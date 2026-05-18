@@ -1,0 +1,63 @@
+{
+  "total_pages": 8,
+  "pages": [
+    {
+      "page_number": 0,
+      "scene_id": null,
+      "type": "cover",
+      "focus": "Cover page. Title treatment. Strong visual hook.",
+      "anecdotes_included": []
+    },
+    {
+      "page_number": 1,
+      "scene_id": null,
+      "type": "character_intro",
+      "character": "CHARACTER_A",
+      "focus": "CHARACTER_A at her desk, surrounded by color-coded spreadsheets. She is labeling a label-maker.",
+      "anecdotes_included": []
+    },
+    {
+      "page_number": 2,
+      "scene_id": null,
+      "type": "character_intro",
+      "character": "CHARACTER_B",
+      "focus": "CHARACTER_B bursts through the office door, phone in one hand, coffee in the other. Pure controlled chaos.",
+      "anecdotes_included": []
+    },
+    {
+      "page_number": 3,
+      "scene_id": 1,
+      "type": "interior",
+      "focus": "Establishing the office dynamic. Fast-paced back-and-forth. Ends on a visual hook: both characters staring at an empty calendar slot.",
+      "anecdotes_included": ["the_forgotten_meeting"]
+    },
+    {
+      "page_number": 4,
+      "scene_id": 1,
+      "type": "interior",
+      "focus": "The fallout. CHARACTER_A scrambles. CHARACTER_B improvises. Two completely different crisis responses.",
+      "anecdotes_included": ["the_coffee_spill"]
+    },
+    {
+      "page_number": 5,
+      "scene_id": 2,
+      "type": "chapter_break",
+      "focus": "Chapter 2 splash. The office at night. Silent. Just a half-eaten sandwich on a desk.",
+      "anecdotes_included": []
+    },
+    {
+      "page_number": 6,
+      "scene_id": 2,
+      "type": "interior",
+      "focus": "Night shift. Only CHARACTER_A remains. She finds the letter. Slow, quiet pacing. 2-3 panels max.",
+      "anecdotes_included": ["the_letter_discovery"]
+    },
+    {
+      "page_number": 7,
+      "scene_id": 2,
+      "type": "interior",
+      "focus": "Cliffhanger. CHARACTER_A looks up from the letter. Someone is at the door. We don't see who.",
+      "anecdotes_included": []
+    }
+  ]
+}

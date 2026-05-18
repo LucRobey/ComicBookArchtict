@@ -1,0 +1,900 @@
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   COMPONENT LIBRARY â€” ui-ux-pro-max: Motion-Driven Dark
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+/* â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.sidebar {
+  width: 200px;
+  min-width: 160px;
+  background: var(--panel-bg);
+  border-right: 1px solid var(--border-color);   /* visible border in dark mode */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 5;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  padding: 14px 14px 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h3 {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.sidebar-pages {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebar-empty {
+  padding: 16px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Page nav button */
+.page-nav-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+
+.page-nav-btn:hover {
+  background: var(--panel-raised);
+  color: var(--text-sub);
+  border-color: var(--border-color);
+}
+
+.page-nav-btn.active {
+  background: var(--accent-dim);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #93c5fd;
+  font-weight: 600;
+}
+
+/* Legacy sidebar section (other phases) */
+.sidebar-section {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-section h3 {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.page-select {
+  width: 100%;
+  padding: 8px 10px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 6px;
+  font-family: 'Fira Sans', inherit;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color var(--dur-fast);
+}
+
+.page-select:focus {
+  border-color: var(--accent-primary);
+}
+
+/* â”€â”€ Style Pool (drag items) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.style-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.style-card {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color var(--dur-base) var(--ease-out),
+              background var(--dur-base) var(--ease-out),
+              transform var(--dur-fast) var(--ease-spring);
+  flex: 1 1 calc(50% - 3px);
+  text-align: center;
+  color: var(--text-sub);
+}
+
+.style-card:hover {
+  border-color: var(--accent-primary);
+  background: var(--accent-dim);
+  transform: translateY(-1px);
+}
+
+/* â”€â”€ Dialogue / Drag Items â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.dialogue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dialogue-item {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: grab;
+  transition: border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-fast) var(--ease-spring),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+
+.dialogue-item:active {
+  cursor: grabbing;
+  transform: scale(1.01);
+}
+
+.dialogue-item:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.char {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-hover);
+  margin-bottom: 3px;
+  display: block;
+  letter-spacing: 0.04em;
+}
+
+.dialogue-item p {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-sub);
+}
+
+/* â”€â”€ Canvas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.canvas-container {
+  flex: 1;
+  background: var(--canvas-bg);
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+}
+
+.canvas-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  color: var(--text-muted);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+}
+
+.canvas-page {
+  width: 700px;
+  height: 1050px;
+  background: white;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.panel-grid {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  right: 32px;
+  bottom: 32px;
+}
+
+.comic-panel {
+  border: 3px solid #000;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: absolute !important;
+}
+
+.panel-placeholder {
+  color: #999;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Canvas element selection ring */
+.canvas-element.selected {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* â”€â”€ Properties Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.properties-panel {
+  width: 280px;
+  min-width: 240px;
+  background: var(--panel-bg);
+  border-left: 1px solid var(--border-color);   /* visible border */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 5;
+  flex-shrink: 0;
+}
+
+.properties-panel-inner {
+  padding: 16px;
+  flex: 1;
+}
+
+.properties-panel.empty {
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  padding: 20px;
+  text-align: center;
+}
+
+.properties-panel h3 {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-sub);
+}
+
+.prop-section {
+  margin-bottom: 18px;
+}
+
+.prop-section label {
+  display: block;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.prop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.prop-field label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+.prop-field input,
+.prop-field select,
+.prop-field textarea {
+  width: 100%;
+  padding: 6px 8px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 5px;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 0.82rem;
+  transition: border-color var(--dur-fast);
+  outline: none;
+}
+
+.prop-field input:focus,
+.prop-field select:focus,
+.prop-field textarea:focus {
+  border-color: var(--accent-primary);
+}
+
+.z-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.z-controls button {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.z-controls button:hover {
+  background: var(--panel-raised);
+  border-color: var(--accent-primary);
+}
+
+/* â”€â”€ Danger Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.btn-danger {
+  background: var(--danger-dim);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.82rem;
+  transition: background var(--dur-base), color var(--dur-base);
+  width: 100%;
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: white;
+}
+
+/* â”€â”€ Flag Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.flag-btn {
+  background: var(--danger-dim);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8rem;
+  transition: background var(--dur-base), color var(--dur-base);
+}
+
+.flag-btn:hover {
+  background: var(--danger);
+  color: white;
+}
+
+/* â”€â”€ Success Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.btn-success {
+  background: var(--success-dim);
+  color: var(--success);
+  border: 1px solid var(--success);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.82rem;
+  transition: background var(--dur-base), color var(--dur-base), box-shadow var(--dur-base);
+}
+
+.btn-success:hover:not(:disabled) {
+  background: var(--success);
+  color: white;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.btn-success:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* â”€â”€ QA Board â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.qa-board {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  background: var(--bg-color);
+}
+
+.qa-board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.qa-board-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.qa-board-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.qa-board-content {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  overflow: hidden;
+  padding: 16px 20px;
+}
+
+.qa-column {
+  flex: 1;
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qa-column h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+.qa-panel-item {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: border-color var(--dur-fast);
+}
+
+.qa-panel-item:hover {
+  border-color: var(--border-color);
+}
+
+.qa-panel-thumb {
+  width: 100px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.qa-panel-thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.qa-panel-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qa-panel-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qa-panel-id {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: var(--text-sub);
+  font-weight: 500;
+}
+
+/* Modification card */
+.qa-mod-card {
+  background: var(--bg-color);
+  border: 1px solid var(--danger);
+  border-radius: 7px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qa-mod-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qa-mod-target {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qa-mod-thumb {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+.qa-mod-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: var(--text-sub);
+}
+
+.btn-remove {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color var(--dur-fast), background var(--dur-fast);
+}
+
+.btn-remove:hover {
+  color: var(--danger);
+  background: var(--danger-dim);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-field label {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.form-field select,
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 7px 10px;
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 5px;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color var(--dur-fast);
+  resize: vertical;
+}
+
+.form-field select:focus,
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--accent-primary);
+}
+
+/* â”€â”€ Sanitization / Preview Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.sanitization-container {
+  padding: 40px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sanitization-container h2 {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+
+.sanitization-container p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+}
+
+.panel-grid-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.preview-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color var(--dur-base);
+}
+
+.preview-card:hover {
+  border-color: var(--accent-primary);
+}
+
+.img-placeholder {
+  height: 180px;
+  background: var(--bg-color);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.preview-card.dirty {
+  border-color: var(--danger);
+}
+
+.status {
+  font-weight: 500;
+  font-size: 0.85rem;
+  font-family: 'Fira Code', monospace;
+}
+
+/* ── Success Button ─────────────────────────────────────────── */
+.btn-success {
+  background: var(--success-dim);
+  color: var(--success);
+  border: 1px solid var(--success);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.82rem;
+  transition: background var(--dur-base), color var(--dur-base), box-shadow var(--dur-base);
+}
+
+.btn-success:hover:not(:disabled) {
+  background: var(--success);
+  color: white;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.btn-success:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── QA Board ───────────────────────────────────────────────── */
+.qa-board {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background: var(--bg-color);
+}
+
+.qa-board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.qa-board-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.qa-board-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.qa-board-content {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 16px 20px;
+}
+
+.qa-column {
+  flex: 1;
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qa-column h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+.qa-panel-item {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: border-color var(--dur-fast);
+}
+
+.qa-panel-item:hover {
+  border-color: var(--accent-primary);
+}
+
+.qa-panel-thumb {
+  width: 100px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.qa-panel-thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.qa-panel-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qa-panel-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qa-panel-id {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: var(--text-sub);
+  font-weight: 500;
+}
+
+/* Modification card */
+.qa-mod-card {
+  background: var(--bg-color);
+  border: 1px solid var(--danger);
+  border-radius: 7px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qa-mod-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qa-mod-target {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qa-mod-thumb {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+.qa-mod-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: var(--text-sub);
+}
+
+.btn-remove {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color var(--dur-fast), background var(--dur-fast);
+}
+
+.btn-remove:hover {
+  color: var(--danger);
+  background: var(--danger-dim);
+}
+
+/* ── Form Fields ────────────────────────────────────────────── */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-field label {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.form-field select,
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 7px 10px;
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 5px;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color var(--dur-fast);
+  resize: vertical;
+}
+
+.form-field select:focus,
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--accent-primary);
+}
+
+

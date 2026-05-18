@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARC 3.0 - Phase 0: Lore Matrix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blueprint: '#1E3A8A',
+              paper: '#FAFAF9',
+              graphite: '#1F2937',
+              cyan: '#3B82F6',
+              border: '#E5E7EB'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Space Grotesk', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4, h5, .heading { font-family: 'Space Grotesk', sans-serif; }
+    .mono { font-family: 'IBM Plex Mono', monospace; }
+  </style>
+</head>
+<body class="bg-brand-blueprint h-screen flex overflow-hidden text-brand-graphite">
+
+  <!-- SIDEBAR (Paper) -->
+  <aside class="w-64 bg-brand-paper border-r border-brand-border flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.1)] z-10">
+    <div class="p-6 border-b border-brand-border">
+      <h1 class="text-2xl font-bold tracking-tight">ARC 3.0</h1>
+      <p class="text-xs text-gray-500 uppercase tracking-widest mt-1 mono">Status: Online</p>
+    </div>
+    <nav class="flex-1 p-4 space-y-1">
+      <a href="#" class="block px-3 py-2 text-sm font-medium bg-gray-100 text-brand-cyan rounded-sm border-l-2 border-brand-cyan">PHASE 0: WORLD LORE</a>
+      <a href="#" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-sm">PHASE 1: PACING</a>
+      <a href="#" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-sm">PHASE 2: STRUCTURING</a>
+      <a href="#" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-sm">PHASE 3: SCRIPTING</a>
+      <a href="#" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-sm">PHASE 6: ASSEMBLY</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CANVAS (Blueprint) -->
+  <main class="flex-1 flex flex-col relative overflow-hidden">
+    
+    <!-- HEADER -->
+    <header class="h-14 bg-brand-paper/95 backdrop-blur-sm border-b border-brand-border flex items-center justify-between px-6 shadow-sm">
+      <h2 class="text-lg font-bold">DATA MATRIX: ENTITIES & SCENARIO</h2>
+      <button class="bg-brand-cyan text-white px-4 py-1.5 text-sm font-medium rounded-sm hover:bg-blue-600 transition-colors">LOCK PHASE</button>
+    </header>
+
+    <!-- WORKSPACE -->
+    <div class="flex-1 p-8 overflow-y-auto" style="background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px;">
+      
+      <!-- DATA PANEL (Paper floating on Blueprint) -->
+      <div class="max-w-4xl mx-auto bg-brand-paper border border-brand-border rounded-sm shadow-xl p-8">
+        
+        <div class="mb-8 border-b border-brand-border pb-4 flex justify-between items-end">
+          <div>
+            <h3 class="text-xl font-bold">LORE_DATA_01</h3>
+            <p class="text-sm text-gray-500 mono mt-1">Path: data/lore.json</p>
+          </div>
+          <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-sm mono">COMPILED</span>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Text Area 1 -->
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">World Parameters</label>
+            <textarea class="w-full h-32 p-4 border border-gray-300 rounded-sm bg-white text-sm focus:outline-none focus:border-brand-cyan resize-none" placeholder="Enter world logic..."></textarea>
+          </div>
+
+          <!-- Text Area 2 -->
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Narrative Scenario</label>
+            <textarea class="w-full h-48 p-4 border border-gray-300 rounded-sm bg-white text-sm focus:outline-none focus:border-brand-cyan resize-none" placeholder="Enter core narrative..."></textarea>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>

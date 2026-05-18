@@ -1,0 +1,28 @@
+{
+  "intro_pages": [
+    {
+      "page_number": 1,
+      "character": "CHARACTER_A",
+      "layout_type": "full_page_splash",
+      "scene_description": "CHARACTER_A at her desk, surrounded by color-coded spreadsheets. She is labeling a label-maker with another label-maker. Her desk is a monument to organizational overreach.",
+      "narrator_caption": "Emily has a system for everything. The system also has a system.",
+      "character_dialogue": "Almost... perfect.",
+      "panels": [
+        { "panel_number": 1, "framing": "Wide Shot", "action": "Full page: CHARACTER_A immersed in her color-coded world, completely at peace in the chaos she's organized." }
+      ]
+    },
+    {
+      "page_number": 2,
+      "character": "CHARACTER_B",
+      "layout_type": "three_panel_sequence",
+      "scene_description": "CHARACTER_B bursts through the office door, phone pinched between ear and shoulder, coffee in one hand, a chaotic stack of papers in the other. Pure kinetic energy.",
+      "narrator_caption": "Sophie has a system too. It's called chaos. It works somehow.",
+      "character_dialogue": "Yes, yes — I'm on my way. I'm basically already there.",
+      "panels": [
+        { "panel_number": 1, "framing": "Wide Shot", "action": "Wide: The door swings open. A blur of motion enters." },
+        { "panel_number": 2, "framing": "Medium Shot", "action": "Medium: CHARACTER_B in full stride, simultaneously on the phone and somehow also drinking coffee." },
+        { "panel_number": 3, "framing": "Close-up", "action": "Close-up on her face: confident, chaotic, completely in control." }
+      ]
+    }
+  ]
+}

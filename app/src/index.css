@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════
+   ARCHITECTURE 3.0 — ARC 3.0 Brand Identity
+   Style: Modern Drafting Board | Clean, analog-inspired
+   Fonts: Space Grotesk (headings), Inter (body), IBM Plex Mono (mono)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Base Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Legacy Variable Mappings ───────────────────────────────── */
+:root {
+  --panel-bg: #FAFAF9;
+  --bg-color: #F3F4F6;
+  --text-main: #1F2937;
+  --text-muted: #6B7280;
+  --border-color: #E5E7EB;
+  --glass-border: #E5E7EB;
+}
+
+/* ── Typography ─────────────────────────────────────────────── */
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  background-color: #1E3A8A;
+  color: #1F2937;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+code, pre, .mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* ── Interaction Utilities ───────────────────────────────────── */
+button, [role="button"], a, select, input[type="checkbox"], [tabindex] {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #1E3A8A;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #E5E7EB;
+  border-radius: 6px;
+  transition: background-color 150ms;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #6B7280;
+}
+
+/* ── Motion Accessibility ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

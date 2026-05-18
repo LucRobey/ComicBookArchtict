@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARC 3.0 - Phase 6: Assembly</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blueprint: '#1E3A8A',
+              paper: '#FAFAF9',
+              graphite: '#1F2937',
+              cyan: '#3B82F6',
+              border: '#E5E7EB'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Space Grotesk', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4, .heading { font-family: 'Space Grotesk', sans-serif; }
+    .mono { font-family: 'IBM Plex Mono', monospace; }
+  </style>
+</head>
+<body class="bg-brand-blueprint h-screen flex flex-col overflow-hidden text-brand-graphite">
+
+  <!-- TOP MENU (Paper) -->
+  <header class="h-14 bg-brand-paper border-b border-brand-border flex items-center justify-between px-6 shadow-sm z-20">
+    <div class="flex items-center gap-4">
+      <h1 class="text-xl font-bold tracking-tight">ARC 3.0</h1>
+      <span class="text-gray-300">|</span>
+      <h2 class="text-sm font-bold heading text-gray-500">PHASE 6: ASSEMBLY</h2>
+    </div>
+    <div class="flex gap-2">
+      <button class="px-4 py-1.5 text-sm font-medium border border-brand-border rounded-sm hover:bg-gray-50">EXPORT PDF</button>
+      <button class="bg-brand-cyan text-white px-4 py-1.5 text-sm font-medium rounded-sm shadow-sm hover:bg-blue-600">COMMIT FINAL</button>
+    </div>
+  </header>
+
+  <main class="flex-1 flex overflow-hidden">
+    
+    <!-- CANVAS (Blueprint Table) -->
+    <div class="flex-1 relative overflow-auto flex items-center justify-center" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;">
+      
+      <!-- Assembled Page (The Comic) -->
+      <div class="w-[600px] h-[800px] bg-white shadow-2xl relative border-4 border-white transition-transform hover:scale-[1.02] cursor-default">
+        
+        <!-- Panel 1 (Mock Art) -->
+        <div class="absolute top-4 left-4 right-4 h-64 bg-gray-200 border-2 border-black flex items-center justify-center overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-80 mix-blend-multiply" />
+          <!-- Speech Bubble -->
+          <div class="absolute top-4 left-8 bg-white border-2 border-black rounded-3xl px-4 py-2 font-bold text-sm shadow-md z-10 max-w-[200px]">
+            "It's quieter than I expected."
+          </div>
+        </div>
+
+        <!-- Panel 2 (Mock Art) -->
+        <div class="absolute top-72 left-4 w-[280px] bottom-4 bg-gray-200 border-2 border-black flex items-center justify-center overflow-hidden">
+           <img src="https://images.unsplash.com/photo-1504221507732-5246c045949b?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-80 mix-blend-multiply" />
+        </div>
+
+        <!-- Panel 3 (Mock Art) -->
+        <div class="absolute top-72 right-4 w-[280px] bottom-4 bg-gray-200 border-2 border-black flex items-center justify-center overflow-hidden">
+           <img src="https://images.unsplash.com/photo-1542397284385-6010376c5337?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-80 mix-blend-multiply" />
+            <!-- Speech Bubble -->
+            <div class="absolute bottom-12 right-8 bg-white border-2 border-black rounded-3xl px-4 py-2 font-bold text-sm shadow-md z-10 max-w-[150px]">
+              "Too quiet."
+            </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- LAYER PROPERTIES (Paper Sidebar) -->
+    <aside class="w-80 bg-brand-paper border-l border-brand-border shadow-xl z-10 flex flex-col">
+      <div class="p-4 border-b border-brand-border">
+        <h2 class="text-sm font-bold heading tracking-widest">VIEWPORT PROPERTIES</h2>
+      </div>
+      <div class="p-6 space-y-6">
+        
+        <div>
+          <label class="text-xs font-bold text-gray-500 uppercase mb-2 block">Active Render</label>
+          <div class="p-2 border border-brand-cyan bg-blue-50 rounded-sm text-sm font-medium text-brand-cyan flex justify-between items-center cursor-pointer">
+            MATRIX_01
+            <span class="mono text-xs">SEL</span>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-6">
+          <label class="text-xs font-bold text-gray-500 uppercase mb-3 block">Layer Stack</label>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between p-2 bg-white border border-gray-200 rounded-sm">
+              <span class="text-sm flex items-center gap-2">💬 Dialogue</span>
+              <input type="checkbox" checked class="accent-brand-cyan">
+            </div>
+            <div class="flex items-center justify-between p-2 bg-white border border-gray-200 rounded-sm">
+              <span class="text-sm flex items-center gap-2">🖼️ Base Art</span>
+              <input type="checkbox" checked class="accent-brand-cyan">
+            </div>
+            <div class="flex items-center justify-between p-2 bg-white border border-gray-200 rounded-sm">
+              <span class="text-sm flex items-center gap-2">📐 Grid Lines</span>
+              <input type="checkbox" class="accent-brand-cyan">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+  </main>
+</body>
+</html>

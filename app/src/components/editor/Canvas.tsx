@@ -102,9 +102,9 @@ const Canvas: React.FC<CanvasProps> = ({ activePage }) => {
   };
 
   return (
-    <div className="canvas-container">
+    <div className="flex-1 overflow-auto bg-[#1E3A8A] p-8 flex items-start justify-center relative">
       <div 
-        className="canvas-page" 
+        className="shadow-2xl ring-1 ring-border" 
         id="export-target"
         ref={canvasRef}
         onDragOver={handleDragOver}
@@ -114,8 +114,8 @@ const Canvas: React.FC<CanvasProps> = ({ activePage }) => {
           position: 'relative', 
           width: '800px', 
           height: '1131px', 
-          backgroundColor: 'white', 
-          margin: '0 auto', 
+          backgroundColor: '#FAFAF9', 
+          flexShrink: 0,
           overflow: 'hidden',
           backgroundImage: showGrid ? 'linear-gradient(to right, #e5e7eb 1px, transparent 1px), linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)' : 'none',
           backgroundSize: showGrid ? '20px 20px' : 'auto'

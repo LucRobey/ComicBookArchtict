@@ -3,7 +3,7 @@
  * The file is written to qa/[phase_name]/qa_report_[TIMESTAMP].md
  */
 export async function exportQaReport(params: {
-  phase: string;          // e.g. "3" or "2" or "15" (for phase 1.5)
+  phase: string;          // e.g. "3" or "2" or "15" (for phase 1)
   phaseFolder: string;    // e.g. "script", "structure", "pacing" — name of subfolder under qa/
   content: string;        // Full markdown content of the report
 }): Promise<{ success: boolean; path?: string; error?: string }> {

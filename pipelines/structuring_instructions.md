@@ -1,7 +1,7 @@
 # 📐 Phase 2: Page Structuring (Pages ➡️ Panels)
 
 **Agent Role:** Layout Artist & Draftsman
-**Objective:** Break down each approved page from Phase 1 into specific panels, dictating explicit camera angles, structural tags, and anecdote flags in JSON format.
+**Objective:** Break down each approved page from Phase 1.5 into specific panels, dictating explicit camera angles, structural tags, and anecdote flags in JSON format.
 
 ---
 
@@ -10,7 +10,7 @@
 You MUST read and fully internalize ALL of the following files before proceeding:
 
 1. `inputs/lore.md` — The **series bible**. Read this first. It defines world rules, character arcs, the antagonist tone, production rules (e.g., max characters per panel, specific art style), and the tone compass. Panel layouts must respect all constraints established here.
-2. `inputs/pages.json` — The Phase 1 approved page allocations. Do not deviate from the scene/page assignments without asking the user. **Note: Skip any pages dedicated to Character Introductions (e.g., `scene_id: 0`). Do not generate panels for them, as they are completely handled by Phase 1.5.**
+2. `inputs/pages.json` — The Phase 1.5 approved page allocations. Do not deviate from the scene/page assignments without asking the user. **Note: Skip any pages dedicated to Character Introductions (e.g., `scene_id: 0`). Do not generate panels for them, as they are completely handled by Phase 1.**
 3. `inputs/detailed_scenario.md` — Full story context, this is critical.
 4. `inputs/project_details.md` — Specific story beats or easter eggs. You must identify which detail belongs to which scene and flag the most appropriate panel for its injection.
 5. `modifications/modifications.md` — The user's modification requests. **Read this first** if doing a modification pass.

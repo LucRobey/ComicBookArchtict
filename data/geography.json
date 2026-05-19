@@ -1,0 +1,150 @@
+{
+  "_schema_version": "1.4",
+  "_description": "Location registry. Each location is a distinct physical space. Time-of-day conditions are modelled as 'variants' within a location, not as separate entries.",
+  "locations": [
+    {
+      "id": "loc_office",
+      "name": "The Office",
+      "type": "interior",
+      "description": "An open-plan office. Desks arranged in clusters that create accidental intimacy. The kind of space where nothing is private — and everyone knows it.",
+      "appears_in_scenes": [
+        1,
+        2
+      ],
+      "location_sheet": "data/locations/loc_office/location_sheet.md",
+      "variants": [
+        {
+          "id": "morning",
+          "label": "Morning",
+          "description": "The office at 8:30 AM. Fluorescent white, monitors cold blue. Every desk already occupied — nobody was first. The space hasn't been claimed yet, but the power dynamics are already visible in where people sit.",
+          "appears_in_scenes": [
+            1
+          ],
+          "image": "data/images/locations/loc_office_day.png",
+          "lighting_summary": "Fluorescent overhead (cold white) + east window morning backlight (amber rim). Blue accent: monitor glow only.",
+          "palette": [
+            "#F2EDE4",
+            "#9B9B9B",
+            "#1C1C1E",
+            "#3B82F6",
+            "#D97706"
+          ],
+          "shots": [
+            {
+              "id": "wide_entrance",
+              "label": "Wide — from entrance",
+              "description": "Full open plan visible. Desks recede into depth. East windows create morning backlight.",
+              "use_for": "Establishing Scene 1. Showing scale. Nothing is private.",
+              "image": "data/images/locations/loc_office_day/wide_entrance.png",
+              "prompt_suffix": "wide establishing shot from entrance doorway, desk clusters receding into depth, east windows with morning backlight, fluorescent overhead lights, morning"
+            },
+            {
+              "id": "medium_desk",
+              "label": "Medium — desk cluster",
+              "description": "Two desks face-to-face. Papers, monitors, coffee. Fluorescent directly above.",
+              "use_for": "Dialogue scenes at desks. A negotiation table nobody agreed to.",
+              "image": "data/images/locations/loc_office_day/medium_desk.png",
+              "prompt_suffix": "medium shot at desk cluster, two desks face-to-face, papers monitors coffee cups, waist-level camera, fluorescent overhead, morning"
+            },
+            {
+              "id": "detail_printer",
+              "label": "Detail — printer alcove",
+              "description": "Printer output tray in dim back-left corner. Empty and waiting.",
+              "use_for": "Foreshadowing Scene 2. Close-up object emphasis.",
+              "image": "data/images/locations/loc_office_day/detail_printer.png",
+              "prompt_suffix": "close detail shot office printer alcove, laser printer, empty output tray, dim corner, power cable, morning"
+            }
+          ]
+        },
+        {
+          "id": "night",
+          "label": "Night",
+          "description": "The same office at 11 PM — now it belongs to no one. Security spots isolate three desk clusters in amber. Everything else is deep shadow. The printer alcove is the only point of interest.",
+          "appears_in_scenes": [
+            2
+          ],
+          "image": "data/images/locations/loc_office_night.png",
+          "lighting_summary": "Security spotlights (amber) on 3 clusters + printer alcove. One computer blue glow. Printer green LED. Rest: deep shadow.",
+          "palette": [
+            "#0A0A0A",
+            "#1C1C1E",
+            "#D97706",
+            "#3B82F6",
+            "#10B981"
+          ],
+          "shots": [
+            {
+              "id": "wide_entrance",
+              "label": "Wide — from entrance (night)",
+              "description": "Amber pools on a few clusters, rest in shadow. Printer alcove is the brightest point.",
+              "use_for": "Opening Scene 2. Establishing emptiness and focal hierarchy.",
+              "image": "data/images/locations/loc_office_night/wide_entrance.png",
+              "prompt_suffix": "wide shot from entrance, office 11PM, security spotlight amber pools, deep shadow, printer alcove as brightest point, empty"
+            },
+            {
+              "id": "medium_printer",
+              "label": "Medium — printer alcove (night)",
+              "description": "Printer under its security spot. Hard amber circle. Folded letter in the output tray. Green LED.",
+              "use_for": "The discovery moment. The letter as subject.",
+              "image": "data/images/locations/loc_office_night/medium_printer.png",
+              "prompt_suffix": "medium shot printer alcove night, hard amber security spotlight, printer with green LED, folded letter in output tray, deep shadow"
+            },
+            {
+              "id": "detail_letter",
+              "label": "Detail — the letter (night)",
+              "description": "Extreme close-up of the letter in the tray. Amber catches the top edge. Everything else: shadow.",
+              "use_for": "The beat where CHARACTER_A sees it. Maximum narrative weight.",
+              "image": "data/images/locations/loc_office_night/detail_letter.png",
+              "prompt_suffix": "extreme close-up printer output tray side-on, folded document letter, amber light catching top edge, deep shadow"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loc_cafe",
+      "name": "The Café",
+      "type": "interior",
+      "description": "A neutral, uninspired café chosen precisely because it belongs to neither character. Coffee orders become a language here.",
+      "appears_in_scenes": [
+        3
+      ],
+      "image": "data/images/locations/loc_cafe.png",
+      "location_sheet": "data/locations/loc_cafe/location_sheet.md",
+      "palette": [
+        "#F2EDE4",
+        "#9B9B9B",
+        "#1C1C1E",
+        "#D97706",
+        "#6B7280"
+      ],
+      "lighting_summary": "One amber pendant over the middle table. All other light: flat cool ambient. Rain window: diffused grey.",
+      "shots": [
+        {
+          "id": "wide_entrance",
+          "label": "Wide — from entrance",
+          "description": "Full café. Counter at back. 6-8 tables. Pendant over middle table. Two cups. Rain window right.",
+          "use_for": "Establishing Scene 3.",
+          "image": "data/images/locations/loc_cafe/wide_entrance.png",
+          "prompt_suffix": "wide establishing shot café from entrance, counter at back, 8 tables generic chairs, rain window right, amber pendant over one table, two coffee cups"
+        },
+        {
+          "id": "medium_table",
+          "label": "Medium — the table",
+          "description": "Two cups opposite each other — one with spoon, one without. Amber pendant above.",
+          "use_for": "All dialogue frames in Scene 3.",
+          "image": "data/images/locations/loc_cafe/medium_table.png",
+          "prompt_suffix": "medium shot café table at sitting height, two coffee cups opposite, one spoon in saucer, amber pendant above, rain window soft background"
+        },
+        {
+          "id": "detail_window",
+          "label": "Detail — the rain window",
+          "description": "Rain streaks on glass. Street blurred grey. Amber pendant reflected.",
+          "use_for": "Scene 3 pause beats. The window is an exit that doesn't open.",
+          "image": "data/images/locations/loc_cafe/detail_window.png",
+          "prompt_suffix": "close shot rain-streaked café window from inside, street blurred grey, amber pendant reflection in glass, diagonal rain lines"
+        }
+      ]
+    }
+  ]
+}

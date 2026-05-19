@@ -1,4 +1,4 @@
-# 🤖 Phase 1: Pacing & Pagination
+# 🤖 Phase 1.5: Pacing & Pagination
 
 **App Tab:** 📋 Pacing
 **Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
@@ -63,7 +63,7 @@ Takes the approved `data/scenario.json` and distributes scenes across physical c
 **Counting rules:**
 - `page_number` starts at 0 (cover = page 0)
 - `total_pages` = length of the pages array
-- Do NOT pre-allocate `character_intro` pages — Phase 1.5 injects them
+- Do NOT pre-allocate `character_intro` pages — Phase 1 injects them
 
 ---
 
@@ -119,5 +119,5 @@ Takes the approved `data/scenario.json` and distributes scenes across physical c
 1. Read `pipelines/pacing_instructions.md` fully before generating.
 2. Every `scene_id` from `data/scenario.json` must appear in at least one page.
 3. Every `anecdote` key must appear in at least one `anecdotes_included` array.
-4. Do NOT generate `character_intro` type pages — Phase 1.5 handles those.
-5. After writing, update `PRODUCTION_STATUS.md`: Phase 1 → `[REVIEW]`
+4. Do NOT generate `character_intro` type pages — Phase 1 handles those.
+5. After writing, update `PRODUCTION_STATUS.md`: Phase 1.5 → `[REVIEW]`

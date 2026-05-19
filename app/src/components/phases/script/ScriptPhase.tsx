@@ -25,11 +25,13 @@ const ScriptPhase: React.FC = () => {
 
   if (loading) return <div className="script-state">Loading script…</div>;
   if (error) return (
-    <div className="bg-background-panel border border-border shadow-md rounded-lg p-8 max-w-md mx-auto mt-20 text-center text-foreground">
-      <div className="text-4xl mb-4 text-warning">⚠️</div>
-      <p className="font-bold mb-2">Could not load script.</p>
-      <p className="text-sm font-mono text-destructive mb-4">{error}</p>
-      <p className="text-sm text-foreground-muted">Run the Phase 3 agent first to generate <code className="bg-secondary px-1.5 py-0.5 rounded-sm">data/script.json</code></p>
+    <div className="w-full h-full flex items-center justify-center bg-background-panel">
+      <div className="border border-border shadow-md rounded-lg p-8 max-w-md text-center text-foreground bg-secondary">
+        <div className="text-4xl mb-4 text-warning">⚠️</div>
+        <p className="font-bold mb-2">Could not load script.</p>
+        <p className="text-sm font-mono text-destructive mb-4">{error}</p>
+        <p className="text-sm text-foreground-muted">Run the Phase 3 agent first to generate <code className="bg-background-panel px-1.5 py-0.5 rounded-sm border border-border">data/script.json</code></p>
+      </div>
     </div>
   );
   if (!data) return null;

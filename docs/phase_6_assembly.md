@@ -108,6 +108,7 @@ Response: `{ "data": {...} }` or `{ "error": "..." }`
 ```
 POST /api/save
 Body: { "path": "data/panels.json", "content": {...} }
+(Note: Do NOT stringify `content` before sending — the server stringifies it automatically.)
 ```
 
 ### Save QA report (markdown)

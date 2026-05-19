@@ -1,4 +1,4 @@
-# QA Report — Phase 1 (Pacing)
+# QA Report — Phase 1.5 (Pacing)
 Generated: 2026-05-17T14:43:31.885Z
 
 ## Page 0 — [REWRITE_FOCUS]

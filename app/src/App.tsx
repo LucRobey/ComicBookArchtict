@@ -10,6 +10,8 @@ import PanelsPhase from '@/components/phases/panels/PanelsPhase';
 import PacingPhase from '@/components/phases/pacing/PacingPhase';
 import CharactersPhase from '@/components/phases/characters/CharactersPhase';
 import LorePhase from '@/components/phases/lore/LorePhase';
+import CharacterHubPhase from '@/components/phases/character-hub/CharacterHubPhase';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useJsonFile } from '@/hooks/useJsonFile';
 import type { PageData } from '@/types/assembly';
 import { useEditorStore } from '@/store/useEditorStore';
@@ -58,35 +60,36 @@ function App() {
 
   const renderPhaseContent = () => {
     switch (activePhase) {
-      case 'lore':       return <LorePhase />;
-      case 'pacing':     return <PacingPhase />;
-      case 'characters': return <CharactersPhase />;
-      case 'panels':     return <PanelsPhase />;
-      case 'script':     return <ScriptPhase />;
+      case 'lore':       return <ErrorBoundary key="lore"><LorePhase /></ErrorBoundary>;
+      case 'char-hub':   return <ErrorBoundary key="char-hub"><CharacterHubPhase /></ErrorBoundary>;
+      case 'pacing':     return <ErrorBoundary key="pacing"><PacingPhase /></ErrorBoundary>;
+      case 'characters': return <ErrorBoundary key="characters"><CharactersPhase /></ErrorBoundary>;
+      case 'panels':     return <ErrorBoundary key="panels"><PanelsPhase /></ErrorBoundary>;
+      case 'script':     return <ErrorBoundary key="script"><ScriptPhase /></ErrorBoundary>;
       case 'assembly':   return renderAssembly();
     }
   };
 
   const renderAssembly = () => (
-    <>
+    <div className="flex-1 flex flex-col h-full w-full">
       {/* Assembly sub-tab bar */}
       <div className="h-14 bg-background-panel/95 backdrop-blur-sm border-b border-border flex items-center justify-between px-6 shadow-sm z-20">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <button
-            className={`px-3 py-1.5 text-sm font-medium rounded-sm transition-colors ${assemblyTab === 'assembly' ? 'bg-secondary text-border-blueprint border-b-2 border-border-blueprint' : 'text-foreground-muted hover:bg-secondary'}`}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${assemblyTab === 'assembly' ? 'bg-secondary text-primary shadow-sm border border-border' : 'text-foreground-muted hover:text-primary hover:bg-secondary border border-transparent'}`}
             onClick={() => setAssemblyTab('assembly')}
           >
             Page Assembly
           </button>
           <button
-            className={`px-3 py-1.5 text-sm font-medium rounded-sm transition-colors ${assemblyTab === 'qa' ? 'bg-secondary text-border-blueprint border-b-2 border-border-blueprint' : 'text-foreground-muted hover:bg-secondary'}`}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${assemblyTab === 'qa' ? 'bg-secondary text-primary shadow-sm border border-border' : 'text-foreground-muted hover:text-primary hover:bg-secondary border border-transparent'}`}
             onClick={() => setAssemblyTab('qa')}
           >
             QA Review Board
           </button>
         </div>
         <button
-          className="bg-primary text-primary-foreground px-4 py-1.5 text-sm font-medium rounded-sm shadow-sm hover:bg-primary-hover disabled:opacity-50"
+          className="bg-primary text-primary-foreground px-4 py-2 text-sm font-medium rounded-md shadow-sm hover:bg-primary-hover disabled:opacity-50"
           onClick={handleExport}
           disabled={isSaving}
         >
@@ -111,11 +114,11 @@ function App() {
           <QAReviewBoard pages={pages} />
         )}
       </div>
-    </>
+    </div>
   );
 
   return (
-    <div className="bg-background h-screen flex flex-col font-sans overflow-hidden text-foreground">
+    <div className="bg-secondary h-screen flex flex-col font-sans overflow-hidden text-foreground">
       <PhaseTabBar activePhase={activePhase} onPhaseChange={setActivePhase} />
 
       <div className="flex-1 flex overflow-hidden">

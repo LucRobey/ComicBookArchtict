@@ -8,5 +8,44 @@
     "Silence is a valid panel. Use it."
   ],
   "era": "Present day",
-  "visual_style": "Graphic novel realism with expressive linework. Muted palette punctuated by color accents on emotional beats."
+  "visual_style": "Graphic novel realism with expressive linework. Muted palette punctuated by color accents on emotional beats.",
+  "palette": [
+    {
+      "label": "Deep Charcoal",
+      "hex": "#1C1C1E",
+      "role": "Dominant tone — line, shadow"
+    },
+    {
+      "label": "Warm Grey",
+      "hex": "#9B9B9B",
+      "role": "Mid-tone — environment"
+    },
+    {
+      "label": "Off-White",
+      "hex": "#705e3e",
+      "role": "Paper fill — faces, empty space"
+    },
+    {
+      "label": "Blueprint Blue",
+      "hex": "#3B82F6",
+      "role": "Accent — emotional beats"
+    },
+    {
+      "label": "Amber Warm",
+      "hex": "#D97706",
+      "role": "Accent — night / tension"
+    }
+  ],
+  "mood_board": [
+    {
+      "id": "style_ref_1",
+      "prompt": "Open-plan office, morning — the space where nothing is private.",
+      "image": "data/images/style_reference/style_ref_1.png"
+    },
+    {
+      "id": "style_ref_2",
+      "prompt": "The café at night — coffee orders as emotional proxies.",
+      "image": "data/images/style_reference/style_ref_2.png"
+    }
+  ]
 }

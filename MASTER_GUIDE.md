@@ -16,8 +16,8 @@
 |-------|-------------|------------|
 | **Pre** | Customize pipeline files to your project | `pipelines/` edited |
 | **0** | Free-form world-building conversation | `data/lore.json`, `data/scenario.json` |
-| **1** | AI distributes scenes across pages | `data/pages.json` |
-| **1.5** | AI builds character intro pages | `data/intro_pages.json` |
+| **1** | AI builds character intro pages | `data/intro_pages.json` |
+| **1.5** | AI distributes scenes across pages | `data/pages.json` |
 | **2** | AI breaks pages into panels + angles | `data/panels.json` |
 | **3** | AI writes all dialogue + captions | `data/script.json` |
 | **4/5** | AI generates panel artwork (in AI chat) | `data/images/page_N/panel_N.png` |
@@ -135,19 +135,7 @@ At every phase, the same loop applies:
 
 ---
 
-### 📋 Phase 1: Pacing & Pagination
-
-*Scenes → Pages*
-
-- **Action:** AI distributes scenes across pages based on dramatic weight.
-- **Output:** `data/pages.json`
-- **Review in app:** 📋 Pacing tab
-- **QA reports:** `qa/pacing/`
-- **Agent doc:** `docs/phase_1_pacing.md`
-
----
-
-### 🎭 Phase 1.5: Character Introductions
+### 🎭 Phase 1: Character Introductions
 
 *Standalone introductory pages.*
 
@@ -155,9 +143,21 @@ At every phase, the same loop applies:
 - **Output:** `data/intro_pages.json`
 - **Review in app:** 🎭 Characters tab
 - **QA reports:** `qa/characters/`
-- **Agent doc:** `docs/phase_1b_characters.md`
+- **Agent doc:** `docs/phase_1_characters.md`
 
 > ⚠️ **After approval:** Update `pipelines/generation_instructions.md` with your project's visual style baseline and character references.
+
+---
+
+### 📋 Phase 1.5: Pacing & Pagination
+
+*Scenes → Pages*
+
+- **Action:** AI distributes scenes across pages based on dramatic weight.
+- **Output:** `data/pages.json`
+- **Review in app:** 📋 Pacing tab
+- **QA reports:** `qa/pacing/`
+- **Agent doc:** `docs/phase_1.5_pacing.md`
 
 ---
 

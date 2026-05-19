@@ -3,20 +3,7 @@ import { useJsonFile } from '@/hooks/useJsonFile';
 import { exportQaReport } from '@/utils/qaExport';
 import PacingQADrawer from './PacingQADrawer';
 import '../../../styles/pacing.css';
-
-interface PageData {
-  page_number: number;
-  scene_id: number | null;
-  type: string;
-  character?: string;
-  focus: string;
-  anecdotes_included: string[];
-}
-
-interface PagesData {
-  total_pages: number;
-  pages: PageData[];
-}
+import type { PagesData } from '@/types/data';
 
 const PAGES_PATH = 'data/pages.json';
 
@@ -44,7 +31,7 @@ const PacingPhase: React.FC = () => {
       <div style={{ fontSize: '2rem' }}>⚠️</div>
       <p>Could not load pages.</p>
       <p className="pacing-state-sub">{error}</p>
-      <p className="pacing-state-hint">Run the Phase 1 agent first to generate <code>data/pages.json</code></p>
+      <p className="pacing-state-hint">Run the Phase 1.5 agent first to generate <code>data/pages.json</code></p>
     </div>
   );
   if (!data) return null;
@@ -60,7 +47,7 @@ const PacingPhase: React.FC = () => {
   };
 
   return (
-    <div className="pacing-phase">
+    <div className="pacing-phase bg-background-panel">
       {/* Header bar */}
       <div className="pacing-top-bar bg-background-panel border-b border-border shadow-sm">
         <div className="pacing-top-stats">

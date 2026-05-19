@@ -1,4 +1,4 @@
-# 🎭 Phase 1.5: Character Introductions (Standalone Step)
+# 🎭 Phase 1: Character Introductions (Standalone Step)
 
 **Agent Role:** You are the Character Introduction Specialist.
 **Objective:** Create the complete structural layout (panels) and script (dialogue/captions) for the dedicated Character Introduction pages. These pages occur immediately after the cover and before the main plot begins.

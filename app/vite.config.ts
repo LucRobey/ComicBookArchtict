@@ -96,6 +96,39 @@ const localSavePlugin = () => ({
             res.end(JSON.stringify({ error: error.message }));
           }
         });
+      } else if (req.url?.startsWith('/api/load-image') && req.method === 'GET') {
+        // Binary image loader — path relative to project root
+        try {
+          const url = new URL(req.url, `http://${req.headers.host}`);
+          const filePath = url.searchParams.get('path');
+          if (!filePath) {
+            res.statusCode = 400;
+            res.end('Missing path parameter');
+            return;
+          }
+          const absolutePath = path.resolve(__dirname, '../', filePath);
+          if (!fs.existsSync(absolutePath)) {
+            res.statusCode = 404;
+            res.end('Image not found');
+            return;
+          }
+          const ext = path.extname(absolutePath).toLowerCase();
+          const mimeTypes: Record<string, string> = {
+            '.png': 'image/png',
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.webp': 'image/webp',
+            '.gif': 'image/gif',
+          };
+          const mime = mimeTypes[ext] || 'application/octet-stream';
+          const data = fs.readFileSync(absolutePath);
+          res.setHeader('Content-Type', mime);
+          res.setHeader('Cache-Control', 'no-cache');
+          res.end(data);
+        } catch (error: any) {
+          res.statusCode = 500;
+          res.end(error.message);
+        }
       } else if (req.url?.startsWith('/api/load') && req.method === 'GET') {
         // Generic JSON file loader — path relative to project root (Architecture 3.0/)
         try {
@@ -119,6 +152,7 @@ const localSavePlugin = () => ({
           res.statusCode = 500;
           res.end(JSON.stringify({ error: error.message }));
         }
+
       } else if (req.url === '/api/save' && req.method === 'POST') {
         // Generic JSON file saver — path relative to project root
         let body = '';

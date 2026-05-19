@@ -42,7 +42,7 @@ const PacingQADrawer: React.FC<PacingQADrawerProps> = ({ target, onClose, onExpo
   const buildReport = (): string => {
     if (!qaType) return '';
     const now = new Date().toISOString();
-    let r = `# QA Report — Phase 1 (Pacing)\nGenerated: ${now}\n\n`;
+    let r = `# QA Report — Phase 1.5 (Pacing)\nGenerated: ${now}\n\n`;
     const ref = `Page ${target.pageNumber}`;
 
     if (qaType === 'REWRITE_FOCUS') {

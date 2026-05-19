@@ -2,7 +2,7 @@
 
 **App Tab:** 📐 Panel Structure
 **Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
-**Upstream:** [Phase 1 →](phase_1_pacing.md) | [Phase 1.5 →](phase_1b_characters.md)
+**Upstream:** [Phase 1.5 →](phase_1.5_pacing.md) | [Phase 1 →](phase_1_characters.md)
 **Downstream:** [Phase 3 →](phase_3_script.md)
 
 ---

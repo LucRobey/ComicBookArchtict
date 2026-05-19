@@ -2,7 +2,7 @@
 
 **App Tab:** 🌍 Lore & Story
 **Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
-**Downstream:** [Phase 1 →](phase_1_pacing.md) | [Phase 1.5 →](phase_1b_characters.md)
+**Downstream:** [Phase 1.5 →](phase_1.5_pacing.md) | [Phase 1 →](phase_1_characters.md)
 
 ---
 
@@ -38,12 +38,16 @@ Phase 0 establishes the creative bedrock of the project. It is the only **manual
   "tone": "string — how the story feels",
   "genre": "string — formal genre",
   "rules": ["hard constraint 1", "hard constraint 2"],
+  "visual_rules": ["visual constraint 1", "visual constraint 2"],
   "era": "string — when the story is set",
-  "visual_style": "string — art direction bible for image generation"
+  "visual_style": "string — art direction bible for image generation",
+  "palette": [{"label": "Name", "hex": "#HEX", "role": "Usage description"}]
 }
 ```
 
-`rules` are imperative behavioral constraints that **every downstream agent must respect**. Write them as commands. Example: `"Characters never say exactly what they mean."`
+`rules` are imperative behavioral/narrative constraints that **every downstream agent must respect**. Write them as commands. Example: `"Characters never say exactly what they mean."`
+
+`visual_rules` are imperative image generation constraints covering linework, rendering, and composition. Example: `"Minimal hatching — shadow is flat fill, not crosshatch."`
 
 ---
 
@@ -85,7 +89,7 @@ Phase 0 establishes the creative bedrock of the project. It is the only **manual
 * **Current:** Dry, deadpan.
 * **Request:** Warmer. Still dry, but with genuine affection.
 ```
-**Action:** Update only `lore.json → tone`. Do not touch other fields.
+**Action:** Update only `lore.json`. For visual rules flagged as `visual_rule:[text]`, update `visual_rules` array.
 
 ### `[REWRITE_SCENE]` — Rewrite a scene
 ```markdown
@@ -100,6 +104,13 @@ Phase 0 establishes the creative bedrock of the project. It is the only **manual
 * **New scene brief:** A comedic beat where CHARACTER_B discovers the letter by accident.
 ```
 **Action:** Insert a new scene object after `scene_id: 2`. Increment following IDs.
+
+### `[REGENERATE_STYLE_REFERENCE]` — Generate a new mood board image
+```markdown
+## Style Reference: The café at night — [REGENERATE_STYLE_REFERENCE]
+* **Request:** Make the lighting more moody and amber.
+```
+**Action:** Update the style reference generation prompt and output a new image to `data/images/style_reference/`.
 
 ---
 

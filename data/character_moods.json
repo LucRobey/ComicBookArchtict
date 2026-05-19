@@ -1,0 +1,57 @@
+{
+  "_schema_version": "1.0",
+  "characters": [
+    "CHARACTER_A",
+    "CHARACTER_B"
+  ],
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "The Forgotten Meeting",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "determined",
+          "feels": "Terrified she'll be blamed",
+          "shows": "Talking too fast, laughing at wrong moments",
+          "tension_with": "CHARACTER_B"
+        },
+        "CHARACTER_B": {
+          "dominant_emotion": "performing",
+          "feels": "Hollow. He doesn't care.",
+          "shows": "Relaxed, already has a plan",
+          "tension_with": null
+        }
+      }
+    },
+    {
+      "scene_id": 2,
+      "title": "Night Office",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "overwhelmed",
+          "feels": "Alone. The letter shattered something.",
+          "shows": "Very still. Not crying. Reading again.",
+          "tension_with": null
+        }
+      }
+    },
+    {
+      "scene_id": 3,
+      "title": "The Confrontation",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "resigned",
+          "feels": "She knows this won't fix anything.",
+          "shows": "Polite. Too polite.",
+          "tension_with": "CHARACTER_B"
+        },
+        "CHARACTER_B": {
+          "dominant_emotion": "determined",
+          "feels": "He needs to say something real today.",
+          "shows": "Unusually quiet, listening more.",
+          "tension_with": null
+        }
+      }
+    }
+  ]
+}

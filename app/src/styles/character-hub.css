@@ -1,0 +1,556 @@
+/* ── Characters Hub Phase — Phase 0.5 ────────────────── */
+
+/* ── Root layout ──────────────────────────────────────── */
+.chub-phase {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Sidebar ──────────────────────────────────────────── */
+.chub-sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  border-right: 1px solid var(--glass-border);
+  overflow-y: auto;
+}
+
+.chub-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 12px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.chub-sidebar-header h3 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.chub-count {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: var(--panel-bg);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.chub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  flex: 1;
+}
+
+.chub-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+.chub-btn:hover { background: rgba(255,255,255,0.05); color: var(--text-main); }
+.chub-btn.active { background: rgba(99,102,241,0.12); color: #818cf8; box-shadow: inset 0 0 0 1px rgba(99,102,241,0.35); }
+
+.chub-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(99,102,241,0.15);
+  color: #818cf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.chub-btn.active .chub-avatar { background: rgba(99,102,241,0.25); color: #a5b4fc; }
+
+.chub-btn-text { display: flex; flex-direction: column; gap: 1px; }
+.chub-char-name { font-size: 0.82rem; font-weight: 600; }
+
+/* ── Main area ────────────────────────────────────────── */
+.chub-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Main header (character name + sub-tab bar) ─────── */
+.chub-main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--glass-border);
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+.chub-char-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.chub-subtab-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0,0,0,0.15);
+  padding: 3px;
+  border-radius: 10px;
+}
+
+.chub-subtab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.chub-subtab-btn:hover { color: var(--text-main); background: rgba(255,255,255,0.05); }
+.chub-subtab-btn.active {
+  background: rgba(99,102,241,0.18);
+  color: #a5b4fc;
+  box-shadow: inset 0 0 0 1px rgba(99,102,241,0.3);
+}
+
+/* ── Sub-tab content area ────────────────────────────── */
+.chub-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Section ──────────────────────────────────────────── */
+.chub-section { display: flex; flex-direction: column; gap: 8px; }
+
+.chub-section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* ── Markdown panel ───────────────────────────────────── */
+.chub-md-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--text-main);
+  white-space: pre-wrap;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  position: relative;
+}
+
+.chub-md-flag-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.chub-md-flag-btn:hover { border-color: #f59e0b; color: #f59e0b; background: rgba(245,158,11,0.08); }
+
+/* ── Image strip (turnarounds) ────────────────────────── */
+.chub-image-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.chub-image-thumb {
+  flex-shrink: 0;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.chub-image-thumb img {
+  width: 120px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background: rgba(0,0,0,0.2);
+}
+
+.chub-image-placeholder {
+  width: 120px;
+  height: 150px;
+  border-radius: 8px;
+  border: 1px dashed var(--glass-border);
+  background: rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  text-align: center;
+}
+
+.chub-image-placeholder span:first-child { font-size: 1.4rem; }
+
+.chub-image-label {
+  font-size: 0.67rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Emotion grid (3×2) ───────────────────────────────── */
+.chub-emotion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.chub-emotion-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  position: relative;
+}
+
+.chub-emotion-cell img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background: rgba(0,0,0,0.2);
+}
+
+.chub-emotion-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 8px;
+  border: 1px dashed var(--glass-border);
+  background: rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+.chub-emotion-placeholder span:first-child { font-size: 1.6rem; }
+
+.chub-emotion-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: capitalize;
+  letter-spacing: 0.04em;
+}
+
+.chub-emotion-flag {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0,0,0,0.55);
+  border: none;
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  padding: 2px 5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.chub-emotion-cell:hover .chub-emotion-flag { opacity: 1; }
+.chub-emotion-flag:hover { color: #f59e0b; }
+
+/* ── Mood Arc timeline ────────────────────────────────── */
+.chub-mood-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chub-mood-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+.chub-mood-card:hover { border-color: rgba(99,102,241,0.4); }
+.chub-mood-card.expanded { border-color: rgba(99,102,241,0.5); }
+
+.chub-mood-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chub-mood-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chub-scene-num {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  min-width: 48px;
+}
+
+.chub-mood-emoji { font-size: 1.4rem; }
+
+.chub-mood-card-info { display: flex; flex-direction: column; gap: 2px; }
+.chub-scene-title { font-size: 0.85rem; font-weight: 600; }
+.chub-mood-label {
+  font-size: 0.72rem;
+  color: #a5b4fc;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.chub-mood-expand-icon {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+}
+.chub-mood-card.expanded .chub-mood-expand-icon { transform: rotate(180deg); }
+
+/* ── Mood card expanded edit form ─────────────────────── */
+.chub-mood-edit-form {
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 1px solid var(--glass-border);
+  animation: chub-slide-down 0.15s ease;
+}
+
+@keyframes chub-slide-down {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.chub-mood-edit-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.chub-field { display: flex; flex-direction: column; gap: 5px; }
+.chub-field-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chub-emotion-select,
+.chub-tension-select {
+  background: var(--bg-color);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.82rem;
+  padding: 7px 10px;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+}
+.chub-emotion-select:focus,
+.chub-tension-select:focus { border-color: #818cf8; }
+
+.chub-mood-textarea {
+  background: var(--bg-color);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.82rem;
+  padding: 8px 10px;
+  resize: vertical;
+  outline: none;
+  min-height: 64px;
+  width: 100%;
+  line-height: 1.5;
+}
+.chub-mood-textarea:focus { border-color: #818cf8; }
+
+.chub-mood-save-btn {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: all 0.2s ease;
+}
+.chub-mood-save-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.35); }
+.chub-mood-save-btn.saved { background: linear-gradient(135deg, #10b981, #059669); }
+
+/* ── QA Drawer ────────────────────────────────────────── */
+.chub-qa-drawer {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  gap: 14px;
+  border-left: 1px solid var(--glass-border);
+  overflow-y: auto;
+}
+.chub-qa-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.chub-qa-header h3 { font-size: 1rem; font-weight: 700; }
+.chub-qa-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+.chub-qa-close { background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; padding: 2px 6px; border-radius: 4px; }
+.chub-qa-close:hover { background: rgba(255,255,255,0.08); }
+
+.chub-qa-textarea {
+  width: 100%;
+  background: var(--bg-color);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.82rem;
+  padding: 8px;
+  resize: vertical;
+  outline: none;
+  min-height: 80px;
+}
+.chub-qa-textarea:focus { border-color: #818cf8; }
+
+.chub-qa-export-btn {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: auto;
+  transition: all 0.2s ease;
+}
+.chub-qa-export-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.35); }
+.chub-qa-export-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── States ───────────────────────────────────────────── */
+.chub-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 24px;
+}
+.chub-state-icon { font-size: 2.5rem; }
+.chub-state-title { font-size: 1rem; font-weight: 600; color: var(--text-main); }
+.chub-state-hint { font-size: 0.8rem; color: var(--text-muted); max-width: 360px; line-height: 1.6; }
+.chub-state-hint code { background: rgba(255,255,255,0.07); padding: 2px 5px; border-radius: 4px; }
+
+/* ── Mood Arc empty state (character not in this scene) ─ */
+.chub-mood-absent {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 6px 16px 10px;
+}
+
+/* ── Saved toast ──────────────────────────────────────── */
+.chub-save-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: #10b981;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.25);
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* ── Real generated images ────────────────────────────── */
+
+/* In the turnaround strip */
+.chub-image-thumb .chub-real-image {
+  width: 120px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  display: block;
+}
+
+/* In the emotion grid */
+.chub-emotion-cell .chub-real-image {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  display: block;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.chub-emotion-cell:hover .chub-real-image {
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+}

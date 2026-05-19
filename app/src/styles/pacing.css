@@ -156,8 +156,8 @@
   border: 1px solid transparent;
   color: var(--text-muted);
   font-size: 0.8rem;
-  padding: 3px 7px;
-  border-radius: 5px;
+  padding: 6px 10px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -169,6 +169,12 @@
 .pacing-expand-icon {
   font-size: 0.7rem;
   color: var(--text-muted);
+  padding: 6px;
+  border-radius: 6px;
+  background: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pacing-focus {

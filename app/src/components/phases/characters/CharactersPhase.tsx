@@ -2,26 +2,7 @@ import React, { useState } from 'react';
 import { useJsonFile } from '@/hooks/useJsonFile';
 import { exportQaReport } from '@/utils/qaExport';
 import '../../../styles/characters.css';
-
-interface IntroPanel {
-  panel_number: number;
-  framing: string;
-  action: string;
-}
-
-interface CharacterIntro {
-  page_number: number;
-  character: string;
-  layout_type: string;
-  scene_description: string;
-  narrator_caption: string;
-  character_dialogue: string;
-  panels: IntroPanel[];
-}
-
-interface IntroData {
-  intro_pages: CharacterIntro[];
-}
+import type { IntroData } from '@/types/data';
 
 const LAYOUT_TYPES = ['full_page_splash', 'three_panel_sequence', 'five_panel_sequence', 'two_panel_spread'];
 
@@ -56,7 +37,7 @@ const CharactersPhase: React.FC = () => {
       <div style={{ fontSize: '2rem' }}>⚠️</div>
       <p>Could not load character intros.</p>
       <p className="chars-state-sub">{error}</p>
-      <p className="chars-state-hint">Run the Phase 1.5 agent to generate <code>data/intro_pages.json</code></p>
+      <p className="chars-state-hint">Run the Phase 1 agent to generate <code>data/intro_pages.json</code></p>
     </div>
   );
   if (!data || data.intro_pages.length === 0) return <div className="chars-state">No character intros found.</div>;
@@ -66,7 +47,7 @@ const CharactersPhase: React.FC = () => {
   const buildReport = (): string => {
     if (!qaType) return '';
     const now = new Date().toISOString();
-    let r = `# QA Report — Phase 1.5 (Character Intros)\nGenerated: ${now}\n\n`;
+    let r = `# QA Report — Phase 1 (Character Intros)\nGenerated: ${now}\n\n`;
     const ref = `Character: ${intro.character}`;
     if (qaType === 'REWRITE_SCENE')    r += `## ${ref} — [REWRITE_SCENE]\n* **Current scene:** ${intro.scene_description}\n* **Request:** ${qaNote}\n`;
     if (qaType === 'CHANGE_LAYOUT')    r += `## ${ref} — [CHANGE_LAYOUT]\n* **Current:** ${intro.layout_type}\n* **New layout:** ${qaNewLayout}\n`;
@@ -88,9 +69,9 @@ const CharactersPhase: React.FC = () => {
   };
 
   return (
-    <div className="chars-phase">
+    <div className="chars-phase bg-background-panel">
       {/* Character selector sidebar */}
-      <div className="chars-sidebar bg-background-panel border-r border-border shadow-sm">
+      <div className="chars-sidebar bg-secondary border-r border-border shadow-sm">
         <div className="chars-sidebar-header">
           <h3>Characters</h3>
           <span className="chars-count">{data.intro_pages.length}</span>

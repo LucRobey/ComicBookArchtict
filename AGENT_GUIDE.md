@@ -37,16 +37,38 @@ architecture 3.0/              ← PROJECT ROOT
 ├── data/                      ← ALL JSON outputs, flat
 │   ├── lore.json              ← Phase 0 output
 │   ├── scenario.json          ← Phase 0 output
-│   ├── pages.json             ← Phase 1 output
-│   ├── intro_pages.json       ← Phase 1.5 output
+│   ├── geography.json         ← Phase 0 output: location registry (schema v1.4)
+│   │                             Each location: id, name, type, description, appears_in_scenes
+│   │                             Flat locations: shots[], palette, lighting_summary, location_sheet
+│   │                             Multi-variant locations: variants[] — same space, different time-of-day
+│   │                             ⚠ Never two entries for the same physical space: use variants instead
+│   ├── locations/             ← Phase 0 output: location_sheet.md per location (written by Pipeline 09)
+│   │   ├── _TEMPLATE/         ← location_sheet.md template for agents
+│   │   ├── loc_office/        ← location_sheet.md covering both Morning and Night variants
+│   │   └── loc_cafe/          ← location_sheet.md (flat — single condition)
+│   ├── images/style_reference/   ← Phase 0 output: mood board reference images for Visual Style tab
+│   │   ├── style_ref_1.png   ← Office morning — generated from lore.json values
+│   │   └── style_ref_2.png   ← Café night — generated from lore.json values
+│   ├── images/locations/      ← Phase 0 output: location shot images (written by Pipeline 08)
+│   │   ├── loc_office_day/    ← morning variant shots (wide_entrance, medium_desk, detail_printer)
+│   │   ├── loc_office_night/  ← night variant shots (wide_entrance, medium_printer, detail_letter)
+│   │   └── loc_cafe/          ← café shots (wide_entrance, medium_table, detail_window)
+│   ├── character_moods.json   ← Phase 0.5 output (pipeline 07 + app-editable)
+│   ├── characters/            ← Phase 0.5 output: per-character project-specific files
+│   │   └── [Name]/
+│   │       ├── personality_signature.md
+│   │       └── examples/emotional_states/  ← 12 dominant emotion images, face-only, costume-neutral
+│   │           (joyful/content/anxious/sad/angry/ashamed/performing/numb/tender/determined/overwhelmed/resigned)
+│   ├── intro_pages.json       ← Phase 1 output
+│   ├── pages.json             ← Phase 1.5 output
 │   ├── panels.json            ← Phase 2 output
 │   ├── script.json            ← Phase 3 output
 │   └── images/                ← Phase 4/5 output: panel_N.png per page
 │
 ├── qa/                        ← All QA reports, organized by phase name
 │   ├── lore/                  ← Phase 0 reports
-│   ├── pacing/                ← Phase 1 reports
-│   ├── characters/            ← Phase 1.5 reports
+│   ├── characters/            ← Phase 1 reports
+│   ├── pacing/                ← Phase 1.5 reports
 │   ├── structure/             ← Phase 2 reports
 │   ├── script/                ← Phase 3 reports
 │   └── images/                ← Phase 4/5 reports
@@ -56,16 +78,23 @@ architecture 3.0/              ← PROJECT ROOT
 │   ├── 02_character_distillation.md  ← Phase 0: character sheets
 │   ├── 03_scenario_development.md    ← Phase 0: scene list
 │   ├── 04_visual_signatures.md       ← Phase 0: visual identity per character
-│   ├── pacing_instructions.md        ← Phase 1
-│   ├── intro_instructions.md         ← Phase 1.5
+│   ├── 05_visual_signature.md        ← Phase 0.5-A: canonical_visual.md + turnarounds
+│   ├── 06_personality_signature.md   ← Phase 0.5-B: personality_signature.md + emotional states
+│   ├── 07_mood_simulation.md         ← Phase 0.5-D: character_moods.json
+│   ├── 09_location_sheets.md         ← Phase 0 (run first): writes location_sheet.md per location
+│   │                                    Decides flat vs. variants structure. ⚠ Must run before 08.
+│   ├── 08_location_visuals.md        ← Phase 0 (run second): generates shot images from location sheets
+│   │                                    Reads variants[].shots[] or shots[] from geography.json.
+│   ├── intro_instructions.md         ← Phase 1
+│   ├── pacing_instructions.md        ← Phase 1.5
 │   ├── structuring_instructions.md   ← Phase 2
-│   ├── scripting_instructions.md     ← Phase 3
+│   ├── scripting_instructions.md     ← Phase 3 (reads character_moods.json as upstream)
 │   └── generation_instructions.md    ← Phase 4/5
 │
 └── docs/                      ← Per-phase agent reference docs
     ├── phase_0_lore.md        → See: docs/phase_0_lore.md
-    ├── phase_1_pacing.md      → See: docs/phase_1_pacing.md
-    ├── phase_1b_characters.md → See: docs/phase_1b_characters.md
+    ├── phase_1_characters.md → See: docs/phase_1_characters.md
+    ├── phase_1.5_pacing.md      → See: docs/phase_1.5_pacing.md
     ├── phase_2_structure.md   → See: docs/phase_2_structure.md
     ├── phase_3_script.md      → See: docs/phase_3_script.md
     ├── phase_4_images.md      → See: docs/phase_4_images.md
@@ -77,21 +106,27 @@ architecture 3.0/              ← PROJECT ROOT
 ## The Data Flow Chain
 
 ```
-data/lore.json ─────────────────────────────────────────────────────────────┐
-data/scenario.json ──────────┬──────────────────────────────────────────────┤
-                             ↓                                               │
-                      data/pages.json ──────────────────────────────────────┤
-                             │                                               │
-               data/intro_pages.json (parallel)                             │
-                             ↓                                               │
-                     data/panels.json ──────────────────────────────────────┤
-                             ↓                                               │
-                     data/script.json ──────────────────────────────────────┤
-                             ↓                                               │
-                    data/images/page_N/ ────────────────────────────────────┘
-                             ↓
-                    data/assembly/pages/
+data/lore.json ─────────────────────────────────────────────────────────────────────────────┐
+data/scenario.json ──────────────┬──────────────────────────────────────────────────────────┤
+                                 ↓                                                           │
+                   data/character_moods.json (Phase 0.5-D)                                  │
+                   global_characters/[Name]/canonical_visual.md (Phase 0.5-A)               │
+                   data/characters/[Name]/personality_signature.md (Phase 0.5-B)            │
+                                 ↓                                                           │
+                       data/intro_pages.json (parallel)                                     │
+                                 │                                                           │
+               data/pages.json ──────────────────────────────────────────────────────────────┤
+                                 ↓                                                           │
+                       data/panels.json ─────────────────────────────────────────────────────┤
+                                 ↓                                                           │
+                       data/script.json ─────────────────────────────────────────────────────┤
+                                 ↓                                                           │
+                     data/images/page_N/ ────────────────────────────────────────────────────┘
+                                 ↓
+                     data/assembly/pages/
 ```
+
+**Phase 0.5 upstream rule:** `data/character_moods.json` is an upstream dependency for Phase 1 (character intros) and Phase 3 (dialogue). The scripting agent MUST read it before writing any scene — see `scripting_instructions.md` item 7.
 
 **Rules:**
 - Never generate a downstream file if its upstream dependency doesn't exist and is not approved.
@@ -106,10 +141,11 @@ data/scenario.json ──────────┬─────────�
 |-------|---------|-------|--------|-----|
 | Pre | — | user brief | customized `pipelines/` files | `init_project_protocol.md` |
 | 0 | 🌍 Lore & Story | conversation | `data/lore.json`, `data/scenario.json` | [→](docs/phase_0_lore.md) |
-| 1 | 📋 Pacing | `data/scenario.json` | `data/pages.json` | [→](docs/phase_1_pacing.md) |
-| 1.5 | 🎭 Characters | Phase 0 notes | `data/intro_pages.json` | [→](docs/phase_1b_characters.md) |
+| **0.5** | **👤 Characters Hub** | `data/lore.json`, `data/scenario.json`, `global_characters/` | `data/character_moods.json`, `global_characters/[Name]/canonical_visual.md`, `data/characters/[Name]/personality_signature.md` | pipelines 05–07 |
+| 1 | 🎭 Characters | Phase 0 notes + `data/character_moods.json` | `data/intro_pages.json` | [→](docs/phase_1_characters.md) |
+| 1.5 | 📋 Pacing | `data/scenario.json` | `data/pages.json` | [→](docs/phase_1.5_pacing.md) |
 | 2 | 📐 Panel Structure | `data/pages.json` | `data/panels.json` | [→](docs/phase_2_structure.md) |
-| 3 | ✍️ Script | `data/panels.json` | `data/script.json` | [→](docs/phase_3_script.md) |
+| 3 | ✍️ Script | `data/panels.json` + `data/character_moods.json` | `data/script.json` | [→](docs/phase_3_script.md) |
 | 4/5 | *(AI chat only)* | `data/script.json` + `data/panels.json` | `data/images/` | [→](docs/phase_4_images.md) |
 | 6 | 🧩 Assembly | `data/images/` + `data/script.json` | Human places panels & bubbles in the app canvas | [→](docs/phase_6_assembly.md) |
 
@@ -143,8 +179,9 @@ Examples:
 | Phase | `qa/` subfolder |
 |-------|----------------|
 | Phase 0 | `qa/lore/` |
-| Phase 1 | `qa/pacing/` |
-| Phase 1.5 | `qa/characters/` |
+| Phase 0.5 | `qa/character-hub/` |
+| Phase 1 | `qa/characters/` |
+| Phase 1.5 | `qa/pacing/` |
 | Phase 2 | `qa/structure/` |
 | Phase 3 | `qa/script/` |
 | Phase 4/5 | `qa/images/` |
@@ -153,15 +190,25 @@ Examples:
 
 | Tag | Phase | Meaning |
 |-----|-------|---------|
-| `[REWRITE_FOCUS]` | 1 | Rewrite a page's focus description |
-| `[EXTEND]` | 1 | Add a page to give a scene more space |
-| `[MERGE_WITH_NEXT]` | 1, 2 | Combine with following page/panel |
-| `[ADD_PAGE_AFTER]` | 1 | Insert a new page after the referenced one |
+| `[REWRITE_VISUAL]` | 0.5 | Rewrite `canonical_visual.md` for a character |
+| `[REGENERATE_TURNAROUNDS]` | 0.5 | Regenerate all 5 turnaround images |
+| `[REGENERATE_EMOTION:name]` | 0.5 | Regenerate a specific emotional state image (e.g. `REGENERATE_EMOTION:angry`) — surgical, one image only |
+| `[REWRITE_PERSONALITY]` | 0.5 | Rewrite `personality_signature.md` for a character |
+| `[REGENERATE_SHOT:{loc}:{variant}:{shot_id}]` | 0 | **Re-generate** shot from scratch — adjust `prompt_suffix` per `Prompt changes:` field, then generate a new image |
+| `[MODIFY_SHOT:{loc}:{variant}:{shot_id}]` | 0 | **Modify** existing shot — pass `Source image:` path back to the generator with `Changes to apply:` as the edit instruction |
+| `[REGENERATE_PALETTE:{loc}:{variant}]` | 0 | Produce a new colour palette for this location/variant and update `geography.json` |
+| `[MODIFY_LIGHTING:{loc}:{variant}]` | 0 | Update the `lighting_summary` text field in `geography.json` per the direction note |
+| `[REGENERATE_STYLE_REFERENCE]` | 0 | Produce a new style reference image from the mood board |
+| `[ADD_LOCATION:{loc_id}]` | 0 | Create a new location entry in `geography.json` from the flag data, then run Pipeline 09, then Pipeline 08 |
 | `[CHANGE_TYPE]` | 1, 1.5 | Change the type badge of a page |
-| `[REWRITE_SCENE]` | 1.5, 0 | Rewrite a scene or character scene description |
-| `[CHANGE_LAYOUT]` | 1.5 | Change character intro layout type |
-| `[REWRITE_CAPTION]` | 1.5 | Change narrator caption |
-| `[REWRITE_DIALOGUE]` | 1.5, 3 | Rewrite a dialogue line |
+| `[REWRITE_SCENE]` | 1, 0 | Rewrite a scene or character scene description |
+| `[CHANGE_LAYOUT]` | 1 | Change character intro layout type |
+| `[REWRITE_CAPTION]` | 1 | Change narrator caption |
+| `[REWRITE_DIALOGUE]` | 1, 3 | Rewrite a dialogue line |
+| `[REWRITE_FOCUS]` | 1.5 | Rewrite a page's focus description |
+| `[EXTEND]` | 1.5 | Add a page to give a scene more space |
+| `[MERGE_WITH_NEXT]` | 1.5, 2 | Combine with following page/panel |
+| `[ADD_PAGE_AFTER]` | 1.5 | Insert a new page after the referenced one |
 | `[REWRITE_ACTION]` | 2 | Rewrite a panel's action description |
 | `[SPLIT]` | 2 | Split one panel into two |
 | `[ADD_PANEL_AFTER]` | 2 | Insert a panel after the referenced one |
@@ -189,55 +236,51 @@ npm run dev
 # → http://localhost:5173/
 ```
 
-### Design System (ui-ux-pro-max)
+### Design System (Modern Drafting Board)
 
-The app uses a **Motion-Driven Dark** design system applied via the `ui-ux-pro-max` skill. The persisted master is at:
+The app uses a **Modern Drafting Board** design system — a clean, analog-inspired light theme. The persisted master is at:
 ```
 app/design-system/architecture-3.0-assembly-studio/MASTER.md
 ```
 
-**Fonts:** `Fira Code` (headings, mono labels) + `Fira Sans` (body text)  
-**Theme:** OLED-optimised dark — base `#020617`, panels `#1e293b`, accents blue `#3b82f6`
+**Fonts:** `Space Grotesk` (headings) + `Inter` (body text) + `IBM Plex Mono` (monospace/code)  
+**Theme:** Light — panels `#FAFAF9`, background `#F3F4F6`, primary blue `#1E3A8A`
 
 **CSS file map:**
 | File | Purpose |
 |------|---------|
-| `app/src/index.css` | Design tokens (CSS variables), typography, glass-panel, scrollbar, motion utilities |
+| `app/src/index.css` | Base reset, typography, font imports, scrollbar, focus-visible outlines, motion accessibility |
 | `app/src/styles/app.css` | Shell layout: `.app-container`, `.phase-tab-bar`, `.phase-tab`, `.nav-btn`, `.export-btn`, `.assembly-subbar` |
 | `app/src/styles/components.css` | Component library: sidebar, canvas, properties panel, QA board, buttons, form fields |
-| `app/src/styles/*.css` | Per-phase styles (script, panels, pacing, characters, lore) |
+| `app/src/styles/*.css` | Per-phase styles (script, panels, pacing, characters, character-hub, lore) |
 
-**Key CSS tokens (from `index.css` `:root`):**
-```css
---bg-deep / --bg-color / --panel-bg / --panel-raised  /* surface layers */
---text-main / --text-sub / --text-muted               /* text hierarchy */
---accent-primary / --accent-hover / --accent-dim / --accent-glow  /* blue neon system */
---success / --success-dim / --danger / --danger-dim   /* status colours */
---border-color / --border-subtle                      /* borders */
---glass-bg / --glass-border / --glass-blur / --glass-shadow  /* glassmorphism */
---dur-fast (150ms) / --dur-base (220ms) / --dur-slow (380ms)  /* motion timing */
---ease-out / --ease-in / --ease-spring                /* easing curves */
+**Key design tokens (from `tailwind.config.js` + `index.css` `:root`):**
+```
+primary: #1E3A8A (hover: #1D4ED8)       /* blue action colour */
+background-panel: #FAFAF9                 /* card/panel surface */
+secondary: #F3F4F6                        /* page background */
+foreground: #1F2937                       /* primary text */
+foreground-muted: #6B7280                 /* secondary text */
+border: #E5E7EB                           /* standard border */
+border-blueprint: #3B82F6                 /* accent borders */
+destructive: #EF4444 | success: #10B981 | warning: #F59E0B
 ```
 
 **CSS class conventions:**
-- Use `.glass-panel` for floating surfaces with backdrop blur
-- Use `.nav-btn` / `.nav-btn.active` for all tab/navigation buttons
-- Use `.export-btn` for primary gradient action buttons
-- Use `.btn-danger` / `.btn-success` / `.btn-remove` for status actions
-- Use `.form-field` wrapper + `label[htmlFor]` + input/select/textarea for all QA forms
-- Use `.qa-board` → `.qa-board-header` → `.qa-board-content` → `.qa-column` for QA layout
-- All interactive elements must have `cursor: pointer` (globally set in `index.css`)
-- All transitions must use `var(--dur-fast)` or `var(--dur-base)` tokens
+- Tailwind utility classes are used throughout (e.g. `bg-background-panel`, `text-foreground-muted`, `border-border`)
+- Per-phase CSS files use BEM-style naming (e.g. `.lore-section-header`, `.chub-mood-card`)
+- All interactive elements have `cursor: pointer` (globally set in `index.css`)
+- Use `transition-colors` or `transition-all` for state changes
 
 **Accessibility rules enforced:**
 - `@media (prefers-reduced-motion: reduce)` — all transitions collapse to 0.01ms
-- `focus-visible` outlines on all interactive elements (2px accent-primary)
-- `aria-current="page"` on active sidebar page buttons
+- `focus-visible` outlines on all interactive elements (2px solid `#1E3A8A`)
 - `htmlFor` + `id` pairing required on all form labels
 
 **API endpoints (served by the Vite dev plugin):**
+- `GET /api/load-image?path=[relative_path]` — Serves binary image files (PNG/JPG/WebP) from the project root. **Must be routed before `/api/load`** in `vite.config.ts` to avoid the `startsWith('/api/load')` handler swallowing it.
 - `GET /api/load?path=[relative_path]` — Reads any JSON file relative to the project root. Returns `{ data: {...} }` or `{ error: "..." }`.
-- `POST /api/save` — Body: `{ path: "...", content: {...} }`. Writes JSON to any path relative to project root.
+- `POST /api/save` — Body: `{ path: "...", content: {...} }`. Writes JSON to any path relative to project root. (Do NOT double-stringify `content` before sending — the server stringifies it automatically.)
 - `POST /api/save-qa` — Body: `{ path: "...", content: "..." }`. Writes a markdown QA report (text content).
 
 **Path resolution:** All paths in the API are relative to the `architecture 3.0/` project root (one level above `app/`).

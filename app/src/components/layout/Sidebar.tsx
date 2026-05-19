@@ -18,7 +18,7 @@ const Sidebar: React.FC<SidebarProps> = ({ pages, currentPageId, onPageChange })
       <div className="flex-1 overflow-y-auto p-4 space-y-1">
         {pages.length === 0 ? (
           <p className="text-xs text-foreground-muted italic p-4 text-center">
-            No pages found.<br />Run Phase 1 first.
+            No pages found.<br />Run Phase 1.5 first.
           </p>
         ) : (
           pages.map(page => {

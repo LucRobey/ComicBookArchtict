@@ -43,28 +43,32 @@ const PropertiesPanel: React.FC = () => {
 
   if (!selectedElement) {
     return (
-      <aside className="properties-panel bg-background-panel border-l border-border shadow-md">
-        <h3>Canvas Settings</h3>
-        <div className="prop-section">
-          <p className="text-foreground-muted text-sm mb-5">
+      <aside className="w-72 flex-shrink-0 flex flex-col bg-background-panel border-l border-border shadow-md overflow-y-auto">
+        <div className="p-4 border-b border-border">
+          <h3 className="text-sm font-bold font-heading tracking-widest text-foreground uppercase">Canvas Settings</h3>
+        </div>
+        <div className="p-4 space-y-4">
+          <p className="text-foreground-muted text-sm">
             No element selected. Adjust global canvas properties below.
           </p>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+          <div className="flex flex-col gap-3">
+            <label className="flex items-center gap-2 cursor-pointer text-sm font-medium text-foreground">
               <input 
                 type="checkbox" 
                 checked={showGrid} 
                 onChange={(e) => setShowGrid(e.target.checked)} 
+                className="rounded border-border text-border-blueprint focus:ring-border-blueprint"
               />
               Show 20px Grid
             </label>
             
-            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+            <label className="flex items-center gap-2 cursor-pointer text-sm font-medium text-foreground">
               <input 
                 type="checkbox" 
                 checked={snapToGrid} 
                 onChange={(e) => setSnapToGrid(e.target.checked)} 
+                className="rounded border-border text-border-blueprint focus:ring-border-blueprint"
               />
               Snap Elements to Grid
             </label>
@@ -78,151 +82,175 @@ const PropertiesPanel: React.FC = () => {
   const isPanel = selectedElement.type === 'panel';
 
   return (
-    <aside className="properties-panel bg-background-panel border-l border-border shadow-md">
-      <h3>Properties</h3>
-      <div className="prop-section">
-        <label>Type: <strong>{selectedElement.type.toUpperCase()}</strong></label>
+    <aside className="w-72 flex-shrink-0 flex flex-col bg-background-panel border-l border-border shadow-md overflow-y-auto pb-4">
+      <div className="p-4 border-b border-border shrink-0">
+        <h3 className="text-sm font-bold font-heading tracking-widest text-foreground uppercase">Properties</h3>
       </div>
 
-      <div className="prop-grid">
-        <div className="prop-field">
-          <label>X</label>
-          <input 
-            type="number" 
-            value={Math.round(selectedElement.x)} 
-            onChange={(e) => updateElementPosition(selectedElement.id, Number(e.target.value), selectedElement.y)} 
-          />
-        </div>
-        <div className="prop-field">
-          <label>Y</label>
-          <input 
-            type="number" 
-            value={Math.round(selectedElement.y)} 
-            onChange={(e) => updateElementPosition(selectedElement.id, selectedElement.x, Number(e.target.value))} 
-          />
-        </div>
-        <div className="prop-field">
-          <label>Width</label>
-          <input 
-            type="text" 
-            value={selectedElement.width} 
-            onChange={(e) => updateElementSize(selectedElement.id, e.target.value, selectedElement.height)} 
-          />
-        </div>
-        <div className="prop-field">
-          <label>Height</label>
-          <input 
-            type="text" 
-            value={selectedElement.height} 
-            onChange={(e) => updateElementSize(selectedElement.id, selectedElement.width, e.target.value)} 
-          />
+      <div className="p-4 border-b border-border">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold text-foreground-muted uppercase tracking-wider">Type</span>
+          <span className="text-sm font-bold text-foreground">{selectedElement.type.toUpperCase()}</span>
         </div>
       </div>
 
-      <div className="prop-section">
-        <label>Z-Index</label>
-        <div className="z-controls">
-          <button onClick={() => updateElementZIndex(selectedElement.id, selectedElement.zIndex - 1)}>-</button>
-          <span>{selectedElement.zIndex}</span>
-          <button onClick={() => updateElementZIndex(selectedElement.id, selectedElement.zIndex + 1)}>+</button>
+      <div className="p-4 border-b border-border">
+        <h4 className="text-xs font-semibold text-foreground-muted uppercase tracking-wider mb-3">Geometry</h4>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-medium text-foreground-muted">X</label>
+            <input 
+              type="number" 
+              value={Math.round(selectedElement.x)} 
+              onChange={(e) => updateElementPosition(selectedElement.id, Number(e.target.value), selectedElement.y)} 
+              className="w-full px-2 py-1.5 bg-secondary border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-border-blueprint"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-medium text-foreground-muted">Y</label>
+            <input 
+              type="number" 
+              value={Math.round(selectedElement.y)} 
+              onChange={(e) => updateElementPosition(selectedElement.id, selectedElement.x, Number(e.target.value))} 
+              className="w-full px-2 py-1.5 bg-secondary border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-border-blueprint"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-medium text-foreground-muted">Width</label>
+            <input 
+              type="text" 
+              value={selectedElement.width} 
+              onChange={(e) => updateElementSize(selectedElement.id, e.target.value, selectedElement.height)} 
+              className="w-full px-2 py-1.5 bg-secondary border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-border-blueprint"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-medium text-foreground-muted">Height</label>
+            <input 
+              type="text" 
+              value={selectedElement.height} 
+              onChange={(e) => updateElementSize(selectedElement.id, selectedElement.width, e.target.value)} 
+              className="w-full px-2 py-1.5 bg-secondary border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-border-blueprint"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="p-4 border-b border-border">
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-semibold text-foreground-muted uppercase tracking-wider">Z-Index</label>
+          <div className="flex items-center gap-2">
+            <button className="px-2 py-0.5 bg-secondary border border-border rounded-sm text-foreground hover:bg-border transition-colors" onClick={() => updateElementZIndex(selectedElement.id, selectedElement.zIndex - 1)}>-</button>
+            <span className="text-sm font-medium w-6 text-center">{selectedElement.zIndex}</span>
+            <button className="px-2 py-0.5 bg-secondary border border-border rounded-sm text-foreground hover:bg-border transition-colors" onClick={() => updateElementZIndex(selectedElement.id, selectedElement.zIndex + 1)}>+</button>
+          </div>
         </div>
       </div>
 
       {isBubble && (
         <>
-          <div className="prop-section">
-            <label>Bubble Styling</label>
-            <div className="prop-grid">
-              <div className="prop-field">
-                <label>Font Size (px)</label>
+          <div className="p-4 border-b border-border">
+            <h4 className="text-xs font-semibold text-foreground-muted uppercase tracking-wider mb-3">Bubble Styling</h4>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-foreground-muted">Font Size (px)</label>
                 <input 
                   type="number" 
                   value={(selectedElement as CanvasBubble).fontSize} 
                   onChange={(e) => updateElementData(selectedElement.id, { fontSize: Number(e.target.value) })} 
+                  className="w-full px-2 py-1.5 bg-secondary border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-border-blueprint"
                 />
               </div>
-              <div className="prop-field">
-                <label>Tail Direction</label>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-foreground-muted">Tail Direction</label>
                 <select 
                   value={(selectedElement as CanvasBubble).tailDirection}
                   onChange={(e) => updateElementData(selectedElement.id, { tailDirection: e.target.value as any })}
-                  className="w-full p-1.5 rounded bg-background text-foreground border border-border"
+                  className="w-full px-2 py-1.5 bg-secondary border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-border-blueprint"
                 >
                   <option value="none">None</option>
                   <option value="left">Left</option>
                   <option value="right">Right</option>
                 </select>
               </div>
-              <div className="prop-field">
-                <label>Background</label>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-foreground-muted">Background</label>
                 <input 
                   type="color" 
                   value={(selectedElement as CanvasBubble).backgroundColor} 
                   onChange={(e) => updateElementData(selectedElement.id, { backgroundColor: e.target.value })}
-                  style={{ width: '100%', height: '30px', padding: '0', cursor: 'pointer' }}
+                  className="w-full h-8 p-0 cursor-pointer rounded-sm border border-border bg-secondary"
                 />
               </div>
-              <div className="prop-field">
-                <label>Text Color</label>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-foreground-muted">Text Color</label>
                 <input 
                   type="color" 
                   value={(selectedElement as CanvasBubble).textColor} 
                   onChange={(e) => updateElementData(selectedElement.id, { textColor: e.target.value })}
-                  style={{ width: '100%', height: '30px', padding: '0', cursor: 'pointer' }}
+                  className="w-full h-8 p-0 cursor-pointer rounded-sm border border-border bg-secondary"
                 />
               </div>
             </div>
           </div>
-          <div className="prop-section">
-            <label>Dialogue Text</label>
+          <div className="p-4 border-b border-border">
+            <label className="text-xs font-semibold text-foreground-muted uppercase tracking-wider mb-2 block">Dialogue Text</label>
             <textarea 
               value={(selectedElement as CanvasBubble).text} 
               onChange={(e) => updateElementData(selectedElement.id, { text: e.target.value })}
-              rows={3} 
-              className="w-full resize-y p-2 rounded bg-background text-foreground border border-border"
+              rows={4} 
+              className="w-full px-2 py-2 bg-secondary border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-border-blueprint resize-y"
             />
           </div>
         </>
       )}
 
       {isPanel && (
-        <div className="prop-section">
-          <label>Image Cropping & Panning</label>
-          <div className="prop-grid">
-            <div className="prop-field">
-              <label>Scale (Zoom)</label>
+        <div className="p-4 border-b border-border">
+          <h4 className="text-xs font-semibold text-foreground-muted uppercase tracking-wider mb-3">Image Cropping</h4>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-medium text-foreground-muted">Scale (Zoom)</label>
               <input 
                 type="number" 
                 step="0.1"
                 min="0.1"
                 value={(selectedElement as CanvasPanel).imageScale} 
                 onChange={(e) => updateElementData(selectedElement.id, { imageScale: Number(e.target.value) })} 
+                className="w-full px-2 py-1.5 bg-secondary border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-border-blueprint"
               />
             </div>
-            <div className="prop-field"></div>
-            <div className="prop-field">
-              <label>Pan X (px)</label>
+            <div className="flex flex-col gap-1.5"></div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-medium text-foreground-muted">Pan X (px)</label>
               <input 
                 type="number" 
                 value={(selectedElement as CanvasPanel).imageOffsetX} 
                 onChange={(e) => updateElementData(selectedElement.id, { imageOffsetX: Number(e.target.value) })} 
+                className="w-full px-2 py-1.5 bg-secondary border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-border-blueprint"
               />
             </div>
-            <div className="prop-field">
-              <label>Pan Y (px)</label>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-medium text-foreground-muted">Pan Y (px)</label>
               <input 
                 type="number" 
                 value={(selectedElement as CanvasPanel).imageOffsetY} 
                 onChange={(e) => updateElementData(selectedElement.id, { imageOffsetY: Number(e.target.value) })} 
+                className="w-full px-2 py-1.5 bg-secondary border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-border-blueprint"
               />
             </div>
           </div>
         </div>
       )}
 
-      <button className="btn-danger" onClick={() => removeElement(selectedElement.id)} style={{ marginTop: '20px', width: '100%' }}>
-        Delete Element
-      </button>
+      <div className="p-4 mt-auto">
+        <button 
+          onClick={() => removeElement(selectedElement.id)} 
+          className="w-full px-4 py-2 bg-destructive/10 text-destructive border border-destructive/30 rounded-sm font-medium hover:bg-destructive hover:text-white transition-colors text-sm"
+        >
+          Delete Element
+        </button>
+      </div>
     </aside>
   );
 };

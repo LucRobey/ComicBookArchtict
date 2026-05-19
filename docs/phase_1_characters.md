@@ -1,15 +1,15 @@
-# 🤖 Phase 1.5: Character Introductions
+# 🤖 Phase 1: Character Introductions
 
 **App Tab:** 🎭 Characters
 **Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
-**Upstream:** [Phase 0 →](phase_0_lore.md) | [Phase 1 →](phase_1_pacing.md)
+**Upstream:** [Phase 0 →](phase_0_lore.md) | [Phase 1.5 →](phase_1.5_pacing.md)
 **Downstream:** [Phase 2 →](phase_2_structure.md)
 
 ---
 
 ## What This Phase Does
 
-Creates dedicated introductory pages for each main character. Each character gets a page (or short sequence) with narrator caption, first spoken line, and a panel breakdown. Runs **in parallel with Phase 1** — both must be approved before Phase 2.
+Creates dedicated introductory pages for each main character. Each character gets a page (or short sequence) with narrator caption, first spoken line, and a panel breakdown. Runs **in parallel with Phase 1.5** — both must be approved before Phase 2.
 
 ---
 
@@ -112,6 +112,6 @@ The panel count in `panels[]` **must exactly match** the `layout_type`. This is 
 2. The `narrator_caption` must reveal character, not just label them.
 3. Panel count must **exactly match** `layout_type`.
 4. Do not assign final page numbers — Phase 2 sets final positions.
-5. After writing, update `PRODUCTION_STATUS.md`: Phase 1.5 → `[REVIEW]`
+5. After writing, update `PRODUCTION_STATUS.md`: Phase 1 → `[REVIEW]`
 
 **⚠️ After approval:** Prompt the user to update `pipelines/generation_instructions.md` with the project's visual style baseline.

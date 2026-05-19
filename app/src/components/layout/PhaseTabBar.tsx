@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type PhaseId = 'lore' | 'pacing' | 'characters' | 'panels' | 'script' | 'assembly';
+export type PhaseId = 'lore' | 'char-hub' | 'pacing' | 'characters' | 'panels' | 'script' | 'assembly';
 
 interface Phase {
   id: PhaseId;
@@ -11,12 +11,13 @@ interface Phase {
 }
 
 const PHASES: Phase[] = [
-  { id: 'lore',       label: 'Lore & Story',    emoji: '🌍', accentColor: '#8b5cf6', badge: 'Phase 0' },
-  { id: 'pacing',     label: 'Pacing',           emoji: '📋', accentColor: '#06b6d4', badge: 'Phase 1' },
-  { id: 'characters', label: 'Characters',       emoji: '🎭', accentColor: '#f59e0b', badge: 'Phase 1.5' },
-  { id: 'panels',     label: 'Panel Structure',  emoji: '📐', accentColor: '#10b981', badge: 'Phase 2' },
-  { id: 'script',     label: 'Script',           emoji: '✍️',  accentColor: '#f97316', badge: 'Phase 3' },
-  { id: 'assembly',   label: 'Assembly',         emoji: '🧩', accentColor: '#3b82f6', badge: 'Phase 6' },
+  { id: 'lore',       label: 'Lore & Story',    emoji: '🌍', accentColor: '#8b5cf6', badge: 'Phase 0'   },
+  { id: 'char-hub',   label: 'Characters Hub',  emoji: '👤', accentColor: '#6366f1', badge: 'Phase 0.5' },
+  { id: 'characters', label: 'Characters',       emoji: '🎭', accentColor: '#f59e0b', badge: 'Phase 1'   },
+  { id: 'pacing',     label: 'Pacing',           emoji: '📋', accentColor: '#06b6d4', badge: 'Phase 1.5' },
+  { id: 'panels',     label: 'Panel Structure',  emoji: '📐', accentColor: '#10b981', badge: 'Phase 2'   },
+  { id: 'script',     label: 'Script',           emoji: '✍️',  accentColor: '#f97316', badge: 'Phase 3'   },
+  { id: 'assembly',   label: 'Assembly',         emoji: '🧩', accentColor: '#3b82f6', badge: 'Phase 6'   },
 ];
 
 interface PhaseTabBarProps {
@@ -40,10 +41,10 @@ const PhaseTabBar: React.FC<PhaseTabBarProps> = ({ activePhase, onPhaseChange })
         {PHASES.map(phase => (
           <button
             key={phase.id}
-            className={`px-3 py-1.5 text-sm font-medium rounded-sm transition-colors flex items-center gap-2 ${
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-2 ${
               activePhase === phase.id 
-                ? 'bg-secondary text-border-blueprint border-b-2 border-border-blueprint' 
-                : 'text-foreground-muted hover:text-foreground hover:bg-secondary'
+                ? 'bg-secondary text-primary shadow-sm border border-border' 
+                : 'text-foreground-muted hover:text-primary hover:bg-secondary border border-transparent'
             }`}
             onClick={() => onPhaseChange(phase.id)}
           >

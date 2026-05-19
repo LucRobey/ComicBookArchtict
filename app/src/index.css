@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
 /* ═══════════════════════════════════════════════════════════
    ARCHITECTURE 3.0 — ARC 3.0 Brand Identity
@@ -31,8 +30,6 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 1.6;
-  background-color: #1E3A8A;
-  color: #1F2937;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -12,9 +12,9 @@
       ↓
 [Phase 0]    Pre-Production           → data/lore.json, data/scenario.json
       ↓
-[Phase 1]    Pacing                   → data/pages.json
+[Phase 1]  Character Intros         → data/intro_pages.json
       ↓
-[Phase 1.5]  Character Intros         → data/intro_pages.json
+[Phase 1.5]    Pacing                   → data/pages.json
       ↓
 [Phase 2]    Panel Structuring        → data/panels.json
       ↓
@@ -128,48 +128,7 @@ Then say: **"Apply my modifications."**
 
 ---
 
-## 📋 Phase 1: Pacing & Pagination
-
-**App Tab:** 📋 Pacing  
-**Pipeline file:** `pipelines/pacing_instructions.md`  
-**Input:** `data/scenario.json`  
-**Output:** `data/pages.json`
-
-### What you say
-
-> *"Execute Phase 1. Read `data/scenario.json` and `pipelines/pacing_instructions.md`. Generate `data/pages.json`."*
-
-### What the agent does
-
-Distributes your scenes across physical pages based on dramatic weight. Each page gets a type, a scene reference, and a focus description.
-
-```json
-{
-  "total_pages": 8,
-  "pages": [
-    {
-      "page_number": 3,
-      "scene_id": 1,
-      "type": "interior",
-      "focus": "What this page shows...",
-      "anecdotes_included": ["anecdote_key"]
-    }
-  ]
-}
-```
-Page types: `cover`, `character_intro`, `interior`, `chapter_break`, `splash`
-
-### In the app
-
-Open the **Pacing** tab. Click 🚩 on any page to flag it.
-
-Fix types: `Rewrite Focus`, `Extend (Add Page)`, `Merge With Next`, `Change Type`, `Add Page After`
-
-QA reports go to: `qa/pacing/`. Then say: **"Apply my modifications."**
-
----
-
-## 🎭 Phase 1.5: Character Introductions
+## 🎭 Phase 1: Character Introductions
 
 **App Tab:** 🎭 Characters  
 **Pipeline file:** `pipelines/intro_instructions.md`  
@@ -178,7 +137,7 @@ QA reports go to: `qa/pacing/`. Then say: **"Apply my modifications."**
 
 ### What you say
 
-> *"Execute Phase 1.5. Read `data/lore.json` and `pipelines/intro_instructions.md`. Generate `data/intro_pages.json`."*
+> *"Execute Phase 1. Read `data/lore.json` and `pipelines/intro_instructions.md`. Generate `data/intro_pages.json`."*
 
 ### What the agent does
 
@@ -209,6 +168,47 @@ Fix types: `Rewrite Scene`, `Change Layout`, `Rewrite Caption`, `Rewrite Dialogu
 QA reports go to: `qa/characters/`. Then say: **"Apply my modifications."**
 
 > ⚠️ **After approval:** Update `pipelines/generation_instructions.md` with your project's visual style baseline.
+
+---
+
+## 📋 Phase 1.5: Pacing & Pagination
+
+**App Tab:** 📋 Pacing  
+**Pipeline file:** `pipelines/pacing_instructions.md`  
+**Input:** `data/scenario.json`  
+**Output:** `data/pages.json`
+
+### What you say
+
+> *"Execute Phase 1.5. Read `data/scenario.json` and `pipelines/pacing_instructions.md`. Generate `data/pages.json`."*
+
+### What the agent does
+
+Distributes your scenes across physical pages based on dramatic weight. Each page gets a type, a scene reference, and a focus description.
+
+```json
+{
+  "total_pages": 8,
+  "pages": [
+    {
+      "page_number": 3,
+      "scene_id": 1,
+      "type": "interior",
+      "focus": "What this page shows...",
+      "anecdotes_included": ["anecdote_key"]
+    }
+  ]
+}
+```
+Page types: `cover`, `character_intro`, `interior`, `chapter_break`, `splash`
+
+### In the app
+
+Open the **Pacing** tab. Click 🚩 on any page to flag it.
+
+Fix types: `Rewrite Focus`, `Extend (Add Page)`, `Merge With Next`, `Change Type`, `Add Page After`
+
+QA reports go to: `qa/pacing/`. Then say: **"Apply my modifications."**
 
 ---
 
@@ -422,8 +422,8 @@ architecture 3.0/
 │
 ├── qa/                        ← All QA reports by phase
 │   ├── lore/
-│   ├── pacing/
 │   ├── characters/
+│   ├── pacing/
 │   ├── structure/
 │   ├── script/
 │   └── images/

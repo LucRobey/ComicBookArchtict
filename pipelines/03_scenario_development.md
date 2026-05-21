@@ -1,41 +1,48 @@
-# 📖 Phase 0 (Step 3): Scenario Development Instructions
+# 📖 Phase 0.2: Scenario Development Pipeline Instructions
 
 **Agent Role:** Screenwriter & Story Architect
-**Objective:** Transform raw user ideas, jokes, and anecdotes into a structured, compelling comic book scenario.
+**Objective:** Transform raw user ideas into a structured, compelling comic book scenario via a 5-step controllable pipeline.
 
 ---
 
-## Context & Inputs
+## The 5-Step Pipeline Architecture
 
-*(This step MUST run after Step 2 is complete)*
+You will receive specific QA flags instructing you to execute one of these 5 steps. You must output the designated JSON files.
 
-You MUST read and fully internalize the following files before proceeding:
+### Step 1: Raw Inputs (The Brain Dump)
+- **Input:** User manual entry in UI.
+- **Data File:** `data/scenario_inputs.json`
+- **Agent Action:** None, unless asked to suggest inputs.
 
-1. `outputs/presentation.md` (The distilled character profiles from Step 2. You MUST use these psychologically grounded profiles to drive the scenario, rather than a generic mood).
-2. `inputs/raw_ideas.txt` (A brain dump of plot points, real-life anecdotes, and jokes).
-3. `modifications/modifications.md` (The user's correction logs. Read this first if it exists).
+### Step 2: Personality Signatures
+- **Trigger Flag:** `GENERATE_SIGNATURES`
+- **Input Required:** `data/scenario_inputs.json` + `data/presentation.json` (Base Character Profiles).
+- **Process:** Generate specific personality signatures tailored to this scenario's events for each character.
+- **Output File:** `data/personality_signature.json` (format: `{"signatures": {"char_name": {"age": "...", "gender": "...", "role": "...", "relationships": {"other_char": "..."}, "general_personality": "...", "loves": ["..."], "hates": ["..."], "verbal_habits": "...", "writing_notes": "..."}}}`)
 
-## 2. Execution Mode Decision
-Based on your check of `modifications/modifications.md`, choose your execution mode:
+### Step 3: The Story Treatment (Synopsis)
+- **Trigger Flag:** `GENERATE_SYNOPSIS` or `REWRITE_SYNOPSIS`
+- **Input Required:** `data/scenario_inputs.json` + `data/personality_signature.json` + `data/lore.json`.
+- **Process:** Write a rich-text synopsis covering the entire scenario arc.
+- **Output File:** `data/scenario_synopsis.json` (format: `{"synopsis": "..."}`)
 
-### Mode A: Normal Generation (No Modifications)
-*If `modifications.md` does not exist or is empty.*
+### Step 4: Chapters (The Outline)
+- **Trigger Flag:** `GENERATE_CHAPTERS` or `REWRITE_CHAPTER`
+- **Input Required:** `data/scenario_synopsis.json`.
+- **Process:** Break the synopsis down into chronological chapters.
+- **Output Files:**
+  - `data/scenario_chapters.json` (format: `{"chapters": [{"chapter_id": 1, "title": "...", "summary": "..."}]}`)
+  - `data/character_mood.json` (Create overarching mood definitions for characters per chapter if required).
 
-1. Read the `raw_ideas.txt`.
-2. Propose a structured narrative arc consisting of distinct scenes. 
-3. **Specific Details Rule:** Every single real-life anecdote or specific plot detail mentioned in the raw ideas MUST be assigned to a specific scene. Do not leave any out. They provide the grounding reality of the story.
+### Step 5: Scenes (The Script Breakdown)
+- **Trigger Flag:** `GENERATE_SCENES` or `REWRITE_SCENE`
+- **Input Required:** `data/scenario_chapters.json` + `data/personality_signature.json` + `data/character_mood.json` (or `character_moods.json`) + `data/geography.json`.
+- **Process:** Break down chapters into individual scenes.
+- **Crucial Rule:** You MUST explicitly cross-reference the scene actions against each Character's `personality_signature` and `character_mood.json` to ensure deep psychological consistency. If a character acts out of character, you must adjust the scene to fit their internal truth.
+- **Output File:** `data/scenario_scenes.json` (format: `{"scenes": [{"scene_id": 1, "title": "...", "location": "...", "characters_present": [], "emotional_beat": "...", "summary": "...", "anecdotes": []}]}`)
 
-#### Expected Outputs
-You must generate three distinct outputs:
-
-1. **`lore.md`:** The world rules. Are there superpowers? Is it a spy thriller? What is the overarching tone (e.g., "pure farce", "gritty noir")?
-2. **`detailed_scenario.md`:** A scene-by-scene breakdown. For each scene, list the characters present, the physical location, and the emotional beat.
-3. **`project_details.md`:** A clean list of all the specific jokes/moments/plot points to include (e.g., "Character A finding the hidden key", "The awkward family dinner").
-
-### Mode B: Modification / Smart Regeneration
-*If `modifications.md` exists and contains user feedback.*
-
-1. **Identify the Targets:** Look closely at the `modifications.md` file. Identify exactly which scenes have comments underneath them.
-2. **Redo the Process:** Do NOT just blindly patch the text. You must smartly *redo the conceptual writing process* for that specific scene. Re-read the raw ideas and the user's critique (e.g., "Scene 3 is too boring. Add an action sequence").
-3. **Regenerate:** Rewrite the scenario for that specific scene from scratch, applying the new constraints while ensuring the pacing remains intact. Output the complete, updated scenario.
-4. **The Pipeline Cascade Rule (CRITICAL):** Because Phase 0 operates as a strict sequence, modifying `lore.md` (Step 3) means you **MUST** flag that the visual signatures (Step 4) may need to be double-checked against the new world rules. Always inform the user if your modifications have triggered a necessary cascade update to downstream files.
+## Handling Modifications
+If the flag contains `REWRITE_...` or `VERIFY_PERSONALITY`:
+1. Read the user's instructions in the QA flag.
+2. Regenerate only the specific step or item requested (e.g., rewrite just Scene 3, or rewrite the Synopsis).
+3. Ensure downstream consistency (e.g., if chapters change, scenes might need an update later).

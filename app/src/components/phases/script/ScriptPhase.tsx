@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PhaseHeader } from '../../shared/PhaseHeader';
 import { useJsonFile } from '@/hooks/useJsonFile';
 import { exportQaReport, buildQaHeader } from '@/utils/qaExport';
 import PanelScriptCard, { type Panel } from './PanelScriptCard';
@@ -36,8 +37,20 @@ const ScriptPhase: React.FC = () => {
   );
   if (!data) return null;
 
-  const pages = data.pages;
+  const pages = data.pages || [];
   const currentPage = pages[selectedPage];
+
+  if (!currentPage) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-background-panel" style={{ minHeight: 400 }}>
+        <div className="border border-border shadow-md rounded-lg p-8 max-w-md text-center text-foreground bg-secondary">
+          <div className="text-4xl mb-4">ℹ️</div>
+          <p className="font-bold mb-2">No script pages found.</p>
+          <p className="text-sm text-foreground-muted">Run the Pacing & Pagination pipeline first to populate script pages.</p>
+        </div>
+      </div>
+    );
+  }
 
   const handleSaveDialogue = async (panelNumber: number, updated: Dialogue) => {
     const newData = structuredClone(data);
@@ -63,6 +76,17 @@ const ScriptPhase: React.FC = () => {
 
   return (
     <div className="script-phase">
+      <PhaseHeader
+        title="Script & Dialogue"
+        emoji="✍️"
+        badge="Phase 3"
+        description="Writes and maps speech bubbles, narrative overlays, and captions for each panel based on scene context and lore."
+        inputs={['data/panels.json', 'data/scenario_scenes.json', 'data/lore.json']}
+        outputs={['data/script.json']}
+        accentColor="#f97316"
+        nextStep={{ label: 'Assembly Studio' }}
+      />
+      <div className="script-body">
       {/* Page sidebar */}
       <div className="script-page-sidebar bg-background-panel border-r border-border shadow-sm">
         <div className="script-sidebar-header">
@@ -123,6 +147,7 @@ const ScriptPhase: React.FC = () => {
           onExport={handleExportQa}
         />
       )}
+      </div>
     </div>
   );
 };

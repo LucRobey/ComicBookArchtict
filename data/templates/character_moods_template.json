@@ -1,0 +1,47 @@
+{
+  "_schema_version": "1.0",
+  "characters": [],
+  "general_mood": {},
+  "chapter_moods": [
+    {
+      "chapter_id": 1,
+      "title": "",
+      "moods": {
+        "CHARACTER_NAME": {
+          "dominant_emotion": "",
+          "feels": "",
+          "shows": "",
+          "tension_with": null
+        }
+      }
+    }
+  ],
+  "chapters": [
+    {
+      "chapter_id": 1,
+      "title": "",
+      "moods": {
+        "CHARACTER_NAME": {
+          "dominant_emotion": "",
+          "feels": "",
+          "shows": "",
+          "tension_with": null
+        }
+      }
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "",
+      "moods": {
+        "CHARACTER_NAME": {
+          "dominant_emotion": "",
+          "feels": "",
+          "shows": "",
+          "tension_with": null
+        }
+      }
+    }
+  ]
+}

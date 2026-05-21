@@ -1,63 +1,349 @@
 {
-  "total_pages": 8,
+  "total_pages": 13,
   "pages": [
     {
       "page_number": 0,
       "scene_id": null,
       "type": "cover",
-      "focus": "Cover page. Title treatment. Strong visual hook.",
+      "layout_proposal": "splash_page",
+      "focus": "Cover page. A warm, dim kitchen scene with a metallic butter knife catching the amber light next to a neon-green feather. Title: 'The Butter Knife and the Flamingo'.",
       "anecdotes_included": []
     },
     {
       "page_number": 1,
-      "scene_id": null,
       "type": "character_intro",
+      "scenes_associated": [],
+      "general_mood": {
+        "emotional_tone": "Dry, deadpan, analytical obsession",
+        "visual_color_palette": "Pristine office tones, flashing red evacuation alarm highlights",
+        "tempo_and_pacing": "slow, meticulous"
+      },
+      "panel_organization": {
+        "panel_count_target": 3,
+        "layout_proposal": "standard_grid",
+        "composition_notes": "Emily discovers a minor 0.05-second deviation in her digital Earl Grey tea timer. Rather than ignoring it and drinking the tea, she immediately maps out a brand history timeline and spreadsheet to investigate the manufacturer's clock crystal reliability, completely ignoring a building fire alarm evacuation around her.",
+        "read_flow_intent": "Z-pattern layout"
+      },
+      "page_narrative_focus": "Emily discovers a minor 0.05-second deviation in her digital Earl Grey tea timer. Rather than ignoring it and drinking the tea, she immediately maps out a brand history timeline and spreadsheet to investigate the manufacturer's clock crystal reliability, completely ignoring a building fire alarm evacuation around her.",
+      "characters_present": [
+        "CHARACTER_A"
+      ],
+      "setting_and_location": {
+        "location_name": "Office (Desk & Building Stairwell)",
+        "time_of_day": "Daytime",
+        "environmental_lighting": "Bright office lights, flashing amber/red alarm lights",
+        "locations": [
+          {
+            "location_name": "Office Desk",
+            "time_of_day": "Daytime",
+            "environmental_lighting": "Bright office lights"
+          },
+          {
+            "location_name": "Building Stairwell",
+            "time_of_day": "Daytime",
+            "environmental_lighting": "Flashing amber/red emergency evacuation lights"
+          }
+        ]
+      },
+      "anecdotes_included": [
+        "Spreadsheet micro-management",
+        "Thermal dynamics of Earl Grey tea",
+        "Control as a coping mechanism"
+      ],
+      "visual_page_turn_hook": "Emily sketches crystal diagrams, oblivious to the completely empty office behind her.",
+      "scene_id": null,
       "character": "CHARACTER_A",
-      "focus": "CHARACTER_A at her desk, surrounded by color-coded spreadsheets. She is labeling a label-maker.",
-      "anecdotes_included": []
+      "focus": "Emily discovers a minor 0.05-second deviation in her digital Earl Grey tea timer. Rather than ignoring it and drinking the tea, she immediately maps out a brand history timeline and spreadsheet to investigate the manufacturer's clock crystal reliability, completely ignoring a building fire alarm evacuation around her."
     },
     {
       "page_number": 2,
-      "scene_id": null,
       "type": "character_intro",
+      "scenes_associated": [],
+      "general_mood": {
+        "emotional_tone": "Kinetic, frantic energy, charming defiance",
+        "visual_color_palette": "Classic red car, grease smudges, flashing tow truck lights",
+        "tempo_and_pacing": "Frantic, comedic"
+      },
+      "panel_organization": {
+        "panel_count_target": 3,
+        "layout_proposal": "asymmetric_focus",
+        "composition_notes": "Marcus is trying to resolve a serious coolant leak in his vintage sports car using a banana peel as a makeshift gasket while having a heated phone argument with the local parking enforcement about the definition of 'temporary driveway obstruction'. The engine starts successfully but immediately triggers a tow truck's arrival.",
+        "read_flow_intent": "Frantic diagonal flow"
+      },
+      "page_narrative_focus": "Marcus is trying to resolve a serious coolant leak in his vintage sports car using a banana peel as a makeshift gasket while having a heated phone argument with the local parking enforcement about the definition of 'temporary driveway obstruction'. The engine starts successfully but immediately triggers a tow truck's arrival.",
+      "characters_present": [
+        "CHARACTER_B"
+      ],
+      "setting_and_location": {
+        "location_name": "Marcus's Driveway",
+        "time_of_day": "Daytime",
+        "environmental_lighting": "Natural daylight, flashing tow truck beacons"
+      },
+      "anecdotes_included": [
+        "Improvised engineering",
+        "Defiance of municipal authority",
+        "Banana chemistry"
+      ],
+      "visual_page_turn_hook": "The rumble of the engine coincides with the arrival of a tow truck in the driveway.",
+      "scene_id": null,
       "character": "CHARACTER_B",
-      "focus": "CHARACTER_B bursts through the office door, phone in one hand, coffee in the other. Pure controlled chaos.",
-      "anecdotes_included": []
+      "focus": "Marcus is trying to resolve a serious coolant leak in his vintage sports car using a banana peel as a makeshift gasket while having a heated phone argument with the local parking enforcement about the definition of 'temporary driveway obstruction'. The engine starts successfully but immediately triggers a tow truck's arrival."
     },
     {
       "page_number": 3,
       "scene_id": 1,
-      "type": "interior",
-      "focus": "Establishing the office dynamic. Fast-paced back-and-forth. Ends on a visual hook: both characters staring at an empty calendar slot.",
-      "anecdotes_included": ["the_forgotten_meeting"]
+      "type": "story",
+      "layout_proposal": "three_panel_horizontal",
+      "focus": "Adèle trying to fix her toaster in her kitchen, showing her meticulous nature and the quiet drafty night.",
+      "anecdotes_included": [
+        "Has had a history of fixing things around the house with whatever cutlery is at hand."
+      ],
+      "characters_present": [
+        "CHARACTER_A"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Kitchen",
+        "time_of_day": "Tuesday Evening / Night",
+        "environmental_lighting": "Dim amber tones, soft overhead lamp casting high-contrast shadows (chiaroscuro), warm table glow, drafty dark window pane"
+      }
     },
     {
       "page_number": 4,
-      "scene_id": 1,
-      "type": "interior",
-      "focus": "The fallout. CHARACTER_A scrambles. CHARACTER_B improvises. Two completely different crisis responses.",
-      "anecdotes_included": ["the_coffee_spill"]
+      "scene_id": 2,
+      "type": "story",
+      "layout_proposal": "standard_grid",
+      "focus": "A loud knock shatters the silence. Adèle opens the door to find Thomas standing there with a giant neon-green flamingo.",
+      "anecdotes_included": [
+        "Thomas has a reputation for showing up unannounced with bizarre items."
+      ],
+      "characters_present": [
+        "CHARACTER_A",
+        "CHARACTER_B"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Doorstep",
+        "time_of_day": "Tuesday Night",
+        "environmental_lighting": "Harsh yellow overhead corridor light, casting long vertical shadows down the hallway"
+      }
     },
     {
       "page_number": 5,
-      "scene_id": 2,
-      "type": "chapter_break",
-      "focus": "Chapter 2 splash. The office at night. Silent. Just a half-eaten sandwich on a desk.",
-      "anecdotes_included": []
+      "scene_id": 3,
+      "type": "story",
+      "layout_proposal": "asymmetric_focus",
+      "focus": "Thomas pleads to keep the bird in the bathtub. Adèle, exhausted, resigns and leaves them in the bathroom.",
+      "anecdotes_included": [
+        "Adèle defaults to quiet retreat when dealing with Thomas's exhausting energy."
+      ],
+      "characters_present": [
+        "CHARACTER_A",
+        "CHARACTER_B"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Bathroom",
+        "time_of_day": "Tuesday Night",
+        "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles"
+      }
     },
     {
       "page_number": 6,
-      "scene_id": 2,
-      "type": "interior",
-      "focus": "Night shift. Only CHARACTER_A remains. She finds the letter. Slow, quiet pacing. 2-3 panels max.",
-      "anecdotes_included": ["the_letter_discovery"]
+      "scene_id": 4,
+      "type": "story",
+      "layout_proposal": "standard_grid",
+      "focus": "Adèle hears clicking and goes to investigate. She sees Thomas feeding corn to the flamingo.",
+      "anecdotes_included": [
+        "Thomas has always been bad at hiding his secrets for more than ten minutes."
+      ],
+      "characters_present": [
+        "CHARACTER_A",
+        "CHARACTER_B"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Bathroom",
+        "time_of_day": "Tuesday Night",
+        "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles"
+      }
     },
     {
       "page_number": 7,
-      "scene_id": 2,
-      "type": "interior",
-      "focus": "Cliffhanger. CHARACTER_A looks up from the letter. Someone is at the door. We don't see who.",
-      "anecdotes_included": []
+      "scene_id": 5,
+      "type": "story",
+      "layout_proposal": "three_panel_horizontal",
+      "focus": "Adèle realizes the bird is actually alive and blinks. Disbelief and shock.",
+      "anecdotes_included": [
+        "Thomas operates entirely on instinct, often rescuing things or animals on a whim."
+      ],
+      "characters_present": [
+        "CHARACTER_A",
+        "CHARACTER_B"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Bathroom",
+        "time_of_day": "Tuesday Night",
+        "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles"
+      }
+    },
+    {
+      "page_number": 8,
+      "scene_id": 6,
+      "type": "story",
+      "layout_proposal": "splash_page",
+      "focus": "Thomas explaining the landlord thinks it's a parrot. Adèle surrenders to the absurdity and sits on the bathmat laughing.",
+      "anecdotes_included": [
+        "Mrs. Gable has very poor eyesight but a very strict policy on pets."
+      ],
+      "characters_present": [
+        "CHARACTER_A",
+        "CHARACTER_B"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Bathroom",
+        "time_of_day": "Tuesday Night",
+        "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles"
+      }
+    },
+    {
+      "page_number": 9,
+      "scene_id": 7,
+      "type": "story",
+      "layout_proposal": "standard_grid",
+      "focus": "Sharing cold pizza on the floor. Reminiscing about childhood.",
+      "anecdotes_included": [
+        "They used to share cold pizza on the floor of their childhood room in Lyon."
+      ],
+      "characters_present": [
+        "CHARACTER_A",
+        "CHARACTER_B"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Bathroom",
+        "time_of_day": "Wednesday Late Night / Midnight",
+        "environmental_lighting": "Single warm bulb overhead, casting soft golden ambient glows over the floor"
+      }
+    },
+    {
+      "page_number": 10,
+      "scene_id": 8,
+      "scenes_associated": [
+        {
+          "scene_id": 8,
+          "scene_title": "The Haircut Incident",
+          "portion": "start"
+        },
+        {
+          "scene_id": 9,
+          "scene_title": "The Stairwell Sofa and Haunted Radiator",
+          "portion": "end"
+        }
+      ],
+      "type": "story",
+      "layout_proposal": "asymmetric_focus",
+      "focus": "Jokingly bringing up the 'Haircut Incident' with dramatic gestures, and Thomas showing the radiator offering pennies.",
+      "anecdotes_included": [
+        "The beanie was bright red and he lost it within two weeks anyway.",
+        "Thomas bought candy with the offering pennies and split it with Adèle."
+      ],
+      "characters_present": [
+        "CHARACTER_A",
+        "CHARACTER_B"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Bathroom",
+        "time_of_day": "Wednesday Late Night",
+        "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles",
+        "locations": [
+          {
+            "location_name": "Adèle's Bathroom",
+            "time_of_day": "Wednesday Late Night",
+            "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles"
+          },
+          {
+            "location_name": "Adèle's Bathroom",
+            "time_of_day": "Wednesday Late Night",
+            "environmental_lighting": "Warm, dim orange glow of the radiator reflecting off bathroom tiles"
+          }
+        ]
+      }
+    },
+    {
+      "page_number": 11,
+      "scene_id": 10,
+      "type": "story",
+      "layout_proposal": "asymmetric_focus",
+      "focus": "Teaching the flamingo to mimic the microwave beep. Noise causing the neighbor's dog to bark.",
+      "anecdotes_included": [
+        "The neighbor's dog is named Napoleon and barks at anything that beeps."
+      ],
+      "characters_present": [
+        "CHARACTER_A",
+        "CHARACTER_B"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Kitchen",
+        "time_of_day": "Wednesday 1:30 AM",
+        "environmental_lighting": "Dim kitchen lights, green digital glow of the microwave timer, dark window"
+      }
+    },
+    {
+      "page_number": 12,
+      "scene_id": 11,
+      "scenes_associated": [
+        {
+          "scene_id": 11,
+          "scene_title": "2:00 AM Departure",
+          "portion": "start"
+        },
+        {
+          "scene_id": 12,
+          "scene_title": "Corn in the Cabinet",
+          "portion": "end"
+        }
+      ],
+      "type": "story",
+      "layout_proposal": "three_panel_horizontal",
+      "focus": "Thomas leaves at 2:00 AM with the bird and the empty pizza box. The silhouette against the hallway light.",
+      "anecdotes_included": [
+        "Thomas always leaves as quickly as he arrives, leaving a vacuum of energy."
+      ],
+      "characters_present": [
+        "CHARACTER_A",
+        "CHARACTER_B"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Living Room / Adèle's Kitchen",
+        "time_of_day": "Wednesday 2:00 AM",
+        "environmental_lighting": "Single floor lamp casting low ambient warm light, cool white light coming from the hallway door",
+        "locations": [
+          {
+            "location_name": "Adèle's Living Room",
+            "time_of_day": "Wednesday 2:00 AM",
+            "environmental_lighting": "Single floor lamp casting low ambient warm light, cool white light coming from the hallway door"
+          },
+          {
+            "location_name": "Adèle's Kitchen",
+            "time_of_day": "Wednesday 2:15 AM",
+            "environmental_lighting": "Warm glowing table lamp, deep shadows in the rest of the kitchen, dark window"
+          }
+        ]
+      }
+    },
+    {
+      "page_number": 13,
+      "scene_id": 12,
+      "type": "story",
+      "layout_proposal": "splash_page",
+      "focus": "Adèle placing a bag of dried corn in her cabinet, showing her quiet acceptance of her brother's chaotic presence.",
+      "anecdotes_included": [
+        "She bought the corn earlier just in case he returns with the bird."
+      ],
+      "characters_present": [
+        "CHARACTER_A"
+      ],
+      "setting_and_location": {
+        "location_name": "Adèle's Kitchen",
+        "time_of_day": "Wednesday 2:15 AM",
+        "environmental_lighting": "Warm glowing table lamp, deep shadows in the rest of the kitchen, dark window"
+      }
     }
   ]
 }

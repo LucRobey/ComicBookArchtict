@@ -6,6 +6,13 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const workspaceRoot = path.resolve(__dirname, '../');
+
+const isSafePath = (absolutePath: string) => {
+  const relative = path.relative(workspaceRoot, absolutePath);
+  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
+};
+
 const localSavePlugin = () => ({
   name: 'local-save-plugin',
   configureServer(server: any) {
@@ -28,6 +35,12 @@ const localSavePlugin = () => ({
             }
 
             const outputDir = path.resolve(__dirname, `../outputs/pages/${pageId}`);
+            if (!isSafePath(outputDir)) {
+              res.statusCode = 403;
+              res.end(JSON.stringify({ error: 'Access denied' }));
+              return;
+            }
+
             if (!fs.existsSync(outputDir)) {
               fs.mkdirSync(outputDir, { recursive: true });
             }
@@ -55,9 +68,16 @@ const localSavePlugin = () => ({
           }
 
           const layoutPath = path.resolve(__dirname, `../outputs/pages/${pageId}/layout.json`);
+          if (!isSafePath(layoutPath)) {
+            res.statusCode = 403;
+            res.end(JSON.stringify({ error: 'Access denied' }));
+            return;
+          }
+
           if (fs.existsSync(layoutPath)) {
             const data = fs.readFileSync(layoutPath, 'utf8');
             res.setHeader('Content-Type', 'application/json');
+            res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
             res.end(JSON.stringify({ elements: JSON.parse(data) }));
           } else {
             res.statusCode = 404;
@@ -80,6 +100,12 @@ const localSavePlugin = () => ({
             const { markdownContent, pageId } = data;
             
             const outputDir = path.resolve(__dirname, `../modifications`);
+            if (!isSafePath(outputDir)) {
+              res.statusCode = 403;
+              res.end(JSON.stringify({ error: 'Access denied' }));
+              return;
+            }
+
             if (!fs.existsSync(outputDir)) {
               fs.mkdirSync(outputDir, { recursive: true });
             }
@@ -107,6 +133,12 @@ const localSavePlugin = () => ({
             return;
           }
           const absolutePath = path.resolve(__dirname, '../', filePath);
+          if (!isSafePath(absolutePath)) {
+            res.statusCode = 403;
+            res.end('Access denied');
+            return;
+          }
+
           if (!fs.existsSync(absolutePath)) {
             res.statusCode = 404;
             res.end('Image not found');
@@ -140,6 +172,12 @@ const localSavePlugin = () => ({
             return;
           }
           const absolutePath = path.resolve(__dirname, '../', filePath);
+          if (!isSafePath(absolutePath)) {
+            res.statusCode = 403;
+            res.end(JSON.stringify({ error: 'Access denied' }));
+            return;
+          }
+
           if (!fs.existsSync(absolutePath)) {
             res.statusCode = 404;
             res.end(JSON.stringify({ error: `File not found: ${filePath}` }));
@@ -147,6 +185,7 @@ const localSavePlugin = () => ({
           }
           const raw = fs.readFileSync(absolutePath, 'utf8');
           res.setHeader('Content-Type', 'application/json');
+          res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
           res.end(JSON.stringify({ data: JSON.parse(raw) }));
         } catch (error: any) {
           res.statusCode = 500;
@@ -166,6 +205,12 @@ const localSavePlugin = () => ({
               return;
             }
             const absolutePath = path.resolve(__dirname, '../', filePath);
+            if (!isSafePath(absolutePath)) {
+              res.statusCode = 403;
+              res.end(JSON.stringify({ error: 'Access denied' }));
+              return;
+            }
+
             const dir = path.dirname(absolutePath);
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
             fs.writeFileSync(absolutePath, JSON.stringify(content, null, 2));
@@ -189,6 +234,12 @@ const localSavePlugin = () => ({
               return;
             }
             const absolutePath = path.resolve(__dirname, '../', filePath);
+            if (!isSafePath(absolutePath)) {
+              res.statusCode = 403;
+              res.end(JSON.stringify({ error: 'Access denied' }));
+              return;
+            }
+
             const dir = path.dirname(absolutePath);
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
             fs.writeFileSync(absolutePath, content, 'utf8');
@@ -199,6 +250,71 @@ const localSavePlugin = () => ({
             res.end(JSON.stringify({ error: error.message }));
           }
         });
+      } else if (req.url?.startsWith('/api/list-dir') && req.method === 'GET') {
+        // Directory listing — returns entries [{name, isDir}] for a path relative to project root
+        try {
+          const url = new URL(req.url, `http://${req.headers.host}`);
+          const dirPath = url.searchParams.get('path');
+          if (!dirPath) {
+            res.statusCode = 400;
+            res.end(JSON.stringify({ error: 'Missing path parameter' }));
+            return;
+          }
+          const absolutePath = path.resolve(__dirname, '../', dirPath);
+          if (!isSafePath(absolutePath)) {
+            res.statusCode = 403;
+            res.end(JSON.stringify({ error: 'Access denied' }));
+            return;
+          }
+
+          if (!fs.existsSync(absolutePath) || !fs.statSync(absolutePath).isDirectory()) {
+            res.statusCode = 404;
+            res.end(JSON.stringify({ error: `Directory not found: ${dirPath}` }));
+            return;
+          }
+          const entries = fs.readdirSync(absolutePath).map((name: string) => {
+            const entryPath = path.join(absolutePath, name);
+            const stat = fs.statSync(entryPath);
+            return { name, isDir: stat.isDirectory() };
+          });
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ entries }));
+        } catch (error: any) {
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: error.message }));
+        }
+
+      } else if (req.url?.startsWith('/api/load-text') && req.method === 'GET') {
+        // Raw text file loader — returns { text: "..." } for markdown and other text files
+        try {
+          const url = new URL(req.url, `http://${req.headers.host}`);
+          const filePath = url.searchParams.get('path');
+          if (!filePath) {
+            res.statusCode = 400;
+            res.end(JSON.stringify({ error: 'Missing path parameter' }));
+            return;
+          }
+          const absolutePath = path.resolve(__dirname, '../', filePath);
+          if (!isSafePath(absolutePath)) {
+            res.statusCode = 403;
+            res.end(JSON.stringify({ error: 'Access denied' }));
+            return;
+          }
+
+          if (!fs.existsSync(absolutePath)) {
+            res.statusCode = 404;
+            res.end(JSON.stringify({ error: `File not found: ${filePath}` }));
+            return;
+          }
+          const text = fs.readFileSync(absolutePath, 'utf8');
+          res.setHeader('Content-Type', 'application/json');
+          res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+          res.end(JSON.stringify({ text }));
+        } catch (error: any) {
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: error.message }));
+        }
+
       } else {
         next();
       }

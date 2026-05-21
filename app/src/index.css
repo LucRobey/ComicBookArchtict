@@ -8,6 +8,113 @@
    Fonts: Space Grotesk (headings), Inter (body), IBM Plex Mono (mono)
    ═══════════════════════════════════════════════════════════ */
 
+/* ── Tailwind v4 Design Tokens ──────────────────────────────
+   @theme registers tokens with Tailwind so utilities like
+   bg-accent-primary, text-muted, border-border etc. are generated.
+   ─────────────────────────────────────────────────────────── */
+@theme {
+  /* Accent */
+  --color-accent-primary: #3b82f6;
+  --color-accent-hover:   #60a5fa;
+  --color-accent-dim:     rgba(59, 130, 246, 0.15);
+
+  /* Primary / Secondary mappings for Tailwind v4 utility compatibility */
+  --color-primary:        #3b82f6;
+  --color-primary-hover:  #60a5fa;
+  --color-primary-foreground: #ffffff;
+  --color-secondary:      #2a2424;
+
+  /* Surfaces */
+  --color-surface:        #1f1b1b;
+  --color-surface-raised: #141212;
+  --color-canvas:         #0c0a0a;
+  --color-panel-raised:   #2a2424;
+
+  /* Text */
+  --color-text-base:      #f5f2eb;
+  --color-text-sub:       #dcd8cf;
+  --color-muted:          #908a80;
+
+  /* Border */
+  --color-border:         #2e2a2a;
+  --color-border-subtle:  rgba(46, 42, 42, 0.6);
+  --color-border-accent:  #3b82f6;
+
+  /* Semantic */
+  --color-danger:         #ef4444;
+  --color-danger-dim:     rgba(239, 68, 68, 0.12);
+  --color-success:        #10b981;
+  --color-success-dim:    rgba(16, 185, 129, 0.12);
+  --color-warning:        #f59e0b;
+
+  /* Brand */
+  --color-brand:          #1E3A8A;
+  --color-brand-hover:    #1D4ED8;
+
+  /* Typography */
+  --font-sans:    'Inter', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+
+  /* Motion */
+  --duration-fast:   150ms;
+  --duration-base:   250ms;
+  --ease-out:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Canonical :root ────────────────────────────────────────
+   Plain CSS variables that alias @theme tokens for backward
+   compatibility with all existing component CSS files.
+   Not consumed by Tailwind — just resolved at runtime.
+   ─────────────────────────────────────────────────────────── */
+:root {
+  /* Surface */
+  --panel-bg:      var(--color-surface);
+  --bg-color:      var(--color-surface-raised);
+  --canvas-bg:     var(--color-canvas);
+  --panel-raised:  var(--color-panel-raised);
+
+  /* Primary / Secondary fallback variables */
+  --primary:       var(--color-primary);
+  --primary-hover: var(--color-primary-hover);
+  --secondary:     var(--color-secondary);
+
+  /* Text */
+  --text-main:     var(--color-text-base);
+  --text-sub:      var(--color-text-sub);
+  --text-muted:    var(--color-muted);
+
+  /* Border */
+  --border-color:  var(--color-border);
+  --border-subtle: var(--color-border-subtle);
+  --glass-border:  var(--color-border);
+
+  /* Accent */
+  --accent-primary: var(--color-accent-primary);
+  --accent-hover:   var(--color-accent-hover);
+  --accent-dim:     var(--color-accent-dim);
+  --accent-glow:    0 0 16px rgba(59, 130, 246, 0.35);
+
+  /* Semantic */
+  --danger:        var(--color-danger);
+  --danger-dim:    var(--color-danger-dim);
+  --success:       var(--color-success);
+  --success-dim:   var(--color-success-dim);
+  --warning:       var(--color-warning);
+
+  /* Typography */
+  --font-sans:     var(--font-sans);
+  --font-heading:  var(--font-heading);
+  --font-mono:     var(--font-mono);
+
+  /* Motion */
+  --dur-fast:  var(--duration-fast);
+  --dur-base:  var(--duration-base);
+  --ease-out:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 /* ── Base Reset ─────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -15,35 +122,27 @@
   padding: 0;
 }
 
-/* ── Legacy Variable Mappings ───────────────────────────────── */
-:root {
-  --panel-bg: #FAFAF9;
-  --bg-color: #F3F4F6;
-  --text-main: #1F2937;
-  --text-muted: #6B7280;
-  --border-color: #E5E7EB;
-  --glass-border: #E5E7EB;
-}
-
 /* ── Typography ─────────────────────────────────────────────── */
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   font-size: 14px;
   line-height: 1.6;
   overflow: hidden;
+  background: var(--canvas-bg);
+  color: var(--text-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.25;
 }
 
 code, pre, .mono {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
 }
 
 /* ── Interaction Utilities ───────────────────────────────────── */
@@ -56,7 +155,7 @@ a:focus-visible,
 select:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #1E3A8A;
+  outline: 2px solid var(--color-brand);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -70,12 +169,12 @@ textarea:focus-visible {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #E5E7EB;
+  background-color: var(--color-border);
   border-radius: 6px;
-  transition: background-color 150ms;
+  transition: background-color var(--duration-fast);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #6B7280;
+  background-color: var(--color-muted);
 }
 
 /* ── Motion Accessibility ───────────────────────────────────── */

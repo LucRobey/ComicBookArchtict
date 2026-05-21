@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PhaseHeader } from '../../shared/PhaseHeader';
 import { useJsonFile } from '@/hooks/useJsonFile';
 import { exportQaReport } from '@/utils/qaExport';
 import PanelStructureCard, { type PanelData } from './PanelStructureCard';
@@ -38,8 +39,20 @@ const PanelsPhase: React.FC = () => {
   );
   if (!data) return null;
 
-  const pages = data.pages;
+  const pages = data.pages || [];
   const currentPage = pages[selectedPage];
+
+  if (!currentPage) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-background-panel" style={{ minHeight: 400 }}>
+        <div className="border border-border shadow-md rounded-lg p-8 max-w-md text-center text-foreground bg-secondary">
+          <div className="text-4xl mb-4">ℹ️</div>
+          <p className="font-bold mb-2">No panel pages found.</p>
+          <p className="text-sm text-foreground-muted">Run the Panel Distillation pipeline first to populate pages and panels.</p>
+        </div>
+      </div>
+    );
+  }
 
   const handleFramingChange = async (panelNumber: number, newFraming: string) => {
     const newData = structuredClone(data);
@@ -64,6 +77,17 @@ const PanelsPhase: React.FC = () => {
 
   return (
     <div className="panels-phase">
+      <PhaseHeader
+        title="Panel Structuring"
+        emoji="📐"
+        badge="Phase 2"
+        description="Divides page-level action into detailed panel templates with framing, compositions, and camera directions."
+        inputs={['data/pages.json', 'data/intro_pages.json', 'data/lore.json']}
+        outputs={['data/panels.json']}
+        accentColor="#10b981"
+        nextStep={{ label: 'Script & Dialogue' }}
+      />
+      <div className="panels-body">
       {/* Page sidebar */}
       <div className="panels-sidebar bg-background-panel border-r border-border shadow-sm">
         <div className="panels-sidebar-header">
@@ -123,6 +147,7 @@ const PanelsPhase: React.FC = () => {
           onExport={handleExportQa}
         />
       )}
+      </div>
     </div>
   );
 };

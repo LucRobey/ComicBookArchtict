@@ -1,0 +1,32 @@
+{
+  "chapters": [
+    {
+      "chapter_id": 1,
+      "title": "The Butter Knife and the Flamingo",
+      "summary": "CHARACTER_A is spending a quiet, predictable Tuesday evening trying to fix her broken toaster with a butter knife in her drafty third-floor apartment. Her caution and love for order are shattered when her chaotic brother, CHARACTER_B, knocks on the door holding what looks like a giant, neon-green plastic flamingo. Claiming his plumbing is broken, he begs her to let him keep it in her tub. Too tired to argue, CHARACTER_A points him to the bathroom and returns to her toaster.",
+      "characters": ["CHARACTER_A", "CHARACTER_B"],
+      "story_progression": "Introduces the main siblings and sets up the inciting incident. Contrasts Adele's need for methodical order with Thomas's sudden, colorful disruption."
+    },
+    {
+      "chapter_id": 2,
+      "title": "The Porcelain Stage",
+      "summary": "Ten minutes later, CHARACTER_A hears a clicking sound from the tub. She walks in to find CHARACTER_B feeding dried corn to the bird. She realizes with shock that it is not plastic, but a real, live flamingo dyed neon-green that CHARACTER_B rescued from a bankrupt roadside zoo. CHARACTER_B deadpans that she shouldn't tell the landlord, Mrs. Gable, who thinks it's a very large parrot. Surrendering to the absurdity, CHARACTER_A abandons the toaster and sits on the bathmat.",
+      "characters": ["CHARACTER_A", "CHARACTER_B"],
+      "story_progression": "Escalates the comic conflict and marks Adele's first transition from rigid resistance to laughing acceptance as she joins her brother on the floor."
+    },
+    {
+      "chapter_id": 3,
+      "title": "Ghost Children and Kitchen Shears",
+      "summary": "Sitting on the bathroom floor and sharing cold pizza, the siblings recount their long history of building-wide disasters. They joke about the 'Haircut Incident' (where CHARACTER_A's shears forced CHARACTER_B to wear a beanie for a month), the 'Stairwell Sofa' (which blocked the stairs for a week with a 'Communal Bench' sign), and the 'Haunted Radiator' (where CHARACTER_B pocketed copper pennies CHARACTER_A left as offerings to a fake ghost child).",
+      "characters": ["CHARACTER_A", "CHARACTER_B"],
+      "story_progression": "Deepens character development and sibling dynamics. Establishes a shared childhood vocabulary that binds their opposite personalities together."
+    },
+    {
+      "chapter_id": 4,
+      "title": "The Beep of Acceptance",
+      "summary": "To pass the time, they teach the green flamingo to mimic the beep of CHARACTER_A's microwave, which drives the neighbor's dog into a barking frenzy. At 2:00 AM, CHARACTER_B leaves, taking the bird and the empty pizza box. CHARACTER_A is left alone with her broken toaster, but she places a new bag of corn in her cabinet—a quiet acceptance of her brother's chaotic but necessary presence in her life.",
+      "characters": ["CHARACTER_A", "CHARACTER_B"],
+      "story_progression": "Thematic resolution. Thomas departs, leaving empty space, but Adele keeping a bag of bird corn signifies her silent acceptance of his chaotic nature."
+    }
+  ]
+}

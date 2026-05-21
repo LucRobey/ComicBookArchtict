@@ -1,0 +1,51 @@
+{
+  "name": "",
+  "last_updated": "",
+  "identity": {
+    "full_name": "",
+    "known_as": "",
+    "age": "",
+    "nationality_origin": "",
+    "languages": "",
+    "profession_role": "",
+    "current_life_chapter": ""
+  },
+  "physical_reality": {
+    "face": "",
+    "hair": "",
+    "build": "",
+    "hands": "",
+    "distinctive_features": "",
+    "how_they_age": "",
+    "what_photos_dont_capture": ""
+  },
+  "backstory": {
+    "origin": "",
+    "formative_events": "",
+    "turning_points": "",
+    "current_situation": ""
+  },
+  "psychology": {
+    "core_driver": "",
+    "core_fear": "",
+    "self_image": "",
+    "the_gap": "",
+    "default_coping_mechanism": "",
+    "what_theyre_proud_of": "",
+    "what_theyre_ashamed_of": ""
+  },
+
+  "voice": {
+    "vocabulary_register": "",
+    "sentence_length": "",
+    "comfortable_topics": "",
+    "avoids_saying": "",
+    "verbal_habit": ""
+  },
+  "agent_notes": {
+    "must_know": "",
+    "common_mistake": "",
+    "what_makes_them_specific": ""
+  },
+  "network": []
+}

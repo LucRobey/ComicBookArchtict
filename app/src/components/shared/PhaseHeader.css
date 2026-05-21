@@ -1,0 +1,196 @@
+/* ── Phase Header ────────────────────────────────────── */
+
+.phase-header-wrapper {
+  background: var(--surface-raised, #1a1a2e);
+  border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+  flex-shrink: 0;
+}
+
+.phase-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  text-align: left;
+  transition: background 0.15s ease;
+  user-select: none;
+}
+
+.phase-header-bar:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.phase-header-bar:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
+.phase-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phase-header-emoji {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.phase-header-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--foreground, #e0e0e0);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.phase-header-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.phase-header-chevron {
+  font-size: 0.75rem;
+  color: var(--foreground-muted, #888);
+  transition: transform 0.2s ease;
+}
+
+.phase-header-chevron[data-collapsed="true"] {
+  transform: rotate(-90deg);
+}
+
+/* ── Collapsible Detail Panel ───────────────────────── */
+
+.phase-header-details {
+  padding: 0 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: phaseHeaderSlide 0.15s ease-out;
+}
+
+@keyframes phaseHeaderSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.phase-header-description {
+  font-size: 0.78rem;
+  color: var(--foreground-muted, #999);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 800px;
+}
+
+/* ── Inputs / Outputs ───────────────────────────────── */
+
+.phase-header-io {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.phase-header-io-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.phase-header-io-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.phase-header-io-label--input {
+  color: var(--danger, #ef4444);
+}
+
+.phase-header-io-label--output {
+  color: var(--success, #22c55e);
+}
+
+.phase-header-io-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.phase-header-chip {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.phase-header-chip--input {
+  color: var(--danger, #ef4444);
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.12);
+}
+
+.phase-header-chip--output {
+  color: var(--success, #22c55e);
+  background: rgba(34, 197, 94, 0.06);
+  border: 1px solid rgba(34, 197, 94, 0.12);
+}
+
+/* ── Next Step Banner ───────────────────────────────── */
+
+.phase-header-next {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 8px;
+  max-width: max-content;
+}
+
+.phase-header-next-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--foreground-muted, #888);
+}
+
+.phase-header-next-btn {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #818cf8;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.phase-header-next-btn:hover {
+  color: #a5b4fc;
+}
+
+.phase-header-next-text {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #818cf8;
+}

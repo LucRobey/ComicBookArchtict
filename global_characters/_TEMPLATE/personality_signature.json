@@ -1,0 +1,28 @@
+{
+  "signatures": {
+    "CHARACTER_NAME": {
+      "age": "",
+      "gender": "",
+      "role": "",
+      "network": [
+        {
+          "target_character": "OTHER_CHARACTER_NAME",
+          "relationship_type": "friend",
+          "relationship_subtype": "normal",
+          "dynamic": "Describe their relationship and dynamic here."
+        }
+      ],
+      "general_personality": "",
+      "loves": [
+        "",
+        ""
+      ],
+      "hates": [
+        "",
+        ""
+      ],
+      "verbal_habits": "",
+      "writing_notes": ""
+    }
+  }
+}

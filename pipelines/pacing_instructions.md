@@ -90,36 +90,87 @@ When in doubt: give space to the quiet, human, imperfect moments. They matter as
 
 ## Expected Output Format: JSON
 
-You MUST output your pacing breakdown as a strict JSON object. Do not output Markdown formatting outside the JSON block. The orchestrator script will handle the conversion.
+You MUST output your pacing breakdown as a strict JSON object. Do not output Markdown formatting outside the JSON block. The pacing agent must think of the best way to arrange the scenes into pages dynamically based on dramatic pacing, pacing rules, and layout logic.
 
 ```json
 {
-  "total_pages": 32,
+  "total_pages": 12,
   "pages": [
     {
-      "page_number": 1,
-      "scene_id": 0,
-      "focus": "Character Introduction: [CHARACTER_A]. Shown in a funny, stressful situation highlighting their specific core flaw.",
-      "anecdotes_included": []
+      "page_number": 0,
+      "type": "cover",
+      "scenes_associated": [],
+      "general_mood": {
+        "emotional_tone": "Warm, cozy, mysterious",
+        "visual_color_palette": "amber, deep shadows, neon-green highlight",
+        "tempo_and_pacing": "static / title page"
+      },
+      "panel_organization": {
+        "panel_count_target": 1,
+        "layout_proposal": "splash_page",
+        "composition_notes": "A full-page splash. A warm, dim kitchen scene with a metallic butter knife catching the amber light next to a neon-green feather. Title: 'The Butter Knife and the Flamingo'.",
+        "read_flow_intent": "Single focal point center"
+      },
+      "page_narrative_focus": "Establishing the title elements: the kitchen butter knife and the neon-green flamingo feather.",
+      "characters_present": [],
+      "setting_and_location": {
+        "location_name": "Adèle's Kitchen",
+        "time_of_day": "Tuesday Evening / Night",
+        "environmental_lighting": "Dim amber tones, soft overhead lamp casting high-contrast shadows"
+      },
+      "anecdotes_included": [],
+      "visual_page_turn_hook": "A sudden shadow cast across the doorway floor.",
+      
+      "// Backward Compatibility Fields": "The fields below are maintained so current views and scripts do not break.",
+      "scene_id": null,
+      "character": null,
+      "focus": "Cover page. A warm, dim kitchen scene with a metallic butter knife catching the amber light next to a neon-green feather."
     },
     {
       "page_number": 2,
+      "type": "interior",
+      "scenes_associated": [
+        {
+          "scene_id": 1,
+          "scene_title": "The Defiant Toaster",
+          "portion": "full"
+        }
+      ],
+      "general_mood": {
+        "emotional_tone": "Quiet focus, slow patience",
+        "visual_color_palette": "dim amber, soft overhead table glow, drafty window pane",
+        "tempo_and_pacing": "slow, detailed"
+      },
+      "panel_organization": {
+        "panel_count_target": 3,
+        "layout_proposal": "three_panel_horizontal",
+        "composition_notes": "Panel 1 establishing the kitchen. Panel 2 close-up of Adèle's hands unscrewing the toaster. Panel 3 Adèle looks determined.",
+        "read_flow_intent": "Z-pattern layout"
+      },
+      "page_narrative_focus": "Adèle trying to fix her toaster in her kitchen, showing her meticulous nature and the quiet drafty night.",
+      "characters_present": ["CHARACTER_A"],
+      "setting_and_location": {
+        "location_name": "Adèle's Kitchen",
+        "time_of_day": "Tuesday Evening / Night",
+        "environmental_lighting": "Dim amber tones, soft overhead lamp casting high-contrast shadows"
+      },
+      "anecdotes_included": ["Has had a history of fixing things around the house with whatever cutlery is at hand."],
+      "visual_page_turn_hook": "Adèle suddenly pauses, ear turned toward the front door.",
+      
       "scene_id": 1,
-      "focus": "Establishing the chaotic dynamic at the starting location. Fast-paced.",
-      "anecdotes_included": ["[Specific Project Anecdote]"]
-    },
-    {
-      "page_number": 2,
-      "scene_id": 1,
-      "focus": "The resolution of the immediate crisis. Ends on a visual hook of the characters running out the door.",
-      "anecdotes_included": []
+      "character": null,
+      "focus": "Adèle trying to fix her toaster in her kitchen, showing her meticulous nature and the quiet drafty night."
     }
   ]
 }
 ```
 
-## Post-Generation Action (Automated Conversion)
+---
 
-Once you have generated and saved the JSON (to `outputs/pages.json`), you MUST use your terminal tools to automatically run the conversion script:
-`python json_to_md_converter.py 1`
-This will generate the readable markdown and scaffold the feedback file for the user. Do NOT batch-generate without showing the converted markdown to the user for approval.
+## Agent Pacing Guidelines (Non-Rigid)
+
+1. **No Rigid Algorithms**: Do not use rigid script-based partitioning of text. The pacing decisions are a creative act, deciding how to allocate pages based on the pacing guidelines above.
+2. **Backward Compatibility**: You MUST always populate the root level backward compatibility fields (`scene_id`, `character`, `focus`) alongside the rich nested metadata structures.
+3. **Lore & Anecdotes**: Ensure every anecdote from `scenario_scenes.json` is mapped to an `anecdotes_included` page entry.
+4. **Handoff Quality**: Detail the visual and structural fields accurately as they serve as the direct inputs for the downstream panel generation agent.
+

@@ -21,7 +21,7 @@ export type {
 
 // ── UI-only types (Lore phase) ──────────────────────────────
 
-export type SubTab = 'world' | 'visual-style' | 'geography' | 'scenario';
+export type SubTab = 'world' | 'visual-style' | 'geography';
 
 export interface FlagTarget {
   type: 'shot' | 'palette' | 'lighting' | 'style_image';

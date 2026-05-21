@@ -17,7 +17,7 @@
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-family: 'Fira Sans', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
@@ -51,7 +51,7 @@
   border: none;
   padding: 7px 20px;
   border-radius: 8px;
-  font-family: 'Fira Code', monospace;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -81,7 +81,7 @@
   border: 1px solid rgba(59, 130, 246, 0.3);
   padding: 3px 10px;
   border-radius: 20px;
-  font-family: 'Fira Code', monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -117,7 +117,7 @@
 }
 
 .phase-tab-logo h1 {
-  font-family: 'Fira Code', monospace;
+  font-family: var(--font-heading);
   font-size: 0.95rem;
   font-weight: 700;
   background: linear-gradient(135deg, #f8fafc, #93c5fd);
@@ -140,7 +140,7 @@
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-family: 'Fira Sans', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;

@@ -1,15 +1,20 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { PhaseHeader } from '../../shared/PhaseHeader';
 import { useJsonFile } from '@/hooks/useJsonFile';
 import { exportQaReport } from '@/utils/qaExport';
+import OriginalView from './OriginalView';
+import { SignatureDetailsPanel } from '../scenario/tabs/SignatureDetailsPanel';
 import '../../../styles/character-hub.css';
-import type { LoreData, CharacterMoodsData, CharacterMood } from '@/types/data';
+import type { LoreData, CharacterMoodsData, CharacterMood, PersonalitySignatureData, ScenarioChaptersData, ScenarioScenesData, CharacterSignature } from '@/types/data';
 
+type ViewMode = 'original' | 'virtual';
 type SubTab = 'visuals' | 'personality' | 'mood-arc';
 
 // ── Constants ────────────────────────────────────────────
 
 const MOODS_PATH = 'data/character_moods.json';
 const LORE_PATH  = 'data/lore.json';
+const HIGHLIGHTS_PATH = 'data/character_highlights.json';
 
 const EMOTIONS = [
   'joyful', 'content', 'anxious', 'sad', 'angry',
@@ -25,7 +30,7 @@ const EMOTION_EMOJI: Record<string, string> = {
 
 const TURNAROUND_VIEWS = ['front', '3q', 'profile', 'back', 'expressions'] as const;
 
-// ── CharacterImage — loads real image, falls back to placeholder ─
+// ── CharacterImage ───────────────────────────────────────
 
 interface CharacterImageProps {
   src: string;
@@ -35,7 +40,6 @@ interface CharacterImageProps {
 
 const CharacterImage: React.FC<CharacterImageProps> = ({ src, alt, fallbackEmoji = '🖼' }) => {
   const [failed, setFailed] = useState(false);
-  // Reset when src changes (different character selected)
   React.useEffect(() => { setFailed(false); }, [src]);
 
   if (failed) {
@@ -58,27 +62,72 @@ const CharacterImage: React.FC<CharacterImageProps> = ({ src, alt, fallbackEmoji
 
 // ── Helpers ──────────────────────────────────────────────
 
-/** Build the URL for a project-relative image file. */
 function buildImageSrc(relativePath: string): string {
   return `/api/load-image?path=${encodeURIComponent(relativePath)}`;
 }
+
+// ── Highlights type ──────────────────────────────────────
+
+interface HighlightsEntry {
+  highlighted_fields: string[];
+  notes: string;
+}
+type HighlightsData = Record<string, HighlightsEntry>;
+
+// ── AvatarThumb — tiny sidebar avatar from originals/ ────
+
+const AvatarThumb: React.FC<{ charName: string }> = ({ charName }) => {
+  const [src, setSrc] = useState<string | null>(null);
+  useEffect(() => {
+    const url = `/api/list-dir?path=${encodeURIComponent(`global_characters/${charName}/originals`)}`;
+    fetch(url).then(r => r.ok ? r.json() : null).then(data => {
+      if (!data?.entries) return;
+      const first = data.entries.find((e: { name: string; isDir: boolean }) => !e.isDir);
+      if (first) setSrc(buildImageSrc(`global_characters/${charName}/originals/${first.name}`));
+    }).catch(() => {});
+  }, [charName]);
+
+  if (!src) return <span className="chub-avatar">{charName[0]}</span>;
+  return <img src={src} alt={charName} className="chub-avatar-img" />;
+};
 
 // ── CharacterHubPhase ────────────────────────────────────
 
 const CharacterHubPhase: React.FC = () => {
   const { data: lore }  = useJsonFile<LoreData>(LORE_PATH);
   const { data: moodsData, save: saveMoods } = useJsonFile<CharacterMoodsData>(MOODS_PATH);
+  const { data: hlData, save: saveHighlights } = useJsonFile<HighlightsData>(HIGHLIGHTS_PATH);
+  const { data: chaptersData } = useJsonFile<ScenarioChaptersData>('data/scenario_chapters.json');
+  const { data: scenarioData } = useJsonFile<ScenarioScenesData>('data/scenario_scenes.json');
+  const [moodLevel, setMoodLevel] = useState<'chapter' | 'scene'>('chapter');
 
-  // Derive character list from moods file, falling back to lore cast if moods not yet generated
+  // Discover character folders from filesystem
+  const [fsChars, setFsChars] = useState<string[]>([]);
+  useEffect(() => {
+    fetch(`/api/list-dir?path=${encodeURIComponent('global_characters')}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (!data?.entries) return;
+        const dirs = data.entries
+          .filter((e: { name: string; isDir: boolean }) => e.isDir && e.name !== '_TEMPLATE')
+          .map((e: { name: string }) => e.name);
+        setFsChars(dirs);
+      })
+      .catch(() => {});
+  }, []);
+
+  // Merge: filesystem chars + moods/lore chars (deduplicated)
   const characters: string[] = React.useMemo(() => {
-    if (moodsData?.characters && moodsData.characters.length > 0) return moodsData.characters;
-    // Attempt to extract cast from lore
-    if (lore?.cast && Array.isArray(lore.cast)) return lore.cast as string[];
-    if (lore?.characters && Array.isArray(lore.characters)) return lore.characters as string[];
-    return [];
-  }, [moodsData, lore]);
+    const fromData: string[] = [];
+    if (moodsData?.characters?.length) fromData.push(...moodsData.characters);
+    else if (lore?.cast && Array.isArray(lore.cast)) fromData.push(...(lore.cast as string[]));
+    else if (lore?.characters && Array.isArray(lore.characters)) fromData.push(...(lore.characters as string[]));
+    const combined = new Set([...fsChars, ...fromData]);
+    return Array.from(combined).sort();
+  }, [fsChars, moodsData, lore]);
 
   const [selectedChar, setSelectedChar] = useState(0);
+  const [viewMode, setViewMode]         = useState<ViewMode>('original');
   const [subTab, setSubTab]             = useState<SubTab>('visuals');
 
   // QA drawer state
@@ -94,7 +143,16 @@ const CharacterHubPhase: React.FC = () => {
   const [savingScene, setSavingScene]     = useState<number | null>(null);
   const [savedScene, setSavedScene]       = useState<number | null>(null);
 
+  // Highlight save state
+  const [hlSaving, setHlSaving] = useState(false);
+  const [hlSaved, setHlSaved]   = useState(false);
+
   const charName = characters[selectedChar] ?? '';
+  const { data: personalityData, save: savePersonality } = useJsonFile<PersonalitySignatureData>(
+    charName ? `data/characters/${charName}/personality_signature.json` : null
+  );
+
+  const charHighlights: HighlightsEntry = hlData?.[charName] ?? { highlighted_fields: [], notes: '' };
 
   // ── QA handling ─────────────────────────────────────────
 
@@ -111,6 +169,45 @@ const CharacterHubPhase: React.FC = () => {
     const result = await exportQaReport({ phase: '05', phaseFolder: 'character-hub', content });
     setExportStatus(result.success ? 'success' : 'error');
     setTimeout(() => { setExportStatus('idle'); setQaOpen(false); setQaNote(''); }, 1500);
+  };
+
+  // ── Highlights save ─────────────────────────────────────
+
+  const handleHighlightsChange = useCallback(async (entry: HighlightsEntry) => {
+    if (!charName) return;
+    const currentHl = hlData ?? {};
+    const updated = { ...currentHl, [charName]: entry };
+    setHlSaving(true);
+    const ok = await saveHighlights(updated);
+    setHlSaving(false);
+    if (ok) { setHlSaved(true); setTimeout(() => setHlSaved(false), 1500); }
+  }, [hlData, charName, saveHighlights]);
+
+  // ── Personality save ────────────────────────────────────
+
+  const handleSavePersonalitySignature = (char: string, updatedSig: CharacterSignature) => {
+    if (!personalityData) return;
+    savePersonality({
+      ...personalityData,
+      signatures: {
+        ...personalityData.signatures,
+        [char]: updatedSig,
+      },
+    });
+  };
+
+  const handleSaveGeneralMood = async (newMood: string): Promise<boolean> => {
+    if (!moodsData) return false;
+    const updatedGeneralMood = {
+      ...(moodsData.general_mood || {}),
+      [charName]: newMood
+    };
+    const updated: CharacterMoodsData = {
+      ...moodsData,
+      general_mood: updatedGeneralMood
+    };
+    const ok = await saveMoods(updated);
+    return !!ok;
   };
 
   // ── Mood save handling ───────────────────────────────────
@@ -130,17 +227,89 @@ const CharacterHubPhase: React.FC = () => {
     });
   };
 
-  const handleSaveMood = async (sceneId: number) => {
+  const handleSaveChapterMood = async (chapterId: number) => {
     if (!moodsData) return;
-    setSavingScene(sceneId);
+    setSavingScene(chapterId);
+    
+    const chapters = moodsData.chapter_moods || moodsData.chapters || [];
+    const hasChapter = chapters.some(c => c.chapter_id === chapterId);
+    
+    let updatedChapters = [...chapters];
+    if (hasChapter) {
+      updatedChapters = chapters.map(c =>
+        c.chapter_id === chapterId
+          ? { ...c, moods: { ...c.moods, [charName]: { ...(c.moods[charName] ?? {}), ...draftMood } as CharacterMood } }
+          : c
+      );
+    } else {
+      const chapterDetail = chaptersData?.chapters?.find(ch => ch.chapter_id === chapterId);
+      const title = chapterDetail?.title ?? `Chapter ${chapterId}`;
+      updatedChapters.push({
+        chapter_id: chapterId,
+        title,
+        moods: {
+          [charName]: {
+            dominant_emotion: 'anxious',
+            feels: '',
+            shows: '',
+            tension_with: null,
+            ...draftMood
+          } as CharacterMood
+        }
+      });
+    }
+
     const updated: CharacterMoodsData = {
       ...moodsData,
-      scenes: moodsData.scenes.map(s =>
+      chapters: updatedChapters,
+      chapter_moods: updatedChapters
+    };
+    
+    const ok = await saveMoods(updated);
+    setSavingScene(null);
+    if (ok) {
+      setSavedScene(chapterId);
+      setTimeout(() => setSavedScene(null), 1800);
+    }
+  };
+
+  const handleSaveSceneMood = async (sceneId: number) => {
+    if (!moodsData) return;
+    setSavingScene(sceneId);
+    
+    const scenes = moodsData.scenes || [];
+    const hasScene = scenes.some(s => s.scene_id === sceneId);
+    
+    let updatedScenes = [...scenes];
+    if (hasScene) {
+      updatedScenes = scenes.map(s =>
         s.scene_id === sceneId
           ? { ...s, moods: { ...s.moods, [charName]: { ...(s.moods[charName] ?? {}), ...draftMood } as CharacterMood } }
           : s
-      ),
+      );
+    } else {
+      const sceneDetail = scenarioData?.scenes?.find(sc => sc.scene_id === sceneId);
+      const title = sceneDetail?.title ?? `Scene ${sceneId}`;
+      updatedScenes.push({
+        scene_id: sceneId,
+        title,
+        moods: {
+          [charName]: {
+            dominant_emotion: 'anxious',
+            feels: '',
+            shows: '',
+            tension_with: null,
+            ...draftMood
+          } as CharacterMood
+        }
+      });
+    }
+
+    const updated: CharacterMoodsData = {
+      ...moodsData,
+      scenes: updatedScenes
     };
+    
     const ok = await saveMoods(updated);
     setSavingScene(null);
     if (ok) {
@@ -149,7 +318,31 @@ const CharacterHubPhase: React.FC = () => {
     }
   };
 
-  // ── Empty state (no characters yet) ─────────────────────
+  const handleSaveMood = async (id: number) => {
+    if (moodLevel === 'chapter') {
+      await handleSaveChapterMood(id);
+    } else {
+      await handleSaveSceneMood(id);
+    }
+  };
+
+  const dynamicEmotions = React.useMemo(() => {
+    const list = new Set<string>(EMOTIONS);
+    moodsData?.scenes?.forEach(s => {
+      Object.values(s.moods || {}).forEach(m => {
+        if (m.dominant_emotion) list.add(m.dominant_emotion);
+      });
+    });
+    const allChapters = moodsData?.chapter_moods || moodsData?.chapters || [];
+    allChapters.forEach(c => {
+      Object.values(c.moods || {}).forEach(m => {
+        if (m.dominant_emotion) list.add(m.dominant_emotion);
+      });
+    });
+    return Array.from(list);
+  }, [moodsData]);
+
+  // ── Empty state ─────────────────────────────────────────
 
   if (characters.length === 0) {
     return (
@@ -158,8 +351,8 @@ const CharacterHubPhase: React.FC = () => {
           <div className="chub-state-icon">👤</div>
           <div className="chub-state-title">No characters found</div>
           <p className="chub-state-hint">
-            Run the Phase 0.5 agent to generate <code>data/character_moods.json</code>, or ensure
-            <code>data/lore.json</code> contains a <code>cast</code> or <code>characters</code> array.
+            Add character folders to <code>global_characters/</code>, or ensure
+            <code>data/lore.json</code> contains a <code>cast</code> array.
           </p>
         </div>
       </div>
@@ -168,7 +361,18 @@ const CharacterHubPhase: React.FC = () => {
 
   return (
     <div className="chub-phase bg-background-panel">
+      <PhaseHeader
+        title="Characters Hub"
+        emoji="👤"
+        badge="Steps 2 & 4"
+        description="Two-pass workflow. Pass 1: Simulate character emotional arcs at chapter granularity. Pass 2 (after Scenario scene division): Refine mood arcs to scene-level and generate visual profiles."
+        inputs={['data/lore.json', 'data/visual_style.json', 'data/personality_signature.json', 'data/scenario_chapters.json', 'data/scenario_scenes.json']}
+        outputs={['data/character_moods.json', 'global_characters/Name/personality_signature.md']}
+        accentColor="#6366f1"
+        nextStep={{ label: 'After chapter moods → Scenario for scene division. After scene moods → Intro + Pacing.' }}
+      />
 
+      <div className="chub-body">
       {/* ── Left sidebar: character list ── */}
       <div className="chub-sidebar bg-secondary border-r border-border shadow-sm">
         <div className="chub-sidebar-header">
@@ -187,7 +391,7 @@ const CharacterHubPhase: React.FC = () => {
                 setDraftMood({});
               }}
             >
-              <span className="chub-avatar">{name[0]}</span>
+              <AvatarThumb charName={name} />
               <div className="chub-btn-text">
                 <span className="chub-char-name">{name}</span>
               </div>
@@ -198,41 +402,80 @@ const CharacterHubPhase: React.FC = () => {
 
       {/* ── Main panel ── */}
       <div className="chub-main">
-        {/* Header: character name + sub-tab switcher */}
+        {/* Header: character name + view toggle + sub-tabs */}
         <div className="chub-main-header border-b border-border bg-background-panel">
           <span className="chub-char-title">{charName}</span>
-          <div className="chub-subtab-bar">
-            <button
-              id="chub-subtab-visuals"
-              className={`chub-subtab-btn ${subTab === 'visuals' ? 'active' : ''}`}
-              onClick={() => { setSubTab('visuals'); setQaOpen(false); }}
-            >
-              🖼 Visuals
-            </button>
-            <button
-              id="chub-subtab-personality"
-              className={`chub-subtab-btn ${subTab === 'personality' ? 'active' : ''}`}
-              onClick={() => { setSubTab('personality'); setQaOpen(false); }}
-            >
-              🧠 Personality
-            </button>
-            <button
-              id="chub-subtab-mood-arc"
-              className={`chub-subtab-btn ${subTab === 'mood-arc' ? 'active' : ''}`}
-              onClick={() => { setSubTab('mood-arc'); setQaOpen(false); }}
-            >
-              📈 Mood Arc
-            </button>
+
+          <div className="chub-header-controls">
+            {/* Primary view toggle */}
+            <div className="chub-view-toggle">
+              <button
+                className={`chub-view-btn ${viewMode === 'original' ? 'active' : ''}`}
+                onClick={() => setViewMode('original')}
+              >
+                📷 Original
+              </button>
+              <button
+                className={`chub-view-btn ${viewMode === 'virtual' ? 'active' : ''}`}
+                onClick={() => setViewMode('virtual')}
+              >
+                ✨ Virtual
+              </button>
+            </div>
+
+            {/* Sub-tabs (virtual mode only) */}
+            {viewMode === 'virtual' && (
+              <div className="chub-subtab-bar">
+                <button
+                  id="chub-subtab-visuals"
+                  className={`chub-subtab-btn ${subTab === 'visuals' ? 'active' : ''}`}
+                  onClick={() => { setSubTab('visuals'); setQaOpen(false); }}
+                >
+                  🖼 Visuals
+                </button>
+                <button
+                  id="chub-subtab-personality"
+                  className={`chub-subtab-btn ${subTab === 'personality' ? 'active' : ''}`}
+                  onClick={() => { setSubTab('personality'); setQaOpen(false); }}
+                >
+                  🧠 Personality
+                </button>
+                <button
+                  id="chub-subtab-mood-arc"
+                  className={`chub-subtab-btn ${subTab === 'mood-arc' ? 'active' : ''}`}
+                  onClick={() => { setSubTab('mood-arc'); setQaOpen(false); }}
+                >
+                  📈 Mood Arc
+                </button>
+              </div>
+            )}
+
+            {/* Highlight save indicator */}
+            {viewMode === 'original' && (hlSaving || hlSaved) && (
+              <span className="chub-save-toast">
+                {hlSaving ? '💾 Saving…' : '✓ Highlights saved'}
+              </span>
+            )}
           </div>
         </div>
 
-        {/* Sub-tab content */}
+        {/* Content area */}
         <div className="chub-content">
 
-          {/* ── Visuals sub-tab ── */}
-          {subTab === 'visuals' && (
+          {/* ── ORIGINAL VIEW ── */}
+          {viewMode === 'original' && (
+            <OriginalView
+              charName={charName}
+              highlights={charHighlights}
+              onHighlightsChange={handleHighlightsChange}
+              generalMood={moodsData?.general_mood?.[charName] ?? ''}
+              onGeneralMoodChange={handleSaveGeneralMood}
+            />
+          )}
+
+          {/* ── VIRTUAL VIEW: Visuals ── */}
+          {viewMode === 'virtual' && subTab === 'visuals' && (
             <>
-              {/* Canonical visual description */}
               <div className="chub-section">
                 <div className="chub-section-label">Canonical Visual Profile</div>
                 <div className="chub-md-panel" id={`chub-canonical-${charName}`}>
@@ -252,7 +495,6 @@ const CharacterHubPhase: React.FC = () => {
                 </div>
               </div>
 
-              {/* Turnaround strip */}
               <div className="chub-section">
                 <div className="chub-section-label">Character Turnarounds</div>
                 <div className="chub-image-strip" id={`chub-turnarounds-${charName}`}>
@@ -276,7 +518,6 @@ const CharacterHubPhase: React.FC = () => {
                 </button>
               </div>
 
-              {/* Emotional state grid — one image per dominant emotion */}
               <div className="chub-section">
                 <div className="chub-section-label">Dominant Emotion States</div>
                 <div className="chub-emotion-grid" id={`chub-emotions-${charName}`}>
@@ -302,26 +543,34 @@ const CharacterHubPhase: React.FC = () => {
             </>
           )}
 
-          {/* ── Personality sub-tab ── */}
-          {subTab === 'personality' && (
+          {/* ── VIRTUAL VIEW: Personality ── */}
+          {viewMode === 'virtual' && subTab === 'personality' && (
             <>
               <div className="chub-section">
                 <div className="chub-section-label">Personality Signature</div>
-                <div className="chub-md-panel" id={`chub-personality-${charName}`}>
-                  <button
-                    className="chub-md-flag-btn"
-                    onClick={() => openQa(`personality_signature.md for ${charName}`, 'REWRITE_PERSONALITY')}
-                    title="Flag for agent — request rewrite"
-                  >
-                    🚩 Flag
-                  </button>
-                  <em style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>
-                    No personality_signature.md found for {charName}.<br />
-                    Run <code>06_personality_signature.md</code> pipeline to generate it.
-                    <br /><br />
-                    Expected path: <code>data/characters/{charName}/personality_signature.md</code>
-                  </em>
-                </div>
+                {personalityData?.signatures?.[charName] ? (
+                  <SignatureDetailsPanel
+                    activeChar={charName}
+                    activeSig={personalityData.signatures[charName]}
+                    onSave={handleSavePersonalitySignature}
+                  />
+                ) : (
+                  <div className="chub-md-panel" id={`chub-personality-${charName}`}>
+                    <button
+                      className="chub-md-flag-btn"
+                      onClick={() => openQa(`personality_signature.json for ${charName}`, 'REWRITE_PERSONALITY')}
+                      title="Flag for agent — request rewrite"
+                    >
+                      🚩 Flag
+                    </button>
+                    <em style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+                      No personality_signature.json found for {charName}.<br />
+                      Run <code>06_personality_signature.md</code> pipeline to generate it.
+                      <br /><br />
+                      Expected path: <code>data/characters/{charName}/personality_signature.json</code>
+                    </em>
+                  </div>
+                )}
               </div>
 
               <div className="chub-section">
@@ -349,144 +598,320 @@ const CharacterHubPhase: React.FC = () => {
             </>
           )}
 
-          {/* ── Mood Arc sub-tab ── */}
-          {subTab === 'mood-arc' && (
+          {/* ── VIRTUAL VIEW: Mood Arc ── */}
+          {viewMode === 'virtual' && subTab === 'mood-arc' && (
             <>
-              {(!moodsData || moodsData.scenes.length === 0) ? (
-                <div className="chub-state" style={{ flex: 1, minHeight: 300 }}>
-                  <div className="chub-state-icon">📈</div>
-                  <div className="chub-state-title">No mood arc yet</div>
-                  <p className="chub-state-hint">
-                    Run the <code>07_mood_simulation.md</code> pipeline to simulate {charName}'s emotional
-                    arc across all scenes. The agent reads <code>data/scenario.json</code> and each
-                    character's <code>personality_signature.md</code> to produce this data.
-                  </p>
-                </div>
-              ) : (
-                <div className="chub-mood-timeline" id={`chub-mood-arc-${charName}`}>
-                  {moodsData.scenes.map(scene => {
-                    const mood = scene.moods?.[charName];
-                    const isExpanded = expandedScene === scene.scene_id;
-                    const emoji = mood ? (EMOTION_EMOJI[mood.dominant_emotion] ?? '❓') : '';
+              {/* Level selector tabs */}
+              <div style={{ display: 'flex', gap: 12, marginBottom: 20 }}>
+                <button
+                  className={`chub-subtab-btn ${moodLevel === 'chapter' ? 'active' : ''}`}
+                  onClick={() => {
+                    setMoodLevel('chapter');
+                    setExpandedScene(null);
+                    setDraftMood({});
+                  }}
+                >
+                  📖 Phase 2: Chapter Moods
+                </button>
+                <button
+                  className={`chub-subtab-btn ${moodLevel === 'scene' ? 'active' : ''}`}
+                  onClick={() => {
+                    setMoodLevel('scene');
+                    setExpandedScene(null);
+                    setDraftMood({});
+                  }}
+                >
+                  🎬 Phase 3: Scene Moods
+                </button>
+              </div>
+
+              {moodLevel === 'chapter' ? (
+                // --- CHAPTER TIMELINE ---
+                (!chaptersData || !chaptersData.chapters || chaptersData.chapters.length === 0) ? (
+                  <div className="chub-state" style={{ flex: 1, minHeight: 250 }}>
+                    <div className="chub-state-icon">📖</div>
+                    <div className="chub-state-title">No chapters found</div>
+                    <p className="chub-state-hint">
+                      Chapters must be defined in <code>data/scenario_chapters.json</code> first.
+                    </p>
+                  </div>
+                ) : (
+                  (() => {
+                    const filteredChapters = chaptersData.chapters.filter(c =>
+                      c.characters && c.characters.includes(charName)
+                    );
+                    
+                    if (filteredChapters.length === 0) {
+                      return (
+                        <div className="chub-state" style={{ flex: 1, minHeight: 200 }}>
+                          <p className="chub-state-hint">
+                            {charName} is not present in any chapter cast lists in <code>scenario_chapters.json</code>.
+                          </p>
+                        </div>
+                      );
+                    }
 
                     return (
-                      <div
-                        key={scene.scene_id}
-                        className={`chub-mood-card ${isExpanded ? 'expanded' : ''}`}
-                        id={`chub-mood-scene-${scene.scene_id}`}
-                      >
-                        <div
-                          className="chub-mood-card-header"
-                          onClick={() => mood && handleExpandScene(scene.scene_id, mood)}
-                          role="button"
-                          tabIndex={0}
-                          onKeyDown={e => e.key === 'Enter' && mood && handleExpandScene(scene.scene_id, mood)}
-                        >
-                          <div className="chub-mood-card-left">
-                            <span className="chub-scene-num">Scene {scene.scene_id}</span>
-                            {mood ? (
-                              <>
-                                <span className="chub-mood-emoji">{emoji}</span>
-                                <div className="chub-mood-card-info">
-                                  <span className="chub-scene-title">{scene.title}</span>
-                                  <span className="chub-mood-label">{mood.dominant_emotion}</span>
-                                </div>
-                              </>
-                            ) : (
-                              <div className="chub-mood-card-info">
-                                <span className="chub-scene-title">{scene.title}</span>
-                              </div>
-                            )}
-                          </div>
-                          {mood && (
-                            <span className="chub-mood-expand-icon">▾</span>
-                          )}
-                        </div>
+                      <div className="chub-mood-timeline" id={`chub-mood-arc-chapters-${charName}`}>
+                        {filteredChapters.map(chapter => {
+                          const allChapters = moodsData?.chapter_moods || moodsData?.chapters || [];
+                          const moodEntry = allChapters.find(ch => ch.chapter_id === chapter.chapter_id);
+                          const mood = moodEntry?.moods?.[charName];
+                          const isExpanded = expandedScene === chapter.chapter_id;
+                          const emoji = mood ? (EMOTION_EMOJI[mood.dominant_emotion] ?? '❓') : '❔';
 
-                        {/* Character not in this scene */}
-                        {!mood && (
-                          <p className="chub-mood-absent">{charName} is not in this scene.</p>
-                        )}
-
-                        {/* Expanded inline edit form */}
-                        {mood && isExpanded && (
-                          <div className="chub-mood-edit-form">
-                            <div className="chub-mood-edit-form-row">
-                              <div className="chub-field">
-                                <label className="chub-field-label">Dominant emotion</label>
-                                <select
-                                  className="chub-emotion-select"
-                                  value={draftMood.dominant_emotion ?? mood.dominant_emotion}
-                                  onChange={e => setDraftMood(d => ({ ...d, dominant_emotion: e.target.value }))}
-                                  id={`chub-emotion-select-${scene.scene_id}`}
-                                >
-                                  {EMOTIONS.map(em => (
-                                    <option key={em} value={em}>
-                                      {EMOTION_EMOJI[em]} {em}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-
-                              <div className="chub-field">
-                                <label className="chub-field-label">Tension with</label>
-                                <select
-                                  className="chub-tension-select"
-                                  value={draftMood.tension_with ?? mood.tension_with ?? ''}
-                                  onChange={e => setDraftMood(d => ({ ...d, tension_with: e.target.value || null }))}
-                                  id={`chub-tension-select-${scene.scene_id}`}
-                                >
-                                  <option value="">— none —</option>
-                                  {characters.filter(c => c !== charName).map(c => (
-                                    <option key={c} value={c}>{c}</option>
-                                  ))}
-                                </select>
-                              </div>
-                            </div>
-
-                            <div className="chub-field">
-                              <label className="chub-field-label">Feels (internal — private truth)</label>
-                              <textarea
-                                className="chub-mood-textarea"
-                                value={draftMood.feels ?? mood.feels}
-                                onChange={e => setDraftMood(d => ({ ...d, feels: e.target.value }))}
-                                rows={2}
-                                placeholder="What is this character privately experiencing?"
-                                id={`chub-feels-${scene.scene_id}`}
-                              />
-                            </div>
-
-                            <div className="chub-field">
-                              <label className="chub-field-label">Shows (external — the mask)</label>
-                              <textarea
-                                className="chub-mood-textarea"
-                                value={draftMood.shows ?? mood.shows}
-                                onChange={e => setDraftMood(d => ({ ...d, shows: e.target.value }))}
-                                rows={2}
-                                placeholder="How does their behaviour/speech express this outward?"
-                                id={`chub-shows-${scene.scene_id}`}
-                              />
-                            </div>
-
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                              <button
-                                className={`chub-mood-save-btn ${savedScene === scene.scene_id ? 'saved' : ''}`}
-                                onClick={() => handleSaveMood(scene.scene_id)}
-                                disabled={savingScene === scene.scene_id}
-                                id={`chub-save-mood-${scene.scene_id}`}
+                          return (
+                            <div
+                              key={chapter.chapter_id}
+                              className={`chub-mood-card ${isExpanded ? 'expanded' : ''}`}
+                              id={`chub-mood-chapter-${chapter.chapter_id}`}
+                            >
+                              <div
+                                className="chub-mood-card-header"
+                                onClick={() => handleExpandScene(chapter.chapter_id, mood)}
+                                role="button"
+                                tabIndex={0}
+                                onKeyDown={e => e.key === 'Enter' && handleExpandScene(chapter.chapter_id, mood)}
                               >
-                                {savingScene === scene.scene_id ? 'Saving…' : savedScene === scene.scene_id ? '✓ Saved' : 'Save changes'}
-                              </button>
-                              {savedScene === scene.scene_id && (
-                                <span className="chub-save-toast">✓ Saved to character_moods.json</span>
+                                <div className="chub-mood-card-left">
+                                  <span className="chub-scene-num">Chapter {chapter.chapter_id}</span>
+                                  <span className="chub-mood-emoji">{emoji}</span>
+                                  <div className="chub-mood-card-info">
+                                    <span className="chub-scene-title">{chapter.title}</span>
+                                    <span className="chub-mood-label">
+                                      {mood ? mood.dominant_emotion : <em style={{ opacity: 0.6 }}>Not set</em>}
+                                    </span>
+                                  </div>
+                                </div>
+                                <span className="chub-mood-expand-icon">▾</span>
+                              </div>
+
+                              {isExpanded && (
+                                <div className="chub-mood-edit-form">
+                                  <div className="chub-mood-edit-form-row">
+                                    <div className="chub-field">
+                                      <label className="chub-field-label">Dominant emotion (Phase 2)</label>
+                                      <input
+                                        type="text"
+                                        list={`emotions-datalist-ch-${chapter.chapter_id}`}
+                                        className="chub-emotion-select"
+                                        value={draftMood.dominant_emotion ?? ''}
+                                        onChange={e => setDraftMood(d => ({ ...d, dominant_emotion: e.target.value }))}
+                                        placeholder="Type or select an emotion..."
+                                        id={`chub-emotion-input-ch-${chapter.chapter_id}`}
+                                      />
+                                      <datalist id={`emotions-datalist-ch-${chapter.chapter_id}`}>
+                                        {dynamicEmotions.map(em => (
+                                          <option key={em} value={em} />
+                                        ))}
+                                      </datalist>
+                                    </div>
+
+                                    <div className="chub-field">
+                                      <label className="chub-field-label">Tension with</label>
+                                      <select
+                                        className="chub-tension-select"
+                                        value={draftMood.tension_with ?? ''}
+                                        onChange={e => setDraftMood(d => ({ ...d, tension_with: e.target.value || null }))}
+                                        id={`chub-tension-select-ch-${chapter.chapter_id}`}
+                                      >
+                                        <option value="">— none —</option>
+                                        {characters.filter(c => c !== charName).map(c => (
+                                          <option key={c} value={c}>{c}</option>
+                                        ))}
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <div className="chub-field">
+                                    <label className="chub-field-label">Feels (internal — private truth)</label>
+                                    <textarea
+                                      className="chub-mood-textarea"
+                                      value={draftMood.feels ?? ''}
+                                      onChange={e => setDraftMood(d => ({ ...d, feels: e.target.value }))}
+                                      rows={2}
+                                      placeholder="What is this character privately experiencing?"
+                                      id={`chub-feels-ch-${chapter.chapter_id}`}
+                                    />
+                                  </div>
+
+                                  <div className="chub-field">
+                                    <label className="chub-field-label">Shows (external — the mask)</label>
+                                    <textarea
+                                      className="chub-mood-textarea"
+                                      value={draftMood.shows ?? ''}
+                                      onChange={e => setDraftMood(d => ({ ...d, shows: e.target.value }))}
+                                      rows={2}
+                                      placeholder="How does their behaviour/speech express this outward?"
+                                      id={`chub-shows-ch-${chapter.chapter_id}`}
+                                    />
+                                  </div>
+
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                    <button
+                                      className={`chub-mood-save-btn ${savedScene === chapter.chapter_id ? 'saved' : ''}`}
+                                      onClick={() => handleSaveMood(chapter.chapter_id)}
+                                      disabled={savingScene === chapter.chapter_id}
+                                      id={`chub-save-mood-ch-${chapter.chapter_id}`}
+                                    >
+                                      {savingScene === chapter.chapter_id ? 'Saving…' : savedScene === chapter.chapter_id ? '✓ Saved' : 'Save changes'}
+                                    </button>
+                                    {savedScene === chapter.chapter_id && (
+                                      <span className="chub-save-toast">✓ Saved to character_moods.json</span>
+                                    )}
+                                  </div>
+                                </div>
                               )}
                             </div>
-                          </div>
-                        )}
+                          );
+                        })}
                       </div>
                     );
-                  })}
-                </div>
+                  })()
+                )
+              ) : (
+                // --- SCENE TIMELINE ---
+                (!scenarioData || !scenarioData.scenes || scenarioData.scenes.length === 0) ? (
+                  <div className="chub-state" style={{ flex: 1, minHeight: 250 }}>
+                    <div className="chub-state-icon">🎬</div>
+                    <div className="chub-state-title">No scenes found</div>
+                    <p className="chub-state-hint">
+                      Scenes must be defined in <code>data/scenario_scenes.json</code> first.
+                    </p>
+                  </div>
+                ) : (
+                  (() => {
+                    const filteredScenes = scenarioData.scenes.filter(s =>
+                      s.characters_present && s.characters_present.includes(charName)
+                    );
+                    
+                    if (filteredScenes.length === 0) {
+                      return (
+                        <div className="chub-state" style={{ flex: 1, minHeight: 200 }}>
+                          <p className="chub-state-hint">
+                            {charName} is not present in any scene casts in <code>scenario_scenes.json</code>.
+                          </p>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div className="chub-mood-timeline" id={`chub-mood-arc-scenes-${charName}`}>
+                        {filteredScenes.map(scene => {
+                          const moodEntry = moodsData?.scenes?.find(s => s.scene_id === scene.scene_id);
+                          const mood = moodEntry?.moods?.[charName];
+                          const isExpanded = expandedScene === scene.scene_id;
+                          const emoji = mood ? (EMOTION_EMOJI[mood.dominant_emotion] ?? '❓') : '❔';
+
+                          return (
+                            <div
+                              key={scene.scene_id}
+                              className={`chub-mood-card ${isExpanded ? 'expanded' : ''}`}
+                              id={`chub-mood-scene-${scene.scene_id}`}
+                            >
+                              <div
+                                className="chub-mood-card-header"
+                                onClick={() => handleExpandScene(scene.scene_id, mood)}
+                                role="button"
+                                tabIndex={0}
+                                onKeyDown={e => e.key === 'Enter' && handleExpandScene(scene.scene_id, mood)}
+                              >
+                                <div className="chub-mood-card-left">
+                                  <span className="chub-scene-num">Scene {scene.scene_id}</span>
+                                  <span className="chub-mood-emoji">{emoji}</span>
+                                  <div className="chub-mood-card-info">
+                                    <span className="chub-scene-title">{scene.title}</span>
+                                    <span className="chub-mood-label">
+                                      {mood ? mood.dominant_emotion : <em style={{ opacity: 0.6 }}>Not set</em>}
+                                    </span>
+                                  </div>
+                                </div>
+                                <span className="chub-mood-expand-icon">▾</span>
+                              </div>
+
+                              {isExpanded && (
+                                <div className="chub-mood-edit-form">
+                                  <div className="chub-mood-edit-form-row">
+                                    <div className="chub-field">
+                                      <label className="chub-field-label">Dominant emotion (Phase 3)</label>
+                                      <input
+                                        type="text"
+                                        list={`emotions-datalist-sc-${scene.scene_id}`}
+                                        className="chub-emotion-select"
+                                        value={draftMood.dominant_emotion ?? ''}
+                                        onChange={e => setDraftMood(d => ({ ...d, dominant_emotion: e.target.value }))}
+                                        placeholder="Type or select an emotion..."
+                                        id={`chub-emotion-input-sc-${scene.scene_id}`}
+                                      />
+                                      <datalist id={`emotions-datalist-sc-${scene.scene_id}`}>
+                                        {dynamicEmotions.map(em => (
+                                          <option key={em} value={em} />
+                                        ))}
+                                      </datalist>
+                                    </div>
+
+                                    <div className="chub-field">
+                                      <label className="chub-field-label">Tension with</label>
+                                      <select
+                                        className="chub-tension-select"
+                                        value={draftMood.tension_with ?? ''}
+                                        onChange={e => setDraftMood(d => ({ ...d, tension_with: e.target.value || null }))}
+                                        id={`chub-tension-select-sc-${scene.scene_id}`}
+                                      >
+                                        <option value="">— none —</option>
+                                        {characters.filter(c => c !== charName).map(c => (
+                                          <option key={c} value={c}>{c}</option>
+                                        ))}
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <div className="chub-field">
+                                    <label className="chub-field-label">Feels (internal — private truth)</label>
+                                    <textarea
+                                      className="chub-mood-textarea"
+                                      value={draftMood.feels ?? ''}
+                                      onChange={e => setDraftMood(d => ({ ...d, feels: e.target.value }))}
+                                      rows={2}
+                                      placeholder="What is this character privately experiencing?"
+                                      id={`chub-feels-sc-${scene.scene_id}`}
+                                    />
+                                  </div>
+
+                                  <div className="chub-field">
+                                    <label className="chub-field-label">Shows (external — the mask)</label>
+                                    <textarea
+                                      className="chub-mood-textarea"
+                                      value={draftMood.shows ?? ''}
+                                      onChange={e => setDraftMood(d => ({ ...d, shows: e.target.value }))}
+                                      rows={2}
+                                      placeholder="How does their behaviour/speech express this outward?"
+                                      id={`chub-shows-sc-${scene.scene_id}`}
+                                    />
+                                  </div>
+
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                    <button
+                                      className={`chub-mood-save-btn ${savedScene === scene.scene_id ? 'saved' : ''}`}
+                                      onClick={() => handleSaveMood(scene.scene_id)}
+                                      disabled={savingScene === scene.scene_id}
+                                      id={`chub-save-mood-sc-${scene.scene_id}`}
+                                    >
+                                      {savingScene === scene.scene_id ? 'Saving…' : savedScene === scene.scene_id ? '✓ Saved' : 'Save changes'}
+                                    </button>
+                                    {savedScene === scene.scene_id && (
+                                      <span className="chub-save-toast">✓ Saved to character_moods.json</span>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })()
+                )
               )}
             </>
           )}
@@ -538,6 +963,7 @@ const CharacterHubPhase: React.FC = () => {
           </button>
         </div>
       )}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,51 @@
+{
+  "total_pages": 0,
+  "pages": [
+    {
+      "page_number": 0,
+      "type": "cover | character_intro | story | chapter_break | splash",
+      "scenes_associated": [
+        {
+          "scene_id": 0,
+          "scene_title": "String",
+          "portion": "full | start | middle | end",
+          "transition_type": "String (optional)"
+        }
+      ],
+      "general_mood": {
+        "emotional_tone": "String",
+        "visual_color_palette": "String (optional)",
+        "tempo_and_pacing": "String (optional)"
+      },
+      "panel_organization": {
+        "panel_count_target": 3,
+        "layout_proposal": "splash_page | standard_grid | three_panel_horizontal | asymmetric_focus",
+        "composition_notes": "String (optional)",
+        "read_flow_intent": "String (optional)"
+      },
+      "page_narrative_focus": "String",
+      "characters_present": [
+        "String"
+      ],
+      "setting_and_location": {
+        "location_name": "String",
+        "time_of_day": "String (optional)",
+        "environmental_lighting": "String (optional)",
+        "locations": [
+          {
+            "location_name": "String",
+            "time_of_day": "String (optional)",
+            "environmental_lighting": "String (optional)"
+          }
+        ]
+      },
+      "anecdotes_included": [
+        "String"
+      ],
+      "visual_page_turn_hook": "String (optional)",
+      "scene_id": null,
+      "character": null,
+      "focus": "String (backward compatibility)"
+    }
+  ]
+}

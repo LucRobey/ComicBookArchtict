@@ -3,6 +3,13 @@
 /* ── Root layout ──────────────────────────────────────── */
 .chub-phase {
   display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.chub-body {
+  display: flex;
   flex: 1;
   overflow: hidden;
 }
@@ -169,7 +176,7 @@
   line-height: 1.7;
   color: var(--text-main);
   white-space: pre-wrap;
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: var(--font-sans);
   position: relative;
 }
 
@@ -242,7 +249,7 @@
 /* ── Emotion grid (3×2) ───────────────────────────────── */
 .chub-emotion-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 10px;
 }
 
@@ -380,7 +387,7 @@
 
 .chub-mood-edit-form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
 }
 
@@ -554,3 +561,322 @@
   transform: scale(1.02);
   box-shadow: 0 4px 16px rgba(0,0,0,0.35);
 }
+
+/* ── Header controls row ─────────────────────────────── */
+.chub-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── View toggle (Original / Virtual) ────────────────── */
+.chub-view-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(0,0,0,0.2);
+  padding: 3px;
+  border-radius: 10px;
+}
+.chub-view-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+.chub-view-btn:hover { color: var(--text-main); background: rgba(255,255,255,0.05); }
+.chub-view-btn.active {
+  background: rgba(245,158,11,0.12);
+  color: #b45309;
+  box-shadow: inset 0 0 0 1px rgba(245,158,11,0.4);
+}
+.chub-view-btn.active:nth-child(2) {
+  background: rgba(59,130,246,0.1);
+  color: #1d4ed8;
+  box-shadow: inset 0 0 0 1px rgba(59,130,246,0.35);
+}
+
+/* ── Avatar thumbnail (sidebar) ──────────────────────── */
+.chub-avatar-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1.5px solid var(--glass-border);
+}
+
+/* ── Originals photo gallery ─────────────────────────── */
+.chub-originals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+.chub-original-thumb {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--glass-border);
+  background: rgba(0,0,0,0.15);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.chub-original-thumb:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+.chub-original-thumb img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+}
+.chub-original-filename {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 4px 8px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: rgba(255,255,255,0.8);
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+}
+
+/* ── Highlight note textarea ─────────────────────────── */
+.chub-highlight-note {
+  background: var(--bg-color);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.8rem;
+  padding: 8px 10px;
+  resize: vertical;
+  outline: none;
+  width: 100%;
+  line-height: 1.5;
+}
+.chub-highlight-note:focus { border-color: #fbbf24; }
+
+/* ── Presentation sections ───────────────────────────── */
+.chub-pres-section {
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: var(--panel-bg);
+  margin-bottom: 2px;
+}
+.chub-pres-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 14px;
+  background: rgba(59,130,246,0.06);
+  border: none;
+  border-bottom: 1px solid var(--glass-border);
+  border-radius: 10px 10px 0 0;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s ease;
+}
+.chub-pres-section-header:hover { background: rgba(59,130,246,0.1); }
+.chub-pres-section-icon { font-size: 1rem; }
+.chub-pres-section-title { flex: 1; letter-spacing: 0.02em; }
+.chub-pres-chevron {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+.chub-pres-chevron.open { transform: rotate(90deg); }
+
+.chub-pres-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Presentation field ──────────────────────────────── */
+.chub-pres-field {
+  padding: 10px 14px;
+  min-height: 40px;
+  background: var(--panel-bg);
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid var(--glass-border);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.chub-pres-field.highlighted {
+  border-left-color: #f59e0b;
+  background: rgba(245,158,11,0.04);
+}
+.chub-pres-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.chub-pres-field-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.chub-highlight-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  opacity: 0.4;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.chub-pres-field:hover .chub-highlight-btn { opacity: 0.7; }
+.chub-highlight-btn.active { opacity: 1; }
+.chub-highlight-btn:hover { transform: scale(1.2); opacity: 1; }
+
+/* ── Inline Edit Actions ─────────────────────────────── */
+.chub-action-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.chub-action-edit {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  opacity: 0;
+  background: rgba(59,130,246,0.10);
+  color: var(--accent-primary, #3b82f6);
+  transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.chub-pres-field.group:hover .chub-action-edit {
+  opacity: 0.6;
+}
+.chub-action-edit:hover {
+  opacity: 1 !important;
+  background: var(--accent-primary, #3b82f6);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* ── Edit Form ───────────────────────────────────────── */
+.chub-pres-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+.chub-pres-edit-textarea {
+  width: 100%;
+  background: var(--bg-color);
+  border: 1px solid var(--accent-primary, #3b82f6);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  resize: vertical;
+}
+.chub-pres-edit-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+.chub-pres-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.chub-pres-btn-cancel,
+.chub-pres-btn-save {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s ease;
+}
+.chub-pres-btn-cancel {
+  background: transparent;
+  color: var(--text-muted);
+}
+.chub-pres-btn-cancel:hover {
+  background: rgba(0,0,0,0.05);
+  color: var(--text-main);
+}
+.chub-pres-btn-save {
+  background: var(--accent-primary, #3b82f6);
+  color: #fff;
+}
+.chub-pres-btn-save:hover {
+  background: var(--accent-hover, #2563eb);
+}
+
+/* ── Presentation field value ────────────────────────── */
+.chub-pres-field-value {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--text-main);
+  margin: 0;
+  white-space: pre-wrap;
+  min-height: 1.2em;
+}
+
+/* ── Lightbox ────────────────────────────────────────── */
+.chub-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: chub-fade-in 0.2s ease;
+}
+@keyframes chub-fade-in { from { opacity: 0; } to { opacity: 1; } }
+.chub-lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+.chub-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.chub-lightbox-close:hover { background: rgba(255,255,255,0.2); }

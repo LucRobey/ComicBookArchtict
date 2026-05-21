@@ -11,8 +11,8 @@
   "visual_style": "Graphic novel realism with expressive linework. Muted palette punctuated by color accents on emotional beats.",
   "palette": [
     {
+      "hex": "#3333c7",
       "label": "Deep Charcoal",
-      "hex": "#1C1C1E",
       "role": "Dominant tone — line, shadow"
     },
     {

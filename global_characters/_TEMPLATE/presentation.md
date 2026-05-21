@@ -100,26 +100,6 @@ Joke? Go quiet?)*
 
 ---
 
-## Relationships (General)
-
-> Not story-specific relationships — the general patterns in how they relate to people.
-
-**How they make friends:**
-*(Easy or hard? Do they pursue or wait? What do they need before they trust?)*
-
-**How they fight:**
-*(Do they go cold? Loud? Passive-aggressive? Disappear? Attack first?)*
-
-**How they love:**
-*(Do they say it or show it? Do they love many people lightly or few people completely?)*
-
-**Who they are at their best:**
-*(The version of them that exists when everything is right)*
-
-**Who they are at their worst:**
-*(The version they try to hide — that comes out under pressure)*
-
----
 
 ## Voice
 

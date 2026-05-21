@@ -3,25 +3,246 @@
     {
       "page_number": 1,
       "character": "CHARACTER_A",
-      "layout_type": "full_page_splash",
-      "scene_description": "CHARACTER_A at her desk, surrounded by color-coded spreadsheets. She is labeling a label-maker with another label-maker. Her desk is a monument to organizational overreach.",
-      "narrator_caption": "Emily has a system for everything. The system also has a system.",
-      "character_dialogue": "Almost... perfect.",
+      "proposal": {
+        "story": "CHARACTER_A discovers a minor 0.05-second deviation in her digital Earl Grey tea timer. Rather than ignoring it and drinking the tea, she immediately maps out a brand history timeline and spreadsheet to investigate the manufacturer's clock crystal reliability, completely ignoring a building fire alarm evacuation around her.",
+        "tone": "Dry, deadpan, analytical obsession. The humor is derived from her calm intensity in the face of minor anomalies and complete obliviousness to real chaos.",
+        "themes": [
+          "Spreadsheet micro-management",
+          "Thermal dynamics of Earl Grey tea",
+          "Control as a coping mechanism"
+        ]
+      },
       "panels": [
-        { "panel_number": 1, "framing": "Wide Shot", "action": "Full page: CHARACTER_A immersed in her color-coded world, completely at peace in the chaos she's organized." }
+        {
+          "panel_number": 1,
+          "layout_intent": {
+            "panel_size_weight": "standard_square",
+            "aspect_ratio_target": "1:1"
+          },
+          "cinematic_framing": {
+            "shot_type": "Close-up",
+            "camera_angle": "Eye-Level",
+            "camera_lens_feel": "Shallow depth of field focus"
+          },
+          "keyframe_action": "Emily is peering through magnifying glasses at a clean glass thermometer submerged in a tea cup, next to a blinking digital timer displaying 03:59.95.",
+          "character_choreography": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression_override": "Intense squinting concentration",
+              "camera_distance_blocking": "Foreground prominent"
+            }
+          ],
+          "tags": [
+            "office",
+            "tea_cup",
+            "timer",
+            "thermometer",
+            "interior"
+          ],
+          "dialogue_and_lettering": {
+            "captions": [
+              "Emily knew that Earl Grey at 94.2°C reached peak flavor at exactly 240 seconds."
+            ],
+            "speech_balloons": []
+          },
+          "image": "data/images/intro/character_a_panel_1.png"
+        },
+        {
+          "panel_number": 2,
+          "layout_intent": {
+            "panel_size_weight": "wide_established",
+            "aspect_ratio_target": "16:9"
+          },
+          "cinematic_framing": {
+            "shot_type": "Wide Establishing Shot",
+            "camera_angle": "Low Angle looking up",
+            "camera_lens_feel": "Wide-angle lens feel"
+          },
+          "keyframe_action": "Emily sits at her pristine, color-coded desk. On her laptop screen is an intricate spreadsheet with red highlighted cells. In the background, office flashing warning lights pulse, and colleagues walk past her toward the exit.",
+          "character_choreography": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression_override": "Mild analytical irritation, eyes fixed on laptop screen",
+              "camera_distance_blocking": "Midground center"
+            }
+          ],
+          "tags": [
+            "office",
+            "desk",
+            "laptop",
+            "spreadsheet",
+            "evacuation_background"
+          ],
+          "dialogue_and_lettering": {
+            "captions": [
+              "A 0.05-second variance was not just a mistake. It was a betrayal."
+            ],
+            "speech_balloons": [
+              {
+                "character_id": "CHARACTER_A",
+                "text": "Statistically... it points to a faulty clock crystal oscillator."
+              }
+            ]
+          },
+          "image": "data/images/intro/character_a_panel_2.png"
+        },
+        {
+          "panel_number": 3,
+          "layout_intent": {
+            "panel_size_weight": "narrow_focus",
+            "aspect_ratio_target": "4:3"
+          },
+          "cinematic_framing": {
+            "shot_type": "Medium shot",
+            "camera_angle": "High Angle looking down",
+            "camera_lens_feel": "Natural focal depth"
+          },
+          "keyframe_action": "A wide angle showing Emily's teacup cold and untouched, while she starts sketching clock crystal diagrams on a chalkboard. The entire office space behind her is empty and dark.",
+          "character_choreography": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression_override": "Determined investigation state",
+              "camera_distance_blocking": "Midground center"
+            }
+          ],
+          "tags": [
+            "empty_office",
+            "chalkboard",
+            "cold_tea",
+            "interior"
+          ],
+          "dialogue_and_lettering": {
+            "captions": [
+              "She still hadn't taken a single sip."
+            ],
+            "speech_balloons": []
+          },
+          "image": "data/images/intro/character_a_panel_3.png"
+        }
       ]
     },
     {
       "page_number": 2,
       "character": "CHARACTER_B",
-      "layout_type": "three_panel_sequence",
-      "scene_description": "CHARACTER_B bursts through the office door, phone pinched between ear and shoulder, coffee in one hand, a chaotic stack of papers in the other. Pure kinetic energy.",
-      "narrator_caption": "Sophie has a system too. It's called chaos. It works somehow.",
-      "character_dialogue": "Yes, yes — I'm on my way. I'm basically already there.",
+      "proposal": {
+        "story": "Marcus is trying to resolve a serious coolant leak in his vintage sports car using a banana peel as a makeshift gasket while having a heated phone argument with the local parking enforcement about the definition of 'temporary driveway obstruction'. The engine starts successfully but immediately triggers a tow truck's arrival.",
+        "tone": "Kinetic, frantic energy, charming defiance. Humor stems from his absolute certainty in a ridiculous mechanical solution and his defensive, rapid-fire dialogue.",
+        "themes": [
+          "Improvised engineering",
+          "Defiance of municipal authority",
+          "Banana chemistry"
+        ]
+      },
       "panels": [
-        { "panel_number": 1, "framing": "Wide Shot", "action": "Wide: The door swings open. A blur of motion enters." },
-        { "panel_number": 2, "framing": "Medium Shot", "action": "Medium: CHARACTER_B in full stride, simultaneously on the phone and somehow also drinking coffee." },
-        { "panel_number": 3, "framing": "Close-up", "action": "Close-up on her face: confident, chaotic, completely in control." }
+        {
+          "panel_number": 1,
+          "layout_intent": {
+            "panel_size_weight": "wide_established",
+            "aspect_ratio_target": "16:9"
+          },
+          "cinematic_framing": {
+            "shot_type": "Wide shot",
+            "camera_angle": "Eye-Level",
+            "camera_lens_feel": "Crisp focal contrast"
+          },
+          "keyframe_action": "Marcus is leaned deep under the hood of a classic red sports convertible in a driveway, face smudged with grease. He holds a partially peeled banana, gesturing with it. A phone is on speakerphone resting on the air filter cover.",
+          "character_choreography": [
+            {
+              "character_id": "CHARACTER_B",
+              "expression_override": "Charming, fast-talking grin",
+              "camera_distance_blocking": "Midground center"
+            }
+          ],
+          "tags": [
+            "driveway",
+            "classic_car",
+            "banana",
+            "exterior"
+          ],
+          "dialogue_and_lettering": {
+            "captions": [
+              "Marcus didn't believe in instructions. He believed in structural organic materials."
+            ],
+            "speech_balloons": [
+              {
+                "character_id": "CHARACTER_B",
+                "text": "Listen, officer, a banana peel has excellent thermal resistance under pressure. It's basically rubber!"
+              }
+            ]
+          },
+          "image": "data/images/intro/character_b_panel_1.png"
+        },
+        {
+          "panel_number": 2,
+          "layout_intent": {
+            "panel_size_weight": "standard_square",
+            "aspect_ratio_target": "1:1"
+          },
+          "cinematic_framing": {
+            "shot_type": "Close-up",
+            "camera_angle": "Dutch Angle",
+            "camera_lens_feel": "Tight macro perspective"
+          },
+          "keyframe_action": "A close-up of a hand tightening a bolt over a yellow banana peel wedged into a metal pipe fitting. Steam is escaping from a tiny gap, but the yellow organic seal is holding.",
+          "character_choreography": [
+            {
+              "character_id": "CHARACTER_B",
+              "expression_override": "Straining hands out of frame",
+              "camera_distance_blocking": "Foreground prominent"
+            }
+          ],
+          "tags": [
+            "close-up",
+            "banana_peel",
+            "car_parts",
+            "steam"
+          ],
+          "dialogue_and_lettering": {
+            "captions": [
+              "It was 90% luck, 10% organic chemistry."
+            ],
+            "speech_balloons": []
+          },
+          "image": "data/images/intro/character_b_panel_2.png"
+        },
+        {
+          "panel_number": 3,
+          "layout_intent": {
+            "panel_size_weight": "narrow_focus",
+            "aspect_ratio_target": "4:3"
+          },
+          "cinematic_framing": {
+            "shot_type": "Medium shot",
+            "camera_angle": "High Angle looking down",
+            "camera_lens_feel": "Natural perspective"
+          },
+          "keyframe_action": "Marcus wipes his hands on a rag, looking up with a grin as the car rumbles to life. Behind him, a tow truck has backed up to the front of his driveway, its yellow beacon lights flashing.",
+          "character_choreography": [
+            {
+              "character_id": "CHARACTER_B",
+              "expression_override": "Incredulous smirk",
+              "camera_distance_blocking": "Foreground prominent"
+            }
+          ],
+          "tags": [
+            "driveway",
+            "tow_truck",
+            "flashing_lights",
+            "exterior"
+          ],
+          "dialogue_and_lettering": {
+            "captions": [
+              "Naturally, the car was parked across the sidewalk."
+            ],
+            "speech_balloons": [
+              {
+                "character_id": "CHARACTER_B",
+                "text": "Oh, perfect. A mobile lift service. Saved me a trip."
+              }
+            ]
+          },
+          "image": "data/images/intro/character_b_panel_3.png"
+        }
       ]
     }
   ]

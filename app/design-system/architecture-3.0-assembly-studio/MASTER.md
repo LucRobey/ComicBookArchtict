@@ -16,39 +16,57 @@
 
 ### Color Palette
 
-| Role | Hex | CSS Variable |
-|------|-----|--------------|
-| Primary | `#0F172A` | `--color-primary` |
-| Secondary | `#1E293B` | `--color-secondary` |
-| CTA/Accent | `#22C55E` | `--color-cta` |
-| Background | `#020617` | `--color-background` |
-| Text | `#F8FAFC` | `--color-text` |
+| Role | Hex | CSS Variable (Tailwind v4 `@theme`) |
+|------|-----|------------------------------------|
+| Brand / Primary Action | `#1E3A8A` | `--color-brand` |
+| Brand Hover | `#1D4ED8` | `--color-brand-hover` |
+| Accent / Blueprint | `#3B82F6` | `--color-accent-primary` |
+| Accent Hover | `#60A5FA` | `--color-accent-hover` |
+| Surface (Panel / Card) | `#FAFAF9` | `--color-surface` |
+| Surface Raised (Page bg) | `#F3F4F6` | `--color-surface-raised` |
+| Canvas / Terminal | `#0D1117` | `--color-canvas` |
+| Text Base | `#1F2937` | `--color-text-base` |
+| Text Sub | `#374151` | `--color-text-sub` |
+| Text Muted | `#6B7280` | `--color-muted` |
+| Border | `#E5E7EB` | `--color-border` |
+| Border Accent | `#3B82F6` | `--color-border-accent` |
+| Danger | `#EF4444` | `--color-danger` |
+| Success | `#10B981` | `--color-success` |
+| Warning | `#F59E0B` | `--color-warning` |
 
-**Color Notes:** Dark bg + green positive indicators
+**Color Notes:** Light panels (`#FAFAF9`) on dark blueprint background (`#1E3A8A`). Accent blue (`#3B82F6`) for interactive elements. No glows, no neon.
 
 ### Typography
 
-- **Heading Font:** Fira Code
-- **Body Font:** Fira Sans
-- **Mood:** dashboard, data, analytics, code, technical, precise
-- **Google Fonts:** [Fira Code + Fira Sans](https://fonts.google.com/share?selection.family=Fira+Code:wght@400;500;600;700|Fira+Sans:wght@300;400;500;600;700)
+- **Heading Font:** Space Grotesk (architectural, slightly technical feel)
+- **Body Font:** Inter (clean, readable)
+- **Mono Font:** IBM Plex Mono (code, labels, data)
+- **Mood:** drafting board, engineering tool, precise, grounded
+- **Google Fonts:**
 
-**CSS Import:**
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 ```
 
 ### Spacing Variables
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--space-xs` | `4px` / `0.25rem` | Tight gaps |
-| `--space-sm` | `8px` / `0.5rem` | Icon gaps, inline spacing |
-| `--space-md` | `16px` / `1rem` | Standard padding |
-| `--space-lg` | `24px` / `1.5rem` | Section padding |
-| `--space-xl` | `32px` / `2rem` | Large gaps |
-| `--space-2xl` | `48px` / `3rem` | Section margins |
-| `--space-3xl` | `64px` / `4rem` | Hero padding |
+| `--space-xs` | `4px` | Tight gaps, icon padding |
+| `--space-sm` | `8px` | Inline spacing, small gaps |
+| `--space-md` | `16px` | Standard padding |
+| `--space-lg` | `24px` | Section padding |
+| `--space-xl` | `32px` | Large gaps |
+| `--space-2xl` | `48px` | Section margins |
+
+### Motion Tokens
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--duration-fast` (alias `--dur-fast`) | `150ms` | Hover, small state changes |
+| `--duration-base` (alias `--dur-base`) | `250ms` | Panel transitions, reveals |
+| `--ease-out` | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` | Standard easing |
+| `--ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Bouncy / spring effects |
 
 ### Shadow Depths
 
@@ -66,32 +84,44 @@
 ### Buttons
 
 ```css
-/* Primary Button */
-.btn-primary {
-  background: #22C55E;
-  color: white;
-  padding: 12px 24px;
+/* Primary Action Button */
+.export-btn {
+  background: linear-gradient(135deg, var(--color-accent-primary), #2563eb);
+  color: #fff;
+  padding: 7px 20px;
   border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
   font-weight: 600;
-  transition: all 200ms ease;
-  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-spring),
+              box-shadow var(--dur-base) var(--ease-out);
 }
 
-.btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+.export-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
 }
 
-/* Secondary Button */
-.btn-secondary {
-  background: transparent;
-  color: #0F172A;
-  border: 2px solid #0F172A;
-  padding: 12px 24px;
-  border-radius: 8px;
+/* Danger / Destructive */
+.btn-danger {
+  background: var(--danger-dim);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 8px 12px;
+  border-radius: 6px;
   font-weight: 600;
-  transition: all 200ms ease;
-  cursor: pointer;
+  transition: background var(--dur-base), color var(--dur-base);
+}
+
+/* Success / Confirm */
+.btn-success {
+  background: var(--success-dim);
+  color: var(--success);
+  border: 1px solid var(--success);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background var(--dur-base), color var(--dur-base), box-shadow var(--dur-base);
 }
 ```
 

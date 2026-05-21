@@ -1,0 +1,56 @@
+{
+  "signatures": {
+    "CHARACTER_A": {
+      "age": "28",
+      "gender": "Female",
+      "role": "The Reluctant Hero / Analyst",
+      "network": [
+        {
+          "target_character": "CHARACTER_B",
+          "relationship_type": "family",
+          "relationship_subtype": "brother",
+          "dynamic": "Rivalry born of mutual respect. She thinks he's reckless but secretly envies his freedom."
+        }
+      ],
+      "general_personality": "Pragmatic, deeply analytical, and naturally cautious. She relies on data over instinct, which makes her excellent at solving puzzles but terrible at taking leaps of faith.",
+      "loves": [
+        "Color-coded spreadsheets",
+        "Predictability",
+        "Earl Grey tea"
+      ],
+      "hates": [
+        "Spontaneous plans",
+        "Being the center of attention",
+        "Loud noises"
+      ],
+      "verbal_habits": "Often trails off at the end of sentences when she's thinking. Uses a lot of qualifiers like 'probably', 'statistically', or 'most likely'.",
+      "writing_notes": "Never have her act impulsively unless the situation is dire. Her default state is observing and analyzing."
+    },
+    "CHARACTER_B": {
+      "age": "31",
+      "gender": "Male",
+      "role": "The Maverick / Field Operative",
+      "network": [
+        {
+          "target_character": "CHARACTER_A",
+          "relationship_type": "family",
+          "relationship_subtype": "sister",
+          "dynamic": "Finds her overly rigid but deeply respects her intellect. Constantly tries to push her out of her comfort zone."
+        }
+      ],
+      "general_personality": "Charming, impulsive, and highly intuitive. He operates entirely on instinct and thrives in chaotic situations. He uses humor as a defense mechanism to hide deeper insecurities.",
+      "loves": [
+        "Adrenaline",
+        "Breaking the rules",
+        "Vintage cars"
+      ],
+      "hates": [
+        "Waiting",
+        "Authoritative figures",
+        "Strict schedules"
+      ],
+      "verbal_habits": "Speaks quickly, uses a lot of slang, and frequently interrupts himself to change the subject. Rarely gives a straight answer.",
+      "writing_notes": "His dialogue should feel energetic and slightly scattered. He never admits when he's scared; he just makes a joke instead."
+    }
+  }
+}

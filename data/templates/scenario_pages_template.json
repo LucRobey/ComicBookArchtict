@@ -1,0 +1,14 @@
+{
+  "total_pages": 0,
+  "pages": [
+    {
+      "page_number": 1,
+      "scene_id": null,
+      "type": "cover | character_intro | interior | chapter_break",
+      "layout_proposal": "splash_page | standard_grid | three_panel_horizontal | asymmetric_focus",
+      "character": "",
+      "focus": "",
+      "anecdotes_included": []
+    }
+  ]
+}

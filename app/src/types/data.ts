@@ -21,19 +21,98 @@ export interface LoreData {
   [key: string]: any;
 }
 
-// ── data/scenario.json ──────────────────────────────────────
+export interface AnecdoteItem {
+  text: string;
+  importance: number;
+}
+
+// ── data/scenario_inputs.json ───────────────────────────────
+export interface ScenarioInputsData {
+  logline: string;
+  themes: string[];
+  points: (string | AnecdoteItem)[];
+}
+
+export interface CharacterLink {
+  target_character: string;
+  relationship_type: 'friend' | 'family' | 'lover';
+  relationship_subtype: string;
+  dynamic: string;
+}
+
+export interface CharacterSignature {
+  age: string;
+  gender: string;
+  role: string;
+  relationships?: Record<string, string>; // Legacy
+  network?: CharacterLink[];
+  general_personality: string;
+  loves: string[];
+  hates: string[];
+  verbal_habits: string;
+  writing_notes: string;
+}
+
+export interface PersonalitySignature {
+  [characterName: string]: CharacterSignature;
+}
+export interface PersonalitySignatureData {
+  signatures: PersonalitySignature;
+}
+
+// ── data/scenario_synopsis.json ─────────────────────────────
+export interface ScenarioSynopsisData {
+  synopsis: string;
+}
+
+// ── data/scenario_chapters.json ─────────────────────────────
+export interface Chapter {
+  chapter_id: number;
+  title: string;
+  summary: string;
+  characters: string[];
+  story_progression?: string;
+}
+export interface ScenarioChaptersData {
+  chapters: Chapter[];
+}
+
+// ── data/scenario_scenes.json ───────────────────────────────
+export interface SceneCharacterManifest {
+  character_id: string;
+  costume_and_appearance_variant: string;
+}
+
 export interface Scene {
   scene_id: number;
+  chapter_id?: number;
+  chapter_title?: string;
   title: string;
-  location: string;
-  characters_present: string[];
+  location_id?: string;
+  variant_id?: string;
+  location?: string; // Legacy/backward compatibility
+  location_master?: {
+    name: string;
+    visual_style_modifiers: string;
+  };
+  scene_world_state?: {
+    time_of_day: string;
+    environmental_lighting: string;
+    atmospheric_effects: string;
+  };
+  character_manifest?: SceneCharacterManifest[];
+  characters_present?: string[]; // Legacy
   emotional_beat: string;
+  camera_shot: string;
+  core_action: string;
   summary: string;
   anecdotes: string[];
 }
-export interface ScenarioData {
+export interface ScenarioScenesData {
   scenes: Scene[];
 }
+export type ScenarioData = ScenarioScenesData;
+
 
 // ── data/geography.json ─────────────────────────────────────
 export interface Shot {
@@ -82,6 +161,11 @@ export interface CharacterMood {
 export interface SceneMoods {
   [characterName: string]: CharacterMood;
 }
+export interface ChapterMoodEntry {
+  chapter_id: number;
+  title: string;
+  moods: SceneMoods;
+}
 export interface SceneEntry {
   scene_id: number;
   title: string;
@@ -91,38 +175,176 @@ export interface CharacterMoodsData {
   _schema_version?: string;
   _description?: string;
   characters: string[];
-  scenes: SceneEntry[];
+  general_mood?: Record<string, string>;
+  chapter_moods?: ChapterMoodEntry[];
+  chapters?: ChapterMoodEntry[];
+  scenes?: SceneEntry[];
 }
 
 // ── data/intro_pages.json ───────────────────────────────────
-export interface IntroPanel {
-  panel_number: number;
-  framing: string;
-  action: string;
+export interface IntroProposal {
+  story: string;
+  tone: string;
+  themes: string[];
 }
+
+export interface IntroPanelLayoutIntent {
+  panel_size_weight: string;
+  aspect_ratio_target: string;
+}
+
+export interface IntroPanelCinematicFraming {
+  shot_type: string;
+  camera_angle: string;
+  camera_lens_feel: string;
+}
+
+export interface IntroPanelChoreography {
+  character_id: string;
+  expression_override: string;
+  camera_distance_blocking: string;
+}
+
+export interface IntroSpeechBalloon {
+  character_id: string;
+  text: string;
+}
+
+export interface IntroPanelDialogueAndLettering {
+  captions: string[];
+  speech_balloons: IntroSpeechBalloon[];
+}
+
+export interface IntroPanelData {
+  panel_number: number;
+  layout_intent: IntroPanelLayoutIntent;
+  cinematic_framing: IntroPanelCinematicFraming;
+  keyframe_action: string;
+  character_choreography: IntroPanelChoreography[];
+  tags: string[];
+  dialogue_and_lettering: IntroPanelDialogueAndLettering;
+  image?: string;
+}
+
 export interface CharacterIntro {
   page_number: number;
   character: string;
-  layout_type: string;
-  scene_description: string;
-  narrator_caption: string;
-  character_dialogue: string;
-  panels: IntroPanel[];
+  proposal: IntroProposal;
+  panels: IntroPanelData[];
 }
+
 export interface IntroData {
   intro_pages: CharacterIntro[];
 }
 
 // ── data/pages.json ─────────────────────────────────────────
+export interface AssociatedScene {
+  scene_id: number;
+  scene_title: string;
+  portion?: 'full' | 'start' | 'middle' | 'end';
+  transition_type?: string;
+}
+
+export interface PageGeneralMood {
+  emotional_tone: string;
+  visual_color_palette?: string;
+  tempo_and_pacing?: string;
+}
+
+export interface PagePanelOrganization {
+  panel_count_target: number;
+  layout_proposal?: string;
+  composition_notes?: string;
+  read_flow_intent?: string;
+}
+
+export interface PageLocation {
+  location_name: string;
+  time_of_day?: string;
+  environmental_lighting?: string;
+}
+
+export interface PageSettingAndLocation {
+  location_name: string;
+  time_of_day?: string;
+  environmental_lighting?: string;
+  locations?: PageLocation[];
+}
+
 export interface PacingPageData {
   page_number: number;
-  scene_id: number | null;
   type: string;
+  scenes_associated?: AssociatedScene[];
+  general_mood?: PageGeneralMood;
+  panel_organization?: PagePanelOrganization;
+  page_narrative_focus?: string;
+  characters_present?: string[];
+  setting_and_location?: PageSettingAndLocation;
+  anecdotes_included: string[];
+  visual_page_turn_hook?: string;
+
+  // Backward compatibility fields
+  scene_id: number | null;
   character?: string;
   focus: string;
-  anecdotes_included: string[];
 }
+
 export interface PagesData {
   total_pages: number;
   pages: PacingPageData[];
 }
+
+// ── data/panels.json ────────────────────────────────────────
+export interface PanelLayoutIntent {
+  panel_size_weight: string;
+  aspect_ratio_target: string;
+}
+
+export interface PanelCinematicFraming {
+  shot_type: string;
+  camera_angle: string;
+  camera_lens_feel: string;
+}
+
+export interface PanelCharacterChoreography {
+  character_id: string;
+  expression_override: string;
+  camera_distance_blocking: string;
+}
+
+export interface SpeechBalloon {
+  character_id: string;
+  text: string;
+}
+
+export interface PanelDialogueAndLettering {
+  captions: string[];
+  speech_balloons: SpeechBalloon[];
+}
+
+export interface PanelData {
+  panel_number: number;
+  scene_id: number;
+  shot_id?: string;
+  layout_intent?: PanelLayoutIntent;
+  cinematic_framing?: PanelCinematicFraming;
+  keyframe_action?: string;
+  character_choreography?: PanelCharacterChoreography[];
+  tags: string[];
+  dialogue_and_lettering?: PanelDialogueAndLettering;
+  
+  // Legacy / UI compatibility fields:
+  framing?: string;
+  action?: string;
+  characters_present?: string[];
+}
+
+export interface PanelsPage {
+  page_number: number;
+  panels: PanelData[];
+}
+
+export interface PanelsData {
+  pages: PanelsPage[];
+}
+

@@ -9,12 +9,14 @@ import ScriptPhase from '@/components/phases/script/ScriptPhase';
 import PanelsPhase from '@/components/phases/panels/PanelsPhase';
 import PacingPhase from '@/components/phases/pacing/PacingPhase';
 import CharactersPhase from '@/components/phases/characters/CharactersPhase';
+import ScenarioPhase from '@/components/phases/scenario/ScenarioPhase';
 import LorePhase from '@/components/phases/lore/LorePhase';
 import CharacterHubPhase from '@/components/phases/character-hub/CharacterHubPhase';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useJsonFile } from '@/hooks/useJsonFile';
 import type { PageData } from '@/types/assembly';
 import { useEditorStore } from '@/store/useEditorStore';
+import { PipelineMapPhase } from '@/components/phases/pipeline-map/PipelineMapPhase';
 
 function App() {
   const [activePhase, setActivePhase] = React.useState<PhaseId>('assembly');
@@ -60,10 +62,12 @@ function App() {
 
   const renderPhaseContent = () => {
     switch (activePhase) {
+      case 'pipeline-map': return <ErrorBoundary key="pipeline-map"><PipelineMapPhase onPhaseChange={setActivePhase} /></ErrorBoundary>;
       case 'lore':       return <ErrorBoundary key="lore"><LorePhase /></ErrorBoundary>;
+      case 'scenario':   return <ErrorBoundary key="scenario"><ScenarioPhase /></ErrorBoundary>;
       case 'char-hub':   return <ErrorBoundary key="char-hub"><CharacterHubPhase /></ErrorBoundary>;
+      case 'intro':      return <ErrorBoundary key="intro"><CharactersPhase /></ErrorBoundary>;
       case 'pacing':     return <ErrorBoundary key="pacing"><PacingPhase /></ErrorBoundary>;
-      case 'characters': return <ErrorBoundary key="characters"><CharactersPhase /></ErrorBoundary>;
       case 'panels':     return <ErrorBoundary key="panels"><PanelsPhase /></ErrorBoundary>;
       case 'script':     return <ErrorBoundary key="script"><ScriptPhase /></ErrorBoundary>;
       case 'assembly':   return renderAssembly();

@@ -18,12 +18,12 @@ Think of this as the agent "playing" every character simultaneously through ever
 
 Before running, confirm:
 
-- `data/scenario.json` — full scene list (required)
+- `data/scenario_scenes.json` — full scene list (required)
 - `data/lore.json` — cast list and world context (required)
-- `data/characters/[Name]/personality_signature.md` — for **every character in the cast** (required)
+- `data/personality_signature.json` — for **every character in the cast** (required)
 - `global_characters/[Name]/general_mood.md` — for each character (recommended)
 
-If any `personality_signature.md` is missing, run Pipeline 06 first.
+If `data/personality_signature.json` is missing, run Pipeline 06 first.
 
 ---
 
@@ -33,7 +33,7 @@ Extract from `lore.json`:
 - Full cast list (names only)
 - Relationships between characters
 
-For each character, read their `personality_signature.md`. Note:
+For each character, read their entry in `data/personality_signature.json`. Note:
 - Core wound
 - Mask vs. core gap
 - Relationship dynamics with each other cast member
@@ -43,7 +43,7 @@ For each character, read their `personality_signature.md`. Note:
 
 ## Step 2 — Simulate Scene by Scene
 
-For each scene in `scenario.json`, for each character **present in that scene**:
+For each scene in `scenario_scenes.json`, for each character **present in that scene**:
 
 Answer these questions:
 
@@ -94,7 +94,7 @@ Use this exact schema:
 - Only include characters who appear in `characters_present` for that scene
 - `dominant_emotion` must be one of the 12 named values above
 - `tension_with` must be a character name or `null` — never a description
-- Do not invent scenes not in `scenario.json`
+- Do not invent scenes not in `scenario_scenes.json`
 
 ---
 

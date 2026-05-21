@@ -1,0 +1,32 @@
+{
+  "scenes": [
+    {
+      "scene_id": 1,
+      "chapter_id": 1,
+      "chapter_title": "",
+      "title": "",
+      "location_id": "",
+      "variant_id": "",
+      "location_master": {
+        "name": "",
+        "visual_style_modifiers": ""
+      },
+      "scene_world_state": {
+        "time_of_day": "",
+        "environmental_lighting": "",
+        "atmospheric_effects": ""
+      },
+      "character_manifest": [
+        {
+          "character_id": "",
+          "costume_and_appearance_variant": ""
+        }
+      ],
+      "emotional_beat": "",
+      "camera_shot": "",
+      "core_action": "",
+      "summary": "",
+      "anecdotes": []
+    }
+  ]
+}

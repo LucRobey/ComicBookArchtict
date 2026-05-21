@@ -1,9 +1,16 @@
 /* ── Script Phase Layout ──────────────────────────────── */
 .script-phase {
   display: flex;
+  flex-direction: column;
   flex: 1;
   overflow: hidden;
   gap: 0;
+}
+
+.script-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
 }
 
 /* ── Page Sidebar ─────────────────────────────────────── */

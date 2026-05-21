@@ -1,17 +1,17 @@
 import React, { useState, useCallback } from 'react';
+import { PhaseHeader } from '../../shared/PhaseHeader';
 import { useJsonFile } from '@/hooks/useJsonFile';
 import { exportQaReport } from '@/utils/qaExport';
 import { saveJsonFile } from '@/utils/saveFile';
 import '../../../styles/lore.css';
-import type { LoreData, ScenarioData, GeographyData, SubTab, FlagTarget, Location, Variant } from './types';
+import type { LoreData, ScenarioData, GeographyData, SubTab, FlagTarget, Location, Variant, Scene } from './types';
 import { WorldTab } from './tabs/WorldTab';
 import { VisualStyleTab } from './tabs/VisualStyleTab';
 import { GeographyTab } from './tabs/GeographyTab';
-import { ScenarioTab } from './tabs/ScenarioTab';
 import { LoreFlagDrawer } from './components/LoreFlagDrawer';
 
 const LORE_PATH      = 'data/lore.json';
-const SCENARIO_PATH  = 'data/scenario.json';
+const SCENARIO_PATH  = 'data/scenario_scenes.json';
 const GEOGRAPHY_PATH = 'data/geography.json';
 
 const LorePhase: React.FC = () => {
@@ -85,7 +85,7 @@ const LorePhase: React.FC = () => {
     const now = new Date().toISOString();
     let r = `# QA Report — Phase 0 (Pre-Production)\nGenerated: ${now}\n\n`;
     if (qaSceneId !== null) {
-      const scene = scenario?.scenes.find(s => s.scene_id === qaSceneId);
+      const scene = scenario?.scenes.find((s: Scene) => s.scene_id === qaSceneId);
       r += `## Scene ${qaSceneId} — [${qaType}]\n`;
       if (qaType === 'REWRITE_SCENE' && scene) r += `* **Current summary:** ${scene.summary}\n* **Request:** ${qaNote}\n`;
       if (qaType === 'ADD_SCENE_AFTER') r += `* **New scene brief:** ${qaNote}\n`;
@@ -116,20 +116,28 @@ const LorePhase: React.FC = () => {
   };
 
   const openLoreFlag  = (key: string) => { setQaLoreKey(key); setQaSceneId(null); setQaLocId(null); setQaStyleRef(null); setQaType('CHANGE'); };
-  const openSceneFlag = (id: number, type: string) => { setQaSceneId(id); setQaLoreKey(null); setQaLocId(null); setQaStyleRef(null); setQaType(type); };
   const openLocFlag   = (id: string) => { setQaLocId(id); setQaSceneId(null); setQaLoreKey(null); setQaStyleRef(null); setQaType('REGENERATE_LOCATION_IMAGE'); };
   const closeQaDrawer   = () => { setQaSceneId(null); setQaLoreKey(null); setQaLocId(null); setQaStyleRef(null); setQaType(null); setQaNote(''); };
   const showQaDrawer = qaSceneId !== null || qaLoreKey !== null || qaLocId !== null || qaStyleRef !== null;
 
   return (
     <div className="lore-phase bg-background-panel">
+      <PhaseHeader
+        title="Lore Editor"
+        emoji="🌍"
+        badge="Phase 0"
+        description="Establishes the universe lore, key factions, global settings, visual style, and initial parameters. This is the foundation that all downstream phases build upon."
+        inputs={[]}
+        outputs={['data/lore.json', 'data/geography.json', 'data/visual_style.json']}
+        accentColor="#8b5cf6"
+        nextStep={{ label: 'Build personality signatures in Scenario: Foundations' }}
+      />
       {/* Sub-tab bar */}
       <div className="lore-subtab-bar bg-background-panel border-b border-border shadow-sm">
         {([
           { id: 'world',        label: '🌍 World' },
           { id: 'visual-style', label: '🎨 Visual Style' },
           { id: 'geography',    label: '🗺️ Geography' },
-          { id: 'scenario',     label: '🎬 Scenario' },
         ] as { id: SubTab; label: string }[]).map(tab => (
           <button
             key={tab.id}
@@ -151,7 +159,6 @@ const LorePhase: React.FC = () => {
           {subTab === 'world'        && <WorldTab lore={lore} openLoreFlag={openLoreFlag} onSaveLoreValue={saveLoreValue} onSaveRules={saveWorldRules} />}
           {subTab === 'visual-style' && <VisualStyleTab lore={lore} openLoreFlag={openLoreFlag} onSavePalette={saveCanonicalPalette} onSaveRules={saveVisualRules} onSaveVisualStyle={saveVisualStyle} onSaveMoodBoard={saveMoodBoard} openFlag={openFlag} />}
           {subTab === 'geography'    && <GeographyTab geography={geography} scenario={scenario} flaggedKeys={flaggedKeys} openFlag={openFlag} openLocFlag={openLocFlag} onSaveDescription={saveDescription} onSaveGeography={saveGeography} />}
-          {subTab === 'scenario'     && <ScenarioTab scenario={scenario} openSceneFlag={openSceneFlag} />}
         </div>
 
         {/* Generic Flag Drawer (Palette/Shot/Lighting) */}

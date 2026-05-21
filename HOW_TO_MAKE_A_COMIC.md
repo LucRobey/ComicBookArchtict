@@ -10,7 +10,9 @@
 ```
 [Pre-Phase]  Project Initialization   → pipelines/ customized for your project
       ↓
-[Phase 0]    Pre-Production           → data/lore.json, data/scenario.json
+[Phase 0]    World Building           → data/lore.json
+      ↓
+[Phase 0.2]  Scenario                 → data/scenario_*.json, data/personality_signature.json
       ↓
 [Phase 1]  Character Intros         → data/intro_pages.json
       ↓
@@ -93,8 +95,8 @@ Every `[ACTION REQUIRED]` placeholder in every `pipelines/` file has been replac
 ## 📖 Phase 0: Pre-Production
 
 **App Tab:** 🌍 Lore & Story  
-**Pipeline files:** `pipelines/01_style_building.md`, `02_character_distillation.md`, `03_scenario_development.md`  
-**Outputs:** `data/lore.json`, `data/scenario.json`
+**Pipeline files:** `pipelines/01_style_building.md`, `02_character_distillation.md`  
+**Outputs:** `data/lore.json`
 
 > ⚠️ **THIS PHASE IS A CONVERSATION.** No single command — you talk freely with the agent until the world and story feel right.
 
@@ -110,9 +112,7 @@ Go back and forth until you're happy. When ready:
 
 ### What the agent does
 
-Builds two files from your conversation:
-- `data/lore.json` — world type, tone, genre, hard rules, visual style, character sheets
-- `data/scenario.json` — full scene list (15–25 scenes) with locations, characters, emotional beats, and anecdotes
+Builds `data/lore.json` — world type, tone, genre, hard rules, visual style, character sheets.
 
 ### In the app
 
@@ -122,7 +122,39 @@ Then say: **"Apply my modifications."**
 
 ### Done when
 
-`data/lore.json` and `data/scenario.json` exist, are approved, and all scenes feel right.
+`data/lore.json` exists, is approved, and all world rules feel right.
+
+---
+
+## 📝 Phase 0.2: Scenario Development
+
+**App Tab:** 📝 Scenario  
+**Pipeline files:** `pipelines/03_scenario_development.md`  
+**Outputs:** `data/scenario_inputs.json`, `data/personality_signature.json`, `data/scenario_synopsis.json`, `data/scenario_chapters.json`, `data/scenario_scenes.json`
+
+> ⚠️ **THIS PHASE IS A STEP-BY-STEP PROCESS.** You proceed through the tabs in the app (Inputs → Signatures → Synopsis → Chapters → Scenes), triggering the agent generation at each step.
+
+### What you say
+
+Start with the Inputs tab in the app, write your logline, themes, and anecdotes. Then ask the agent:
+
+> *"Generate the personality signatures based on my inputs."*
+
+Continue this process for each tab, guiding the agent until the final scene-by-scene script breakdown is generated.
+
+### What the agent does
+
+Builds a decoupled set of JSON files that structurally defines your entire narrative arc and scene list.
+
+### In the app
+
+Open the **Scenario** tab and review each sub-tab. Use 🚩 to flag anything that feels wrong. QA reports go to `qa/scenario/`.
+
+Then say: **"Apply my modifications."**
+
+### Done when
+
+All five scenario files exist, are approved, and all scenes feel right.
 
 > ⚠️ **After approval:** Check that `pipelines/pacing_instructions.md` scene-type weights match your actual scenes.
 
@@ -175,12 +207,12 @@ QA reports go to: `qa/characters/`. Then say: **"Apply my modifications."**
 
 **App Tab:** 📋 Pacing  
 **Pipeline file:** `pipelines/pacing_instructions.md`  
-**Input:** `data/scenario.json`  
+**Input:** `data/scenario_scenes.json`  
 **Output:** `data/pages.json`
 
 ### What you say
 
-> *"Execute Phase 1.5. Read `data/scenario.json` and `pipelines/pacing_instructions.md`. Generate `data/pages.json`."*
+> *"Execute Phase 1.5. Read `data/scenario_scenes.json` and `pipelines/pacing_instructions.md`. Generate `data/pages.json`."*
 
 ### What the agent does
 
@@ -376,7 +408,8 @@ If a speech bubble text needs a real rewrite, go back to the **Script** tab → 
 | You want to… | Do it in… |
 |---|---|
 | Define world rules & tone | Phase 0 chat → `data/lore.json` |
-| Add/remove a scene | Phase 0 chat → `data/scenario.json` |
+| Define the story arc | Phase 0.2 chat → `data/scenario_*.json` |
+| Add/remove a scene | Phase 0.2 chat → `data/scenario_scenes.json` |
 | Add or merge a page | 📋 Pacing tab → 🚩 Flag |
 | Fix a character's intro | 🎭 Characters tab → 🚩 Flag |
 | Change a panel's camera angle | 📐 Panel Structure tab → framing dropdown |
@@ -411,7 +444,11 @@ architecture 3.0/
 │
 ├── data/                      ← ALL generated JSON files
 │   ├── lore.json
-│   ├── scenario.json
+│   ├── scenario_inputs.json
+│   ├── personality_signature.json
+│   ├── scenario_synopsis.json
+│   ├── scenario_chapters.json
+│   ├── scenario_scenes.json
 │   ├── pages.json
 │   ├── intro_pages.json
 │   ├── panels.json

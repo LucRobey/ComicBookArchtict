@@ -33,7 +33,7 @@ The output is not a description of the original photos. It is a specification fo
 Before running, confirm all of the following exist:
 
 - `global_characters/[Name]/originals/` — at least one reference photo or sketch of the real person/source character
-- `global_characters/[Name]/presentation.md` — biography (personality, history, age)
+- `global_characters/[Name]/presentation.json` — biography (personality, history, age)
 - `global_characters/[Name]/general_mood.md` — current emotional headspace
 - `data/lore.json` — the project's world (setting, period, species, themes)
 - `pipelines/01_style_building.md` — the project's target art style

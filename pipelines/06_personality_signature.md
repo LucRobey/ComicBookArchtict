@@ -1,19 +1,19 @@
 # Pipeline 06 — Personality Signature
 
 **Phase:** 0.5-B  
-**Output target:** `data/characters/[Name]/personality_signature.md` + `data/characters/[Name]/examples/emotional_states/`  
+**Output target:** `data/characters/[Name]/personality_signature.json` (and `.md` for human reading) + `data/characters/[Name]/examples/emotional_states/`  
 **Triggered by:** User request to define a character's personality in the context of this project's specific lore and scenario
 
 ---
 
 ## Important Distinction
 
-`personality_signature.md` is **project-specific**. The same person behaves differently depending on:
+`personality_signature.json` (and `.md`) is **project-specific**. The same person behaves differently depending on:
 - Who they're with (the current cast)
 - What they're going through (the current story's lore and scenario)
 - What they want vs. what they're able to show
 
-The canonical biography (`global_characters/[Name]/presentation.md`) is the source of *who they are*. This pipeline generates *who they are in this specific story*.
+The canonical biography (`global_characters/[Name]/presentation.json`) is the source of *who they are*. This pipeline generates *who they are in this specific story*.
 
 ---
 
@@ -21,11 +21,11 @@ The canonical biography (`global_characters/[Name]/presentation.md`) is the sour
 
 Before running, confirm all of the following exist:
 
-- `global_characters/[Name]/presentation.md` — biography
+- `global_characters/[Name]/presentation.json` — biography
 - `global_characters/[Name]/general_mood.md` — current life context
 - `global_characters/[Name]/canonical_visual.md` — visual baseline (for emotional state image prompts)
 - `data/lore.json` — the story's lore (cast, location, period, themes)
-- `data/scenario.json` — the scene list (to understand what situations this character faces)
+- `data/scenario_scenes.json` — the scene list (to understand what situations this character faces)
 
 ---
 
@@ -42,7 +42,27 @@ Read all inputs. Then answer these questions internally:
 
 ---
 
-## Step 2 — Write `personality_signature.md`
+## Step 2 — Write `personality_signature.json` & `personality_signature.md`
+
+Generate the structured JSON for the app UI:
+```json
+{
+  "age": "...",
+  "gender": "...",
+  "role": "...",
+  "relationships": {
+    "Character B": "...",
+    "Character C": "..."
+  },
+  "general_personality": "...",
+  "loves": ["...", "..."],
+  "hates": ["...", "..."],
+  "verbal_habits": "...",
+  "writing_notes": "..."
+}
+```
+
+Then generate the human-readable markdown (`personality_signature.md`):
 
 ```markdown
 # [Name] — Personality Signature
@@ -123,7 +143,7 @@ Save generated images to: `data/characters/[Name]/examples/emotional_states/`
 ## Step 4 — Output Summary
 
 ```
-✓ personality_signature.md written for [Name]
+✓ personality_signature.json and .md written for [Name]
 ✓ Emotional state prompts generated: joyful, content, anxious, sad, angry, ashamed, performing, numb, tender, determined, overwhelmed, resigned
 ✓ Images saved to data/characters/[Name]/examples/emotional_states/
 ```
@@ -132,7 +152,7 @@ Save generated images to: `data/characters/[Name]/examples/emotional_states/`
 
 ## Flag Handling
 
-If `personality_signature.md` is flagged with `[REWRITE_PERSONALITY]`:
+If `personality_signature.json` or `.md` is flagged with `[REWRITE_PERSONALITY]`:
 1. Read the flag note for the specific concern
 2. Update the relevant section only
 3. If the rewrite changes verbal or physical signature, regenerate all 12 emotional state images

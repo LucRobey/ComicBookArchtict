@@ -1,0 +1,60 @@
+{
+  "style_metadata": {
+    "name": "Silver Age Vintage Comic",
+    "description": "Art direction details for the project's visual identity."
+  },
+  "dna": {
+    "description": "Graphic novel realism with expressive linework. Muted palette punctuated by color accents on emotional beats."
+  },
+  "palette": [
+    {
+      "hex": "#3333c7",
+      "label": "Deep Charcoal",
+      "role": "Dominant tone — line, shadow"
+    },
+    {
+      "hex": "#9B9B9B",
+      "label": "Warm Grey",
+      "role": "Mid-tone — environment"
+    },
+    {
+      "hex": "#705e3e",
+      "label": "Off-White",
+      "role": "Paper fill — faces, empty space"
+    },
+    {
+      "hex": "#3B82F6",
+      "label": "Accent — emotional beats"
+    },
+    {
+      "hex": "#D97706",
+      "label": "Amber Warm",
+      "role": "Accent — night / tension"
+    }
+  ],
+  "rules": [
+    "Clean ink line — no sketch texture or pencil grain",
+    "Minimal hatching — shadow is flat fill, not crosshatch",
+    "Expressive line weight — thinner for environment, heavier for figures",
+    "No gradients — solid fills only, except for the emotional accent color",
+    "Silence panels use negative space as the subject"
+  ],
+  "mood_board": [
+    {
+      "id": "style_ref_1",
+      "prompt": "Open-plan office, morning — the space where nothing is private.",
+      "image": "data/images/style_reference/style_ref_1.png"
+    },
+    {
+      "id": "style_ref_2",
+      "prompt": "The café at night — coffee orders as emotional proxies.",
+      "image": "data/images/style_reference/style_ref_2.png"
+    }
+  ],
+  "image_generation": {
+    "positive_baseline": "1960s Silver Age comic book art, classic comic aesthetic, limited 4-color CMYK palette, flat colors, visible Ben-Day halftone dots, newsprint paper texture, heavy black ink spotting, crisp outlines, traditional hatching and feathering for shadows, slight color misregistration, off-register colors, faded yellowed paper edges. No speech bubbles, no text, no caption boxes.",
+    "negative_prompt": "speech bubbles, text, caption boxes, words, letters, modern digital gradients, 3D rendering, realistic lighting, hyper-detailed backgrounds, smooth digital shading",
+    "interior_page_framing": "rigid panel grid layout, linear visual storytelling, abstract solid color background",
+    "cover_page_framing": "dramatic foreshortening, central action pose, distressed faux-vintage paper texture, bold typography"
+  }
+}

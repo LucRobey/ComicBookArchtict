@@ -1,0 +1,41 @@
+{
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_number": 1,
+          "scene_id": 1,
+          "shot_id": "",
+          "layout_intent": {
+            "panel_size_weight": "splash_page | wide_established | standard_square | narrow_focus",
+            "aspect_ratio_target": "16:9 | 1:1 | 4:3 | 21:9"
+          },
+          "cinematic_framing": {
+            "shot_type": "Wide Establishing Shot | Medium shot | Medium two-shot | Close-up | Extreme close-up | Over-the-shoulder | Dynamic low angle | Bird's eye view | POV shot",
+            "camera_angle": "Eye-Level | Low Angle looking up | High Angle looking down | Dutch Angle",
+            "camera_lens_feel": ""
+          },
+          "keyframe_action": "",
+          "character_choreography": [
+            {
+              "character_id": "",
+              "expression_override": "",
+              "camera_distance_blocking": "Foreground prominent | Midground center | Background silhouette | Off-screen / Out of frame"
+            }
+          ],
+          "tags": [],
+          "dialogue_and_lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "character_id": "",
+                "text": ""
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

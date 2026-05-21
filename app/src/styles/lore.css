@@ -308,7 +308,7 @@
 .lore-rule-index {
   font-size: 0.7rem;
   font-weight: 700;
-  font-family: monospace;
+  font-family: var(--font-mono);
   color: var(--accent-primary, #3b82f6);
   letter-spacing: 0.04em;
   flex-shrink: 0;
@@ -473,7 +473,7 @@
   gap: 2px;
 }
 .lore-swatch-label { font-size: 0.82rem; font-weight: 700; color: var(--text-main); }
-.lore-swatch-hex   { font-size: 0.72rem; font-family: monospace; color: var(--text-muted); }
+.lore-swatch-hex   { font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-muted); }
 .lore-swatch-role  { font-size: 0.7rem;  color: var(--text-muted); font-style: italic; }
 
 /* ══════════════════════════════════════════════════════
@@ -484,7 +484,7 @@
 
 .lore-location-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 10px;
 }
 
@@ -599,7 +599,7 @@
   background: rgba(59,130,246,0.12);
   color: var(--accent-primary, #3b82f6);
   border: 1px solid rgba(59,130,246,0.25);
-  font-family: monospace;
+  font-family: var(--font-mono);
 }
 
 .lore-location-desc {
@@ -768,7 +768,7 @@
 
 .lore-loc-shots-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 12px;
 }
 
@@ -861,7 +861,7 @@
 }
 
 .scene-meta { display: flex; align-items: center; gap: 10px; }
-.scene-id   { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); font-family: monospace; }
+.scene-id   { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); font-family: var(--font-mono); }
 .scene-title { font-size: 1rem; font-weight: 700; color: var(--text-main); }
 
 .scene-actions { display: flex; gap: 6px; }
@@ -1738,7 +1738,7 @@
   background: rgba(0,0,0,0.85);
   color: #fff;
   font-size: 0.6rem;
-  font-family: monospace;
+  font-family: var(--font-mono);
   padding: 2px 5px;
   border-radius: 4px;
   white-space: nowrap;
@@ -1895,7 +1895,7 @@
 /* Hex value */
 .lore-canon-swatch-hex {
   font-size: 0.6rem;
-  font-family: monospace;
+  font-family: var(--font-mono);
   color: var(--text-muted);
   letter-spacing: 0.04em;
 }

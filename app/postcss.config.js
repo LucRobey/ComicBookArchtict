@@ -1,6 +1,6 @@
 export default {
   plugins: {
     '@tailwindcss/postcss': {},
-    autoprefixer: {},
+    // autoprefixer removed: Tailwind v4 uses Lightning CSS internally for vendor prefixing
   },
 }

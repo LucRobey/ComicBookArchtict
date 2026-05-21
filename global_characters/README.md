@@ -8,7 +8,7 @@ This folder is the **canonical, permanent character library**. It lives outside 
 global_characters/
   [Name]/
     originals/                     ← User provides: photos, reference images
-    presentation.md                ← User provides: full biography
+    presentation.json              ← User provides/edits: full biography
     general_mood.md                ← User provides: life context for this trip / story period
     canonical_visual.md            ← GENERATED (Phase 0.5-A) — agent writes based on originals + bio
     examples/
@@ -30,6 +30,6 @@ global_characters/
 ## How to add a new character
 
 1. Create `global_characters/[Name]/originals/` and drop in your reference images.
-2. Write `global_characters/[Name]/presentation.md` — full biography.
+2. Write `global_characters/[Name]/presentation.json` — full biography.
 3. Write `global_characters/[Name]/general_mood.md` — current life context.
 4. Run the Phase 0.5-A agent pipeline (`05_visual_signature.md`) to generate `canonical_visual.md` and turnaround images.

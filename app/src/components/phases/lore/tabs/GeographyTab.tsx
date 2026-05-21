@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { GeographyData, ScenarioData, Location, Variant, Shot } from '../types';
+import type { GeographyData, ScenarioData, Location, Variant, Shot, Scene } from '../types';
 import { InlineEditableText } from '../components/InlineEditableText';
 import { AddLocationModal } from '../components/AddLocationModal';
 import { RequestViewModal } from '../components/RequestViewModal';
@@ -367,12 +367,12 @@ export const GeographyTab: React.FC<GeographyTabProps> = ({ geography, scenario,
           )}
 
           {scenario?.scenes && (() => {
-            const matchedScenes = scenario.scenes.filter(s => displaySceneIds.has(s.scene_id));
+            const matchedScenes = scenario.scenes.filter((s: Scene) => displaySceneIds.has(s.scene_id));
             return matchedScenes.length > 0 ? (
               <div className="lore-loc-detail-row lore-loc-scenes-row">
                 <span className="lore-loc-detail-label">🎬 Scenes</span>
                 <div className="lore-geo-scene-list">
-                  {matchedScenes.map(scene => (
+                  {matchedScenes.map((scene: Scene) => (
                     <div key={scene.scene_id} className="lore-geo-scene-card">
                       <div className="lore-geo-scene-meta">
                         <span className="scene-id">Scene {scene.scene_id}</span>

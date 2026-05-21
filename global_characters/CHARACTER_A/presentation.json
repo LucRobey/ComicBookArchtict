@@ -1,0 +1,57 @@
+{
+  "name": "CHARACTER_A",
+  "last_updated": "2026-05-19",
+  "identity": {
+    "full_name": "Adèle  Moreau - EDITED",
+    "known_as": "Adèle — sometimes 'Del' by close friends",
+    "age": "29",
+    "nationality_origin": "French — born in Lyon, raised between Lyon and a small village in Ardèche",
+    "languages": "French (native), English (fluent, slight accent), Italian (conversational)",
+    "profession_role": "Independent documentary photographer — freelance, mostly editorial work for European magazines",
+    "current_life_chapter": "Just left a long-term relationship and moved to a smaller apartment in the 11th arrondissement. Rebuilding from scratch, quietly."
+  },
+  "physical_reality": {
+    "face": "Oval face with a strong jaw that softens at the chin. Deep-set hazel eyes with visible flecks of amber in sunlight — her eyes look dark indoors. Straight nose, slightly wide at the bridge. Full lower lip, thinner upper lip. Her resting face looks like she's about to say something but decided against it. Faint smile lines already forming at 29.",
+    "hair": "Dark brown, almost black. Naturally wavy, medium length — usually falls just past her shoulders. Thick and slightly unruly. She pushes it behind her ears constantly. It has a mind of its own in humidity.",
+    "build": "5'7\", lean but not thin. Looks lighter than she is — she carries muscle in her legs and shoulders from years of walking with heavy camera gear. Moves with purpose, rarely fidgets.",
+    "hands": "Long fingers, always slightly dry. Nails cut very short — practical. A thin scar on her right index finger from a darkroom accident at 19. She talks with her hands more than she realises.",
+    "distinctive_features": "A small constellation of three moles on her left collarbone. A barely-visible scar through her right eyebrow from a childhood fall. Her ears are slightly asymmetrical — left one sits a fraction higher.",
+    "how_they_age": "Looks her age, maybe a year older when tired. Fatigue shows under her eyes first — they hollow out. When she's rested and happy, people guess younger. She'll age well but visibly — not the type who 'doesn't change.'",
+    "what_photos_dont_capture": "The speed of her expressions. Her face moves fast — a thought crosses it and is gone in half a second. In photos she looks composed; in person she's much more animated. Also: her voice is lower than expected, and she laughs louder than you'd guess from looking at her."
+  },
+  "backstory": {
+    "origin": "Middle-class family. Father was an electrician, mother a school librarian. One older brother (Thomas, 33). Grew up splitting time between the city flat in Lyon and her grandparents' stone farmhouse in Ardèche. Quiet childhood — she was the observant kid, not the loud one. Books, wandering, drawing maps of places she hadn't been.",
+    "formative_events": "1) At 14, her grandfather gave her his 1970s Pentax camera. She spent the next summer photographing everything in the village — it was the first time she felt she had something. 2) At 20, she interned at a war photography agency in Paris. Saw images she couldn't unsee. Left after 6 months. It clarified what she didn't want to photograph, which was more important than knowing what she did. 3) At 25, her first solo exhibition in a Lyon gallery — small, but 40 people came. Her mother cried. It was the first time her family understood what she was trying to do.",
+    "turning_points": "The breakup three months ago. Five years with Marc. Not dramatic — just a slow realisation that she had been performing contentment. She initiated the split. It was the bravest and loneliest thing she'd done.",
+    "current_situation": "Freelancing steadily but not comfortably. Enough work to pay rent but not enough to feel secure. Living alone for the first time since university. One close friend in Paris (Nadia), family in Lyon she calls weekly. Working on a personal project about abandoned industrial buildings in northern France — it's the first work that feels like hers in years."
+  },
+  "psychology": {
+    "core_driver": "To see things as they really are — not as they're presented. She wants truth, but specifically the quiet, overlooked kind. Not scandal. The truth of how light falls in an empty room.",
+    "core_fear": "That she's ordinary. That the things she notices, everyone notices — she just takes longer to say it. That her 'eye' is actually just slowness dressed up as depth.",
+    "self_image": "She sees herself as someone who chose integrity over comfort. Independent, clear-eyed, a bit solitary by nature. She's proud of not compromising.",
+    "the_gap": "She mistakes isolation for independence. She pushes people away pre-emptively and calls it 'not needing much.' She's lonelier than she admits, and her 'standards' are partly a defence against being known.",
+    "default_coping_mechanism": "Goes quiet. Retreats into work. When things hurt, she picks up her camera and disappears for hours. She processes through looking at other things — never by talking about the thing itself.",
+    "what_theyre_proud_of": "Walking away from the war photography world. It would have been the 'impressive' career — she chose something smaller and more honest. She believes that was a moral choice, not a career choice.",
+    "what_theyre_ashamed_of": "How long she stayed with Marc knowing it was wrong. She hates that she was a coward about it. Five years of performing a life she didn't believe in."
+  },
+  "voice": {
+    "vocabulary_register": "Educated but not showy. She defaults to precise, simple words. Occasionally drops into something more poetic when she's relaxed or describing visual things. Never uses jargon to impress.",
+    "sentence_length": "Short to medium. She edits herself in real time — starts a longer thought, then cuts it. Leaves things half-said on purpose. Comfortable with silence between sentences.",
+    "comfortable_topics": "Light, colour, places she's been, the mechanics of seeing. Other people's work — she's generous about artists she admires. Food, especially regional French cooking. She can talk about bread for twenty minutes.",
+    "avoids_saying": "Anything about her emotional state. She'll describe what happened but not how she felt about it. Also avoids the word 'love' — uses 'care about' instead. Never says 'I need you.'",
+    "verbal_habit": "Trails off with 'enfin...' (French verbal shrug — roughly 'anyway' / 'well'). Does it in English too, switching to French for that one word. Also: asks 'What do you see?' instead of 'What do you think?' — it reveals her photographer's brain."
+  },
+  "agent_notes": {
+    "must_know": "She is not brooding or melancholy. She's quietly intense but also funny — her humour is dry, observational, and catches people off guard. Don't flatten her into a 'sad artist' cliché.",
+    "common_mistake": "Writing her as cold or aloof. She's reserved, not cold. The difference is crucial — there's enormous warmth underneath the composure, it just takes time to reach it. If she seems ice-cold in your draft, you've lost her.",
+    "what_makes_them_specific": "She processes the world visually before emotionally. She'll notice the colour of the light in the room before she registers that she's upset. Her emotional responses are real but arrive on a delay — she feels things twenty minutes after they happen."
+  },
+  "network": [
+    {
+      "target_character": "CHARACTER_B",
+      "relationship_type": "family",
+      "relationship_subtype": "brother",
+      "dynamic": "Rivalry born of mutual respect. She thinks he's reckless but secretly envies his freedom."
+    }
+  ]
+}

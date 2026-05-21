@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type PhaseId = 'lore' | 'char-hub' | 'pacing' | 'characters' | 'panels' | 'script' | 'assembly';
+export type PhaseId = 'pipeline-map' | 'lore' | 'scenario' | 'char-hub' | 'intro' | 'pacing' | 'panels' | 'script' | 'assembly';
 
 interface Phase {
   id: PhaseId;
@@ -11,9 +11,11 @@ interface Phase {
 }
 
 const PHASES: Phase[] = [
-  { id: 'lore',       label: 'Lore & Story',    emoji: '🌍', accentColor: '#8b5cf6', badge: 'Phase 0'   },
-  { id: 'char-hub',   label: 'Characters Hub',  emoji: '👤', accentColor: '#6366f1', badge: 'Phase 0.5' },
-  { id: 'characters', label: 'Characters',       emoji: '🎭', accentColor: '#f59e0b', badge: 'Phase 1'   },
+  { id: 'pipeline-map', label: 'Pipeline Map',     emoji: '🗺️', accentColor: '#10b981', badge: 'Overview' },
+  { id: 'lore',         label: 'Lore',             emoji: '🌍', accentColor: '#8b5cf6', badge: 'Phase 0'   },
+  { id: 'scenario',   label: 'Scenario',         emoji: '📝', accentColor: '#ec4899', badge: 'Phase 0.2' },
+  { id: 'char-hub',   label: 'Characters Hub',   emoji: '👤', accentColor: '#6366f1', badge: 'Phase 0.5' },
+  { id: 'intro',      label: "Characters'intro", emoji: '🎭', accentColor: '#f59e0b', badge: 'Phase 1'   },
   { id: 'pacing',     label: 'Pacing',           emoji: '📋', accentColor: '#06b6d4', badge: 'Phase 1.5' },
   { id: 'panels',     label: 'Panel Structure',  emoji: '📐', accentColor: '#10b981', badge: 'Phase 2'   },
   { id: 'script',     label: 'Script',           emoji: '✍️',  accentColor: '#f97316', badge: 'Phase 3'   },

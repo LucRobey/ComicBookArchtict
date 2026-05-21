@@ -1,6 +1,13 @@
 /* ── Panels Phase Layout ──────────────────────────────── */
 .panels-phase {
   display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.panels-body {
+  display: flex;
   flex: 1;
   overflow: hidden;
 }

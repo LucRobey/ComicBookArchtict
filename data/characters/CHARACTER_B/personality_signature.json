@@ -1,0 +1,30 @@
+{
+  "signatures": {
+    "CHARACTER_B": {
+      "age": "31",
+      "gender": "Male",
+      "role": "The Maverick / Field Operative",
+      "network": [
+        {
+          "target_character": "CHARACTER_A",
+          "relationship_type": "family",
+          "relationship_subtype": "sister",
+          "dynamic": "Finds her overly rigid but deeply respects her intellect. Constantly tries to push her out of her comfort zone."
+        }
+      ],
+      "general_personality": "Charming, impulsive, and highly intuitive. He operates entirely on instinct and thrives in chaotic situations. He uses humor as a defense mechanism to hide deeper insecurities.",
+      "loves": [
+        "Adrenaline",
+        "Breaking the rules",
+        "Vintage cars"
+      ],
+      "hates": [
+        "Waiting",
+        "Authoritative figures",
+        "Strict schedules"
+      ],
+      "verbal_habits": "Speaks quickly, uses a lot of slang, and frequently interrupts himself to change the subject. Rarely gives a straight answer.",
+      "writing_notes": "His dialogue should feel energetic and slightly scattered. He never admits when he's scared; he just makes a joke instead."
+    }
+  }
+}

@@ -28,7 +28,9 @@ export function useJsonFile<T>(relativePath: string | null): UseJsonFileResult<T
     setLoading(true);
     setError(null);
 
-    fetch(`/api/load?path=${encodeURIComponent(relativePath)}`)
+    fetch(`/api/load?path=${encodeURIComponent(relativePath)}&t=${Date.now()}`, {
+      cache: 'no-store'
+    })
       .then(res => res.json())
       .then(json => {
         if (cancelled) return;

@@ -8,7 +8,7 @@ export type PacingQaType =
   | 'CHANGE_TYPE'
   | 'ADD_PAGE_AFTER';
 
-const PAGE_TYPES = ['cover', 'character_intro', 'interior', 'chapter_break', 'splash'];
+const PAGE_TYPES = ['cover', 'character_intro', 'story', 'chapter_break', 'splash'];
 
 const QA_TYPES: { id: PacingQaType; label: string; desc: string }[] = [
   { id: 'REWRITE_FOCUS',  label: 'Rewrite Focus',    desc: 'Change the description of this page' },

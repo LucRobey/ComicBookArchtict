@@ -1,0 +1,380 @@
+{
+  "scenes": [
+    {
+      "scene_id": 1,
+      "chapter_id": 1,
+      "chapter_title": "The Butter Knife and the Flamingo",
+      "title": "The Defiant Toaster",
+      "location_id": "loc_adele_kitchen",
+      "variant_id": "var_adele_kitchen_night",
+      "location_master": {
+        "name": "Adèle's Kitchen",
+        "visual_style_modifiers": "small cluttered third-floor apartment kitchen, cozy and worn, drafty window, retro appliances, french style details"
+      },
+      "scene_world_state": {
+        "time_of_day": "Tuesday Evening / Night",
+        "environmental_lighting": "Dim amber tones, soft overhead lamp casting high-contrast shadows (chiaroscuro), warm table glow, drafty dark window pane",
+        "atmospheric_effects": "Subtle kitchen steam, cold draft blowing from the window"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        }
+      ],
+      "emotional_beat": "Quiet Focus",
+      "camera_shot": "Medium-close overhead shot of Adèle's hands, focused on the metal butter knife unscrewing a screw on the side of a chrome toaster.",
+      "core_action": "Adèle carefully unscrewing the side of a toaster with a butter knife on the kitchen table.",
+      "summary": "Adèle (CHARACTER_A) spends a quiet Tuesday evening in her drafty third-floor apartment meticulously trying to disassemble and repair her broken toaster using a butter knife. She relies on her patience and logic, seeking quiet order in a manual task.",
+      "anecdotes": ["Has had a history of fixing things around the house with whatever cutlery is at hand."]
+    },
+    {
+      "scene_id": 2,
+      "chapter_id": 1,
+      "chapter_title": "The Butter Knife and the Flamingo",
+      "title": "A Neon Knock",
+      "location_id": "loc_adele_doorstep",
+      "variant_id": "var_adele_doorstep_night",
+      "location_master": {
+        "name": "Adèle's Doorstep",
+        "visual_style_modifiers": "narrow apartment hallway corridor, peeling paint on walls, generic brown wooden front door, small door number plaque"
+      },
+      "scene_world_state": {
+        "time_of_day": "Tuesday Night",
+        "environmental_lighting": "Harsh yellow overhead corridor light, casting long vertical shadows down the hallway",
+        "atmospheric_effects": "Cool hallway air draft"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        },
+        {
+          "character_id": "CHARACTER_B",
+          "costume_and_appearance_variant": "Thomas in a slightly crumpled corduroy jacket, green beanie, and dark jeans"
+        }
+      ],
+      "emotional_beat": "Sudden Disruption",
+      "camera_shot": "Wide shot from inside the hallway looking toward the open front door, capturing the scale of the neon-green flamingo next to Thomas.",
+      "core_action": "Thomas standing at the doorway leaning casually against the doorframe, holding a giant dyed green flamingo.",
+      "summary": "A loud, energetic knock shatters the apartment's quiet. Adèle opens the door to find her brother Thomas (CHARACTER_B) standing there. He is holding a giant, neon-green flamingo and acting completely casual about it.",
+      "anecdotes": ["Thomas has a reputation for showing up unannounced with bizarre items."]
+    },
+    {
+      "scene_id": 3,
+      "chapter_id": 1,
+      "chapter_title": "The Butter Knife and the Flamingo",
+      "title": "The Tub Negotiation",
+      "location_id": "loc_adele_bathroom",
+      "variant_id": "var_adele_bathroom_night",
+      "location_master": {
+        "name": "Adèle's Bathroom",
+        "visual_style_modifiers": "small vintage bathroom, retro checkered tile floor, white porcelain bathtub, chrome pipes, frosted window"
+      },
+      "scene_world_state": {
+        "time_of_day": "Tuesday Night",
+        "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles",
+        "atmospheric_effects": "Slight damp/cool air, quiet porcelain stillness"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        },
+        {
+          "character_id": "CHARACTER_B",
+          "costume_and_appearance_variant": "Thomas in a slightly crumpled corduroy jacket, green beanie, and dark jeans"
+        }
+      ],
+      "emotional_beat": "Reluctant Surrender",
+      "camera_shot": "Medium over-the-shoulder shot from Adèle's perspective, looking at Thomas as he points to the white bathroom tub.",
+      "core_action": "Thomas pointing enthusiastically to the empty bathtub, pleading with Adèle to let the bird stay.",
+      "summary": "Thomas claims his plumbing is broken and pleads to keep the flamingo in her tub. Too tired to argue with his fast-paced banter and jokes, Adèle points him to the bathroom and returns to her kitchen.",
+      "anecdotes": ["Adèle defaults to quiet retreat when dealing with Thomas's exhausting energy."]
+    },
+    {
+      "scene_id": 4,
+      "chapter_id": 2,
+      "chapter_title": "The Porcelain Stage",
+      "title": "Corn and Clicking",
+      "location_id": "loc_adele_bathroom",
+      "variant_id": "var_adele_bathroom_night",
+      "location_master": {
+        "name": "Adèle's Bathroom",
+        "visual_style_modifiers": "small vintage bathroom, retro checkered tile floor, white porcelain bathtub, chrome pipes, frosted window"
+      },
+      "scene_world_state": {
+        "time_of_day": "Tuesday Night",
+        "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles",
+        "atmospheric_effects": "Slight damp/cool air, quiet porcelain stillness"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        },
+        {
+          "character_id": "CHARACTER_B",
+          "costume_and_appearance_variant": "Thomas in a slightly crumpled corduroy jacket, green beanie, and dark jeans"
+        }
+      ],
+      "emotional_beat": "Curiosity & Suspicions",
+      "camera_shot": "Low angle close-up shot of dry corn kernels in a palm, with a blurry green bird beak in the foreground.",
+      "core_action": "Thomas sitting on the edge of the tub, feeding dried corn to the neon-green flamingo.",
+      "summary": "Ten minutes later, Adèle hears clicking sounds from the bathroom and goes to investigate. She finds Thomas sitting next to the tub feeding dried corn to the bird.",
+      "anecdotes": ["Thomas has always been bad at hiding his secrets for more than ten minutes."]
+    },
+    {
+      "scene_id": 5,
+      "chapter_id": 2,
+      "chapter_title": "The Porcelain Stage",
+      "title": "Real, Live, and Neon-Green",
+      "location_id": "loc_adele_bathroom",
+      "variant_id": "var_adele_bathroom_night",
+      "location_master": {
+        "name": "Adèle's Bathroom",
+        "visual_style_modifiers": "small vintage bathroom, retro checkered tile floor, white porcelain bathtub, chrome pipes, frosted window"
+      },
+      "scene_world_state": {
+        "time_of_day": "Tuesday Night",
+        "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles",
+        "atmospheric_effects": "Slight damp/cool air, quiet porcelain stillness"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        },
+        {
+          "character_id": "CHARACTER_B",
+          "costume_and_appearance_variant": "Thomas in a slightly crumpled corduroy jacket, green beanie, and dark jeans"
+        }
+      ],
+      "emotional_beat": "Shock & Absurdity",
+      "camera_shot": "Medium-wide profile shot capturing Adèle's widening eyes as the flamingo turns its head and blinks.",
+      "core_action": "Adèle staring in disbelief at the flamingo as it makes a soft sound, realizing it is alive.",
+      "summary": "Adèle realizes the bird is alive, not plastic. Thomas admits he rescued it from a bankrupt roadside zoo. Adèle is stunned by the sheer impulsiveness of the act, which mirrors his reckless nature.",
+      "anecdotes": ["Thomas operates entirely on instinct, often rescuing things or animals on a whim."]
+    },
+    {
+      "scene_id": 6,
+      "chapter_id": 2,
+      "chapter_title": "The Porcelain Stage",
+      "title": "The Landlord's 'Parrot'",
+      "location_id": "loc_adele_bathroom",
+      "variant_id": "var_adele_bathroom_night",
+      "location_master": {
+        "name": "Adèle's Bathroom",
+        "visual_style_modifiers": "small vintage bathroom, retro checkered tile floor, white porcelain bathtub, chrome pipes, frosted window"
+      },
+      "scene_world_state": {
+        "time_of_day": "Tuesday Night",
+        "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles",
+        "atmospheric_effects": "Slight damp/cool air, quiet porcelain stillness"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        },
+        {
+          "character_id": "CHARACTER_B",
+          "costume_and_appearance_variant": "Thomas in a slightly crumpled corduroy jacket, green beanie, and dark jeans"
+        }
+      ],
+      "emotional_beat": "Resignation",
+      "camera_shot": "High angle shot looking down at Adèle sitting on the patterned bathmat, laughing with her head tilted back.",
+      "core_action": "Adèle sitting on the floor laughing, while Thomas explains the landlord thinks it's a parrot.",
+      "summary": "Thomas warns her Mrs. Gable must not know, as he told her it was just a large parrot. Surrendering to the absurdity of the situation, Adèle abandons her toaster and sits down on the bathmat.",
+      "anecdotes": ["Mrs. Gable has very poor eyesight but a very strict policy on pets."]
+    },
+    {
+      "scene_id": 7,
+      "chapter_id": 3,
+      "chapter_title": "Ghost Children and Kitchen Shears",
+      "title": "Pizza on the Bathmat",
+      "location_id": "loc_adele_bathroom",
+      "variant_id": "var_adele_bathroom_night",
+      "location_master": {
+        "name": "Adèle's Bathroom",
+        "visual_style_modifiers": "small vintage bathroom, retro checkered tile floor, white porcelain bathtub, chrome pipes, frosted window"
+      },
+      "scene_world_state": {
+        "time_of_day": "Wednesday Late Night / Midnight",
+        "environmental_lighting": "Single warm bulb overhead, casting soft golden ambient glows over the floor",
+        "atmospheric_effects": "Cozy shared room feel, quiet apartment hum"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        },
+        {
+          "character_id": "CHARACTER_B",
+          "costume_and_appearance_variant": "Thomas in a slightly crumpled corduroy jacket, green beanie, and dark jeans"
+        }
+      ],
+      "emotional_beat": "Warm Nostalgia",
+      "camera_shot": "Wide overhead shot of the bathroom floor, showing Adèle and Thomas sitting on opposite sides of a grease-stained pizza box.",
+      "core_action": "Adèle and Thomas sharing slices of cold pizza on the floor next to the bathtub.",
+      "summary": "Sharing cold pizza on the bathroom floor, the siblings look at the green flamingo and feel a sense of camaraderie, recalling their long history of shared disasters and childhood games.",
+      "anecdotes": ["They used to share cold pizza on the floor of their childhood room in Lyon."]
+    },
+    {
+      "scene_id": 8,
+      "chapter_id": 3,
+      "chapter_title": "Ghost Children and Kitchen Shears",
+      "title": "The Haircut Incident",
+      "location_id": "loc_adele_bathroom",
+      "variant_id": "var_adele_bathroom_night",
+      "location_master": {
+        "name": "Adèle's Bathroom",
+        "visual_style_modifiers": "small vintage bathroom, retro checkered tile floor, white porcelain bathtub, chrome pipes, frosted window"
+      },
+      "scene_world_state": {
+        "time_of_day": "Wednesday Late Night",
+        "environmental_lighting": "Single warm bulb overhead, soft yellow illumination reflecting on tiles",
+        "atmospheric_effects": "Cozy shared room feel, quiet apartment hum"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        },
+        {
+          "character_id": "CHARACTER_B",
+          "costume_and_appearance_variant": "Thomas in a slightly crumpled corduroy jacket, green beanie, and dark jeans"
+        }
+      ],
+      "emotional_beat": "Playful Rivalry",
+      "camera_shot": "Medium shot focused on Thomas playfully pointing at Adèle's face, with a pair of kitchen shears lying on the sink counter behind him.",
+      "core_action": "Thomas gesturing dramatically as he complains about the haircut, while Adèle smiles dryly.",
+      "summary": "They joke about the 'Haircut Incident' where Adèle's kitchen shears forced Thomas to wear a beanie for a month. Thomas acts dramatic about it while Adèle points out it was statistically his fault.",
+      "anecdotes": ["The beanie was bright red and he lost it within two weeks anyway."]
+    },
+    {
+      "scene_id": 9,
+      "chapter_id": 3,
+      "chapter_title": "Ghost Children and Kitchen Shears",
+      "title": "The Stairwell Sofa and Haunted Radiator",
+      "location_id": "loc_adele_bathroom",
+      "variant_id": "var_adele_bathroom_night",
+      "location_master": {
+        "name": "Adèle's Bathroom",
+        "visual_style_modifiers": "small vintage bathroom, retro checkered tile floor, white porcelain bathtub, chrome pipes, frosted window"
+      },
+      "scene_world_state": {
+        "time_of_day": "Wednesday Late Night",
+        "environmental_lighting": "Warm, dim orange glow of the radiator reflecting off bathroom tiles",
+        "atmospheric_effects": "Hiss and clank of the old radiator"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        },
+        {
+          "character_id": "CHARACTER_B",
+          "costume_and_appearance_variant": "Thomas in a slightly crumpled corduroy jacket, green beanie, and dark jeans"
+        }
+      ],
+      "emotional_beat": "Shared Memories",
+      "camera_shot": "Extreme close-up of a few copper pennies in a hand, lit by the warm, dim orange glow of a radiator.",
+      "core_action": "Thomas showing the pennies he pocketed from the 'haunted' radiator offerings, smiling mischievously.",
+      "summary": "They reminisce about blocking the stairs with a sofa and Thomas pocketing the offerings left for the fake ghost child near the radiator. They bond over their different ways of reacting to life.",
+      "anecdotes": ["Thomas bought candy with the offering pennies and split it with Adèle."]
+    },
+    {
+      "scene_id": 10,
+      "chapter_id": 4,
+      "chapter_title": "The Beep of Acceptance",
+      "title": "The Microwave Mimic",
+      "location_id": "loc_adele_kitchen",
+      "variant_id": "var_adele_kitchen_night",
+      "location_master": {
+        "name": "Adèle's Kitchen",
+        "visual_style_modifiers": "small cluttered third-floor apartment kitchen, cozy and worn, drafty window, retro appliances, french style details"
+      },
+      "scene_world_state": {
+        "time_of_day": "Wednesday 1:30 AM",
+        "environmental_lighting": "Dim kitchen lights, green digital glow of the microwave timer, dark window",
+        "atmospheric_effects": "Late night stillness"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        },
+        {
+          "character_id": "CHARACTER_B",
+          "costume_and_appearance_variant": "Thomas in a slightly crumpled corduroy jacket, green beanie, and dark jeans"
+        }
+      ],
+      "emotional_beat": "Playful Chaos",
+      "camera_shot": "Medium-close shot of the flamingo's open beak next to the digital glow of the microwave timer, with Thomas holding a treat.",
+      "core_action": "Thomas mimicking microwave beeps while the green flamingo tries to copy the sound.",
+      "summary": "To pass the time, they teach the green flamingo to mimic the beep of Adèle's microwave. The mimicry is so good it drives the neighbor's dog into a barking frenzy.",
+      "anecdotes": ["The neighbor's dog is named Napoleon and barks at anything that beeps."]
+    },
+    {
+      "scene_id": 11,
+      "chapter_id": 4,
+      "chapter_title": "The Beep of Acceptance",
+      "title": "2:00 AM Departure",
+      "location_id": "loc_adele_living_room",
+      "variant_id": "var_adele_living_room_night",
+      "location_master": {
+        "name": "Adèle's Living Room",
+        "visual_style_modifiers": "cramped cozy living room, worn fabric armchair, bookshelves, wooden floorboards"
+      },
+      "scene_world_state": {
+        "time_of_day": "Wednesday 2:00 AM",
+        "environmental_lighting": "Single floor lamp casting low ambient warm light, cool white light coming from the hallway door",
+        "atmospheric_effects": "Sudden cold night air from the doorway"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        },
+        {
+          "character_id": "CHARACTER_B",
+          "costume_and_appearance_variant": "Thomas in a slightly crumpled corduroy jacket, green beanie, and dark jeans"
+        }
+      ],
+      "emotional_beat": "Melancholy Departure",
+      "camera_shot": "Wide shot from the dark living room looking towards the open front door, with Thomas and the green silhouette of the bird silhouetted against the hallway light.",
+      "core_action": "Thomas carrying the green flamingo and a pizza box as he exits into the hallway at 2:00 AM.",
+      "summary": "At 2:00 AM, Thomas gathers the bird and the empty pizza box. He leaves the apartment, stepping back out into the night and leaving Adèle alone in the sudden silence.",
+      "anecdotes": ["Thomas always leaves as quickly as he arrives, leaving a vacuum of energy."]
+    },
+    {
+      "scene_id": 12,
+      "chapter_id": 4,
+      "chapter_title": "The Beep of Acceptance",
+      "title": "Corn in the Cabinet",
+      "location_id": "loc_adele_kitchen",
+      "variant_id": "var_adele_kitchen_night",
+      "location_master": {
+        "name": "Adèle's Kitchen",
+        "visual_style_modifiers": "small cluttered third-floor apartment kitchen, cozy and worn, drafty window, retro appliances, french style details"
+      },
+      "scene_world_state": {
+        "time_of_day": "Wednesday 2:15 AM",
+        "environmental_lighting": "Warm glowing table lamp, deep shadows in the rest of the kitchen, dark window",
+        "atmospheric_effects": "Quiet silence of the early morning"
+      },
+      "character_manifest": [
+        {
+          "character_id": "CHARACTER_A",
+          "costume_and_appearance_variant": "Adèle in casual home clothes, a cozy knit beige sweater, round glasses, messy bun"
+        }
+      ],
+      "emotional_beat": "Quiet Acceptance",
+      "camera_shot": "Close-up shot of the interior of Adèle's wooden kitchen cabinet, highlighting a plastic bag filled with yellow dried corn kernels.",
+      "core_action": "Adèle placing a bag of dried corn in the cabinet, smiling quietly in the empty apartment.",
+      "summary": "Adèle is left alone with her broken toaster. Instead of feeling frustrated, she smiles and puts a bag of dried corn in her cabinet — a quiet sign of accepting her brother's presence.",
+      "anecdotes": ["She bought the corn earlier just in case he returns with the bird."]
+    }
+  ]
+}

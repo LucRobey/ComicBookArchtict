@@ -1,0 +1,74 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Panel-level script. Takes the scene script beats and assigns them to specific panels within pages. Adds lettering details, acting direction, balloon styling, and reading flow. This is the visual storytelling / editing layer.",
+  "_agent_inputs": [
+    "scene_script.json",
+    "scenario_scenes.json",
+    "pages.json",
+    "character_moods.json",
+    "lore.json"
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "scene_ids": [],
+      "layout": "",
+      "page_turn_context": "",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p1_pan1",
+          "scene_id": 1,
+          "beats_assigned": [],
+
+          "lettering": {
+            "captions": [
+              {
+                "beat_ref": "",
+                "text": "",
+                "position": "top_left | top_right | bottom_left | bottom_right | center_top | center_bottom | floating",
+                "style": "narration_box | character_voice | editorial | poetic"
+              }
+            ],
+            "speech_balloons": [
+              {
+                "beat_ref": "",
+                "character_id": "",
+                "text": "",
+                "balloon_type": "normal | whisper | shout | thought | off_panel | radio | phone",
+                "tail_direction": "",
+                "emphasis_words": [],
+                "reading_order": 1
+              }
+            ],
+            "sfx": [
+              {
+                "beat_ref": "",
+                "text": "",
+                "style": "integrated | overlaid | background",
+                "position": "",
+                "size": "small | medium | large"
+              }
+            ]
+          },
+
+          "acting_direction": {
+            "CHARACTER_ID": {
+              "expression": "",
+              "body_language": "",
+              "gaze_direction": "",
+              "micro_action": ""
+            }
+          },
+
+          "panel_rhythm": "establishing | slow_build | conversational | rapid_exchange | reaction_beat | punchline | silence_beat | climax | denouement",
+          "reader_focus": "",
+          "panel_tension": "low | medium | high"
+        }
+      ],
+
+      "page_rhythm_note": ""
+    }
+  ]
+}

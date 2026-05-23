@@ -26,16 +26,16 @@ The shot library in the location sheet is what Pipeline 08 uses to generate imag
 
 ```
 data/geography.json     ← location IDs, names, scene references
-data/scenario.json      ← scene summaries, emotional beats, character actions
-data/lore.json          ← visual_style, tone, world rules
+data/scenario_scenes.json ← scene summaries, emotional beats, character actions
+data/final_lore.json    ← visual_style, tone, world rules
 ```
 
 ---
 
 ## Step 1 — Read All Inputs
 
-1. Read `data/lore.json`: extract `visual_style`, `tone`, `genre`, `world_rules`
-2. Read `data/scenario.json`: for each scene, extract `scene_id`, `location`, `summary`, `emotional_beat`, `characters`, `anecdotes`
+1. Read `data/final_lore.json`: extract `visual_style`, `tone`, `genre`, `world_rules`
+2. Read `data/scenario_scenes.json`: for each scene, extract `scene_id`, `location`, `summary`, `emotional_beat`, `characters`, `anecdotes`
 3. Read `data/geography.json`: for each location, extract `id`, `name`, `type`, `description`, `appears_in_scenes`
 
 Cross-reference: for each location, find all scenes that reference it. Those scenes define the props, actions, and emotional beats that must be reflected in the location sheet.
@@ -78,7 +78,7 @@ Before writing the shot library, decide the structure of this location:
 Synthesise from:
 - The location `description` field (starting point only — expand it)
 - Any spatial references in scene summaries (e.g. "walks to the printer", "sits at her desk")
-- Genre conventions for this type of space (the `genre` field from lore.json informs the register)
+- Genre conventions for this type of space (the `genre` field from final_lore.json informs the register)
 
 Write 1–2 paragraphs. Be precise about: size, shape, orientation, entrance, windows, dominant axis. Answer the question: *what can you see from the entrance?*
 
@@ -100,7 +100,7 @@ Derive from:
 - Genre/tone (e.g., "dark comedy" → flat fluorescent is funnier than dramatic shadow)
 
 ### Palette
-5 entries minimum. Hex codes. Use the `visual_style` from lore.json for the base palette. Layer location-specific accents on top.
+5 entries minimum. Hex codes. Use the `visual_style` from final_lore.json for the base palette. Layer location-specific accents on top.
 
 **For multi-variant locations:** Each variant has its own palette section. Palettes may share some values (walls, floor) but must differ in accent and shadow colours.
 
@@ -113,7 +113,7 @@ Write 3 shots minimum per location or per variant (wide / medium / detail). For 
 - `use_for`: which scene types or emotional moments this shot serves
 - `image`: `data/images/locations/[loc_id]/[shot_id].png` ← leave this path even if image does not exist yet
   - For variant shots: `data/images/locations/[loc_id]_[variant_id]/[shot_id].png`
-- `prompt_suffix`: the shot-specific part of the image generation prompt (camera angle, foreground subject, background — NOT the style rules, those come from lore.json)
+- `prompt_suffix`: the shot-specific part of the image generation prompt (camera angle, foreground subject, background — NOT the style rules, those come from final_lore.json)
 
 **Shot selection logic:**
 - Wide shot: always from the entrance or dominant viewpoint. Full space visible.
@@ -210,7 +210,7 @@ User flags a location sheet from the Geography tab QA drawer (`REWRITE_LOCATION_
 
 ## Adding New Locations
 
-When a scene is added to `scenario.json` with a location not in `geography.json`:
+When a scene is added to `scenario_scenes.json` with a location not in `geography.json`:
 
 1. **Determine if it's a new space or a new time-of-day for an existing space.**
    - New physical space → add a new location entry.
@@ -233,7 +233,7 @@ Do not reprocess existing locations or existing variants unless explicitly modif
 
 ## Style Inheritance
 
-The location sheet does **not** repeat the universal style rules (linework type, fill style, etc.). Those are always read from `lore.json visual_style` and appended by Pipeline 08 at generation time.
+The location sheet does **not** repeat the universal style rules (linework type, fill style, etc.). Those are always read from `final_lore.json visual_style` and appended by Pipeline 08 at generation time.
 
 The `prompt_suffix` in each shot only contains the shot-specific camera and framing details. This keeps the shot library readable and the prompts composable.
 

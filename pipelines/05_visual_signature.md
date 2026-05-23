@@ -35,7 +35,7 @@ Before running, confirm all of the following exist:
 - `global_characters/[Name]/originals/` — at least one reference photo or sketch of the real person/source character
 - `global_characters/[Name]/presentation.json` — biography (personality, history, age)
 - `global_characters/[Name]/general_mood.md` — current emotional headspace
-- `data/lore.json` — the project's world (setting, period, species, themes)
+- `data/final_lore.json` — the project's world (setting, period, species, themes)
 - `pipelines/01_style_building.md` — the project's target art style
 
 If any input is missing, stop and ask the user to provide it before proceeding.
@@ -44,7 +44,7 @@ If any input is missing, stop and ask the user to provide it before proceeding.
 
 ## Step 1 — Read the World Rules
 
-Read `data/lore.json` and `pipelines/01_style_building.md`.
+Read `data/final_lore.json` and `pipelines/01_style_building.md`.
 
 Extract the constraints this world places on all characters:
 - **Species/form:** Are characters human? Anthropomorphic animals? Smurfs? Robots?
@@ -100,7 +100,7 @@ If an anchor **cannot** be translated (e.g. a subtle skin texture that doesn't e
 
 ```markdown
 # [Name] — Canonical Visual Profile
-*Project: [project name from lore.json]*
+*Project: [project name from final_lore.json]*
 *World: [brief world description — e.g. "Smurfs universe, flat cartoon style"]*
 
 ## Identity Anchors (source → translation)

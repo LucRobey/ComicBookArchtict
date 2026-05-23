@@ -1,15 +1,15 @@
 # 🤖 Phase 1.5: Pacing & Pagination
 
 **App Tab:** 📋 Pacing
-**Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
-**Upstream:** [Phase 0 →](phase_0_lore.md)
-**Downstream:** [Phase 2 →](phase_2_structure.md)
+**Master Guide:** [← MASTER_GUIDE.md](../MASTER_GUIDE.md)
+**Upstream:** [Phase 3A →](phase_3_script.md) (Script Scene)
+**Downstream:** [Phase 2 →](phase_2_structure.md) | [Phase 3B →](phase_3_script.md) (Panel Script)
 
 ---
 
 ## What This Phase Does
 
-Takes the approved `data/scenario.json` and distributes scenes across physical comic book pages, deciding how many pages each scene gets based on dramatic weight and the rules in `pipelines/pacing_instructions.md`.
+Takes the approved `data/scene_script.json` and distributes scenes across physical comic book pages, deciding how many pages each scene gets based on dramatic weight and the rules in `pipelines/pacing_instructions.md`.
 
 ---
 
@@ -17,7 +17,7 @@ Takes the approved `data/scenario.json` and distributes scenes across physical c
 
 | File | Path |
 |------|------|
-| Scene list | `data/scenario.json` |
+| Scene script | `data/scene_script.json` |
 | Instructions | `pipelines/pacing_instructions.md` |
 
 ---
@@ -180,7 +180,7 @@ Takes the approved `data/scenario.json` and distributes scenes across physical c
 ## Agent Rules
 
 1. Read `pipelines/pacing_instructions.md` fully before generating.
-2. Every `scene_id` from `data/scenario.json` must appear in at least one page.
+2. Every `scene_id` from `data/scene_script.json` must appear in at least one page.
 3. Every `anecdote` key must appear in at least one `anecdotes_included` array.
 4. Do NOT generate `character_intro` type pages — Phase 1 handles those.
 5. After writing, update `PRODUCTION_STATUS.md`: Phase 1.5 → `[REVIEW]`

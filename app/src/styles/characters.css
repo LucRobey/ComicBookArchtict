@@ -1,4 +1,13 @@
 /* ── Characters Phase Layout ──────────────────────────── */
+.chars-phase-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-color, #0f0f13);
+}
+
 .chars-phase {
   display: flex;
   flex: 1;

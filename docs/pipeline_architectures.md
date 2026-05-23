@@ -19,7 +19,7 @@ The Character Hub builds the baseline assets and behavioral models for character
 ```mermaid
 flowchart TD
     %% Base Data Sources
-    LORE["data/lore.json"] -.-> S1
+    LORE["data/final_lore.json"] -.-> S1
     LORE -.-> S2
     LORE -.-> S3
     LORE -.-> S4
@@ -75,7 +75,7 @@ flowchart TD
 
 ## 2. Phase 1 & 1.5: Pacing & Character Intro (Parallel)
 
-Once the core script breakdown (`data/scenario_scenes.json`) is approved, pagination runs in parallel with dedicated character intro generation. Both outputs must be finalized before structural panel division occurs.
+Once the scene script (`data/scene_script.json`) is approved, pagination runs in parallel with dedicated character intro generation. Both outputs must be finalized before structural panel division occurs.
 
 ### Data Schema Overview
 - **Intro Pages:** Maps splash layout types to exact panel numbers for main characters (`data/intro_pages.json`).
@@ -86,8 +86,8 @@ Once the core script breakdown (`data/scenario_scenes.json`) is approved, pagina
 ```mermaid
 flowchart TD
     %% Inputs
-    LORE["data/lore.json"] -.-> S_INTRO
-    SCENES["data/scenario_scenes.json"] -.-> AgentP
+    LORE["data/final_lore.json"] -.-> S_INTRO
+    SCENE_SCRIPT["data/scene_script.json"] -.-> AgentP
     CHAR_SIG["global_characters/Name/personality_signature.md"] -.-> S_INTRO
 
     %% Phase 1: Character Intros
@@ -118,7 +118,7 @@ flowchart TD
     
     class S_INTRO,S_PAGES,S_PANELS file;
     class AgentI,AgentP agent;
-    class LORE,SCENES,CHAR_SIG baseData;
+    class LORE,SCENE_SCRIPT,CHAR_SIG baseData;
     class UI_INTRO,UI_PACE ui;
 ```
 
@@ -126,7 +126,7 @@ flowchart TD
 
 ## 3. Phase 2: Panel Structuring
 
-This phase divides page focal descriptions into individual panel layout structures. It lists framing, characters present, visual actions, and structural metadata tags.
+This phase divides page focal descriptions into individual panel layout structures. It lists framing, characters present, visual actions, and structural metadata tags. It is guided by both the pagination structure and the scene script.
 
 ### Camera Framing & Custom Overrides
 - **Camera Angles:** Restricts values to standard options (`Close-up`, `Wide Establishing Shot`, `POV shot`, etc.).
@@ -137,9 +137,10 @@ This phase divides page focal descriptions into individual panel layout structur
 ```mermaid
 flowchart TD
     %% Inputs
-    LORE["data/lore.json"] -.-> AgentS
+    LORE["data/final_lore.json"] -.-> AgentS
     PAGES["data/pages.json"] -.-> AgentS
     INTROS["data/intro_pages.json"] -.-> AgentS
+    SCENE_SCRIPT["data/scene_script.json"] -.-> AgentS
 
     %% Structuring Pipeline
     subgraph "Phase 2: Page Structuring"
@@ -153,7 +154,8 @@ flowchart TD
     end
 
     %% Downstream
-    PANELS --> SCRIPT["data/script.json (Phase 3)"]
+    PANELS --> SCRIPT_PANEL["data/script.json (Phase 3B)"]
+    PANELS --> ASSEMBLY["Assembly Studio (Phase 6)"]
 
     %% Styling
     classDef file fill:#f9f,stroke:#333,stroke-width:2px;
@@ -161,35 +163,46 @@ flowchart TD
     classDef baseData fill:#bbf,stroke:#333,stroke-width:1px,stroke-dasharray: 5 5;
     classDef ui fill:#dfd,stroke:#333,stroke-width:2px;
     
-    class PANELS,SCRIPT file;
+    class PANELS,SCRIPT_PANEL file;
     class AgentS agent;
-    class LORE,PAGES,INTROS baseData;
+    class LORE,PAGES,INTROS,SCENE_SCRIPT baseData;
     class UI_STRUCT,UI_OVERRIDE ui;
 ```
 
 ---
 
-## 4. Phase 3: Scripting
+## 4. Phase 3: Scripting (Two-Stage Pipeline)
 
-Generates and validates dialogue overlays, thought bubbles, and narrator captions. The output is referenced permanently for downstream layout and lettering.
+Scripting is divided into two sequential stages: narrative writing (**Phase 3A**) and panel layout editing (**Phase 3B**). 
 
-### Critical Rules
-- **Unique Dialogue ID:** Structured as `d_[page]_[panel]_[index]` (e.g., `d_2_3_1`). These IDs are permanent.
-- **Modifications Constraints:** Renumbering on deletions or edits is prohibited to avoid breaking layout coordinates.
+- **Phase 3A (Scene Script):** Translates scene definitions into written beats, dialogue, and pacing. No visual layout is assumed.
+- **Phase 3B (Panel Script):** Distributes the written beats into individual panels, specifying bubble placement, acting direction, and reading flow.
 
 ### Pipeline Flow Diagram
 
 ```mermaid
 flowchart TD
-    %% Inputs
-    LORE["data/lore.json"] -.-> AgentSc
-    PANELS["data/panels.json"] -.-> AgentSc
-    SCENES["data/scenario_scenes.json"] -.-> AgentSc
+    %% Inputs 3A
+    SCENES["data/scenario_scenes.json"] -.-> Agent3A
+    LORE_A["data/final_lore.json"] -.-> Agent3A
+    STYLE_A["data/script_style.json"] -.-> Agent3A
 
-    %% Scripting Pipeline
-    subgraph "Phase 3: Scripting & Lettering Script"
-        SCRIPT["data/script.json"] -- "Gen Dialogues (QA Flag)" --> AgentSc(("Scripting Agent"))
-        AgentSc --> SCRIPT
+    %% Stage 3A
+    subgraph "Phase 3A: Scene Scripting"
+        BEATS["data/scene_script.json"] -- "Gen Scene Beats (QA Flag)" --> Agent3A(("Scene Writer Agent"))
+        Agent3A --> BEATS
+    end
+
+    %% Inputs 3B
+    BEATS -.-> Agent3B
+    PANELS["data/panels.json"] -.-> Agent3B
+    LORE_B["data/final_lore.json"] -.-> Agent3B
+    STYLE_B["data/script_style.json"] -.-> Agent3B
+
+    %% Stage 3B
+    subgraph "Phase 3B: Panel Scripting"
+        SCRIPT["data/script.json"] -- "Gen Panel Dialogues (QA Flag)" --> Agent3B(("Panel Script Agent"))
+        Agent3B --> SCRIPT
         
         %% UI Interactions
         UI_SCRIPT("Script UI: Dialogue Cards") --> SCRIPT
@@ -207,9 +220,9 @@ flowchart TD
     classDef baseData fill:#bbf,stroke:#333,stroke-width:1px,stroke-dasharray: 5 5;
     classDef ui fill:#dfd,stroke:#333,stroke-width:2px;
     
-    class SCRIPT file;
-    class AgentSc agent;
-    class LORE,PANELS,SCENES baseData;
+    class BEATS,SCRIPT file;
+    class Agent3A,Agent3B agent;
+    class SCENES,PANELS,LORE_A,LORE_B,STYLE_A,STYLE_B baseData;
     class UI_SCRIPT,UI_OVERRIDE ui;
 ```
 
@@ -228,7 +241,7 @@ Generates high-fidelity artwork matching the panel breakdown. Features a manual 
 ```mermaid
 flowchart TD
     %% Inputs
-    LORE["data/lore.json"] -.-> Prompter
+    LORE["data/final_lore.json"] -.-> Prompter
     PANELS["data/panels.json"] -.-> Prompter
     SCRIPT["data/script.json"] -.-> Prompter
     BASELINE["pipelines/generation_instructions.md"] -.-> Prompter

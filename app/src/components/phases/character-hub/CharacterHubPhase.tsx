@@ -26,9 +26,10 @@ const EMOTION_EMOJI: Record<string, string> = {
   joyful: '😄', content: '😌', anxious: '😰', sad: '😢',
   angry: '😠', ashamed: '😔', performing: '🎭', numb: '😶',
   tender: '🥹', determined: '💪', overwhelmed: '😵', resigned: '😑',
+  happy: '😄', crying: '😭', laughing: '😆', surprised: '😮',
 };
 
-const TURNAROUND_VIEWS = ['front', '3q', 'profile', 'back', 'expressions'] as const;
+const TURNAROUND_VIEWS = ['front', '3q', 'profile', 'back'] as const;
 
 // ── CharacterImage ───────────────────────────────────────
 
@@ -148,6 +149,7 @@ const CharacterHubPhase: React.FC = () => {
   const [hlSaved, setHlSaved]   = useState(false);
 
   const charName = characters[selectedChar] ?? '';
+
   const { data: personalityData, save: savePersonality } = useJsonFile<PersonalitySignatureData>(
     charName ? `data/characters/${charName}/personality_signature.json` : null
   );
@@ -219,11 +221,28 @@ const CharacterHubPhase: React.FC = () => {
       return;
     }
     setExpandedScene(sceneId);
-    setDraftMood(currentMood ? { ...currentMood } : {
+    setDraftMood(currentMood ? {
+      dominant_emotion: currentMood.dominant_emotion || 'anxious',
+      feels: currentMood.feels || '',
+      shows: currentMood.shows || '',
+      tension_with: currentMood.tension_with || null,
+      agenda: currentMood.agenda || '',
+      subtext: currentMood.subtext || '',
+      secret: currentMood.secret || '',
+      status_dynamic: currentMood.status_dynamic || '',
+      tactics: currentMood.tactics || '',
+      scene_stakes: currentMood.scene_stakes || '',
+    } : {
       dominant_emotion: 'anxious',
       feels: '',
       shows: '',
       tension_with: null,
+      agenda: '',
+      subtext: '',
+      secret: '',
+      status_dynamic: '',
+      tactics: '',
+      scene_stakes: '',
     });
   };
 
@@ -326,21 +345,7 @@ const CharacterHubPhase: React.FC = () => {
     }
   };
 
-  const dynamicEmotions = React.useMemo(() => {
-    const list = new Set<string>(EMOTIONS);
-    moodsData?.scenes?.forEach(s => {
-      Object.values(s.moods || {}).forEach(m => {
-        if (m.dominant_emotion) list.add(m.dominant_emotion);
-      });
-    });
-    const allChapters = moodsData?.chapter_moods || moodsData?.chapters || [];
-    allChapters.forEach(c => {
-      Object.values(c.moods || {}).forEach(m => {
-        if (m.dominant_emotion) list.add(m.dominant_emotion);
-      });
-    });
-    return Array.from(list);
-  }, [moodsData]);
+
 
   // ── Empty state ─────────────────────────────────────────
 
@@ -366,8 +371,8 @@ const CharacterHubPhase: React.FC = () => {
         emoji="👤"
         badge="Steps 2 & 4"
         description="Two-pass workflow. Pass 1: Simulate character emotional arcs at chapter granularity. Pass 2 (after Scenario scene division): Refine mood arcs to scene-level and generate visual profiles."
-        inputs={['data/lore.json', 'data/visual_style.json', 'data/personality_signature.json', 'data/scenario_chapters.json', 'data/scenario_scenes.json']}
-        outputs={['data/character_moods.json', 'global_characters/Name/personality_signature.md']}
+        inputs={['data/lore.json', 'data/visual_style.json', 'data/characters/[Name]/personality_signature.json', 'data/scenario_chapters.json', 'data/scenario_scenes.json']}
+        outputs={['data/character_moods.json', 'data/characters/[Name]/personality_signature.json']}
         accentColor="#6366f1"
         nextStep={{ label: 'After chapter moods → Scenario for scene division. After scene moods → Intro + Pacing.' }}
       />
@@ -501,7 +506,7 @@ const CharacterHubPhase: React.FC = () => {
                   {TURNAROUND_VIEWS.map(view => (
                     <div key={view} className="chub-image-thumb">
                       <CharacterImage
-                        src={buildImageSrc(`global_characters/${charName}/turnarounds/${view}.png`)}
+                        src={buildImageSrc(`global_characters/${charName}/examples/turnarounds/${view}.png`)}
                         alt={`${charName} — ${view} view`}
                         fallbackEmoji="🖼"
                       />
@@ -659,11 +664,12 @@ const CharacterHubPhase: React.FC = () => {
                           const mood = moodEntry?.moods?.[charName];
                           const isExpanded = expandedScene === chapter.chapter_id;
                           const emoji = mood ? (EMOTION_EMOJI[mood.dominant_emotion] ?? '❓') : '❔';
+                          const isMoodSet = !!(mood && mood.dominant_emotion && mood.feels && mood.shows);
 
                           return (
                             <div
                               key={chapter.chapter_id}
-                              className={`chub-mood-card ${isExpanded ? 'expanded' : ''}`}
+                              className={`chub-mood-card ${isExpanded ? 'expanded' : ''} ${mood?.dominant_emotion ? `mood-${mood.dominant_emotion}` : 'mood-none'}`}
                               id={`chub-mood-chapter-${chapter.chapter_id}`}
                             >
                               <div
@@ -678,76 +684,196 @@ const CharacterHubPhase: React.FC = () => {
                                   <span className="chub-mood-emoji">{emoji}</span>
                                   <div className="chub-mood-card-info">
                                     <span className="chub-scene-title">{chapter.title}</span>
-                                    <span className="chub-mood-label">
-                                      {mood ? mood.dominant_emotion : <em style={{ opacity: 0.6 }}>Not set</em>}
-                                    </span>
+                                    <div className="chub-mood-meta-row">
+                                      <span className="chub-mood-label">
+                                        {mood ? mood.dominant_emotion : <em style={{ opacity: 0.6 }}>Not set</em>}
+                                      </span>
+                                      {chapter.characters && (
+                                        <span className="chub-meta-pill">👥 Cast: {chapter.characters.join(', ')}</span>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
-                                <span className="chub-mood-expand-icon">▾</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                  {isMoodSet ? (
+                                    <span className="chub-status-badge complete">✓ Mood Set</span>
+                                  ) : (
+                                    <span className="chub-status-badge empty">⚠ Empty</span>
+                                  )}
+                                  <span className="chub-mood-expand-icon">▾</span>
+                                </div>
                               </div>
 
                               {isExpanded && (
                                 <div className="chub-mood-edit-form">
-                                  <div className="chub-mood-edit-form-row">
-                                    <div className="chub-field">
-                                      <label className="chub-field-label">Dominant emotion (Phase 2)</label>
-                                      <input
-                                        type="text"
-                                        list={`emotions-datalist-ch-${chapter.chapter_id}`}
-                                        className="chub-emotion-select"
-                                        value={draftMood.dominant_emotion ?? ''}
-                                        onChange={e => setDraftMood(d => ({ ...d, dominant_emotion: e.target.value }))}
-                                        placeholder="Type or select an emotion..."
-                                        id={`chub-emotion-input-ch-${chapter.chapter_id}`}
-                                      />
-                                      <datalist id={`emotions-datalist-ch-${chapter.chapter_id}`}>
-                                        {dynamicEmotions.map(em => (
-                                          <option key={em} value={em} />
-                                        ))}
-                                      </datalist>
+                                  <div className="chub-mood-form-grid">
+                                    {/* Left Column: Chapter Context Card & Emotion Selection */}
+                                    <div className="chub-mood-form-left">
+                                      {/* Read-only Context Panel */}
+                                      <div className="chub-scene-context-card">
+                                        <div className="chub-context-header">📖 Chapter Context Details</div>
+                                        <div className="chub-context-body">
+                                          {chapter.summary && (
+                                            <div className="chub-context-section">
+                                              <span className="chub-context-label">Chapter Summary</span>
+                                              <p className="chub-context-text">{chapter.summary}</p>
+                                            </div>
+                                          )}
+                                          {chapter.story_progression && (
+                                            <div className="chub-context-section">
+                                              <span className="chub-context-label">Story Progression</span>
+                                              <p className="chub-context-text">{chapter.story_progression}</p>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+
+                                      {/* Clickable Dominant Emotion Selector */}
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Dominant Emotion</label>
+                                        <div className="chub-emotion-grid-selector">
+                                          {EMOTIONS.map(emotion => {
+                                            const isSelected = draftMood.dominant_emotion === emotion;
+                                            return (
+                                              <button
+                                                key={emotion}
+                                                type="button"
+                                                className={`chub-emotion-selector-btn ${isSelected ? 'active' : ''}`}
+                                                onClick={() => setDraftMood(d => ({ ...d, dominant_emotion: emotion }))}
+                                                title={`Select ${emotion}`}
+                                              >
+                                                <span className="chub-selector-emoji">{EMOTION_EMOJI[emotion] ?? '🎭'}</span>
+                                                <span className="chub-selector-text">{emotion}</span>
+                                              </button>
+                                            );
+                                          })}
+                                        </div>
+                                      </div>
+
+                                      {/* Tension with */}
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Tension with</label>
+                                        <select
+                                          className="chub-tension-select"
+                                          value={draftMood.tension_with ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, tension_with: e.target.value || null }))}
+                                          id={`chub-tension-select-ch-${chapter.chapter_id}`}
+                                        >
+                                          <option value="">— none —</option>
+                                          {characters.filter(c => c !== charName).map(c => (
+                                            <option key={c} value={c}>{c}</option>
+                                          ))}
+                                        </select>
+                                      </div>
                                     </div>
 
-                                    <div className="chub-field">
-                                      <label className="chub-field-label">Tension with</label>
-                                      <select
-                                        className="chub-tension-select"
-                                        value={draftMood.tension_with ?? ''}
-                                        onChange={e => setDraftMood(d => ({ ...d, tension_with: e.target.value || null }))}
-                                        id={`chub-tension-select-ch-${chapter.chapter_id}`}
-                                      >
-                                        <option value="">— none —</option>
-                                        {characters.filter(c => c !== charName).map(c => (
-                                          <option key={c} value={c}>{c}</option>
-                                        ))}
-                                      </select>
+                                    {/* Right Column: Character Psychological Fields */}
+                                    <div className="chub-mood-form-right">
+                                      <div className="chub-form-section-title">🧠 Internal vs. External Psychology</div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Feels (internal — private truth)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.feels ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, feels: e.target.value }))}
+                                          rows={2}
+                                          placeholder="What is this character privately experiencing?"
+                                          id={`chub-feels-ch-${chapter.chapter_id}`}
+                                        />
+                                      </div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Shows (external — the mask)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.shows ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, shows: e.target.value }))}
+                                          rows={2}
+                                          placeholder="How does their behaviour/speech express this outward?"
+                                          id={`chub-shows-ch-${chapter.chapter_id}`}
+                                        />
+                                      </div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Secret (what they are actively hiding)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.secret ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, secret: e.target.value }))}
+                                          rows={2}
+                                          placeholder="Is there any secret they are holding or keeping back?"
+                                          id={`chub-secret-ch-${chapter.chapter_id}`}
+                                        />
+                                      </div>
+
+                                      <div className="chub-form-section-title" style={{ marginTop: 16 }}>🎭 Scene Dynamics & Stakes</div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Agenda (what they want & expect in this chapter)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.agenda ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, agenda: e.target.value }))}
+                                          rows={2}
+                                          placeholder="What does this character want to achieve in this chapter?"
+                                          id={`chub-agenda-ch-${chapter.chapter_id}`}
+                                        />
+                                      </div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Subtext (what is implied/hidden under their actions)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.subtext ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, subtext: e.target.value }))}
+                                          rows={2}
+                                          placeholder="What are the unspoken undercurrents for them?"
+                                          id={`chub-subtext-ch-${chapter.chapter_id}`}
+                                        />
+                                      </div>
+
+                                      <div className="chub-mood-edit-form-row">
+                                        <div className="chub-field">
+                                          <label className="chub-field-label">Status Dynamic (power dynamics)</label>
+                                          <input
+                                            type="text"
+                                            className="chub-emotion-select"
+                                            value={draftMood.status_dynamic ?? ''}
+                                            onChange={e => setDraftMood(d => ({ ...d, status_dynamic: e.target.value }))}
+                                            placeholder="e.g. low status, seeking control, shifting high"
+                                            id={`chub-status-ch-${chapter.chapter_id}`}
+                                          />
+                                        </div>
+
+                                        <div className="chub-field">
+                                          <label className="chub-field-label">Tactics (verbal/behavioral tactics)</label>
+                                          <input
+                                            type="text"
+                                            className="chub-emotion-select"
+                                            value={draftMood.tactics ?? ''}
+                                            onChange={e => setDraftMood(d => ({ ...d, tactics: e.target.value }))}
+                                            placeholder="e.g. deflection, flattery, guilt-tripping"
+                                            id={`chub-tactics-ch-${chapter.chapter_id}`}
+                                          />
+                                        </div>
+                                      </div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Stakes (what happens if they fail)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.scene_stakes ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, scene_stakes: e.target.value }))}
+                                          rows={2}
+                                          placeholder="What are the stakes for this character?"
+                                          id={`chub-stakes-ch-${chapter.chapter_id}`}
+                                        />
+                                      </div>
                                     </div>
                                   </div>
 
-                                  <div className="chub-field">
-                                    <label className="chub-field-label">Feels (internal — private truth)</label>
-                                    <textarea
-                                      className="chub-mood-textarea"
-                                      value={draftMood.feels ?? ''}
-                                      onChange={e => setDraftMood(d => ({ ...d, feels: e.target.value }))}
-                                      rows={2}
-                                      placeholder="What is this character privately experiencing?"
-                                      id={`chub-feels-ch-${chapter.chapter_id}`}
-                                    />
-                                  </div>
-
-                                  <div className="chub-field">
-                                    <label className="chub-field-label">Shows (external — the mask)</label>
-                                    <textarea
-                                      className="chub-mood-textarea"
-                                      value={draftMood.shows ?? ''}
-                                      onChange={e => setDraftMood(d => ({ ...d, shows: e.target.value }))}
-                                      rows={2}
-                                      placeholder="How does their behaviour/speech express this outward?"
-                                      id={`chub-shows-ch-${chapter.chapter_id}`}
-                                    />
-                                  </div>
-
-                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 12 }}>
                                     <button
                                       className={`chub-mood-save-btn ${savedScene === chapter.chapter_id ? 'saved' : ''}`}
                                       onClick={() => handleSaveMood(chapter.chapter_id)}
@@ -782,7 +908,8 @@ const CharacterHubPhase: React.FC = () => {
                 ) : (
                   (() => {
                     const filteredScenes = scenarioData.scenes.filter(s =>
-                      s.characters_present && s.characters_present.includes(charName)
+                      (s.characters_present && s.characters_present.includes(charName)) ||
+                      (s.character_manifest && s.character_manifest.some(m => m.character_id === charName))
                     );
                     
                     if (filteredScenes.length === 0) {
@@ -802,11 +929,12 @@ const CharacterHubPhase: React.FC = () => {
                           const mood = moodEntry?.moods?.[charName];
                           const isExpanded = expandedScene === scene.scene_id;
                           const emoji = mood ? (EMOTION_EMOJI[mood.dominant_emotion] ?? '❓') : '❔';
+                          const isMoodSet = !!(mood && mood.dominant_emotion && mood.feels && mood.shows);
 
                           return (
                             <div
                               key={scene.scene_id}
-                              className={`chub-mood-card ${isExpanded ? 'expanded' : ''}`}
+                              className={`chub-mood-card ${isExpanded ? 'expanded' : ''} ${mood?.dominant_emotion ? `mood-${mood.dominant_emotion}` : 'mood-none'}`}
                               id={`chub-mood-scene-${scene.scene_id}`}
                             >
                               <div
@@ -821,76 +949,214 @@ const CharacterHubPhase: React.FC = () => {
                                   <span className="chub-mood-emoji">{emoji}</span>
                                   <div className="chub-mood-card-info">
                                     <span className="chub-scene-title">{scene.title}</span>
-                                    <span className="chub-mood-label">
-                                      {mood ? mood.dominant_emotion : <em style={{ opacity: 0.6 }}>Not set</em>}
-                                    </span>
+                                    <div className="chub-mood-meta-row">
+                                      <span className="chub-mood-label">
+                                        {mood ? mood.dominant_emotion : <em style={{ opacity: 0.6 }}>Not set</em>}
+                                      </span>
+                                      {scene.location_master?.name && (
+                                        <span className="chub-meta-pill">📍 {scene.location_master.name}</span>
+                                      )}
+                                      {scene.scene_world_state?.time_of_day && (
+                                        <span className="chub-meta-pill">🕒 {scene.scene_world_state.time_of_day}</span>
+                                      )}
+                                      {scene.emotional_beat && (
+                                        <span className="chub-meta-pill beat">⚡ {scene.emotional_beat}</span>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
-                                <span className="chub-mood-expand-icon">▾</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                  {isMoodSet ? (
+                                    <span className="chub-status-badge complete">✓ Mood Set</span>
+                                  ) : (
+                                    <span className="chub-status-badge empty">⚠ Empty</span>
+                                  )}
+                                  <span className="chub-mood-expand-icon">▾</span>
+                                </div>
                               </div>
 
                               {isExpanded && (
                                 <div className="chub-mood-edit-form">
-                                  <div className="chub-mood-edit-form-row">
-                                    <div className="chub-field">
-                                      <label className="chub-field-label">Dominant emotion (Phase 3)</label>
-                                      <input
-                                        type="text"
-                                        list={`emotions-datalist-sc-${scene.scene_id}`}
-                                        className="chub-emotion-select"
-                                        value={draftMood.dominant_emotion ?? ''}
-                                        onChange={e => setDraftMood(d => ({ ...d, dominant_emotion: e.target.value }))}
-                                        placeholder="Type or select an emotion..."
-                                        id={`chub-emotion-input-sc-${scene.scene_id}`}
-                                      />
-                                      <datalist id={`emotions-datalist-sc-${scene.scene_id}`}>
-                                        {dynamicEmotions.map(em => (
-                                          <option key={em} value={em} />
-                                        ))}
-                                      </datalist>
+                                  <div className="chub-mood-form-grid">
+                                    {/* Left Column: Context Card & Emotion Selection */}
+                                    <div className="chub-mood-form-left">
+                                      {/* Read-only Context Panel */}
+                                      <div className="chub-scene-context-card">
+                                        <div className="chub-context-header">🎬 Scene Context Details</div>
+                                        <div className="chub-context-body">
+                                          {scene.summary && (
+                                            <div className="chub-context-section">
+                                              <span className="chub-context-label">Summary / Narrative</span>
+                                              <p className="chub-context-text">{scene.summary}</p>
+                                            </div>
+                                          )}
+                                          {scene.core_action && (
+                                            <div className="chub-context-section">
+                                              <span className="chub-context-label">Key Action Beat</span>
+                                              <p className="chub-context-text">{scene.core_action}</p>
+                                            </div>
+                                          )}
+                                          {scene.camera_shot && (
+                                            <div className="chub-context-section">
+                                              <span className="chub-context-label">Cinematic Framing</span>
+                                              <p className="chub-context-text">{scene.camera_shot}</p>
+                                            </div>
+                                          )}
+                                          {scene.scene_world_state?.environmental_lighting && (
+                                            <div className="chub-context-section">
+                                              <span className="chub-context-label">Lighting & Mood Modifiers</span>
+                                              <p className="chub-context-text">{scene.scene_world_state.environmental_lighting}</p>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+
+                                      {/* Clickable Dominant Emotion Selector */}
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Dominant Emotion</label>
+                                        <div className="chub-emotion-grid-selector">
+                                          {EMOTIONS.map(emotion => {
+                                            const isSelected = draftMood.dominant_emotion === emotion;
+                                            return (
+                                              <button
+                                                key={emotion}
+                                                type="button"
+                                                className={`chub-emotion-selector-btn ${isSelected ? 'active' : ''}`}
+                                                onClick={() => setDraftMood(d => ({ ...d, dominant_emotion: emotion }))}
+                                                title={`Select ${emotion}`}
+                                              >
+                                                <span className="chub-selector-emoji">{EMOTION_EMOJI[emotion] ?? '🎭'}</span>
+                                                <span className="chub-selector-text">{emotion}</span>
+                                              </button>
+                                            );
+                                          })}
+                                        </div>
+                                      </div>
+
+                                      {/* Tension with */}
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Tension with</label>
+                                        <select
+                                          className="chub-tension-select"
+                                          value={draftMood.tension_with ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, tension_with: e.target.value || null }))}
+                                          id={`chub-tension-select-sc-${scene.scene_id}`}
+                                        >
+                                          <option value="">— none —</option>
+                                          {characters.filter(c => c !== charName).map(c => (
+                                            <option key={c} value={c}>{c}</option>
+                                          ))}
+                                        </select>
+                                      </div>
                                     </div>
 
-                                    <div className="chub-field">
-                                      <label className="chub-field-label">Tension with</label>
-                                      <select
-                                        className="chub-tension-select"
-                                        value={draftMood.tension_with ?? ''}
-                                        onChange={e => setDraftMood(d => ({ ...d, tension_with: e.target.value || null }))}
-                                        id={`chub-tension-select-sc-${scene.scene_id}`}
-                                      >
-                                        <option value="">— none —</option>
-                                        {characters.filter(c => c !== charName).map(c => (
-                                          <option key={c} value={c}>{c}</option>
-                                        ))}
-                                      </select>
+                                    {/* Right Column: Character Psychological Fields */}
+                                    <div className="chub-mood-form-right">
+                                      <div className="chub-form-section-title">🧠 Internal vs. External Psychology</div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Feels (internal — private truth)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.feels ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, feels: e.target.value }))}
+                                          rows={2}
+                                          placeholder="What is this character privately experiencing?"
+                                          id={`chub-feels-sc-${scene.scene_id}`}
+                                        />
+                                      </div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Shows (external — the mask)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.shows ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, shows: e.target.value }))}
+                                          rows={2}
+                                          placeholder="How does their behavior/speech express this outward?"
+                                          id={`chub-shows-sc-${scene.scene_id}`}
+                                        />
+                                      </div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Secret (what they are actively hiding)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.secret ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, secret: e.target.value }))}
+                                          rows={2}
+                                          placeholder="Is there any secret they are holding or keeping back?"
+                                          id={`chub-secret-sc-${scene.scene_id}`}
+                                        />
+                                      </div>
+
+                                      <div className="chub-form-section-title" style={{ marginTop: 16 }}>🎭 Scene Dynamics & Stakes</div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Agenda (what they want & expect in this scene)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.agenda ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, agenda: e.target.value }))}
+                                          rows={2}
+                                          placeholder="What does this character want to achieve in this scene?"
+                                          id={`chub-agenda-sc-${scene.scene_id}`}
+                                        />
+                                      </div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Subtext (what is implied/hidden under their actions)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.subtext ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, subtext: e.target.value }))}
+                                          rows={2}
+                                          placeholder="What are the unspoken undercurrents for them?"
+                                          id={`chub-subtext-sc-${scene.scene_id}`}
+                                        />
+                                      </div>
+
+                                      <div className="chub-mood-edit-form-row">
+                                        <div className="chub-field">
+                                          <label className="chub-field-label">Status Dynamic (power dynamics)</label>
+                                          <input
+                                            type="text"
+                                            className="chub-emotion-select"
+                                            value={draftMood.status_dynamic ?? ''}
+                                            onChange={e => setDraftMood(d => ({ ...d, status_dynamic: e.target.value }))}
+                                            placeholder="e.g. low status, seeking control, shifting high"
+                                            id={`chub-status-sc-${scene.scene_id}`}
+                                          />
+                                        </div>
+
+                                        <div className="chub-field">
+                                          <label className="chub-field-label">Tactics (verbal/behavioral tactics)</label>
+                                          <input
+                                            type="text"
+                                            className="chub-emotion-select"
+                                            value={draftMood.tactics ?? ''}
+                                            onChange={e => setDraftMood(d => ({ ...d, tactics: e.target.value }))}
+                                            placeholder="e.g. deflection, flattery, guilt-tripping"
+                                            id={`chub-tactics-sc-${scene.scene_id}`}
+                                          />
+                                        </div>
+                                      </div>
+
+                                      <div className="chub-field">
+                                        <label className="chub-field-label">Stakes (what happens if they fail)</label>
+                                        <textarea
+                                          className="chub-mood-textarea"
+                                          value={draftMood.scene_stakes ?? ''}
+                                          onChange={e => setDraftMood(d => ({ ...d, scene_stakes: e.target.value }))}
+                                          rows={2}
+                                          placeholder="What are the stakes for this character?"
+                                          id={`chub-stakes-sc-${scene.scene_id}`}
+                                        />
+                                      </div>
                                     </div>
                                   </div>
 
-                                  <div className="chub-field">
-                                    <label className="chub-field-label">Feels (internal — private truth)</label>
-                                    <textarea
-                                      className="chub-mood-textarea"
-                                      value={draftMood.feels ?? ''}
-                                      onChange={e => setDraftMood(d => ({ ...d, feels: e.target.value }))}
-                                      rows={2}
-                                      placeholder="What is this character privately experiencing?"
-                                      id={`chub-feels-sc-${scene.scene_id}`}
-                                    />
-                                  </div>
-
-                                  <div className="chub-field">
-                                    <label className="chub-field-label">Shows (external — the mask)</label>
-                                    <textarea
-                                      className="chub-mood-textarea"
-                                      value={draftMood.shows ?? ''}
-                                      onChange={e => setDraftMood(d => ({ ...d, shows: e.target.value }))}
-                                      rows={2}
-                                      placeholder="How does their behaviour/speech express this outward?"
-                                      id={`chub-shows-sc-${scene.scene_id}`}
-                                    />
-                                  </div>
-
-                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 12 }}>
                                     <button
                                       className={`chub-mood-save-btn ${savedScene === scene.scene_id ? 'saved' : ''}`}
                                       onClick={() => handleSaveMood(scene.scene_id)}

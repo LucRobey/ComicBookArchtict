@@ -1,13 +1,37 @@
 import React, { useState } from 'react';
 import type { Dialogue, DialogueType } from './DialogueLine';
+import type { Beat } from './BeatLine';
 import '../../../styles/script.css';
 
-export type QaType = 'REWRITE_LINE' | 'CHANGE_TYPE' | 'CHANGE_SPEAKER' | 'DELETE_LINE' | 'ADD_LINE_AFTER' | 'FULL_PANEL_REWRITE';
+/* ── 3B (Panel Script) QA types ─────────────────────── */
+export type QaType3B =
+  | 'REWRITE_LINE'
+  | 'CHANGE_TYPE'
+  | 'CHANGE_SPEAKER'
+  | 'DELETE_LINE'
+  | 'ADD_LINE_AFTER'
+  | 'FULL_PANEL_REWRITE'
+  | 'REASSIGN_BEATS';
 
-interface QaTarget {
-  type: 'line' | 'panel';
+/* ── 3A (Scene Script) QA types ─────────────────────── */
+export type QaType3A =
+  | 'REWRITE_BEAT'
+  | 'REWRITE_SCENE'
+  | 'ADJUST_DENSITY'
+  | 'REWRITE_VOICE';
+
+export type QaType = QaType3A | QaType3B;
+
+/* ── Target types ───────────────────────────────────── */
+export interface QaTarget {
+  stage: '3a' | '3b';
+  // 3B targets
+  type?: 'line' | 'panel';
   dialogue?: Dialogue;
   panelRef?: { pageNumber: number; panelNumber: number };
+  // 3A targets
+  beat?: Beat;
+  sceneRef?: { sceneId: number; flagType?: string };
 }
 
 interface ScriptQADrawerProps {
@@ -16,19 +40,32 @@ interface ScriptQADrawerProps {
   onExport: (report: string) => void;
 }
 
-const QA_TYPES_LINE: { id: QaType; label: string; desc: string }[] = [
+/* ── 3B flag definitions ────────────────────────────── */
+const QA_TYPES_3B_LINE: { id: QaType3B; label: string; desc: string }[] = [
   { id: 'REWRITE_LINE',     label: 'Rewrite Line',       desc: 'Change the text of this line' },
-  { id: 'CHANGE_TYPE',      label: 'Change Type',         desc: 'Switch speech/thought/caption' },
+  { id: 'CHANGE_TYPE',      label: 'Change Type',         desc: 'Switch speech/thought/caption/sfx' },
   { id: 'CHANGE_SPEAKER',   label: 'Change Speaker',      desc: 'Assign to a different character' },
   { id: 'DELETE_LINE',      label: 'Delete Line',         desc: 'Remove this line from the script' },
   { id: 'ADD_LINE_AFTER',   label: 'Add Line After',      desc: 'Insert a new dialogue after this one' },
 ];
 
-const QA_TYPES_PANEL: { id: QaType; label: string; desc: string }[] = [
-  { id: 'FULL_PANEL_REWRITE', label: 'Full Panel Rewrite', desc: 'Rewrite all dialogue for this panel' },
+const QA_TYPES_3B_PANEL: { id: QaType3B; label: string; desc: string }[] = [
+  { id: 'FULL_PANEL_REWRITE', label: 'Full Panel Rewrite', desc: 'Rewrite all lettering for this panel' },
+  { id: 'REASSIGN_BEATS',     label: 'Reassign Beats',     desc: 'Move beats between panels on same page' },
 ];
 
-const DIALOGUE_TYPES: DialogueType[] = ['speech', 'thought', 'caption'];
+/* ── 3A flag definitions ────────────────────────────── */
+const QA_TYPES_3A_BEAT: { id: QaType3A; label: string; desc: string }[] = [
+  { id: 'REWRITE_BEAT', label: 'Rewrite Beat', desc: 'Rewrite this specific beat' },
+];
+
+const QA_TYPES_3A_SCENE: { id: QaType3A; label: string; desc: string }[] = [
+  { id: 'REWRITE_SCENE',  label: 'Rewrite Scene',    desc: 'Rewrite all beats for this scene' },
+  { id: 'ADJUST_DENSITY',  label: 'Adjust Density',   desc: 'Too many or too few beats' },
+  { id: 'REWRITE_VOICE',   label: 'Rewrite Voice',    desc: 'Character doesn\'t sound right' },
+];
+
+const DIALOGUE_TYPES: DialogueType[] = ['speech', 'thought', 'caption', 'sfx'];
 
 const ScriptQADrawer: React.FC<ScriptQADrawerProps> = ({ target, onClose, onExport }) => {
   const [qaType, setQaType] = useState<QaType | null>(null);
@@ -43,15 +80,55 @@ const ScriptQADrawer: React.FC<ScriptQADrawerProps> = ({ target, onClose, onExpo
 
   if (!target) return null;
 
-  const availableTypes = target.type === 'line' ? QA_TYPES_LINE : QA_TYPES_PANEL;
-  const d = target.dialogue;
+  /* ── Determine available QA types based on target ─── */
+  const getAvailableTypes = () => {
+    if (target.stage === '3a') {
+      if (target.beat) return QA_TYPES_3A_BEAT;
+      if (target.sceneRef) {
+        // If a specific flagType was provided, pre-filter
+        if (target.sceneRef.flagType) {
+          const specific = QA_TYPES_3A_SCENE.find(t => t.id === target.sceneRef!.flagType);
+          return specific ? [specific] : QA_TYPES_3A_SCENE;
+        }
+        return QA_TYPES_3A_SCENE;
+      }
+      return QA_TYPES_3A_SCENE;
+    }
+    // Stage 3B
+    if (target.type === 'line') return QA_TYPES_3B_LINE;
+    if (target.type === 'panel') return QA_TYPES_3B_PANEL;
+    return QA_TYPES_3B_LINE;
+  };
 
+  const availableTypes = getAvailableTypes();
+  const d = target.dialogue;
+  const b = target.beat;
+
+  /* ── Build QA report ──────────────────────────────── */
   const buildReport = (): string => {
     if (!qaType) return '';
     const now = new Date().toISOString();
-    let report = `# QA Report — Phase 3 (Script)\nGenerated: ${now}\n\n`;
+    const stageLabel = target.stage === '3a' ? 'Phase 3A (Scene Script)' : 'Phase 3B (Panel Script)';
+    let report = `# QA Report — ${stageLabel}\nGenerated: ${now}\n\n`;
 
-    if (d && qaType === 'REWRITE_LINE') {
+    // ── 3A reports ──
+    if (b && qaType === 'REWRITE_BEAT') {
+      report += `## Beat ${b.beat_id} — [REWRITE_BEAT]\n`;
+      report += `* **Type:** ${b.type}\n`;
+      report += `* **Current text:** "${b.text || b.description || ''}"\n`;
+      report += `* **Request:** ${note}\n`;
+    } else if (target.sceneRef && qaType === 'REWRITE_SCENE') {
+      report += `## Scene ${target.sceneRef.sceneId} — [REWRITE_SCENE]\n`;
+      report += `* **Request:** ${note}\n`;
+    } else if (target.sceneRef && qaType === 'ADJUST_DENSITY') {
+      report += `## Scene ${target.sceneRef.sceneId} — [ADJUST_DENSITY]\n`;
+      report += `* **Request:** ${note}\n`;
+    } else if (target.sceneRef && qaType === 'REWRITE_VOICE') {
+      report += `## Scene ${target.sceneRef.sceneId} — [REWRITE_VOICE]\n`;
+      report += `* **Request:** ${note}\n`;
+
+    // ── 3B reports ──
+    } else if (d && qaType === 'REWRITE_LINE') {
       report += `## Dialogue ${d.id} — [REWRITE_LINE]\n`;
       report += `* **Speaker:** ${d.speaker}\n`;
       report += `* **Current text:** "${d.text}"\n`;
@@ -79,6 +156,10 @@ const ScriptQADrawer: React.FC<ScriptQADrawerProps> = ({ target, onClose, onExpo
       const { pageNumber, panelNumber } = target.panelRef;
       report += `## Page ${pageNumber}, Panel ${panelNumber} — [FULL_PANEL_REWRITE]\n`;
       report += `* **Request:** ${note}\n`;
+    } else if (target.panelRef && qaType === 'REASSIGN_BEATS') {
+      const { pageNumber, panelNumber } = target.panelRef;
+      report += `## Page ${pageNumber}, Panel ${panelNumber} — [REASSIGN_BEATS]\n`;
+      report += `* **Request:** ${note}\n`;
     }
 
     return report;
@@ -94,22 +175,47 @@ const ScriptQADrawer: React.FC<ScriptQADrawerProps> = ({ target, onClose, onExpo
 
   const isValid = () => {
     if (!qaType) return false;
+    // 3A validations
+    if (qaType === 'REWRITE_BEAT' && !note.trim()) return false;
+    if (qaType === 'REWRITE_SCENE' && !note.trim()) return false;
+    if (qaType === 'ADJUST_DENSITY' && !note.trim()) return false;
+    if (qaType === 'REWRITE_VOICE' && !note.trim()) return false;
+    // 3B validations
     if (qaType === 'REWRITE_LINE' && !note.trim()) return false;
     if (qaType === 'CHANGE_SPEAKER' && !newSpeaker.trim()) return false;
     if (qaType === 'DELETE_LINE' && !deleteConfirmed) return false;
     if (qaType === 'ADD_LINE_AFTER' && (!addSpeaker.trim() || !addText.trim())) return false;
     if (qaType === 'FULL_PANEL_REWRITE' && !note.trim()) return false;
+    if (qaType === 'REASSIGN_BEATS' && !note.trim()) return false;
     return true;
   };
+
+  /* ── Drawer header subtitle ─────────────────────── */
+  const getSubtitle = () => {
+    if (target.stage === '3a') {
+      if (b) return `${b.beat_id} · ${b.type}`;
+      if (target.sceneRef) return `Scene ${target.sceneRef.sceneId}`;
+    }
+    if (d) return `${d.id} · ${d.speaker}`;
+    if (target.panelRef) return `Page ${target.panelRef.pageNumber}, Panel ${target.panelRef.panelNumber}`;
+    return '';
+  };
+
+  const stageLabel = target.stage === '3a' ? 'Scene Script' : 'Panel Script';
 
   return (
     <div className="qa-drawer bg-background-panel border-l border-border shadow-lg">
       <div className="qa-drawer-header">
         <div>
           <h3>🚩 Flag for Agent</h3>
-          {d && <p className="qa-drawer-sub">{d.id} · {d.speaker}</p>}
+          <p className="qa-drawer-sub">{stageLabel} · {getSubtitle()}</p>
         </div>
         <button className="qa-close-btn" onClick={onClose}>✕</button>
+      </div>
+
+      {/* Stage badge */}
+      <div className={`qa-stage-badge ${target.stage === '3a' ? 'qa-stage--3a' : 'qa-stage--3b'}`}>
+        {target.stage === '3a' ? '📖 Stage 3A — Scene Script' : '📐 Stage 3B — Panel Script'}
       </div>
 
       {/* QA Type selector */}
@@ -129,7 +235,9 @@ const ScriptQADrawer: React.FC<ScriptQADrawerProps> = ({ target, onClose, onExpo
       {/* Contextual fields */}
       {qaType && (
         <div className="qa-fields">
-          {(qaType === 'REWRITE_LINE' || qaType === 'FULL_PANEL_REWRITE') && (
+          {/* Note field for most flag types */}
+          {(qaType === 'REWRITE_LINE' || qaType === 'FULL_PANEL_REWRITE' || qaType === 'REASSIGN_BEATS' ||
+            qaType === 'REWRITE_BEAT' || qaType === 'REWRITE_SCENE' || qaType === 'ADJUST_DENSITY' || qaType === 'REWRITE_VOICE') && (
             <textarea
               className="qa-textarea"
               placeholder="Describe what should change..."

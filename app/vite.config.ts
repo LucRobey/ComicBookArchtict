@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import fs from 'fs'
@@ -315,6 +315,33 @@ const localSavePlugin = () => ({
           res.end(JSON.stringify({ error: error.message }));
         }
 
+      } else if (req.url === '/api/run-lore-merge' && req.method === 'POST') {
+        try {
+          const { exec } = await import('child_process');
+          const scriptPath = path.resolve(__dirname, '../pipelines/09c_lore_merge.py');
+          
+          exec(`python "${scriptPath}"`, { env: process.env }, (error: any, stdout: string, stderr: string) => {
+            if (error) {
+              console.error('Error running lore merge script:', error);
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ 
+                error: error.message,
+                stderr: stderr,
+                stdout: stdout
+              }));
+              return;
+            }
+            
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ success: true, stdout, stderr }));
+          });
+        } catch (error: any) {
+          res.statusCode = 500;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: error.message }));
+        }
+
       } else {
         next();
       }
@@ -323,16 +350,22 @@ const localSavePlugin = () => ({
 });
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [react(), localSavePlugin()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
+export default defineConfig(({ mode }) => {
+  // Load env files (e.g. .env, .env.local) and merge into process.env
+  const env = loadEnv(mode, __dirname, '');
+  process.env = { ...process.env, ...env };
+
+  return {
+    plugins: [react(), localSavePlugin()],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
     },
-  },
-  server: {
-    fs: {
-      allow: ['..']
+    server: {
+      fs: {
+        allow: ['..']
+      }
     }
-  }
+  };
 })

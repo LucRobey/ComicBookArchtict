@@ -23,11 +23,21 @@ function App() {
   const [assemblyTab, setAssemblyTab] = React.useState<'assembly' | 'qa'>('assembly');
   // Load the page list from data/pages.json (the canonical source of truth)
   const { data: pagesJson } = useJsonFile<{ pages: Array<{ page_number: number }> }>('data/pages.json');
-  const pages: PageData[] = (pagesJson?.pages ?? []).map(p => ({
-    id: `page_${p.page_number}`,
-    name: `Page ${p.page_number}`,
-    panels: [],
-  }));
+  // Load the panels structure or its template fallback
+  const { data: panelsJson } = useJsonFile<{ pages: Array<{ page_number: number; layout_template: string; panels: Array<{ panel_number: number }> }> }>('data/panels.json');
+  const { data: panelsTemplateJson } = useJsonFile<{ pages: Array<{ page_number: number; layout_template: string; panels: Array<{ panel_number: number }> }> }>('data/templates/panels_template.json');
+
+  const activePanelsData = panelsJson || panelsTemplateJson;
+
+  const pages: PageData[] = (pagesJson?.pages ?? []).map(p => {
+    const matchedPage = activePanelsData?.pages?.find((pp: any) => pp.page_number === p.page_number);
+    return {
+      id: `page_${p.page_number}`,
+      name: `Page ${p.page_number}`,
+      panels: matchedPage?.panels ?? [],
+      layout_template: matchedPage?.layout_template || 'tintin_standard_4x3',
+    };
+  });
   const [currentPageId, setCurrentPageId] = React.useState<string | null>(null);
   const elements = useEditorStore(state => state.elements);
   const [isSaving, setIsSaving] = React.useState(false);

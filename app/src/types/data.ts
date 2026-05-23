@@ -157,6 +157,12 @@ export interface CharacterMood {
   feels: string;
   shows: string;
   tension_with: string | null;
+  agenda?: string;
+  subtext?: string;
+  secret?: string;
+  status_dynamic?: string;
+  tactics?: string;
+  scene_stakes?: string;
 }
 export interface SceneMoods {
   [characterName: string]: CharacterMood;
@@ -337,6 +343,17 @@ export interface PanelData {
   framing?: string;
   action?: string;
   characters_present?: string[];
+  
+  // Enriched panel-level visual and acting states:
+  focal_element?: string;
+  characters_acting?: {
+    character_id: string;
+    expression: string;
+    pose_and_gesture?: string;
+    internal_state?: string;
+  }[];
+  environment_details?: string;
+  composition_notes?: string;
 }
 
 export interface PanelsPage {

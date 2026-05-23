@@ -4,22 +4,34 @@ import { useJsonFile } from '@/hooks/useJsonFile';
 import { exportQaReport } from '@/utils/qaExport';
 import { saveJsonFile } from '@/utils/saveFile';
 import '../../../styles/lore.css';
-import type { LoreData, ScenarioData, GeographyData, SubTab, FlagTarget, Location, Variant, Scene } from './types';
+import type { LoreData, ScenarioData, GeographyData, SubTab, FlagTarget, Location, Variant, Scene, UserLoreData, FinalLoreData } from './types';
 import { WorldTab } from './tabs/WorldTab';
-import { VisualStyleTab } from './tabs/VisualStyleTab';
 import { GeographyTab } from './tabs/GeographyTab';
+import { StyleResearchTab } from './tabs/StyleResearchTab';
+import { BlendedLoreTab } from './tabs/BlendedLoreTab';
 import { LoreFlagDrawer } from './components/LoreFlagDrawer';
+import { mergeLore } from './utils/loreMergeUtil';
 
-const LORE_PATH      = 'data/lore.json';
-const SCENARIO_PATH  = 'data/scenario_scenes.json';
-const GEOGRAPHY_PATH = 'data/geography.json';
+const LORE_PATH       = 'data/lore.json';
+const USER_LORE_PATH  = 'data/user_lore.json';
+const FINAL_LORE_PATH = 'data/final_lore.json';
+const SCENARIO_PATH   = 'data/scenario_scenes.json';
+const GEOGRAPHY_PATH  = 'data/geography.json';
 
 const LorePhase: React.FC = () => {
   const { data: lore,      loading: loreLoading, reload: reloadLore } = useJsonFile<LoreData>(LORE_PATH);
+  const { data: userLore,  loading: userLoreLoading, reload: reloadUserLore } = useJsonFile<UserLoreData>(USER_LORE_PATH);
+  const { data: finalLore, loading: finalLoreLoading, reload: reloadFinalLore } = useJsonFile<FinalLoreData>(FINAL_LORE_PATH);
   const { data: scenario,  loading: scLoading } = useJsonFile<ScenarioData>(SCENARIO_PATH);
   const { data: geography, loading: geoLoading,  reload: reloadGeography } = useJsonFile<GeographyData>(GEOGRAPHY_PATH);
 
-  const [subTab, setSubTab] = useState<SubTab>('world');
+  // Fetch Style Research outputs
+  const { data: loreStyle,   loading: loreStyleLoading,   reload: reloadLoreStyle }   = useJsonFile<any>('data/lore_style.json');
+  const { data: visualStyle, loading: visualStyleLoading, reload: reloadVisualStyle } = useJsonFile<any>('data/visual_style.json');
+  const { data: panelStyle,  loading: panelStyleLoading,  reload: reloadPanelStyle }  = useJsonFile<any>('data/panel_style.json');
+  const { data: scriptStyle, loading: scriptStyleLoading, reload: reloadScriptStyle } = useJsonFile<any>('data/script_style.json');
+
+  const [subTab, setSubTab] = useState<SubTab>('raw-lore');
   
   // QA Report Drawer
   const [qaSceneId,       setQaSceneId]       = useState<number | null>(null);
@@ -29,20 +41,64 @@ const LorePhase: React.FC = () => {
   const [qaType,          setQaType]          = useState<string | null>(null);
   const [qaNote,          setQaNote]          = useState('');
   const [exportStatus,    setExportStatus]    = useState<'idle' | 'success' | 'error'>('idle');
+  const [merging,         setMerging]         = useState(false);
 
   // Specific Flag Drawer (Palette/Lighting/Shot)
   const [flagTarget, setFlagTarget] = useState<FlagTarget | null>(null);
   const [flaggedKeys, setFlaggedKeys] = useState<Set<string>>(new Set());
 
-  const loading = loreLoading || scLoading || geoLoading;
+  const loading = loreLoading || userLoreLoading || finalLoreLoading || scLoading || geoLoading || loreStyleLoading || visualStyleLoading || panelStyleLoading || scriptStyleLoading;
 
   // ── Shared save helpers ──────────────────────────────────
-  // All lore saves go through saveJsonFile to avoid duplicated fetch logic.
 
-  const saveLoreField = useCallback(async (field: string, value: any) => {
-    if (!lore) return;
-    await saveJsonFile(LORE_PATH, { ...lore, [field]: value }, reloadLore);
-  }, [lore, reloadLore]);
+  const saveUserLoreField = useCallback(async (field: string, value: string) => {
+    if (!userLore) return;
+    await saveJsonFile(USER_LORE_PATH, { ...userLore, [field]: value }, reloadUserLore);
+  }, [userLore, reloadUserLore]);
+
+  const saveUserLoreRules = useCallback(async (rules: string[]) => {
+    if (!userLore) return;
+    await saveJsonFile(USER_LORE_PATH, { ...userLore, rules }, reloadUserLore);
+  }, [userLore, reloadUserLore]);
+
+
+
+  const handleMixWorldAndStyle = useCallback(async () => {
+    if (!userLore || !loreStyle || !visualStyle) return;
+    setMerging(true);
+    try {
+      const response = await fetch('/api/run-lore-merge', {
+        method: 'POST',
+      });
+      
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error || errData.stderr || 'Server error running merge script');
+      }
+      
+      await reloadFinalLore();
+      await reloadLore();
+      alert('⚡ Agentic Lore Merged successfully! final_lore.json and lore.json have been created by the AI Agent.');
+    } catch (err: any) {
+      console.error('Backend merge failed, falling back to dynamic client-side blend:', err);
+      const confirmFallback = confirm(
+        `🤖 Agentic merge on backend failed.\nReason: ${err.message}\n\nWould you like to run the dynamic client-side fallback merge instead?`
+      );
+      if (confirmFallback) {
+        try {
+          const { finalLore: mergedFinal, flatLore: mergedFlat } = mergeLore(userLore, loreStyle, visualStyle);
+          await saveJsonFile(FINAL_LORE_PATH, mergedFinal, reloadFinalLore);
+          await saveJsonFile(LORE_PATH, mergedFlat, reloadLore);
+          alert('⚡ Client-side Dynamic Lore Merge completed successfully!');
+        } catch (clientErr: any) {
+          console.error(clientErr);
+          alert('Client fallback merge failed: ' + clientErr.message);
+        }
+      }
+    } finally {
+      setMerging(false);
+    }
+  }, [userLore, loreStyle, visualStyle, reloadFinalLore, reloadLore]);
 
   const saveGeography = useCallback(async (updated: GeographyData) => {
     await saveJsonFile(GEOGRAPHY_PATH, updated, reloadGeography);
@@ -63,16 +119,23 @@ const LorePhase: React.FC = () => {
     await saveJsonFile(GEOGRAPHY_PATH, updated, reloadGeography);
   }, [geography, reloadGeography]);
 
-  const saveCanonicalPalette = useCallback(async (next: { label: string; hex: string; role: string }[]) => {
-    if (!lore) return;
-    await saveJsonFile(LORE_PATH, { ...lore, palette: next }, reloadLore);
-  }, [lore, reloadLore]);
+  const saveLoreStyle = useCallback(async (updated: any) => {
+    await saveJsonFile('data/lore_style.json', updated, reloadLoreStyle);
+  }, [reloadLoreStyle]);
 
-  const saveVisualRules  = useCallback(async (visual_rules: string[]) => saveLoreField('visual_rules', visual_rules), [saveLoreField]);
-  const saveVisualStyle  = useCallback(async (visual_style: string) => saveLoreField('visual_style', visual_style), [saveLoreField]);
-  const saveMoodBoard    = useCallback(async (mood_board: { id: string; prompt: string; image?: string }[]) => saveLoreField('mood_board', mood_board), [saveLoreField]);
-  const saveLoreValue    = useCallback(async (key: string, value: string) => saveLoreField(key, value), [saveLoreField]);
-  const saveWorldRules   = useCallback(async (rules: string[]) => saveLoreField('rules', rules), [saveLoreField]);
+  const saveVisualStyleFile = useCallback(async (updated: any) => {
+    await saveJsonFile('data/visual_style.json', updated, reloadVisualStyle);
+  }, [reloadVisualStyle]);
+
+  const savePanelStyle = useCallback(async (updated: any) => {
+    await saveJsonFile('data/panel_style.json', updated, reloadPanelStyle);
+  }, [reloadPanelStyle]);
+
+  const saveScriptStyle = useCallback(async (updated: any) => {
+    await saveJsonFile('data/script_style.json', updated, reloadScriptStyle);
+  }, [reloadScriptStyle]);
+
+
 
   // ── Loading guard (must come AFTER all hooks) ───────────
   if (loading) return <div className="lore-state">Loading…</div>;
@@ -135,9 +198,10 @@ const LorePhase: React.FC = () => {
       {/* Sub-tab bar */}
       <div className="lore-subtab-bar bg-background-panel border-b border-border shadow-sm">
         {([
-          { id: 'world',        label: '🌍 World' },
-          { id: 'visual-style', label: '🎨 Visual Style' },
-          { id: 'geography',    label: '🗺️ Geography' },
+          { id: 'raw-lore',       label: '🌍 Raw World' },
+          { id: 'style-research', label: '🔍 Style Research' },
+          { id: 'blended-lore',   label: '✨ Blended World' },
+          { id: 'geography',      label: '🗺️ Geography' },
         ] as { id: SubTab; label: string }[]).map(tab => (
           <button
             key={tab.id}
@@ -156,9 +220,47 @@ const LorePhase: React.FC = () => {
 
       <div className="lore-body">
         <div className="lore-content-area">
-          {subTab === 'world'        && <WorldTab lore={lore} openLoreFlag={openLoreFlag} onSaveLoreValue={saveLoreValue} onSaveRules={saveWorldRules} />}
-          {subTab === 'visual-style' && <VisualStyleTab lore={lore} openLoreFlag={openLoreFlag} onSavePalette={saveCanonicalPalette} onSaveRules={saveVisualRules} onSaveVisualStyle={saveVisualStyle} onSaveMoodBoard={saveMoodBoard} openFlag={openFlag} />}
-          {subTab === 'geography'    && <GeographyTab geography={geography} scenario={scenario} flaggedKeys={flaggedKeys} openFlag={openFlag} openLocFlag={openLocFlag} onSaveDescription={saveDescription} onSaveGeography={saveGeography} />}
+          {subTab === 'raw-lore'       && (
+            <WorldTab
+              userLore={userLore}
+              openLoreFlag={openLoreFlag}
+              onSaveLoreValue={saveUserLoreField}
+              onSaveRules={saveUserLoreRules}
+            />
+          )}
+          {subTab === 'style-research' && (
+            <StyleResearchTab
+              loreStyle={loreStyle}
+              visualStyle={visualStyle}
+              panelStyle={panelStyle}
+              scriptStyle={scriptStyle}
+              openLoreFlag={openLoreFlag}
+              onSaveLoreStyle={saveLoreStyle}
+              onSaveVisualStyle={saveVisualStyleFile}
+              onSavePanelStyle={savePanelStyle}
+              onSaveScriptStyle={saveScriptStyle}
+            />
+          )}
+          {subTab === 'blended-lore'   && (
+            <BlendedLoreTab
+              finalLore={finalLore}
+              onMixWorldAndStyle={handleMixWorldAndStyle}
+              openLoreFlag={openLoreFlag}
+              merging={merging}
+            />
+          )}
+
+          {subTab === 'geography'    && (
+            <GeographyTab
+              geography={geography}
+              scenario={scenario}
+              flaggedKeys={flaggedKeys}
+              openFlag={openFlag}
+              openLocFlag={openLocFlag}
+              onSaveDescription={saveDescription}
+              onSaveGeography={saveGeography}
+            />
+          )}
         </div>
 
         {/* Generic Flag Drawer (Palette/Shot/Lighting) */}

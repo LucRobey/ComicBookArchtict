@@ -1,0 +1,52 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Narrative style and tropes researched from Herge's 'The Adventures of Tintin'. Produced by the Style Research agent (Phase 0.5) to serve as thematic ingredients for the downstream lore merging step.",
+  "reference_comic": "The Adventures of Tintin",
+  "thematic_tropes": [
+    {
+      "name": "Accidental Involvement & Mistaken Identity",
+      "description": "The protagonist is drawn into a massive, dangerous plot not by choice or destiny, but by a random accident: buying a model ship, picking up a dropped wallet, or being mistaken for a foreign agent.",
+      "example_usage": "Tintin purchases a model of the Unicorn ship at a market, which contains a secret scroll, drawing the attention of dangerous collectors and drawing him into a hunt for pirate treasure."
+    },
+    {
+      "name": "The Mysterious Clue or MacGuffin Hunt",
+      "description": "The story revolves around a physical object or puzzle (a scroll, a scepter, a falling meteorite, a stolen statue) that the protagonist must find, decipher, or protect from rival factions.",
+      "example_usage": "The search for King Ottokar's Scepter, which must be returned to the king before a national holiday to prevent a political coup."
+    },
+    {
+      "name": "Global Travel & Multi-Locale Adventure",
+      "description": "The narrative scale shifts rapidly from a quiet domestic setting (Marlinstike Hall) to multiple international, often exotic, locales (e.g. desert, mountains, foreign cities, space) to track down the mystery.",
+      "example_usage": "The pursuit of opium smugglers leads Tintin from Belgium to Egypt, India, and eventually China."
+    },
+    {
+      "name": "Shadowy Syndicate / Conspiracy",
+      "description": "The villains are not lone wolves but belong to a highly organized, international conspiracy: smugglers, counterfeiters, secret societies, or military juntas operating behind respectable facades.",
+      "example_usage": "The international drug ring led by Rastapopoulos operating under the cover of a movie production company."
+    }
+  ],
+  "narrative_rules": [
+    {
+      "rule": "Altruistic and Moral Focus",
+      "reason": "The protagonist has no hidden selfish motives or psychological darkness. They act purely out of bravery, loyalty, and the desire to help the weak and bring criminals to justice."
+    },
+    {
+      "rule": "Externalized Conflict and Plot-Driven Focus",
+      "reason": "There are no deep romantic subplots or internal psychological monologues for human characters. Tension comes from external dangers, puzzles, and physical obstacles."
+    },
+    {
+      "rule": "Animal Companion Commentary",
+      "reason": "The dog companion acts as the moral and cynical proxy for the reader, using thought balloons to offer commentary, express fear, or warn the protagonist of things they missed."
+    },
+    {
+      "rule": "Comic Decompression",
+      "reason": "Tense action beats or dramatic plot twists are immediately followed by or mixed with physical comedy (slapstick) or character-based humor to keep the tone light and family-friendly."
+    }
+  ],
+  "humor_and_pacing_tropes": [
+    "Slapstick collisions, falls, and vehicle crashes",
+    "Running gags (e.g. wrong phone numbers, recurring annoying callers)",
+    "Professor Calculus misinterpreting normal questions as insults",
+    "Bowler-hatted detectives repeating each other's phrases redundantly",
+    "Captain Haddock's creative, clean insults ('Cercopithecus!', 'Troglodyte!')"
+  ]
+}

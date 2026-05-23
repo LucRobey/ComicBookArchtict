@@ -61,4 +61,4 @@ Once the `pipelines/` files have been customized, output a brief report to the u
 
 ---
 
-> 📖 For the full data file reference, phase schemas, and QA system, see [`AGENT_GUIDE.md`](AGENT_GUIDE.md).
+> 📖 For the full data file reference, phase schemas, and QA system, see [`MASTER_GUIDE.md`](MASTER_GUIDE.md).

@@ -24,7 +24,7 @@ Before running, confirm all of the following exist:
 - `global_characters/[Name]/presentation.json` — biography
 - `global_characters/[Name]/general_mood.md` — current life context
 - `global_characters/[Name]/canonical_visual.md` — visual baseline (for emotional state image prompts)
-- `data/lore.json` — the story's lore (cast, location, period, themes)
+- `data/final_lore.json` — the story's lore (cast, location, period, themes)
 - `data/scenario_scenes.json` — the scene list (to understand what situations this character faces)
 
 ---
@@ -66,7 +66,7 @@ Then generate the human-readable markdown (`personality_signature.md`):
 
 ```markdown
 # [Name] — Personality Signature
-*Project: [project name from lore.json]*
+*Project: [project name from final_lore.json]*
 
 ## Core Identity
 [2-3 sentences capturing who this person is at the centre — not surface traits, but the deep driver]

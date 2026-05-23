@@ -1,0 +1,91 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Scene-level script. Contains all dialogue, narration, sound, and pacing for each scene as an ordered sequence of beats. This is the narrative writing layer — no panel layout decisions are made here.",
+  "_agent_inputs": [
+    "scenario_synopsis.json",
+    "scenario_scenes.json",
+    "scenario_chapters.json",
+    "pages.json",
+    "character_moods.json",
+    "personality_signature.json",
+    "lore.json"
+  ],
+  "scenes": [
+    {
+      "scene_id": 1,
+      "chapter_id": 1,
+      "title": "",
+
+      "page_budget": {
+        "pages": [],
+        "estimated_total_panels": 0,
+        "density_note": "sparse | moderate | dense"
+      },
+
+      "emotional_arc": {
+        "opening_state": "",
+        "turning_point": "",
+        "closing_state": "",
+        "arc_note": ""
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc1_b01",
+          "type": "action",
+          "description": "",
+          "character_focus": "",
+          "emotional_state": "",
+          "weight": "anchor | supporting | ambient"
+        },
+        {
+          "beat_id": "sc1_b02",
+          "type": "dialogue",
+          "speaker": "",
+          "text": "",
+          "delivery": "",
+          "subtext": "",
+          "volume": "whisper | quiet | normal | loud | shout",
+          "weight": "anchor | supporting | ambient"
+        },
+        {
+          "beat_id": "sc1_b03",
+          "type": "narration",
+          "text": "",
+          "voice": "omniscient | character_internal",
+          "character_id": null,
+          "tone": "",
+          "weight": "anchor | supporting | ambient"
+        },
+        {
+          "beat_id": "sc1_b04",
+          "type": "internal_monologue",
+          "character_id": "",
+          "text": "",
+          "tone": "",
+          "weight": "anchor | supporting | ambient"
+        },
+        {
+          "beat_id": "sc1_b05",
+          "type": "sfx",
+          "text": "",
+          "description": "",
+          "intensity": "subtle | moderate | dramatic",
+          "weight": "supporting | ambient"
+        },
+        {
+          "beat_id": "sc1_b06",
+          "type": "silence",
+          "description": "",
+          "duration": "brief | held | extended",
+          "purpose": "",
+          "weight": "anchor | supporting"
+        }
+      ],
+
+      "pacing_notes": "",
+      "scene_thesis": "",
+      "transition_out": ""
+    }
+  ]
+}

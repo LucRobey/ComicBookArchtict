@@ -1,0 +1,25 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Narrative style and tropes researched from a reference comic. Produced by the Style Research agent (Phase 0.5) to serve as thematic ingredients for the downstream lore merging step.",
+  "reference_comic": "",
+  "thematic_tropes": [
+    {
+      "name": "",
+      "description": "",
+      "example_usage": ""
+    }
+  ],
+  "narrative_rules": [
+    {
+      "rule": "",
+      "reason": ""
+    }
+  ],
+  "character_role_guidelines": [
+    {
+      "archetype": "",
+      "description": ""
+    }
+  ],
+  "humor_and_pacing_tropes": []
+}

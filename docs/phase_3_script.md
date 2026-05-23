@@ -1,59 +1,199 @@
-# 🤖 Phase 3: Scripting
+# 🤖 Phase 3: Scripting (Two-Stage Pipeline)
 
-**App Tab:** ✍️ Script
-**Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
-**Upstream:** [Phase 2 →](phase_2_structure.md)
-**Downstream:** [Phase 4/5 →](phase_4_images.md) | [Phase 6 →](phase_6_assembly.md)
+**App Tab:** ✍️ Script (Sub-tabs: Scene Script | Panel Script)  
+**Master Guide:** [← MASTER_GUIDE.md](../MASTER_GUIDE.md)  
+**Pipeline Flow:** 
+- **Stage 3A (Scene Script)**: Runs *before* pacing and panels. Upstream: Phase 0.2 Scenario, Downstream: Phase 1.5 Pacing.
+- **Stage 3B (Panel Script)**: Runs *after* pacing and panels (in parallel with Phase 2). Upstream: Phase 2 Panels & Stage 3A Scene Script, Downstream: Phase 4/5 Images & Phase 6 Assembly.
 
 ---
 
 ## What This Phase Does
 
-Reads `data/panels.json` and writes all dialogue, internal thoughts, and narrator captions for every panel. Output is `data/script.json` — used by both the image agent (bubble context) and the Assembly Studio (lettering).
+Produces the complete comic script in two sequential stages:
+
+| Stage | Pipeline | Job | Output |
+|-------|----------|-----|--------|
+| **3A — Scene Script** | `pipelines/10_scene_script.md` | Writes all dialogue, narration, SFX, and pacing beats per scene. Pure writing — no panel layout decisions. | `data/scene_script.json` |
+| **3B — Panel Script** | `pipelines/11_panel_script.md` | Assigns scene script beats to panels. Adds lettering, acting direction, balloon types, and reading flow. | `data/script.json` |
+
+**Why two stages:** Separating narrative writing (what characters say) from visual editing (which panel each line goes into) produces better dialogue and better layouts than doing both simultaneously.
 
 ---
 
-## Inputs
+## Stage 3A — Scene Script
+
+### Inputs
 
 | File | Path |
 |------|------|
-| Panel breakdown | `data/panels.json` |
-| Instructions | `pipelines/scripting_instructions.md` |
-| Lore rules | `data/lore.json` |
-| Scene context | `data/scenario.json` (optional) |
+| Lore rules | `data/final_lore.json` |
+| Full synopsis | `data/scenario_synopsis.json` |
+| Chapter breakdown | `data/scenario_chapters.json` |
+| Scene list | `data/scenario_scenes.json` |
+| Character moods | `data/character_moods.json` |
+| Character voice | `data/personality_signature.json` |
+| Agent instructions | `pipelines/10_scene_script.md` |
 
----
-
-## Output
+### Output
 
 | File | Path |
 |------|------|
-| All dialogue | `data/script.json` |
+| Scene-level script | `data/scene_script.json` |
 
----
-
-## `data/script.json` Schema
+### `data/scene_script.json` Schema
 
 ```json
 {
+  "_schema_version": "1.0",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "chapter_id": 1,
+      "title": "The Defiant Toaster",
+      "page_budget": {
+        "pages": [3],
+        "estimated_total_panels": 3,
+        "density_note": "sparse"
+      },
+      "emotional_arc": {
+        "opening_state": "Quiet, meditative focus",
+        "turning_point": null,
+        "closing_state": "Quiet, meditative focus",
+        "arc_note": "No shift — this is the baseline"
+      },
+      "beats": [
+        {
+          "beat_id": "sc1_b01",
+          "type": "action | dialogue | narration | internal_monologue | sfx | silence",
+          "...": "fields vary by type — see template"
+        }
+      ],
+      "pacing_notes": "Slow, meditative. Let the reader settle in.",
+      "scene_thesis": "Adèle imposes order on small things because the big things are beyond her control.",
+      "transition_out": "Hard cut — the knock shatters the silence."
+    }
+  ]
+}
+```
+
+### Beat Types
+
+| Type | Key Fields |
+|------|-----------|
+| `action` | `description`, `character_focus`, `emotional_state`, `weight` |
+| `dialogue` | `speaker`, `text`, `delivery`, `subtext`, `volume`, `weight` |
+| `narration` | `text`, `voice` (omniscient/character_internal), `tone`, `weight` |
+| `internal_monologue` | `character_id`, `text`, `tone`, `weight` |
+| `sfx` | `text`, `description`, `intensity`, `weight` |
+| `silence` | `description`, `duration`, `purpose`, `weight` |
+
+### Beat Weight
+
+| Weight | Meaning |
+|--------|---------|
+| `anchor` | Dramatically essential — needs its own visual space. 1-3 per scene max. |
+| `supporting` | Important but flexible — can share a panel. |
+| `ambient` | Atmospheric — can be combined, trimmed, or cut. |
+
+### Beat ID Format
+```
+sc[scene_id]_b[NN]
+```
+Example: `sc3_b07` = Scene 3, beat 7
+
+---
+
+## Stage 3B — Panel Script
+
+### Inputs
+
+| File | Path |
+|------|------|
+| Scene script | `data/scene_script.json` |
+| Scene list | `data/scenario_scenes.json` |
+| Page layout | `data/pages.json` |
+| Character moods | `data/character_moods.json` |
+| Lore rules | `data/final_lore.json` |
+| Agent instructions | `pipelines/11_panel_script.md` |
+
+### Output
+
+| File | Path |
+|------|------|
+| Final panel script | `data/script.json` |
+
+### `data/script.json` Schema (v2.0)
+
+```json
+{
+  "_schema_version": "2.0",
   "pages": [
     {
-      "page_number": 1,
+      "page_number": 3,
+      "scene_ids": [1],
+      "layout": "three_panel_horizontal",
+      "page_turn_context": "",
+      "page_rhythm_note": "Slow establishing page — the reader settles in.",
       "panels": [
         {
           "panel_number": 1,
+          "panel_id": "p3_pan1",
+          "scene_id": 1,
+          "beats_assigned": ["sc1_b01", "sc1_b02"],
+          "lettering": {
+            "captions": [
+              {
+                "beat_ref": "sc1_b03",
+                "text": "The screw didn't move.",
+                "position": "top_left",
+                "style": "narration_box"
+              }
+            ],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc1_b04",
+                "character_id": "CHARACTER_A",
+                "text": "Probably... a Phillips head.",
+                "balloon_type": "normal",
+                "tail_direction": "lower_left",
+                "emphasis_words": ["Phillips"],
+                "reading_order": 2
+              }
+            ],
+            "sfx": [
+              {
+                "beat_ref": "sc1_b02",
+                "text": "SKREEE",
+                "style": "integrated",
+                "position": "near_hands",
+                "size": "medium"
+              }
+            ]
+          },
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Brow furrowed, lips pressed",
+              "body_language": "Hunched over the table",
+              "gaze_direction": "Down at the toaster",
+              "micro_action": "Adjusting butter knife grip"
+            }
+          },
+          "panel_rhythm": "establishing",
+          "reader_focus": "Adèle's hands and the butter knife",
+          "panel_tension": "low",
           "dialogues": [
             {
-              "id": "d_1_1_1",
+              "id": "d_3_1_1",
               "speaker": "NARRATOR",
-              "text": "Sunday. 9:04 AM.",
-              "type": "caption"
-            },
-            {
-              "id": "d_1_1_2",
-              "speaker": "CHARACTER_A",
-              "text": "Has anyone seen the—",
-              "type": "speech"
+              "text": "The screw didn't move.",
+              "type": "caption",
+              "beat_ref": "sc1_b03",
+              "balloon_type": null,
+              "style": "narration_box",
+              "position": "top_left",
+              "emphasis_words": [],
+              "reading_order": 1
             }
           ]
         }
@@ -67,90 +207,66 @@ Reads `data/panels.json` and writes all dialogue, internal thoughts, and narrato
 ```
 d_[page_number]_[panel_number]_[dialogue_index]
 ```
-- `d_1_1_1` → Page 1, Panel 1, first line
-- `d_3_4_2` → Page 3, Panel 4, second line
+- `d_3_1_1` → Page 3, Panel 1, first line
+- `d_4_2_3` → Page 4, Panel 2, third line
 
 IDs are **permanent**. They are cross-referenced by the Assembly Studio for lettering placement. **Never change or renumber an approved ID.**
 
-### `type` values:
+### `type` values (backward compatible):
 
 | Value | Icon | Meaning |
-|-------|------|---------|
+|-------|------|---------| 
 | `speech` | 💬 | Standard speech bubble |
 | `thought` | 💭 | Thought bubble / internal monologue |
 | `caption` | 📝 | Narrator box or location caption |
+| `sfx` | 🔊 | Sound effect |
 
-### `speaker` values:
-- Character names in ALL_CAPS: `CHARACTER_A`, `CHARACTER_B`
-- `NARRATOR` for narrator captions
+### `balloon_type` values (new in v2.0):
 
-### Writing rules:
-1. Read `data/lore.json → rules` before writing anything.
-2. Read `pipelines/scripting_instructions.md` for tone-by-scene-type guidelines.
-3. Max **3–4 dialogue boxes per panel** (up to 6 if `[MULTI-DIALOGUE]` tag is present).
-4. Silent panels are valid: `"dialogues": []`
-5. Captions state facts: `"Sunday. 9:04 AM."` ✅ — `"It was a difficult morning."` ❌
+| Value | Visual treatment |
+|-------|-----------------|
+| `normal` | Standard rounded balloon |
+| `whisper` | Dashed border |
+| `shout` | Jagged border |
+| `thought` | Cloud-shaped bubble |
+| `off_panel` | Jagged tail pointing off-frame |
+| `radio` | Rectangular, lightning bolt tail |
+| `phone` | Rectangular, phone iconography |
+
+### Panel rhythm values:
+
+`establishing` · `slow_build` · `conversational` · `rapid_exchange` · `reaction_beat` · `punchline` · `silence_beat` · `climax` · `denouement`
 
 ---
 
 ## App: ✍️ Script Tab
 
-**Left sidebar:** Page navigation (orange accent). **Main area:** One panel card per panel with: camera badge, action text (italic, read-only from `data/panels.json`), dialogue list.
+The Script tab contains two sub-tabs:
 
-**Per dialogue line:** Type icon, speaker name, dialogue ID (monospace right), ✏️ edit button → inline textarea (saves on Ctrl+Enter), 🚩 flag button.
+### Scene Script sub-tab
+Displays `data/scene_script.json`. Per-scene view showing ordered beats with dialogue, emotional arc, and pacing notes. Supports inline editing and QA flagging at the beat level.
 
-**🚩 Flag Panel** button on each card = full panel rewrite request.
-
-> ⚠️ **Inline text edits do NOT create QA reports.** Always re-read `data/script.json` before applying QA.
+### Panel Script sub-tab
+Displays `data/script.json`. Per-page/panel view showing lettering assignments, acting direction, and panel rhythm. Supports inline dialogue editing, type switching, and QA flagging at the line and panel level.
 
 ---
 
 ## QA Reports → `qa/script/`
 
-### `[REWRITE_LINE]`
-```markdown
-## Dialogue d_1_3_2 — [REWRITE_LINE]
-* **Speaker:** CHARACTER_B
-* **Current:** "Mmhm."
-* **Request:** Something that sounds attentive but reveals she heard nothing.
-```
-**Action:** Update only `dialogues[id="d_1_3_2"].text`. Find by ID, never change the ID.
+### Stage 3A flags (narrative)
+- `[REWRITE_BEAT]` — Rewrite a specific beat by `beat_id`
+- `[REWRITE_SCENE]` — Rewrite all beats for a scene
+- `[ADJUST_DENSITY]` — Too many or too few beats
+- `[REWRITE_VOICE]` — Character doesn't sound right
 
-### `[CHANGE_TYPE]`
-```markdown
-## Dialogue d_2_3_1 — [CHANGE_TYPE]
-* **Current type:** speech
-* **New type:** thought
-```
-
-### `[CHANGE_SPEAKER]`
-```markdown
-## Dialogue d_1_2_1 — [CHANGE_SPEAKER]
-* **New speaker:** CHARACTER_B
-```
-
-### `[DELETE_LINE]`
-```markdown
-## Dialogue d_3_1_3 — [DELETE_LINE]
-* **Confirmed:** yes
-```
-**Action:** Remove the entry. **Do NOT renumber remaining IDs** — leave the gap. Renumbering breaks assembly references.
-
-### `[ADD_LINE_AFTER]`
-```markdown
-## Dialogue d_1_1_2 — [ADD_LINE_AFTER]
-* **New speaker:** CHARACTER_B
-* **New text:** "The dog moved it."
-* **New type:** speech
-```
-**Action:** Insert after `d_1_1_2`. Assign `d_1_1_3`. If `d_1_1_3` already exists, use `d_1_1_3b`.
-
-### `[FULL_PANEL_REWRITE]`
-```markdown
-## Page 2, Panel 3 — [FULL_PANEL_REWRITE]
-* **Request:** Pure subtext — neither character says what they mean.
-```
-**Action:** Rewrite all `dialogues[]` for that panel. Preserve existing IDs where possible.
+### Stage 3B flags (layout)
+- `[REWRITE_LINE]` — Rewrite specific dialogue by `id`
+- `[CHANGE_SPEAKER]` — Reassign speaker
+- `[CHANGE_TYPE]` — Change dialogue type
+- `[DELETE_LINE]` — Remove entry (do NOT renumber)
+- `[ADD_LINE_AFTER]` — Insert after specific `id`
+- `[FULL_PANEL_REWRITE]` — Rewrite all lettering for a panel
+- `[REASSIGN_BEATS]` — Move beats between panels
 
 ---
 
@@ -160,5 +276,5 @@ IDs are **permanent**. They are cross-referenced by the Assembly Studio for lett
 2. **When deleting:** do not renumber. Leave the ID gap.
 3. **When adding:** increment index; use letter suffix for collisions (`3b`, `3c`).
 4. **Re-read `data/script.json` before applying QA** — human may have made inline edits.
-5. Read the panel's `action` from `data/panels.json` before writing dialogue.
-6. After writing, update `PRODUCTION_STATUS.md`: Phase 3 → `[REVIEW]`
+5. **Stage 3B may not rewrite dialogue substance** — only Pipeline 10 controls the words.
+6. After writing, update `PRODUCTION_STATUS.md`: Phase 3A/3B → `[REVIEW]`

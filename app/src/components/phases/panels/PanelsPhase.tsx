@@ -19,6 +19,7 @@ const PANELS_PATH = 'data/panels.json';
 
 const PanelsPhase: React.FC = () => {
   const { data, loading, error, save } = useJsonFile<PanelsData>(PANELS_PATH);
+  const { data: panelStyle } = useJsonFile<any>('data/panel_style.json');
   const [selectedPage, setSelectedPage] = useState(0);
   const [qaTarget, setQaTarget] = useState<{
     pageNumber: number; panelNumber: number;
@@ -120,23 +121,67 @@ const PanelsPhase: React.FC = () => {
           <span className="panels-count-label">{currentPage.panels.length} panels</span>
           <span className="panels-inline-hint">📐 Camera angle changes save instantly</span>
         </div>
-        <div className="panels-grid">
-          {currentPage.panels.map(panel => (
-            <PanelStructureCard
-              key={panel.panel_number}
-              panel={panel}
-              pageNumber={currentPage.page_number}
-              onFramingChange={handleFramingChange}
-              onFlag={(pn, action, chars, tags) => setQaTarget({
-                pageNumber: currentPage.page_number,
-                panelNumber: pn,
-                currentAction: action,
-                currentCharacters: chars,
-                currentTags: tags,
+        {(() => {
+          const pattern = panelStyle?.signature_patterns?.find((p: any) => p.pattern_id === currentPage.layout_template)
+                       || panelStyle?.signature_patterns?.[0];
+
+          const gridStyle: React.CSSProperties = pattern && panelStyle ? {
+            display: 'grid',
+            gridTemplateColumns: pattern.grid_template.columns,
+            gridTemplateRows: pattern.grid_template.rows,
+            gap: panelStyle.gutter?.size || '8px',
+            padding: panelStyle.gutter?.outer_margin || '16px',
+            background: '#151313', // drafting board background
+            border: '2px dashed rgba(16, 185, 129, 0.2)', // signature green accent border
+            borderRadius: '12px',
+            width: '90%',
+            aspectRatio: '800 / 1131',
+            maxWidth: '700px',
+            margin: '16px auto',
+            alignContent: 'stretch',
+            boxShadow: '0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 10px 15px -6px rgba(0, 0, 0, 0.4)',
+            overflow: 'hidden'
+          } : {};
+
+          return (
+            <div className="panels-grid" style={gridStyle}>
+              {currentPage.panels.map((panel, idx) => {
+                const slot = pattern?.panel_areas?.find((sa: any) => sa.slot === panel.panel_number)
+                          || pattern?.panel_areas?.[idx]
+                          || pattern?.panel_areas?.[0];
+
+                const cardStyle: React.CSSProperties = slot ? {
+                  gridArea: slot.gridArea,
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  boxSizing: 'border-box',
+                  overflow: 'auto',
+                  borderRadius: panelStyle?.panel_shapes?.border_radius || '0px',
+                  border: `${panelStyle?.panel_shapes?.border_weight || '1.5px'} solid ${panelStyle?.panel_shapes?.border_color || '#000000'}`,
+                  backgroundColor: '#1E293B',
+                } : {};
+
+                return (
+                  <PanelStructureCard
+                    key={panel.panel_number}
+                    panel={panel}
+                    pageNumber={currentPage.page_number}
+                    onFramingChange={handleFramingChange}
+                    style={cardStyle}
+                    onFlag={(pn, action, chars, tags) => setQaTarget({
+                      pageNumber: currentPage.page_number,
+                      panelNumber: pn,
+                      currentAction: action,
+                      currentCharacters: chars,
+                      currentTags: tags,
+                    })}
+                  />
+                );
               })}
-            />
-          ))}
-        </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* QA Drawer */}

@@ -1,0 +1,1585 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Panel-level script. Takes the scene script beats and assigns them to specific panels within pages. Adds lettering details, acting direction, balloon styling, and reading flow. This is the visual storytelling / editing layer.",
+  "_agent_inputs": [
+    "scene_script.json",
+    "scenario_scenes.json",
+    "pages.json",
+    "character_moods.json",
+    "lore.json"
+  ],
+  "pages": [
+    {
+      "page_number": 3,
+      "scene_ids": [1],
+      "layout": "three_panel_horizontal",
+      "page_turn_context": "Opening page — establishes Adèle alone in her world before the disruption",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p3_pan1",
+          "scene_id": 1,
+          "beats_assigned": ["sc1_b01", "sc1_b02"],
+
+          "lettering": {
+            "captions": [
+              {
+                "beat_ref": "sc1_b02",
+                "text": "Tuesday. 9:47 PM. The toaster had been broken since March.",
+                "position": "top_left",
+                "style": "narration_box"
+              }
+            ],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Brow furrowed in concentration, lips slightly pursed",
+              "body_language": "Hunched forward over the table, both hands gripping the butter knife",
+              "gaze_direction": "Down — locked onto the screw head",
+              "micro_action": "Thumb adjusting knife angle against the Phillips screw"
+            }
+          },
+
+          "panel_rhythm": "establishing",
+          "reader_focus": "Adèle's hands on the toaster — the intimacy of the task",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p3_pan2",
+          "scene_id": 1,
+          "beats_assigned": ["sc1_b03", "sc1_b04"],
+
+          "lettering": {
+            "captions": [
+              {
+                "beat_ref": "sc1_b03",
+                "text": "Probably a Phillips head. Most likely a number two. The butter knife was... statistically adequate.",
+                "position": "top_right",
+                "style": "character_voice"
+              }
+            ],
+            "speech_balloons": [],
+            "sfx": [
+              {
+                "beat_ref": "sc1_b04",
+                "text": "SKREEE",
+                "style": "integrated",
+                "position": "center_bottom",
+                "size": "small"
+              }
+            ]
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Eyes narrowed, analytical focus",
+              "body_language": "Leaning in closer, knife slipping on metal",
+              "gaze_direction": "Down — studying the screw resistance",
+              "micro_action": "Knife scraping, leaving a thin scratch on chrome"
+            }
+          },
+
+          "panel_rhythm": "slow_build",
+          "reader_focus": "The scratch on the toaster — first sign of failure",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 3,
+          "panel_id": "p3_pan3",
+          "scene_id": 1,
+          "beats_assigned": ["sc1_b05", "sc1_b06"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Glasses pushed up with wrist, flat stare at the toaster",
+              "body_language": "Sitting back slightly, arms resting on table edge",
+              "gaze_direction": "Level — regarding the toaster like an adversary",
+              "micro_action": "Pushing glasses up with the back of her wrist"
+            }
+          },
+
+          "panel_rhythm": "silence_beat",
+          "reader_focus": "The empty apartment around her — the quiet loneliness of the space",
+          "panel_tension": "low"
+        }
+      ],
+
+      "page_rhythm_note": "Three horizontal panels, each progressively wider in emotional scope. Start tight on hands, end wide on the apartment silence."
+    },
+
+    {
+      "page_number": 4,
+      "scene_ids": [2],
+      "layout": "standard_grid",
+      "page_turn_context": "Page turn reveals the disruption — the knock should feel like a physical jolt",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p4_pan1",
+          "scene_id": 2,
+          "beats_assigned": ["sc2_b01", "sc2_b02"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": [
+              {
+                "beat_ref": "sc2_b01",
+                "text": "BAM BAM BAM",
+                "style": "overlaid",
+                "position": "center_top",
+                "size": "large"
+              }
+            ]
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Eyes wide, startled flinch",
+              "body_language": "Shoulders jerked up, butter knife mid-clatter onto table",
+              "gaze_direction": "Snapping toward the door",
+              "micro_action": "Dropping the butter knife reflexively"
+            }
+          },
+
+          "panel_rhythm": "climax",
+          "reader_focus": "The violence of the knock — breaking the established quiet",
+          "panel_tension": "high"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p4_pan2",
+          "scene_id": 2,
+          "beats_assigned": ["sc2_b03"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Mouth slightly open, processing",
+              "body_language": "Standing at the open door, one hand on the handle",
+              "gaze_direction": "At the flamingo, then slowly up to Thomas",
+              "micro_action": "Grip tightening on the door handle"
+            },
+            "CHARACTER_B": {
+              "expression": "Easy grin, completely relaxed",
+              "body_language": "Leaning against the doorframe, flamingo tucked under one arm like a baguette",
+              "gaze_direction": "At Adèle — reading her reaction",
+              "micro_action": "Slight lean forward, casual as borrowing sugar"
+            }
+          },
+
+          "panel_rhythm": "reaction_beat",
+          "reader_focus": "The flamingo — the absurd centerpiece revealed",
+          "panel_tension": "medium"
+        },
+        {
+          "panel_number": 3,
+          "panel_id": "p4_pan3",
+          "scene_id": 2,
+          "beats_assigned": ["sc2_b04", "sc2_b05"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc2_b04",
+                "character_id": "CHARACTER_B",
+                "text": "Hey. So — quick thing. Completely unrelated to anything. Can I use your bathtub?",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["completely", "unrelated"],
+                "reading_order": 1
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Eyebrows raised innocently, hint of a smirk",
+              "body_language": "Gesturing vaguely toward the apartment interior",
+              "gaze_direction": "At Adèle, studying her defenses",
+              "micro_action": "Slight head tilt, selling the casual pitch"
+            }
+          },
+
+          "panel_rhythm": "punchline",
+          "reader_focus": "Thomas's delivery — the bathtub question landing",
+          "panel_tension": "medium"
+        },
+        {
+          "panel_number": 4,
+          "panel_id": "p4_pan4",
+          "scene_id": 2,
+          "beats_assigned": ["sc2_b06", "sc2_b07"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc2_b06",
+                "character_id": "CHARACTER_A",
+                "text": "Thomas... what is that.",
+                "balloon_type": "normal",
+                "tail_direction": "down_right",
+                "emphasis_words": ["what"],
+                "reading_order": 1
+              },
+              {
+                "beat_ref": "sc2_b07",
+                "character_id": "CHARACTER_B",
+                "text": "It's a flamingo. Obviously. The colour is — look, that's a whole separate conversation.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["obviously", "separate"],
+                "reading_order": 2
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Flat, diagnostic stare",
+              "body_language": "Arms crossed, blocking the doorway reflexively",
+              "gaze_direction": "Down at the flamingo, disbelief",
+              "micro_action": "One hand gesturing limply at the bird"
+            },
+            "CHARACTER_B": {
+              "expression": "Waving off the colour question, deflecting",
+              "body_language": "Already half-stepping past her into the apartment",
+              "gaze_direction": "Looking past Adèle toward the hallway",
+              "micro_action": "Shifting the flamingo to his other arm"
+            }
+          },
+
+          "panel_rhythm": "conversational",
+          "reader_focus": "The exchange — Adèle's deadpan vs Thomas's deflection",
+          "panel_tension": "medium"
+        }
+      ],
+
+      "page_rhythm_note": "Impact → Reveal → Punchline → Volley. The page reads as a comedic escalation from silence to absurdity."
+    },
+
+    {
+      "page_number": 5,
+      "scene_ids": [3],
+      "layout": "asymmetric_focus",
+      "page_turn_context": "The negotiation — Thomas steamrolling Adèle's resistance",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p5_pan1",
+          "scene_id": 3,
+          "beats_assigned": ["sc3_b01", "sc3_b02"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc3_b01",
+                "character_id": "CHARACTER_B",
+                "text": "My plumbing is — you don't want details. Trust me. The point is, she needs water. Shallow water. Your tub is perfect.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["she", "perfect"],
+                "reading_order": 1
+              },
+              {
+                "beat_ref": "sc3_b02",
+                "character_id": "CHARACTER_A",
+                "text": "She.",
+                "balloon_type": "normal",
+                "tail_direction": "down_right",
+                "emphasis_words": ["She"],
+                "reading_order": 2
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Rapid-fire enthusiasm, wide eyes",
+              "body_language": "Gesturing at the bathtub like a real estate agent showing a penthouse",
+              "gaze_direction": "Sweeping between Adèle and the tub",
+              "micro_action": "Pointing emphatically at the empty porcelain"
+            },
+            "CHARACTER_A": {
+              "expression": "One eyebrow raised, minimal",
+              "body_language": "Standing in the doorway, arms at sides, not entering",
+              "gaze_direction": "At Thomas, processing the pronoun",
+              "micro_action": "Slight backward lean — recoiling from the implication"
+            }
+          },
+
+          "panel_rhythm": "rapid_exchange",
+          "reader_focus": "Thomas's sales pitch crashing into Adèle's one-word response",
+          "panel_tension": "medium"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p5_pan2",
+          "scene_id": 3,
+          "beats_assigned": ["sc3_b03", "sc3_b04"],
+
+          "lettering": {
+            "captions": [
+              {
+                "beat_ref": "sc3_b04",
+                "text": "It's 10 PM on a Tuesday. There is a green bird in my hallway. This is my life now.",
+                "position": "bottom_right",
+                "style": "character_voice"
+              }
+            ],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc3_b03",
+                "character_id": "CHARACTER_B",
+                "text": "Her name is Giselle. Which — I didn't pick. She came pre-named.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["Giselle", "pre-named"],
+                "reading_order": 1
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Defensive pride, like introducing a girlfriend",
+              "body_language": "One hand on the flamingo's back, protective",
+              "gaze_direction": "At Adèle, gauging her reaction",
+              "micro_action": "Slight puff of the chest"
+            },
+            "CHARACTER_A": {
+              "expression": "Eyes closed, pinching the bridge of her nose",
+              "body_language": "Weight shifting, resigned lean against the doorframe",
+              "gaze_direction": "Eyes shut — processing",
+              "micro_action": "Slow exhale through the nose"
+            }
+          },
+
+          "panel_rhythm": "reaction_beat",
+          "reader_focus": "Adèle's internal monologue — the moment she gives up fighting",
+          "panel_tension": "medium"
+        },
+        {
+          "panel_number": 3,
+          "panel_id": "p5_pan3",
+          "scene_id": 3,
+          "beats_assigned": ["sc3_b05", "sc3_b06"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc3_b05",
+                "character_id": "CHARACTER_A",
+                "text": "...bathroom's on the left.",
+                "balloon_type": "whisper",
+                "tail_direction": "down_right",
+                "emphasis_words": [],
+                "reading_order": 1
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Defeated half-smile, eyes still closed",
+              "body_language": "Already turning away toward the kitchen, waving vaguely at the bathroom",
+              "gaze_direction": "Away — toward her toaster refuge",
+              "micro_action": "Limp wave in the direction of the bathroom"
+            },
+            "CHARACTER_B": {
+              "expression": "Triumphant grin",
+              "body_language": "Marching past her with the flamingo, victorious",
+              "gaze_direction": "Forward — toward the bathroom",
+              "micro_action": "Quick wink at Adèle as he passes"
+            }
+          },
+
+          "panel_rhythm": "denouement",
+          "reader_focus": "The surrender — Adèle walking away, Thomas marching in",
+          "panel_tension": "low"
+        }
+      ],
+
+      "page_rhythm_note": "Three panels: pitch → breaking point → surrender. The asymmetric layout gives the middle panel (Adèle's internal monologue) the most space."
+    },
+
+    {
+      "page_number": 6,
+      "scene_ids": [4],
+      "layout": "standard_grid",
+      "page_turn_context": "Time skip — the clicking sound draws Adèle back",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p6_pan1",
+          "scene_id": 4,
+          "beats_assigned": ["sc4_b01", "sc4_b02"],
+
+          "lettering": {
+            "captions": [
+              {
+                "beat_ref": "sc4_b02",
+                "text": "That's not a plumbing sound.",
+                "position": "top_right",
+                "style": "character_voice"
+              }
+            ],
+            "speech_balloons": [],
+            "sfx": [
+              {
+                "beat_ref": "sc4_b01",
+                "text": "tik tik tik tik",
+                "style": "background",
+                "position": "center_bottom",
+                "size": "small"
+              }
+            ]
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Head tilted, listening",
+              "body_language": "Paused mid-task at the kitchen table, butter knife hovering",
+              "gaze_direction": "Toward the bathroom door — off-panel",
+              "micro_action": "Ear slightly turned toward the sound"
+            }
+          },
+
+          "panel_rhythm": "slow_build",
+          "reader_focus": "The sound — tiny, rhythmic, out of place",
+          "panel_tension": "medium"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p6_pan2",
+          "scene_id": 4,
+          "beats_assigned": ["sc4_b03"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Bewildered, mouth slightly open",
+              "body_language": "Standing in the bathroom doorway, leaning on the frame",
+              "gaze_direction": "Down at Thomas and the flamingo",
+              "micro_action": "Hand gripping the doorframe"
+            },
+            "CHARACTER_B": {
+              "expression": "Peaceful, focused on the bird",
+              "body_language": "Sitting on the tub edge, palm open with corn kernels",
+              "gaze_direction": "At the flamingo's beak, watching it eat",
+              "micro_action": "Fingers gently releasing one kernel at a time"
+            }
+          },
+
+          "panel_rhythm": "reaction_beat",
+          "reader_focus": "The reveal — Thomas feeding the bird like it's the most natural thing in the world",
+          "panel_tension": "medium"
+        },
+        {
+          "panel_number": 3,
+          "panel_id": "p6_pan3",
+          "scene_id": 4,
+          "beats_assigned": ["sc4_b04", "sc4_b05"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc4_b04",
+                "character_id": "CHARACTER_A",
+                "text": "You brought... food for it.",
+                "balloon_type": "normal",
+                "tail_direction": "down_right",
+                "emphasis_words": ["food"],
+                "reading_order": 1
+              },
+              {
+                "beat_ref": "sc4_b05",
+                "character_id": "CHARACTER_B",
+                "text": "Her. And yeah, she likes the dry kind better. The wet stuff makes her — anyway. It's a texture thing.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["Her", "texture"],
+                "reading_order": 2
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Slow realization — this was premeditated",
+              "body_language": "Arms folded loosely, weight on one hip",
+              "gaze_direction": "At the bag of corn on the floor",
+              "micro_action": "Chin dropping slightly"
+            },
+            "CHARACTER_B": {
+              "expression": "Caught out but unapologetic",
+              "body_language": "Shrugging mid-sentence, casual deflection",
+              "gaze_direction": "At the flamingo, avoiding Adèle's eyes",
+              "micro_action": "Interrupting himself with a hand wave"
+            }
+          },
+
+          "panel_rhythm": "conversational",
+          "reader_focus": "The corn as evidence — Thomas planned this",
+          "panel_tension": "medium"
+        },
+        {
+          "panel_number": 4,
+          "panel_id": "p6_pan4",
+          "scene_id": 4,
+          "beats_assigned": ["sc4_b06"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Softening — a crack in the analytical armor",
+              "body_language": "Leaning slightly forward, drawn in despite herself",
+              "gaze_direction": "Meeting the flamingo's eye",
+              "micro_action": "Unconscious half-step into the bathroom"
+            }
+          },
+
+          "panel_rhythm": "silence_beat",
+          "reader_focus": "The flamingo looking at Adèle — a connection forming",
+          "panel_tension": "low"
+        }
+      ],
+
+      "page_rhythm_note": "Sound → Reveal → Dialogue → Silent connection. Four panels building from suspicion to curiosity."
+    },
+
+    {
+      "page_number": 7,
+      "scene_ids": [5],
+      "layout": "three_panel_horizontal",
+      "page_turn_context": "The bird is alive — the central shock of the story",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p7_pan1",
+          "scene_id": 5,
+          "beats_assigned": ["sc5_b01", "sc5_b02"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": [
+              {
+                "beat_ref": "sc5_b01",
+                "text": "krrr",
+                "style": "integrated",
+                "position": "center_bottom",
+                "size": "medium"
+              }
+            ]
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Eyes widening — genuine shock",
+              "body_language": "Body frozen, one hand suspended mid-air",
+              "gaze_direction": "Locked on the flamingo's blinking eye",
+              "micro_action": "Breath caught — visible stillness"
+            }
+          },
+
+          "panel_rhythm": "climax",
+          "reader_focus": "The blink — the moment the bird becomes real",
+          "panel_tension": "high"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p7_pan2",
+          "scene_id": 5,
+          "beats_assigned": ["sc5_b03", "sc5_b04"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc5_b03",
+                "character_id": "CHARACTER_A",
+                "text": "Thomas. That's... that is a real bird.",
+                "balloon_type": "whisper",
+                "tail_direction": "down_right",
+                "emphasis_words": ["real"],
+                "reading_order": 1
+              },
+              {
+                "beat_ref": "sc5_b04",
+                "character_id": "CHARACTER_B",
+                "text": "Bankrupt roadside zoo. Outside Valence. She was the last one left. They were just... going to leave her.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["last", "leave"],
+                "reading_order": 2
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Mouth slightly open, whispering",
+              "body_language": "Hand reaching partway toward the bird, then stopping",
+              "gaze_direction": "Between the bird and Thomas",
+              "micro_action": "Swallowing — processing"
+            },
+            "CHARACTER_B": {
+              "expression": "Serious for once — no mask, no grin",
+              "body_language": "Hands resting on his knees, shoulders dropped",
+              "gaze_direction": "At the flamingo, not at Adèle",
+              "micro_action": "Voice dropping — no performance"
+            }
+          },
+
+          "panel_rhythm": "slow_build",
+          "reader_focus": "Thomas's rare sincerity — the truth behind the stunt",
+          "panel_tension": "high"
+        },
+        {
+          "panel_number": 3,
+          "panel_id": "p7_pan3",
+          "scene_id": 5,
+          "beats_assigned": ["sc5_b05"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Softened, absorbing",
+              "body_language": "Standing still, arms at sides",
+              "gaze_direction": "At the flamingo shifting its weight",
+              "micro_action": "Faint nod — unconscious acceptance"
+            },
+            "CHARACTER_B": {
+              "expression": "Quiet, watching Adèle process it",
+              "body_language": "Still seated on tub edge, hands clasped",
+              "gaze_direction": "At Adèle — gauging her response",
+              "micro_action": "Faint smile starting at the corners"
+            }
+          },
+
+          "panel_rhythm": "silence_beat",
+          "reader_focus": "The shared silence — something real has entered the room",
+          "panel_tension": "medium"
+        }
+      ],
+
+      "page_rhythm_note": "Three horizontal panels: shock → truth → silence. The center panel carries the emotional weight."
+    },
+
+    {
+      "page_number": 8,
+      "scene_ids": [6],
+      "layout": "splash_page",
+      "page_turn_context": "The emotional release — Adèle laughing on the floor",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p8_pan1",
+          "scene_id": 6,
+          "beats_assigned": ["sc6_b01", "sc6_b02", "sc6_b03"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc6_b01",
+                "character_id": "CHARACTER_B",
+                "text": "Okay, one thing. Mrs. Gable absolutely cannot find out about this.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["absolutely", "cannot"],
+                "reading_order": 1
+              },
+              {
+                "beat_ref": "sc6_b02",
+                "character_id": "CHARACTER_A",
+                "text": "Thomas. It's four feet tall.",
+                "balloon_type": "normal",
+                "tail_direction": "down_right",
+                "emphasis_words": ["four feet"],
+                "reading_order": 2
+              },
+              {
+                "beat_ref": "sc6_b03",
+                "character_id": "CHARACTER_B",
+                "text": "I told her it was a large parrot.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["large parrot"],
+                "reading_order": 3
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Dead serious — finger raised, conspiratorial lean",
+              "body_language": "Leaning forward from the tub edge, one finger raised like giving a briefing",
+              "gaze_direction": "At Adèle, earnest",
+              "micro_action": "Index finger wagging"
+            },
+            "CHARACTER_A": {
+              "expression": "Deadpan disbelief cracking into the first tremor of laughter",
+              "body_language": "Starting to slide down the wall, knees giving way",
+              "gaze_direction": "At Thomas, then ceiling — giving up",
+              "micro_action": "Hand covering her mouth, shoulders starting to shake"
+            }
+          },
+
+          "panel_rhythm": "punchline",
+          "reader_focus": "The 'large parrot' line as the comedic climax of the chapter",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p8_pan2",
+          "scene_id": 6,
+          "beats_assigned": ["sc6_b04", "sc6_b05", "sc6_b06"],
+
+          "lettering": {
+            "captions": [
+              {
+                "beat_ref": "sc6_b06",
+                "text": "She hadn't laughed like that since before Marc.",
+                "position": "bottom_right",
+                "style": "narration_box"
+              }
+            ],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Head tilted back, genuine laughter, tears at the corners",
+              "body_language": "Sitting on the bathmat, back against the tiled wall, shoulders shaking",
+              "gaze_direction": "Up at the ceiling, eyes crinkling",
+              "micro_action": "One hand on the floor for balance, the other over her stomach"
+            },
+            "CHARACTER_B": {
+              "expression": "Warm, satisfied — watching her laugh",
+              "body_language": "Sitting back on the tub edge, relaxed posture",
+              "gaze_direction": "At Adèle — taking in the moment",
+              "micro_action": "Quiet smile — no need to perform anymore"
+            }
+          },
+
+          "panel_rhythm": "denouement",
+          "reader_focus": "Adèle on the floor — the release. The narration grounds the emotion.",
+          "panel_tension": "low"
+        }
+      ],
+
+      "page_rhythm_note": "Splash-style layout: the top panel is the comedic exchange, the bottom is the wide emotional payoff. High angle looking down at Adèle on the bathmat."
+    },
+
+    {
+      "page_number": 9,
+      "scene_ids": [7],
+      "layout": "standard_grid",
+      "page_turn_context": "The bonding deepens — cold pizza and childhood echoes",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p9_pan1",
+          "scene_id": 7,
+          "beats_assigned": ["sc7_b01"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Relaxed, small smile, guard fully down",
+              "body_language": "Sitting cross-legged on the floor, holding a pizza slice",
+              "gaze_direction": "At the pizza box between them",
+              "micro_action": "Picking at a piece of cheese"
+            },
+            "CHARACTER_B": {
+              "expression": "Content, chewing",
+              "body_language": "Legs stretched out, leaning back against the tub",
+              "gaze_direction": "At the flamingo behind them",
+              "micro_action": "Eating the crust first"
+            }
+          },
+
+          "panel_rhythm": "establishing",
+          "reader_focus": "The overhead tableau — two siblings, pizza, a flamingo in a bathtub",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p9_pan2",
+          "scene_id": 7,
+          "beats_assigned": ["sc7_b02", "sc7_b03"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc7_b02",
+                "character_id": "CHARACTER_B",
+                "text": "This is exactly like Lyon. Floor pizza. Terrible lighting. Except the bird is new.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["exactly", "new"],
+                "reading_order": 1
+              },
+              {
+                "beat_ref": "sc7_b03",
+                "character_id": "CHARACTER_A",
+                "text": "The lighting in Lyon was worse. You had that... that lamp shaped like a football.",
+                "balloon_type": "normal",
+                "tail_direction": "down_right",
+                "emphasis_words": ["worse", "football"],
+                "reading_order": 2
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Nostalgic grin, mouth half-full",
+              "body_language": "Waving a pizza slice for emphasis",
+              "gaze_direction": "At Adèle",
+              "micro_action": "Gesturing around the bathroom as if it's the old room"
+            },
+            "CHARACTER_A": {
+              "expression": "Half-smile forming, looking away",
+              "body_language": "Shoulders softening, leaning into the memory",
+              "gaze_direction": "Into middle distance — remembering",
+              "micro_action": "Pizza slice forgotten in hand"
+            }
+          },
+
+          "panel_rhythm": "conversational",
+          "reader_focus": "The Lyon callback — the past overlaying the present",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 3,
+          "panel_id": "p9_pan3",
+          "scene_id": 7,
+          "beats_assigned": ["sc7_b04", "sc7_b05"],
+
+          "lettering": {
+            "captions": [
+              {
+                "beat_ref": "sc7_b05",
+                "text": "Same positions. Same cold pizza. He still eats the crust first.",
+                "position": "bottom_left",
+                "style": "character_voice"
+              }
+            ],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc7_b04",
+                "character_id": "CHARACTER_B",
+                "text": "That lamp was a design classic.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["design classic"],
+                "reading_order": 1
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Mock-offended, pointing with pizza crust",
+              "body_language": "Leaning forward, jabbing the crust at her",
+              "gaze_direction": "At Adèle, playing the part",
+              "micro_action": "Crust-pointing like a sword"
+            }
+          },
+
+          "panel_rhythm": "reaction_beat",
+          "reader_focus": "Adèle's internal observation — the tender detail of crust-first eating",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 4,
+          "panel_id": "p9_pan4",
+          "scene_id": 7,
+          "beats_assigned": ["sc7_b06"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Peaceful, looking at the flamingo",
+              "body_language": "Relaxed against the wall, pizza box between them",
+              "gaze_direction": "At the flamingo standing on one leg",
+              "micro_action": "Slow blink — content"
+            },
+            "CHARACTER_B": {
+              "expression": "Quiet, watching Adèle",
+              "body_language": "Head resting against the tub rim",
+              "gaze_direction": "At his sister — protective, brief",
+              "micro_action": "Chewing the last of his crust"
+            }
+          },
+
+          "panel_rhythm": "silence_beat",
+          "reader_focus": "The silence — warmth without words. The radiator hisses.",
+          "panel_tension": "low"
+        }
+      ],
+
+      "page_rhythm_note": "Wide establishing overhead → dialogue → tender detail → held silence. The page should feel warm and unhurried."
+    },
+
+    {
+      "page_number": 10,
+      "scene_ids": [8, 9],
+      "layout": "asymmetric_focus",
+      "page_turn_context": "Two memory scenes sharing a page — the haircut and the pennies",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p10_pan1",
+          "scene_id": 8,
+          "beats_assigned": ["sc8_b01", "sc8_b02"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc8_b01",
+                "character_id": "CHARACTER_B",
+                "text": "Remember the kitchen shears? I wore a beanie for a MONTH because of you.",
+                "balloon_type": "shout",
+                "tail_direction": "down_left",
+                "emphasis_words": ["MONTH"],
+                "reading_order": 1
+              },
+              {
+                "beat_ref": "sc8_b02",
+                "character_id": "CHARACTER_A",
+                "text": "You moved. I told you not to move. Statistically, one hundred percent your fault.",
+                "balloon_type": "normal",
+                "tail_direction": "down_right",
+                "emphasis_words": ["Statistically", "one hundred percent"],
+                "reading_order": 2
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Dramatic mock-outrage, grinning through it",
+              "body_language": "Pointing at Adèle's face, leaning forward",
+              "gaze_direction": "At Adèle, accusatory but playful",
+              "micro_action": "Jabbing his finger for emphasis"
+            },
+            "CHARACTER_A": {
+              "expression": "Dry, unflinching — zero remorse",
+              "body_language": "Arms folded, chin slightly raised",
+              "gaze_direction": "Level at Thomas — deadpan",
+              "micro_action": "One eyebrow micro-raise"
+            }
+          },
+
+          "panel_rhythm": "rapid_exchange",
+          "reader_focus": "The ping-pong of accusation and defense",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p10_pan2",
+          "scene_id": 8,
+          "beats_assigned": ["sc8_b03", "sc8_b04", "sc8_b05"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc8_b03",
+                "character_id": "CHARACTER_B",
+                "text": "The beanie was bright red. I looked like a — like a postbox with legs.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["postbox"],
+                "reading_order": 1
+              },
+              {
+                "beat_ref": "sc8_b05",
+                "character_id": "CHARACTER_A",
+                "text": "...you lost the red one in two weeks.",
+                "balloon_type": "whisper",
+                "tail_direction": "down_right",
+                "emphasis_words": [],
+                "reading_order": 2
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Laughing at his own joke, tugging the green beanie",
+              "body_language": "One hand pulling at his current beanie, self-aware",
+              "gaze_direction": "Down at his own beanie, then at Adèle",
+              "micro_action": "Tugging the green beanie — visual callback"
+            },
+            "CHARACTER_A": {
+              "expression": "Quiet knowing smile, looking at the green beanie",
+              "body_language": "Leaning back, arms relaxed",
+              "gaze_direction": "At the green beanie — the pattern",
+              "micro_action": "Trailing off mid-sentence"
+            }
+          },
+
+          "panel_rhythm": "punchline",
+          "reader_focus": "The beanie callback — green replaces red, habit endures",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 3,
+          "panel_id": "p10_pan3",
+          "scene_id": 9,
+          "beats_assigned": ["sc9_b01", "sc9_b02", "sc9_b03", "sc9_b04"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc9_b01",
+                "character_id": "CHARACTER_B",
+                "text": "And the sofa. On the stairs. Nobody could get past for three days.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["three days"],
+                "reading_order": 1
+              },
+              {
+                "beat_ref": "sc9_b02",
+                "character_id": "CHARACTER_A",
+                "text": "Madame Fournier had to use the service elevator. She called us ghost children.",
+                "balloon_type": "normal",
+                "tail_direction": "down_right",
+                "emphasis_words": ["ghost children"],
+                "reading_order": 2
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Building momentum, eyes bright",
+              "body_language": "Gesturing with both hands, storyteller mode",
+              "gaze_direction": "At Adèle, drawing her in",
+              "micro_action": "Hands painting the scene in the air"
+            },
+            "CHARACTER_A": {
+              "expression": "Half-laughing, genuine delight",
+              "body_language": "Leaning forward, engaged",
+              "gaze_direction": "At Thomas, matching his energy",
+              "micro_action": "Laughing with her whole face"
+            }
+          },
+
+          "panel_rhythm": "conversational",
+          "reader_focus": "The shared story — both contributing, building together",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 4,
+          "panel_id": "p10_pan4",
+          "scene_id": 9,
+          "beats_assigned": ["sc9_b05", "sc9_b06"],
+
+          "lettering": {
+            "captions": [
+              {
+                "beat_ref": "sc9_b05",
+                "text": "He bought candy with those pennies. Split it exactly in half. Even the broken pieces.",
+                "position": "bottom_left",
+                "style": "character_voice"
+              }
+            ],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Quiet, sincere — no performance",
+              "body_language": "Open palm extended, three copper pennies catching the light",
+              "gaze_direction": "Down at the pennies in his hand",
+              "micro_action": "Thumb gently turning one penny over"
+            },
+            "CHARACTER_A": {
+              "expression": "Eyes glistening, touched",
+              "body_language": "Leaning toward his open palm",
+              "gaze_direction": "At the pennies — the past made physical",
+              "micro_action": "Breath held"
+            }
+          },
+
+          "panel_rhythm": "silence_beat",
+          "reader_focus": "The pennies — a physical artifact of their childhood bond",
+          "panel_tension": "low"
+        }
+      ],
+
+      "page_rhythm_note": "Two scenes compressed into one page — fast memories (haircut) transitioning into a tender moment (pennies). The final panel should be the largest, holding the silence."
+    },
+
+    {
+      "page_number": 11,
+      "scene_ids": [10],
+      "layout": "asymmetric_focus",
+      "page_turn_context": "Playful chaos — the flamingo learns to beep",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p11_pan1",
+          "scene_id": 10,
+          "beats_assigned": ["sc10_b01", "sc10_b02"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc10_b01",
+                "character_id": "CHARACTER_B",
+                "text": "Okay okay okay. Watch this. Ready?",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["Watch"],
+                "reading_order": 1
+              }
+            ],
+            "sfx": [
+              {
+                "beat_ref": "sc10_b02",
+                "text": "BEEP BEEP BEEP",
+                "style": "overlaid",
+                "position": "center_top",
+                "size": "medium"
+              }
+            ]
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Manic excitement, eyes wide",
+              "body_language": "Crouching next to the microwave, one hand holding a treat toward the bird",
+              "gaze_direction": "Between Adèle and the flamingo",
+              "micro_action": "Mouth shaped for the beep sound"
+            },
+            "CHARACTER_A": {
+              "expression": "Skeptical amusement, arms crossed",
+              "body_language": "Leaning against the kitchen counter, watching",
+              "gaze_direction": "At Thomas, eyebrow raised",
+              "micro_action": "Slight head shake"
+            }
+          },
+
+          "panel_rhythm": "slow_build",
+          "reader_focus": "Thomas's setup — the anticipation",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p11_pan2",
+          "scene_id": 10,
+          "beats_assigned": ["sc10_b03", "sc10_b04", "sc10_b05"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc10_b05",
+                "character_id": "CHARACTER_A",
+                "text": "That's... that is statistically improbable.",
+                "balloon_type": "normal",
+                "tail_direction": "down_right",
+                "emphasis_words": ["statistically improbable"],
+                "reading_order": 1
+              }
+            ],
+            "sfx": [
+              {
+                "beat_ref": "sc10_b03",
+                "text": "BRREEP",
+                "style": "overlaid",
+                "position": "center_top",
+                "size": "large"
+              }
+            ]
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Astonished delight — mouth open, adjusting glasses",
+              "body_language": "Pushing off the counter, leaning forward",
+              "gaze_direction": "At the flamingo, wide-eyed",
+              "micro_action": "Adjusting glasses — nervous habit when surprised"
+            },
+            "CHARACTER_B": {
+              "expression": "Triumphant — fist pump",
+              "body_language": "Standing up, arms raised",
+              "gaze_direction": "At the flamingo, proud parent energy",
+              "micro_action": "Fist clenching in celebration"
+            }
+          },
+
+          "panel_rhythm": "climax",
+          "reader_focus": "The flamingo's beep — the impossible made real",
+          "panel_tension": "medium"
+        },
+        {
+          "panel_number": 3,
+          "panel_id": "p11_pan3",
+          "scene_id": 10,
+          "beats_assigned": ["sc10_b06", "sc10_b07"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": [
+              {
+                "beat_ref": "sc10_b06",
+                "text": "BRRREEP BRRREEP BRRREEP",
+                "style": "overlaid",
+                "position": "top_left",
+                "size": "large"
+              },
+              {
+                "beat_ref": "sc10_b07",
+                "text": "WOOF WOOF WOOF WOOF",
+                "style": "background",
+                "position": "bottom_right",
+                "size": "large"
+              }
+            ]
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Laughing, hand over mouth",
+              "body_language": "Doubling over, trying to contain laughter",
+              "gaze_direction": "At the wall — the barking is coming from there",
+              "micro_action": "Pressing a hand against the wall separating apartments"
+            },
+            "CHARACTER_B": {
+              "expression": "Wincing and laughing simultaneously",
+              "body_language": "Hands up in surrender, backing away from the bird",
+              "gaze_direction": "At the wall, then at Adèle",
+              "micro_action": "Shushing gesture at the flamingo"
+            }
+          },
+
+          "panel_rhythm": "rapid_exchange",
+          "reader_focus": "The chaos — flamingo beeping, dog barking, siblings laughing",
+          "panel_tension": "medium"
+        },
+        {
+          "panel_number": 4,
+          "panel_id": "p11_pan4",
+          "scene_id": 10,
+          "beats_assigned": ["sc10_b08"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc10_b08",
+                "character_id": "CHARACTER_B",
+                "text": "Napoleon.",
+                "balloon_type": "whisper",
+                "tail_direction": "down_left",
+                "emphasis_words": ["Napoleon"],
+                "reading_order": 1
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Instant regret, eyes wide",
+              "body_language": "Frozen, one finger raised",
+              "gaze_direction": "At the wall — toward Napoleon",
+              "micro_action": "Mouthing the name like a curse"
+            }
+          },
+
+          "panel_rhythm": "punchline",
+          "reader_focus": "The one-word reaction — Thomas realizing the consequences",
+          "panel_tension": "low"
+        }
+      ],
+
+      "page_rhythm_note": "Build → Payoff → Chaos → Punchline. The page escalates from anticipation to pandemonium, then cuts to Thomas's single-word regret."
+    },
+
+    {
+      "page_number": 12,
+      "scene_ids": [11, 12],
+      "layout": "three_panel_horizontal",
+      "page_turn_context": "The farewell — Thomas departs, the silence returns",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p12_pan1",
+          "scene_id": 11,
+          "beats_assigned": ["sc11_b01", "sc11_b02"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc11_b02",
+                "character_id": "CHARACTER_B",
+                "text": "Right. Early start tomorrow. Big plans. Very legitimate plans.",
+                "balloon_type": "normal",
+                "tail_direction": "down_left",
+                "emphasis_words": ["legitimate"],
+                "reading_order": 1
+              }
+            ],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Casual grin, already disengaging",
+              "body_language": "Scooping flamingo under one arm, pizza box in the other, moving toward the door",
+              "gaze_direction": "Toward the door — forward, not back",
+              "micro_action": "Tucking the flamingo under his arm with practiced ease"
+            },
+            "CHARACTER_A": {
+              "expression": "Faint smile, watching him go",
+              "body_language": "Standing in the living room, arms at sides",
+              "gaze_direction": "At Thomas's back",
+              "micro_action": "Fingers curling, almost reaching out"
+            }
+          },
+
+          "panel_rhythm": "conversational",
+          "reader_focus": "Thomas's transparent deflection — 'legitimate plans' fools no one",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p12_pan2",
+          "scene_id": 11,
+          "beats_assigned": ["sc11_b03", "sc11_b04", "sc11_b05"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [
+              {
+                "beat_ref": "sc11_b03",
+                "character_id": "CHARACTER_A",
+                "text": "Thomas...",
+                "balloon_type": "whisper",
+                "tail_direction": "down_right",
+                "emphasis_words": [],
+                "reading_order": 1
+              }
+            ],
+            "sfx": [
+              {
+                "beat_ref": "sc11_b05",
+                "text": "click",
+                "style": "integrated",
+                "position": "bottom_right",
+                "size": "small"
+              }
+            ]
+          },
+
+          "acting_direction": {
+            "CHARACTER_B": {
+              "expression": "Sincere smile — no joke, no deflection",
+              "body_language": "Paused in the open doorway, backlit by hallway light, flamingo silhouette beside him",
+              "gaze_direction": "At Adèle — holding her gaze",
+              "micro_action": "Small nod — acknowledgment without words"
+            },
+            "CHARACTER_A": {
+              "expression": "Words trailing off, emotions she can't name",
+              "body_language": "One step forward, hand half-raised",
+              "gaze_direction": "At Thomas in the doorway light",
+              "micro_action": "Mouth opening, then closing — the sentence dies"
+            }
+          },
+
+          "panel_rhythm": "denouement",
+          "reader_focus": "The silhouette in the doorway — the unfinished sentence",
+          "panel_tension": "medium"
+        },
+        {
+          "panel_number": 3,
+          "panel_id": "p12_pan3",
+          "scene_id": 11,
+          "beats_assigned": ["sc11_b06"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Still, absorbing the silence",
+              "body_language": "Standing alone in the living room, door closed",
+              "gaze_direction": "At the closed door",
+              "micro_action": "Light fading from under the door as Thomas walks away"
+            }
+          },
+
+          "panel_rhythm": "silence_beat",
+          "reader_focus": "The empty apartment — the silence that fills the vacuum Thomas leaves",
+          "panel_tension": "medium"
+        }
+      ],
+
+      "page_rhythm_note": "Three horizontal panels: departure → doorway moment → silence. The final panel should feel like a held breath."
+    },
+
+    {
+      "page_number": 13,
+      "scene_ids": [12],
+      "layout": "splash_page",
+      "page_turn_context": "Final page — the corn replaces the toaster. Acceptance.",
+
+      "panels": [
+        {
+          "panel_number": 1,
+          "panel_id": "p13_pan1",
+          "scene_id": 12,
+          "beats_assigned": ["sc12_b01", "sc12_b02"],
+
+          "lettering": {
+            "captions": [],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "Reflective, tired but calm",
+              "body_language": "Standing at the kitchen counter, not looking at the toaster. Reaching into a grocery bag.",
+              "gaze_direction": "At the bag of corn in her hand",
+              "micro_action": "Pulling the corn bag from the grocery bag — deliberate"
+            }
+          },
+
+          "panel_rhythm": "slow_build",
+          "reader_focus": "Adèle choosing the corn over the toaster — the pivot",
+          "panel_tension": "low"
+        },
+        {
+          "panel_number": 2,
+          "panel_id": "p13_pan2",
+          "scene_id": 12,
+          "beats_assigned": ["sc12_b03", "sc12_b04", "sc12_b05"],
+
+          "lettering": {
+            "captions": [
+              {
+                "beat_ref": "sc12_b03",
+                "text": "Just in case.",
+                "position": "top_right",
+                "style": "character_voice"
+              },
+              {
+                "beat_ref": "sc12_b05",
+                "text": "The toaster could wait.",
+                "position": "bottom_right",
+                "style": "narration_box"
+              }
+            ],
+            "speech_balloons": [],
+            "sfx": []
+          },
+
+          "acting_direction": {
+            "CHARACTER_A": {
+              "expression": "A smile she doesn't know she's making",
+              "body_language": "Placing the corn bag on the middle shelf, next to colour-coded spice jars. Adjusting it so it sits straight.",
+              "gaze_direction": "At the corn bag on the shelf — satisfied",
+              "micro_action": "Nudging the bag into alignment with the spice jars — her orderliness embracing chaos"
+            }
+          },
+
+          "panel_rhythm": "denouement",
+          "reader_focus": "The corn nestled among the spice jars — order making room for disorder. The final image.",
+          "panel_tension": "low"
+        }
+      ],
+
+      "page_rhythm_note": "Splash page split into two visual moments: the choice (picking up the corn) and the act (placing it in the cabinet). The final narration closes the story."
+    }
+  ]
+}

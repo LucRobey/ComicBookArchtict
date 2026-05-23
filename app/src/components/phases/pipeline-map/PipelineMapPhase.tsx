@@ -48,98 +48,98 @@ function layoutNodes(nodes: Node[], edges: Edge[]): Node[] {
 const initialRawNodes: Node[] = [
   // ─── PHASES ──────────────────────────────────────────────
 
-  // Phase 0: Lore
+  // Phase 0: Raw World Building
   {
     id: 'lore_phase',
     type: 'pipelineNode',
     position: { x: 0, y: 0 },
     data: {
       id: 'lore_phase',
-      label: 'Lore Editor',
+      label: 'Raw World Building',
       type: 'phase',
       emoji: '🌍',
-      description: 'Establishes the universe lore, key factions, global settings, visual style, and initial parameters.',
+      description: 'Establishes the raw universe lore, key factions, global settings, and initial story concept rules.',
       badge: 'Phase 0',
       accentColor: '#8b5cf6',
       activePhaseId: 'lore',
       inputs: [],
-      outputs: ['data/lore.json', 'data/geography.json', 'data/visual_style.json'],
+      outputs: ['data/user_lore.json', 'data/geography.json'],
     },
   },
 
-  // Step 1: Scenario — Foundations
+  // Phase 0.5: Style Research
   {
-    id: 'scenario_p1',
+    id: 'style_research',
     type: 'pipelineNode',
     position: { x: 0, y: 0 },
     data: {
-      id: 'scenario_p1',
-      label: 'Scenario: Foundations',
+      id: 'style_research',
+      label: 'Style Research',
+      type: 'phase',
+      emoji: '🔍',
+      description: 'Researches and extracts reference comic layout grids, narrative styles, visual DNA, and scripting conventions.',
+      badge: 'Phase 0.5',
+      accentColor: '#3b82f6',
+      activePhaseId: 'lore',
+      inputs: [],
+      outputs: ['data/panel_style.json', 'data/script_style.json', 'data/lore_style.json', 'data/visual_style.json'],
+    },
+  },
+
+  // Phase 0.6: Lore Merging
+  {
+    id: 'lore_merge',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'lore_merge',
+      label: 'Lore Merging',
+      type: 'phase',
+      emoji: '🌪️',
+      description: 'Blends user story ideas with style tropes to output a unified active series bible.',
+      badge: 'Phase 0.6',
+      accentColor: '#10b981',
+      activePhaseId: 'lore',
+      inputs: ['data/user_lore.json', 'data/lore_style.json', 'data/visual_style.json'],
+      outputs: ['data/final_lore.json'],
+    },
+  },
+
+  // Phase 0.2: Scenario Development
+  {
+    id: 'scenario_phase',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'scenario_phase',
+      label: 'Scenario Development',
       type: 'phase',
       emoji: '📝',
-      description: 'Takes scenario inputs and builds character personality signatures, the synopsis, and the chapter breakdown.',
-      badge: 'Step 1',
+      description: 'Builds the narrative framework: scenario synopsis, chapter breakdown, and scene outline list.',
+      badge: 'Phase 0.2',
       accentColor: '#ec4899',
       activePhaseId: 'scenario',
-      inputs: ['data/lore.json', 'data/scenario_inputs.json'],
-      outputs: ['data/personality_signature.json', 'data/scenario_synopsis.json', 'data/scenario_chapters.json'],
+      inputs: ['data/final_lore.json', 'data/scenario_inputs.json'],
+      outputs: ['data/scenario_synopsis.json', 'data/scenario_chapters.json', 'data/scenario_scenes.json'],
     },
   },
 
-  // Step 2: Characters — Chapter Moods
+  // Phase 0.7: Characters Hub & Moods
   {
-    id: 'charhub_p1',
+    id: 'charhub_phase',
     type: 'pipelineNode',
     position: { x: 0, y: 0 },
     data: {
-      id: 'charhub_p1',
-      label: 'Characters: Chapter Moods',
+      id: 'charhub_phase',
+      label: 'Characters Hub',
       type: 'phase',
       emoji: '👤',
-      description: 'Simulates character emotional arcs at chapter granularity using personality signatures and chapter structure.',
-      badge: 'Step 2',
+      description: 'Generates character personality signatures, turnaround sheets, emotional state portraits, and simulates mood matrices.',
+      badge: 'Phase 0.7',
       accentColor: '#6366f1',
       activePhaseId: 'char-hub',
-      inputs: ['data/lore.json', 'data/visual_style.json', 'data/personality_signature.json', 'data/scenario_chapters.json'],
-      outputs: ['data/character_moods.json'],
-    },
-  },
-
-  // Step 3: Scenario — Scene Division
-  {
-    id: 'scenario_p2',
-    type: 'pipelineNode',
-    position: { x: 0, y: 0 },
-    data: {
-      id: 'scenario_p2',
-      label: 'Scenario: Scene Division',
-      type: 'phase',
-      emoji: '📝',
-      description: 'Divides approved chapters into granular scenes using character mood context from the previous pass.',
-      badge: 'Step 3',
-      accentColor: '#ec4899',
-      activePhaseId: 'scenario',
-      inputs: ['data/scenario_chapters.json', 'data/character_moods.json'],
-      outputs: ['data/scenario_scenes.json'],
-    },
-  },
-
-  // Step 4: Characters — Scene Moods & Profiles
-  {
-    id: 'charhub_p2',
-    type: 'pipelineNode',
-    position: { x: 0, y: 0 },
-    data: {
-      id: 'charhub_p2',
-      label: 'Characters: Scene Moods',
-      type: 'phase',
-      emoji: '👤',
-      description: 'Refines mood arcs to scene-level precision. Generates turnarounds, visual profiles, and emotional state references.',
-      badge: 'Step 4',
-      accentColor: '#6366f1',
-      activePhaseId: 'char-hub',
-      inputs: ['data/scenario_scenes.json', 'data/personality_signature.json', 'data/visual_style.json', 'data/character_moods.json'],
-      outputs: ['data/character_moods.json', 'global_characters/Name/personality_signature.md'],
+      inputs: ['data/final_lore.json', 'data/scenario_scenes.json'],
+      outputs: ['data/character_moods.json', 'data/characters/[Name]/personality_signature.json'],
     },
   },
 
@@ -157,7 +157,7 @@ const initialRawNodes: Node[] = [
       badge: 'Phase 1',
       accentColor: '#f59e0b',
       activePhaseId: 'intro',
-      inputs: ['data/lore.json', 'global_characters/Name/personality_signature.md'],
+      inputs: ['data/final_lore.json', 'data/characters/[Name]/personality_signature.json'],
       outputs: ['data/intro_pages.json'],
     },
   },
@@ -176,7 +176,7 @@ const initialRawNodes: Node[] = [
       badge: 'Phase 1.5',
       accentColor: '#06b6d4',
       activePhaseId: 'pacing',
-      inputs: ['data/scenario_scenes.json'],
+      inputs: ['data/scene_script.json'],
       outputs: ['data/pages.json'],
     },
   },
@@ -191,30 +191,49 @@ const initialRawNodes: Node[] = [
       label: 'Panel Structuring',
       type: 'phase',
       emoji: '📐',
-      description: 'Divides page-level action into detailed panel templates, framing, and compositions.',
+      description: 'Divides page-level action into detailed panel templates, framing, and compositions, guided by layout grids.',
       badge: 'Phase 2',
       accentColor: '#10b981',
       activePhaseId: 'panels',
-      inputs: ['data/pages.json', 'data/intro_pages.json', 'data/lore.json'],
+      inputs: ['data/pages.json', 'data/intro_pages.json', 'data/final_lore.json', 'data/panel_style.json', 'data/scene_script.json'],
       outputs: ['data/panels.json'],
     },
   },
 
-  // Phase 3: Script
+  // Phase 3A: Script (Scene)
   {
-    id: 'script_phase',
+    id: 'script_scene_phase',
     type: 'pipelineNode',
     position: { x: 0, y: 0 },
     data: {
-      id: 'script_phase',
-      label: 'Script & Dialogue',
+      id: 'script_scene_phase',
+      label: 'Script (Scene)',
       type: 'phase',
-      emoji: '✍️',
-      description: 'Writes and maps speech bubbles, narrative overlays, and captions for each panel.',
-      badge: 'Phase 3',
+      emoji: '✍️🎬',
+      description: 'Writes the narrative scene-level script beats: dialogues, narrations, SFX, and silences.',
+      badge: 'Phase 3A',
       accentColor: '#f97316',
       activePhaseId: 'script',
-      inputs: ['data/panels.json', 'data/scenario_scenes.json', 'data/lore.json'],
+      inputs: ['data/scenario_scenes.json', 'data/final_lore.json', 'data/script_style.json'],
+      outputs: ['data/scene_script.json'],
+    },
+  },
+
+  // Phase 3B: Script (Panel)
+  {
+    id: 'script_panel_phase',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'script_panel_phase',
+      label: 'Script (Panel)',
+      type: 'phase',
+      emoji: '✍️📐',
+      description: 'Maps scene beats to panels, determines reading flow, acting directions, and bubble placement details.',
+      badge: 'Phase 3B',
+      accentColor: '#ea580c',
+      activePhaseId: 'script',
+      inputs: ['data/scene_script.json', 'data/panels.json', 'data/script_style.json', 'data/final_lore.json'],
       outputs: ['data/script.json'],
     },
   },
@@ -241,14 +260,25 @@ const initialRawNodes: Node[] = [
   // ─── DATA FILES ──────────────────────────────────────────
 
   {
-    id: 'file_lore',
+    id: 'file_user_lore',
     type: 'pipelineNode',
     position: { x: 0, y: 0 },
     data: {
-      id: 'file_lore',
-      label: 'data/lore.json',
+      id: 'file_user_lore',
+      label: 'data/user_lore.json',
       type: 'file',
-      description: 'Core metadata parameters for world systems, histories, and geography.',
+      description: 'User raw world building rules, core conflict, and genre ideas.',
+    },
+  },
+  {
+    id: 'file_lore_style',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'file_lore_style',
+      label: 'data/lore_style.json',
+      type: 'file',
+      description: 'Extracted thematic tropes, rules, and archetypes from reference comic.',
     },
   },
   {
@@ -259,9 +289,43 @@ const initialRawNodes: Node[] = [
       id: 'file_visual_style',
       label: 'data/visual_style.json',
       type: 'file',
-      description: 'Art direction reference, universal style seeds, and visual rules configuration.',
+      description: 'Art direction reference, universal style seeds, color tokens, and visual rules configuration.',
     },
   },
+  {
+    id: 'file_panel_style',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'file_panel_style',
+      label: 'data/panel_style.json',
+      type: 'file',
+      description: 'Layout grids, aspect ratios, gutters, reading flow, and CSS grid templates.',
+    },
+  },
+  {
+    id: 'file_script_style',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'file_script_style',
+      label: 'data/script_style.json',
+      type: 'file',
+      description: 'Dialogue density, average word counts, narration rules, and styling anti-patterns.',
+    },
+  },
+  {
+    id: 'file_final_lore',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'file_final_lore',
+      label: 'data/final_lore.json',
+      type: 'file',
+      description: 'Blended world scenario bible combining user world and style tropes.',
+    },
+  },
+
   {
     id: 'file_scenario_inputs',
     type: 'pipelineNode',
@@ -279,7 +343,7 @@ const initialRawNodes: Node[] = [
     position: { x: 0, y: 0 },
     data: {
       id: 'file_signatures',
-      label: 'data/personality_signature.json',
+      label: 'data/characters/[Name]/personality_signature.json',
       type: 'file',
       description: 'Psychological profiles, traits, and relationship networks.',
     },
@@ -303,7 +367,7 @@ const initialRawNodes: Node[] = [
       id: 'file_moods',
       label: 'data/character_moods.json',
       type: 'file',
-      description: 'Character emotional trajectories — first at chapter level, then refined to scene level.',
+      description: 'Character emotional trajectories simulated at scene level.',
     },
   },
   {
@@ -351,6 +415,17 @@ const initialRawNodes: Node[] = [
     },
   },
   {
+    id: 'file_scene_script',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'file_scene_script',
+      label: 'data/scene_script.json',
+      type: 'file',
+      description: 'Narrative scene-level script containing story beats, dialogue text, and sound effects.',
+    },
+  },
+  {
     id: 'file_script',
     type: 'pipelineNode',
     position: { x: 0, y: 0 },
@@ -375,6 +450,28 @@ const initialRawNodes: Node[] = [
 
   // ─── AI AGENTS ───────────────────────────────────────────
 
+  {
+    id: 'agent_research',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'agent_research',
+      label: 'Style Researcher Agent',
+      type: 'agent',
+      description: 'Performs targeted web searches to compile layouts, writing, and lore conventions.',
+    },
+  },
+  {
+    id: 'agent_merge',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'agent_merge',
+      label: 'Lore Merging Agent',
+      type: 'agent',
+      description: 'Blends world concepts and style rules into final_lore.json bible.',
+    },
+  },
   {
     id: 'agent_personality',
     type: 'pipelineNode',
@@ -442,14 +539,25 @@ const initialRawNodes: Node[] = [
     },
   },
   {
-    id: 'agent_scripting',
+    id: 'agent_scene_scripting',
     type: 'pipelineNode',
     position: { x: 0, y: 0 },
     data: {
-      id: 'agent_scripting',
-      label: 'Scripting Agent',
+      id: 'agent_scene_scripting',
+      label: 'Scene Scripting Agent',
       type: 'agent',
-      description: 'Refines dialogues, generates dialogue bubble texts, and verifies re-reading flow.',
+      description: 'Writes the narrative scene-level beats (dialogues, narration, SFX) based on story bible.',
+    },
+  },
+  {
+    id: 'agent_panel_scripting',
+    type: 'pipelineNode',
+    position: { x: 0, y: 0 },
+    data: {
+      id: 'agent_panel_scripting',
+      label: 'Panel Scripting Agent',
+      type: 'agent',
+      description: 'Assigns beats to panels, configures bubbles reading order, and defines acting instructions.',
     },
   },
   {
@@ -466,96 +574,118 @@ const initialRawNodes: Node[] = [
 ];
 
 const initialEdges: Edge[] = [
-  // ─── MAIN PROCESS FLOW (the zigzag) ─────────────────────
+  // ─── MAIN PROCESS FLOW ───────────────────────────────────
 
-  // Lore → Scenario Pass 1
-  { id: 'e_lore_sp1', source: 'lore_phase', target: 'scenario_p1', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
-  // Scenario Pass 1 → Character Hub Pass 1
-  { id: 'e_sp1_cp1', source: 'scenario_p1', target: 'charhub_p1', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
-  // Character Hub Pass 1 → Scenario Pass 2
-  { id: 'e_cp1_sp2', source: 'charhub_p1', target: 'scenario_p2', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
-  // Scenario Pass 2 → Character Hub Pass 2
-  { id: 'e_sp2_cp2', source: 'scenario_p2', target: 'charhub_p2', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  // Lore → Style Research
+  { id: 'e_lore_sr', source: 'lore_phase', target: 'style_research', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  // Style Research → Lore Merge
+  { id: 'e_sr_lm', source: 'style_research', target: 'lore_merge', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  // Lore Merge → Scenario
+  { id: 'e_lm_sc', source: 'lore_merge', target: 'scenario_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  // Scenario → CharHub
+  { id: 'e_sc_ch', source: 'scenario_phase', target: 'charhub_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  // Scenario → Intro (Parallel character intros)
+  { id: 'e_ch_intro', source: 'charhub_phase', target: 'intro_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
 
-  // Character Hub Pass 2 → downstream (parallel fork)
-  { id: 'e_cp2_intro', source: 'charhub_p2', target: 'intro_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
-  { id: 'e_cp2_pace', source: 'charhub_p2', target: 'pacing_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
-
-  // Parallel → converge at panels
-  { id: 'e_intro_pan', source: 'intro_phase', target: 'panels_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  // New sequence: CharHub -> Script Scene -> Pacing -> Panels & Panel Script (parallel)
+  { id: 'e_ch_scrip_scene', source: 'charhub_phase', target: 'script_scene_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  { id: 'e_scrip_scene_pace', source: 'script_scene_phase', target: 'pacing_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  
+  // Parallel fork after Pacing:
   { id: 'e_pace_pan', source: 'pacing_phase', target: 'panels_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  { id: 'e_pace_scrip_panel', source: 'pacing_phase', target: 'script_panel_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
 
-  // Linear downstream
-  { id: 'e_pan_scrip', source: 'panels_phase', target: 'script_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
-  { id: 'e_scrip_assemb', source: 'script_phase', target: 'assembly_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  // Intro page maps into panels
+  { id: 'e_intro_pan', source: 'intro_phase', target: 'panels_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+
+  // Convergence at assembly
+  { id: 'e_pan_assemb', source: 'panels_phase', target: 'assembly_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
+  { id: 'e_scrip_panel_assemb', source: 'script_panel_phase', target: 'assembly_phase', type: 'smoothstep', animated: true, style: { stroke: '#3b82f6', strokeWidth: 2.5 } },
 
   // ─── FILE DATA FLOWS ────────────────────────────────────
 
   // Lore outputs
-  { id: 'e_lore_flore', source: 'lore_phase', target: 'file_lore', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_lore_fvs', source: 'lore_phase', target: 'file_visual_style', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_lore_fuser', source: 'lore_phase', target: 'file_user_lore', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
-  // Scenario P1 inputs
-  { id: 'e_flore_sp1', source: 'file_lore', target: 'scenario_p1', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fsinp_sp1', source: 'file_scenario_inputs', target: 'scenario_p1', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  // Style Research outputs
+  { id: 'e_sr_fls', source: 'style_research', target: 'file_lore_style', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_sr_fvs', source: 'style_research', target: 'file_visual_style', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_sr_fps', source: 'style_research', target: 'file_panel_style', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_sr_fss', source: 'style_research', target: 'file_script_style', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
-  // Scenario P1 outputs
-  { id: 'e_sp1_fsig', source: 'scenario_p1', target: 'file_signatures', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_sp1_fchap', source: 'scenario_p1', target: 'file_chapters', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  // Lore Merge inputs
+  { id: 'e_fuser_lm', source: 'file_user_lore', target: 'lore_merge', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fls_lm', source: 'file_lore_style', target: 'lore_merge', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fvs_lm', source: 'file_visual_style', target: 'lore_merge', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
-  // CharHub P1 inputs
-  { id: 'e_flore_cp1', source: 'file_lore', target: 'charhub_p1', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fvs_cp1', source: 'file_visual_style', target: 'charhub_p1', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fsig_cp1', source: 'file_signatures', target: 'charhub_p1', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fchap_cp1', source: 'file_chapters', target: 'charhub_p1', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  // Lore Merge outputs
+  { id: 'e_lm_fflore', source: 'lore_merge', target: 'file_final_lore', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
-  // CharHub P1 output
-  { id: 'e_cp1_fmoods', source: 'charhub_p1', target: 'file_moods', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  // Scenario inputs
+  { id: 'e_fflore_sc', source: 'file_final_lore', target: 'scenario_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fsinp_sc', source: 'file_scenario_inputs', target: 'scenario_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
-  // Scenario P2 inputs
-  { id: 'e_fchap_sp2', source: 'file_chapters', target: 'scenario_p2', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fmoods_sp2', source: 'file_moods', target: 'scenario_p2', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  // Scenario outputs
+  { id: 'e_sc_fsig', source: 'scenario_phase', target: 'file_signatures', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_sc_fchap', source: 'scenario_phase', target: 'file_chapters', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_sc_fscenes', source: 'scenario_phase', target: 'file_scenes', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
-  // Scenario P2 output
-  { id: 'e_sp2_fscenes', source: 'scenario_p2', target: 'file_scenes', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  // CharHub inputs
+  { id: 'e_fflore_ch', source: 'file_final_lore', target: 'charhub_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fscenes_ch', source: 'file_scenes', target: 'charhub_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fsig_ch', source: 'file_signatures', target: 'charhub_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fvs_ch', source: 'file_visual_style', target: 'charhub_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
-  // CharHub P2 inputs
-  { id: 'e_fscenes_cp2', source: 'file_scenes', target: 'charhub_p2', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fsig_cp2', source: 'file_signatures', target: 'charhub_p2', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fvs_cp2', source: 'file_visual_style', target: 'charhub_p2', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fmoods_cp2', source: 'file_moods', target: 'charhub_p2', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  // CharHub outputs
+  { id: 'e_ch_fmoods', source: 'charhub_phase', target: 'file_moods', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
   // Downstream file flows
-  { id: 'e_flore_intro', source: 'file_lore', target: 'intro_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fscenes_pace', source: 'file_scenes', target: 'pacing_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-
+  { id: 'e_fflore_intro', source: 'file_final_lore', target: 'intro_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fsig_intro', source: 'file_signatures', target: 'intro_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
   { id: 'e_intro_fintro', source: 'intro_phase', target: 'file_intro', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+
+  // Scene Script (3A) file flows
+  { id: 'e_fscenes_scrip_scene', source: 'file_scenes', target: 'script_scene_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fflore_scrip_scene', source: 'file_final_lore', target: 'script_scene_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fss_scrip_scene', source: 'file_script_style', target: 'script_scene_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_scrip_scene_fsscene', source: 'script_scene_phase', target: 'file_scene_script', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+
+  // Pacing inputs
+  { id: 'e_fsscene_pace', source: 'file_scene_script', target: 'pacing_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
   { id: 'e_pace_fpages', source: 'pacing_phase', target: 'file_pages', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
-  { id: 'e_fintro_pan', source: 'file_intro', target: 'panels_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  // Panel layout (2) inputs
   { id: 'e_fpages_pan', source: 'file_pages', target: 'panels_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_flore_pan', source: 'file_lore', target: 'panels_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-
+  { id: 'e_fintro_pan', source: 'file_intro', target: 'panels_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fflore_pan', source: 'file_final_lore', target: 'panels_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fps_pan', source: 'file_panel_style', target: 'panels_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fsscene_pan', source: 'file_scene_script', target: 'panels_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
   { id: 'e_pan_fpanels', source: 'panels_phase', target: 'file_panels', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fpanels_scrip', source: 'file_panels', target: 'script_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_fscenes_scrip', source: 'file_scenes', target: 'script_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
-  { id: 'e_flore_scrip', source: 'file_lore', target: 'script_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
-  { id: 'e_scrip_fscript', source: 'script_phase', target: 'file_script', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  // Panel Script (3B) file flows
+  { id: 'e_fsscene_scrip_panel', source: 'file_scene_script', target: 'script_panel_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fpanels_scrip_panel', source: 'file_panels', target: 'script_panel_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fss_scrip_panel', source: 'file_script_style', target: 'script_panel_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_fflore_scrip_panel', source: 'file_final_lore', target: 'script_panel_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+  { id: 'e_scrip_panel_fscript', source: 'script_panel_phase', target: 'file_script', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
+
+  // Assembly inputs
   { id: 'e_fscript_assemb', source: 'file_script', target: 'assembly_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
   { id: 'e_fpanels_assemb', source: 'file_panels', target: 'assembly_phase', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
   { id: 'e_assemb_ffinal', source: 'assembly_phase', target: 'file_final', type: 'smoothstep', style: { stroke: '#ef4444', strokeWidth: 1.2, opacity: 0.6 } },
 
-  // ─── AGENT CONNECTIONS ──────────────────────────────────
+  // ─── AGENT CONNECTIONS ───────────────────────────────────
 
-  { id: 'e_sp1_aperson', source: 'scenario_p1', target: 'agent_personality', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
-  { id: 'e_cp1_amood', source: 'charhub_p1', target: 'agent_mood', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
-  { id: 'e_cp2_amood', source: 'charhub_p2', target: 'agent_mood', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
-  { id: 'e_cp2_avisual', source: 'charhub_p2', target: 'agent_visual', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
+  { id: 'e_sr_ares', source: 'style_research', target: 'agent_research', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
+  { id: 'e_lm_amrg', source: 'lore_merge', target: 'agent_merge', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
+  { id: 'e_sc_aperson', source: 'scenario_phase', target: 'agent_personality', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
+  { id: 'e_ch_amood', source: 'charhub_phase', target: 'agent_mood', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
+  { id: 'e_ch_avisual', source: 'charhub_phase', target: 'agent_visual', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
   { id: 'e_intro_aintro', source: 'intro_phase', target: 'agent_intro', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
   { id: 'e_pace_apace', source: 'pacing_phase', target: 'agent_pacing', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
   { id: 'e_pan_astruct', source: 'panels_phase', target: 'agent_structuring', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
-  { id: 'e_scrip_ascrip', source: 'script_phase', target: 'agent_scripting', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
+  { id: 'e_scrip_scene_ase_scene', source: 'script_scene_phase', target: 'agent_scene_scripting', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
+  { id: 'e_scrip_panel_ase_panel', source: 'script_panel_phase', target: 'agent_panel_scripting', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
   { id: 'e_assemb_arender', source: 'assembly_phase', target: 'agent_renderer', type: 'smoothstep', style: { stroke: '#f59e0b', strokeWidth: 1.2, strokeDasharray: '4 4', opacity: 0.6 } },
 ];
 
@@ -586,78 +716,86 @@ interface PipelineStep {
 
 const pipelineSteps: PipelineStep[] = [
   {
-    id: 'lore',
+    id: 'raw_world',
     phaseId: 'lore',
     badge: 'Phase 0',
-    title: 'Lore Editor',
+    title: 'Raw World Building',
     emoji: '🌍',
-    description: 'Establishes the universe lore, key factions, global settings, visual style, and initial parameters. This is the foundation that all downstream phases build upon.',
+    description: 'Establishes the raw universe lore, key factions, global settings, and initial story concept rules.',
     accentColor: '#8b5cf6',
     inputs: [],
-    outputs: ['data/lore.json', 'data/geography.json', 'data/visual_style.json'],
-    agentName: 'Lore Compiler Agent',
-    agentDesc: 'Resolves narrative consistencies, expands geographic settings, and organizes faction histories.',
-    instruction: 'Define your setting details, character relationships, and art directions in the editor fields.'
+    outputs: ['data/user_lore.json', 'data/geography.json'],
+    instruction: 'Define your raw story ideas, non-negotiable rules, setting, and geography elements.'
   },
   {
-    id: 'scenario_p1',
+    id: 'style_research',
+    phaseId: 'lore',
+    badge: 'Phase 0.5',
+    title: 'Style Research',
+    emoji: '🔍',
+    description: 'Researches and extracts reference comic layout grids, narrative styles, visual DNA, and scripting conventions.',
+    accentColor: '#3b82f6',
+    inputs: [],
+    outputs: ['data/panel_style.json', 'data/script_style.json', 'data/lore_style.json', 'data/visual_style.json'],
+    agentName: 'Style Researcher Agent',
+    agentDesc: 'Performs targeted web searches to analyze visual layouts, writing styles, and aesthetic details.',
+    instruction: 'Confirm the reference comic and review the extracted layout rules, writing conventions, and visual prompts.'
+  },
+  {
+    id: 'lore_merge',
+    phaseId: 'lore',
+    badge: 'Phase 0.6',
+    title: 'Lore Merging',
+    emoji: '🌪️',
+    description: 'Blends the user story ideas with style tropes to output a unified active series bible.',
+    accentColor: '#10b981',
+    inputs: ['data/user_lore.json', 'data/lore_style.json', 'data/visual_style.json'],
+    outputs: ['data/final_lore.json'],
+    agentName: 'Lore Merging Agent',
+    agentDesc: 'Mixes world genres, setting eras, and conflict dynamics to produce a blended story bible.',
+    instruction: 'Click Mix World & Style in the blended tab to programmatically merge story rules.'
+  },
+  {
+    id: 'scenario',
     phaseId: 'scenario',
-    badge: 'Step 1 of 4 (Loop)',
-    title: 'Scenario: Foundations',
+    badge: 'Phase 0.2',
+    title: 'Scenario Development',
     emoji: '📝',
-    description: 'Takes scenario inputs and builds character personality signatures, the synopsis, and the chapter breakdown.',
+    description: 'Builds the narrative framework: scenario synopsis, chapter breakdown, and scene outline list.',
     accentColor: '#ec4899',
-    inputs: ['data/lore.json', 'data/scenario_inputs.json'],
-    outputs: ['data/personality_signature.json', 'data/scenario_synopsis.json', 'data/scenario_chapters.json'],
+    inputs: ['data/final_lore.json', 'data/scenario_inputs.json'],
+    outputs: ['data/scenario_synopsis.json', 'data/scenario_chapters.json', 'data/scenario_scenes.json'],
     agentName: 'Scenario Architect Agent',
-    agentDesc: 'Transforms themes and outlines into character signatures and structural chapter grids.',
-    instruction: 'Create your initial synopsis and edit chapter outlines. Make sure characters are registered with signatures.',
-    isLoopStep: true
+    agentDesc: 'Transforms themes and outlines into story arcs, chapter breakdowns, and scene cards.',
+    instruction: 'Build the synopsis and outline chapter lists, then expand chapters into granular scene lists.'
   },
   {
-    id: 'charhub_p1',
+    id: 'char_hub',
     phaseId: 'char-hub',
-    badge: 'Step 2 of 4 (Loop)',
-    title: 'Characters: Chapter Moods',
+    badge: 'Phase 0.7',
+    title: 'Characters Hub',
     emoji: '👤',
-    description: 'Simulates character emotional arcs at chapter granularity using personality signatures and chapter structure.',
+    description: 'Generates personality signatures, turnaround sheets, emotional state portraits, and scene mood matrices.',
     accentColor: '#6366f1',
-    inputs: ['data/lore.json', 'data/visual_style.json', 'data/personality_signature.json', 'data/scenario_chapters.json'],
-    outputs: ['data/character_moods.json'],
-    agentName: 'Mood Simulation Agent',
-    agentDesc: 'Projects emotional trajectories (e.g. anger, fear, valence) across chapters.',
-    instruction: 'Inspect character emotional trends chapter by chapter. Refine moods where necessary.',
-    isLoopStep: true
+    inputs: ['data/final_lore.json', 'data/scenario_scenes.json'],
+    outputs: ['data/character_moods.json', 'data/characters/[Name]/personality_signature.json'],
+    agentName: 'Character Foundation Agent',
+    agentDesc: 'Simulates character emotional trajectories scene-by-scene and creates target styling portraits.',
+    instruction: 'Review character signatures and visual sheets, and refine scene emotional trajectories.'
   },
   {
-    id: 'scenario_p2',
-    phaseId: 'scenario',
-    badge: 'Step 3 of 4 (Loop)',
-    title: 'Scenario: Scene Division',
-    emoji: '📝',
-    description: 'Divides approved chapters into granular scenes using character mood context from the previous pass.',
-    accentColor: '#ec4899',
-    inputs: ['data/scenario_chapters.json', 'data/character_moods.json'],
-    outputs: ['data/scenario_scenes.json'],
-    agentName: 'Scene Outliner Agent',
-    agentDesc: 'Carves chapter beats into individual page-ready scenes and setups.',
-    instruction: 'Expand chapters into scene cards. Specify the focus characters and settings for each scene.',
-    isLoopStep: true
-  },
-  {
-    id: 'charhub_p2',
-    phaseId: 'char-hub',
-    badge: 'Step 4 of 4 (Loop)',
-    title: 'Characters: Scene Moods',
-    emoji: '👤',
-    description: 'Refines mood arcs to scene-level precision, mapping fine-grained emotional beats and generating visual profiles.',
-    accentColor: '#6366f1',
-    inputs: ['data/scenario_scenes.json', 'data/personality_signature.json', 'data/visual_style.json', 'data/character_moods.json'],
-    outputs: ['data/character_moods.json'],
-    agentName: 'Visual Signature Agent',
-    agentDesc: 'Compiles visual look-books and prompt templates for image generation.',
-    instruction: 'Map fine-grained emotional beats scene-by-scene, and generate model turnaround sheets.',
-    isLoopStep: true
+    id: 'script_scene',
+    phaseId: 'script',
+    badge: 'Phase 3A',
+    title: 'Script (Scene)',
+    emoji: '✍️🎬',
+    description: 'Writes the narrative scene-level script beats: dialogue, narration overlays, SFX, and silences.',
+    accentColor: '#f97316',
+    inputs: ['data/scenario_scenes.json', 'data/final_lore.json', 'data/script_style.json'],
+    outputs: ['data/scene_script.json'],
+    agentName: 'Scene Scripting Agent',
+    agentDesc: 'Translates scene actions and character personalities into chronological story beats and text.',
+    instruction: 'Review and refine dialogue lines, narration tone, and story beats at the scene level.'
   },
   {
     id: 'intro',
@@ -667,7 +805,7 @@ const pipelineSteps: PipelineStep[] = [
     emoji: '🎭',
     description: 'Orchestrates dynamic introduction splash layouts for primary scenario characters based on their personality signatures and lore.',
     accentColor: '#f59e0b',
-    inputs: ['data/lore.json', 'data/personality_signature.json'],
+    inputs: ['data/final_lore.json', 'data/characters/[Name]/personality_signature.json'],
     outputs: ['data/intro_pages.json'],
     agentName: 'Intro Page Agent',
     agentDesc: 'Formulates introductory splash page composition and narrator captions.',
@@ -681,7 +819,7 @@ const pipelineSteps: PipelineStep[] = [
     emoji: '📋',
     description: 'Maps the sequential scenes list onto physical comic pages, specifying focus points and pagination.',
     accentColor: '#06b6d4',
-    inputs: ['data/scenario_scenes.json'],
+    inputs: ['data/scene_script.json'],
     outputs: ['data/pages.json'],
     agentName: 'Layout Pagination Agent',
     agentDesc: 'Determines the page layout structure based on scene pacing and focus character densities.',
@@ -693,34 +831,48 @@ const pipelineSteps: PipelineStep[] = [
     badge: 'Phase 2',
     title: 'Panel Structuring',
     emoji: '📐',
-    description: 'Divides page-level action into detailed panel templates with framing, compositions, and camera directions.',
+    description: 'Divides page-level action into detailed panel templates with framing, compositions, and camera directions (designed in parallel with scripting).',
     accentColor: '#10b981',
-    inputs: ['data/pages.json', 'data/intro_pages.json', 'data/lore.json'],
+    inputs: ['data/pages.json', 'data/intro_pages.json', 'data/final_lore.json', 'data/panel_style.json', 'data/scene_script.json'],
     outputs: ['data/panels.json'],
     agentName: 'Panel Composition Agent',
     agentDesc: 'Generates comic grid configurations, panel compositions, and framing descriptions.',
     instruction: 'Adjust camera angles, panels configurations, and confirm visual panel layout templates.'
   },
   {
-    id: 'script',
+    id: 'script_panel',
     phaseId: 'script',
-    badge: 'Phase 3',
-    title: 'Script & Dialogue',
-    emoji: '✍️',
-    description: 'Writes and maps speech bubbles, narrative overlays, and captions for each panel based on scene context.',
-    accentColor: '#f97316',
-    inputs: ['data/panels.json', 'data/scenario_scenes.json', 'data/lore.json'],
+    badge: 'Phase 3B',
+    title: 'Script (Panel)',
+    emoji: '✍️📐',
+    description: 'Distributes narrative beats to specific panels, defining reading flow, balloon shapes, and acting directions (designed in parallel with panel structure).',
+    accentColor: '#ea580c',
+    inputs: ['data/scene_script.json', 'data/panels.json', 'data/script_style.json', 'data/final_lore.json'],
     outputs: ['data/script.json'],
-    agentName: 'Scripting & Dialog Agent',
-    agentDesc: 'Polishes dialogue tone, checks word-balloon volumes, and sequences bubbles.',
-    instruction: 'Polish speech bubble placements, character lines, and run dialogue QA tests.'
+    agentName: 'Panel Scripting Agent',
+    agentDesc: 'Aligns dialogue beats with panels structure, sets speech balloon types, and assigns gaze directions.',
+    instruction: 'Adjust balloon placements, acting performance notes, and verify balloon-to-panel proportions.'
+  },
+  {
+    id: 'assembly',
+    phaseId: 'assembly',
+    badge: 'Phase 6',
+    title: 'Assembly Studio',
+    emoji: '🧩',
+    description: 'Brings script bubbles, graphics overlay grids, and generated panel artwork onto the final page layouts.',
+    accentColor: '#3b82f6',
+    inputs: ['data/script.json', 'data/panels.json'],
+    outputs: ['pages/page_N/final.png'],
+    agentName: 'Page Renderer Agent',
+    agentDesc: 'Handles lettering layers compositing and wraps artwork into standard SVG/PNG canvas layouts.',
+    instruction: 'Finalize lettering sizing, check panel boundaries, and run the production page export pipeline.'
   }
 ];
 
 export const PipelineMapPhase: React.FC<PipelineMapPhaseProps> = ({ onPhaseChange }) => {
   const [viewMode, setViewMode] = useState<'tracker' | 'diagram'>('tracker');
   const [selectedNodeData, setSelectedNodeData] = useState<PipelineNodeData | null>(null);
-  const [selectedStepId, setSelectedStepId] = useState<string>('lore');
+  const [selectedStepId, setSelectedStepId] = useState<string>('raw_world');
 
   // File existence check state
   const [fileStatus, setFileStatus] = useState<Record<string, boolean>>({});
@@ -729,11 +881,15 @@ export const PipelineMapPhase: React.FC<PipelineMapPhaseProps> = ({ onPhaseChang
   React.useEffect(() => {
     const checkFileStatus = async () => {
       const allFiles = [
-        'data/lore.json',
-        'data/geography.json',
+        'data/user_lore.json',
+        'data/lore_style.json',
         'data/visual_style.json',
+        'data/panel_style.json',
+        'data/script_style.json',
+        'data/final_lore.json',
+        'data/geography.json',
         'data/scenario_inputs.json',
-        'data/personality_signature.json',
+        'data/characters/[Name]/personality_signature.json',
         'data/scenario_synopsis.json',
         'data/scenario_chapters.json',
         'data/character_moods.json',
@@ -741,6 +897,7 @@ export const PipelineMapPhase: React.FC<PipelineMapPhaseProps> = ({ onPhaseChang
         'data/intro_pages.json',
         'data/pages.json',
         'data/panels.json',
+        'data/scene_script.json',
         'data/script.json',
       ];
       
@@ -749,7 +906,9 @@ export const PipelineMapPhase: React.FC<PipelineMapPhaseProps> = ({ onPhaseChang
       await Promise.all(
         allFiles.map(async (file) => {
           try {
-            const res = await fetch(`/api/load?path=${encodeURIComponent(file)}`);
+            // Resolve [Name] variable to CHARACTER_A for proxy checking
+            const pathToCheck = file.replace('[Name]', 'CHARACTER_A');
+            const res = await fetch(`/api/load?path=${encodeURIComponent(pathToCheck)}`);
             status[file] = res.ok;
           } catch {
             status[file] = false;
@@ -804,7 +963,7 @@ export const PipelineMapPhase: React.FC<PipelineMapPhaseProps> = ({ onPhaseChang
   const activeStep = pipelineSteps.find(s => s.id === selectedStepId) || pipelineSteps[0];
 
   return (
-    <div className="flex flex-col h-full w-full bg-canvas select-none">
+    <div className="flex flex-col h-full w-full min-h-0 overflow-hidden bg-canvas select-none">
       {/* Top Header Control Area */}
       <div className="h-14 bg-background-panel border-b border-border flex items-center justify-between px-6 z-20">
         <div className="flex items-center gap-3">

@@ -1,0 +1,119 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Script writing style guide. Extracted from a reference comic by the Style Research agent. Governs all narrative decisions: dialogue density, caption usage, pacing, humor style, beat structure, and lettering conventions. Consumed by the Scene Script Agent (Phase 3A) and the Panel Script Agent (Phase 3B).",
+  "_usage": "The Style Research agent fills this template by analyzing a reference comic's storytelling conventions. Once approved by the user, this file constrains all script generation for the project.",
+
+  "reference": {
+    "comic_title": "",
+    "author_writer": "",
+    "publisher": "",
+    "era": "",
+    "style_family": "european_bd | american_classic | american_modern | manga | indie_art | webcomic",
+    "reference_notes": ""
+  },
+
+  "dialogue_conventions": {
+    "density": "minimal | sparse | moderate | dense | heavy",
+    "average_words_per_balloon": { "min": 0, "max": 0, "typical": 0 },
+    "average_balloons_per_panel": { "min": 0, "max": 0, "typical": 0 },
+    "average_balloons_per_page": { "min": 0, "max": 0, "typical": 0 },
+    "line_length_tendency": "very_short | short | medium | long | verbose",
+    "interruptions_and_trails": "never | rare | occasional | frequent",
+    "overlapping_dialogue": false,
+    "dialogue_notes": ""
+  },
+
+  "caption_conventions": {
+    "usage_frequency": "never | rare | occasional | frequent | constant",
+    "primary_voice": "omniscient | character_internal | editorial | poetic | none",
+    "caption_length": "one_liner | short | medium | long",
+    "caption_placement": "top_of_panel | bottom_of_panel | varies",
+    "narration_boxes_per_page": { "min": 0, "max": 0, "typical": 0 },
+    "caption_notes": ""
+  },
+
+  "silence_and_pacing": {
+    "silent_panel_frequency": "never | rare | occasional | frequent | dominant",
+    "silent_panels_per_page": { "min": 0, "max": 0, "typical": 0 },
+    "wordless_page_frequency": "never | rare | occasional",
+    "beat_density_per_scene": "sparse | moderate | dense",
+    "scene_length_tendency": "very_short | short | medium | long | extended",
+    "pacing_notes": ""
+  },
+
+  "sfx_conventions": {
+    "usage_frequency": "never | rare | occasional | frequent | constant",
+    "style": "integrated | overlaid | background | mixed",
+    "visual_size": "subtle | moderate | dramatic | mixed",
+    "onomatopoeia_language": "french | english | japanese | original_language",
+    "custom_lettering": false,
+    "sfx_notes": ""
+  },
+
+  "internal_monologue_conventions": {
+    "usage_frequency": "never | rare | occasional | frequent",
+    "presentation": "thought_balloon | caption_box | italic_narration | none",
+    "tone": "analytical | emotional | poetic | stream_of_consciousness",
+    "monologue_notes": ""
+  },
+
+  "humor_style": {
+    "primary_type": "visual_gag | wordplay | deadpan | slapstick | absurdist | situational | dark | none",
+    "secondary_type": "",
+    "joke_frequency": "never | rare | occasional | frequent | constant",
+    "punchline_delivery": "dialogue | visual | timing_silence | caption | combo",
+    "humor_notes": ""
+  },
+
+  "emotional_register": {
+    "subtext_level": "none | minimal | moderate | heavy | everything_is_subtext",
+    "sentimentality": "never | rare | earned | frequent | constant",
+    "exposition_style": "show_dont_tell | balanced | tell_heavy",
+    "conflict_expression": "direct_confrontation | passive_aggressive | unspoken | physical | mixed",
+    "emotional_notes": ""
+  },
+
+  "character_voice_rules": {
+    "voice_differentiation": "minimal | moderate | strong | extreme",
+    "verbal_tics_frequency": "never | rare | occasional | every_line",
+    "formality_range": "uniform | slight_variation | wide_range",
+    "accent_dialect_usage": false,
+    "voice_notes": ""
+  },
+
+  "lettering_style": {
+    "balloon_types_used": [],
+    "dominant_balloon_type": "normal | rounded | rectangular | organic | none",
+    "tail_style": "pointed | curved | broken | none",
+    "emphasis_method": "bold | italic | size_change | underline | color | mixed",
+    "emphasis_frequency": "never | rare | occasional | frequent",
+    "whisper_convention": "small_text | dashed_balloon | dotted_balloon",
+    "shout_convention": "large_text | jagged_balloon | bold | all_caps",
+    "thought_convention": "cloud_balloon | caption_box | italic | none",
+    "lettering_notes": ""
+  },
+
+  "page_narrative_structure": {
+    "typical_scenes_per_page": { "min": 0, "max": 0, "typical": 0 },
+    "scene_transition_style": "hard_cut | fade | location_caption | continuous",
+    "cliffhanger_frequency": "never | rare | occasional | every_chapter",
+    "page_turn_hooks": "always | often | sometimes | never",
+    "structure_notes": ""
+  },
+
+  "beat_weight_distribution": {
+    "anchor_beats_per_scene": { "min": 0, "max": 0, "typical": 0 },
+    "supporting_to_anchor_ratio": "",
+    "ambient_usage": "never | rare | moderate | frequent",
+    "action_vs_dialogue_ratio": "",
+    "weight_notes": ""
+  },
+
+  "anti_patterns": [
+    {
+      "rule": "",
+      "reason": "",
+      "severity": "hard_rule | strong_preference | soft_suggestion"
+    }
+  ]
+}

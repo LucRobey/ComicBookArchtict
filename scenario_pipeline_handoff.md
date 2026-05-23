@@ -1,85 +1,82 @@
-# Scenario Pipeline Architecture & Handoff
+# Reference: Controllable 5-Step Scenario Generation Pipeline
 
-**Context:** 
-We are refactoring the "Lore & Story -> Scenario" generation process in the Assembly Studio. 
-Currently, the process jumps straight from raw data to a finished scene-by-scene script (`scenario.json`), behaving like a black box. 
-We are replacing this with a **5-step controllable pipeline** where the user can steer the narrative, edit intermediate outputs, and trigger agent generation (via the established QA Flagging system) at every level of granularity.
+This document details the architectural design, file flow, and agent coordination protocols for the **5-step controllable scenario generation pipeline**. This pipeline allows human operators and AI agents to guide, refine, and verify narrative outputs at multiple levels of granularity.
 
 ---
 
-## The 5-Step Pipeline Architecture
+## 1. Architectural Overview
 
-### Step 1: Raw Inputs (The Brain Dump)
-- **Input Required:** User manual entry of logline, themes, and a list of specific anecdotes/plot points/jokes.
-- **Modifications Possible:** Add, remove, or edit the bullet points directly in the UI.
-- **Output:** Saves to `data/scenario_inputs.json`.
+Instead of generating a scene-by-scene script directly from raw text, the story development process is broken down into five distinct, sequential steps. Each step exposes its intermediate output to the user interface, enabling manual editing and targeted AI regeneration using **QA Flags**.
+
+```
+  Step 1: Inputs ──► Step 2: Signatures ──► Step 3: Synopsis ──► Step 4: Chapters ──► Step 5: Scenes
+```
+
+---
+
+## 2. Detailed Step Specifications
+
+### Step 1: Raw Inputs
+- **Goal:** Capture the core narrative direction, constraints, and source materials.
+- **Inputs:** User manual input in the UI (Logline, Themes, Anecdotes, Notes).
+- **Outputs:** [scenario_inputs.json](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/data/scenario_inputs.json)
+- **User Actions:** Directly edit bullet points, themes, and goals in the UI editor.
 
 ### Step 2: Personality Signatures
-- **Input Required:** `data/scenario_inputs.json` + `data/presentation.json` (Base Character Profiles).
-- **Process:** Based on the scenario's raw inputs and the base character profiles, the agent generates specific personality signatures tailored to this scenario's events.
-- **Modifications Possible:** The user has a dedicated editing phase to manually refine and adjust each character's `personality_signature`.
-- **Output:** Saves to `data/personality_signature.json`.
+- **Goal:** Distill project-specific psychology, verbal styles, and relationship grids for each character.
+- **Inputs:** `scenario_inputs.json` + `global_characters/[Name]/presentation.json` + `data/lore.json`.
+- **Outputs:** [data/characters/[Name]/personality_signature.json](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/data/characters) (Project-specific character configurations).
+- **User Actions:** Add, edit, or delete character relationships and dynamics using the interactive **Relationship Tree Graph** and details editor.
+- **Agent Pipeline Script:** [pipelines/06_personality_signature.md](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/pipelines/06_personality_signature.md).
 
-### Step 3: The Story Treatment (Synopsis)
-- **Input Required:** `data/scenario_inputs.json` + `data/personality_signature.json` + `data/lore.json`.
-- **Modifications Possible:** Direct rich-text editing of the generated synopsis. Users can also flag the entire synopsis or specific paragraphs for a QA rewrite.
-- **Output:** Saves to `data/scenario_synopsis.json`.
+### Step 3: Story Treatment (Synopsis)
+- **Goal:** Develop the complete plot summary and overarching narrative flow.
+- **Inputs:** `data/scenario_inputs.json` + `data/characters/[Name]/personality_signature.json` + `data/lore.json`.
+- **Outputs:** [scenario_synopsis.json](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/data/scenario_synopsis.json)
+- **User Actions:** Read and edit the text outline. Write instructions to flag paragraphs or the full synopsis for AI rewrites.
+- **Agent Pipeline Script:** [pipelines/03_scenario_development.md](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/pipelines/03_scenario_development.md).
 
-### Step 4: Chapters (The Outline)
-- **Input Required:** `data/scenario_synopsis.json`.
-- **Modifications Possible:** 
+### Step 4: Chapters (Outline)
+- **Goal:** Divide the synopsis into structured chapter beats and map character emotional arcs.
+- **Inputs:** `data/scenario_synopsis.json` + `data/lore.json`.
+- **Outputs:**
+  - [scenario_chapters.json](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/data/scenario_chapters.json) (Chapter outlines and summaries).
+  - [character_moods.json](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/data/character_moods.json) (Overarching character moods per chapter).
+- **User Actions:**
   - Drag-and-drop to reorder, add, or delete chapters.
-  - Flag individual chapters for a QA rewrite or expansion.
-- **Output:** Saves to two distinct files:
-  - `data/scenario_chapters.json` (The plot outline)
-  - `data/character_mood.json` (The character's overarching mood in each chapter). *Note: The user will primarily edit this file in the **Characters Hub** panel.*
+  - Modify character mood levels (Anger, Fear, Valence, Tension) in the **Characters Hub** tab.
+- **Agent Pipeline Script:** [pipelines/07_mood_simulation.md](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/pipelines/07_mood_simulation.md).
 
-### Step 5: Scenes (The Script Breakdown)
-- **Input Required:** `data/scenario_chapters.json` + `data/personality_signature.json` + `data/character_mood.json` + `data/geography.json` (Locations).
-- **Modifications Possible:**
-  - Modify the scene's location, summary, and the characters present.
-  - Tweak the specific character mood for that scene.
-  - **Personality & Mood Confrontation:** Flag a scene to ask the QA agent to verify it: *"Does this scene contradict CHARACTER_A's `personality_signature` or their inherited `character_mood` for this chapter?"* 
-  - Flag for rewrite, split scenes, add scenes after.
-- **Output:** Saves to `data/scenario_scenes.json` (replacing the old `scenario.json`).
+### Step 5: Scenes (Script Breakdown)
+- **Goal:** Refine chapters into granular, page-ready visual scenes.
+- **Inputs:** `data/scenario_chapters.json` + `data/characters/[Name]/personality_signature.json` + `data/character_moods.json` + `data/geography.json`.
+- **Outputs:** [scenario_scenes.json](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/data/scenario_scenes.json) (Replaces legacy `scenario.json`).
+- **User Actions:**
+  - Reorder scenes, assign locations from the registry, and select focus characters.
+  - Edit scene-level emotional prompts.
+  - **Personality Confrontation:** Trigger a QA check asking: *"Does this scene action align with the character's personality signature or chapter mood state?"*
 
 ---
 
-## Implementation Checklist for the Next Agent
+## 3. Agent Integration & QA Flagging Protocol
 
-### 1. Data Schema Updates (`app/src/types/data.ts`)
-- Define TypeScript interfaces for the new JSON files:
-  - `ScenarioInputsData`
-  - `PersonalitySignatureData`
-  - `ScenarioSynopsisData`
-  - `ScenarioChaptersData`
-  - `CharacterMoodData`
-  - `ScenarioScenesData` (Adapt the old `ScenarioData` interface)
-
-### 2. UI Component Architecture (`ScenarioBuilder.tsx`)
-- Create a new wrapper component `ScenarioBuilder.tsx` to orchestrate the 5 steps via a stepper or accordion UI.
-- Ensure clicking "Generate" dispatches a **QA Flag** (e.g., `flagTarget: 'scenario_synopsis'`) for the background python agent, maintaining a non-blocking UI.
-- Build sub-components for each of the 5 steps, ensuring they can save state locally and persist back to the backend.
-
-### 3. Characters Hub Integration
-- The existing Characters Hub must be updated to load and edit `data/character_mood.json` directly.
-
-### 4. Backend / Python Agent Scripts Updates
-- The Phase 0 python scripts in the `pipelines/` or backend directory must be updated to:
-  1. Handle intermediate QA generation flags (`GENERATE_SIGNATURES`, `GENERATE_SYNOPSIS`, etc.).
-  2. Parse and write to the new separated JSON files.
-  3. **Crucial Rule:** The Step 5 agent prompt must explicitly cross-reference the scene actions against the Character's `personality_signature` and `character_mood.json` to ensure deep psychological consistency.
+The Comic Studio app operates in a non-blocking mode. When the user requests generation or flags a component:
+1. The UI creates a **QA Flag** detailing the scope (e.g. `flagTarget: 'scenario_synopsis'`) and the instructions.
+2. The flag is saved to `qa/scenario/` as a timestamped markdown file.
+3. The background AI agent polls or receives notifications of this flag.
+4. The agent reads the relevant `pipelines/` script, processes the inputs, applies the instructions, and writes the output back to the `data/` directory.
+5. The UI updates dynamically upon file change.
 
 ---
 
-## Pipeline Data Flow Diagram
+## 4. Pipeline Data Flow Diagram
 
 ```mermaid
 flowchart TD
     %% Base Data Sources
     LORE["data/lore.json"] -.-> S3
-    PRES["data/presentation.json<br/>Base Profiles"] -.-> S2
-    GEO["data/geography.json<br/>Locations"] -.-> S5
+    PRES["global_characters/[Name]/presentation.json"] -.-> S2
+    GEO["data/geography.json"] -.-> S5
 
     %% Step 1
     subgraph Step 1
@@ -91,7 +88,7 @@ flowchart TD
     
     %% Step 2
     subgraph Step 2
-        Agent1 --> S2["data/personality_signature.json"]
+        Agent1 --> S2["data/characters/[Name]/personality_signature.json"]
         UI2("User UI: Edit Signatures") --> S2
         S2 --> UI2
     end
@@ -112,8 +109,8 @@ flowchart TD
 
     %% Step 4
     subgraph Step 4
-        Agent3 --> S4["data/scenario_chapters.json<br/>Chapter Summaries"]
-        Agent3 --> CM["data/character_mood.json"]
+        Agent3 --> S4["data/scenario_chapters.json"]
+        Agent3 --> CM["data/character_moods.json"]
         UI4("User UI: Chapter List") --> S4
         S4 --> UI4
         UI_Hub("Characters Hub: Edit Moods") --> CM
@@ -127,7 +124,7 @@ flowchart TD
 
     %% Step 5
     subgraph Step 5
-        Agent4 --> S5["data/scenario_scenes.json<br/>- Scene Locations<br/>- Characters Present<br/>- 'Personality Confrontation'"]
+        Agent4 --> S5["data/scenario_scenes.json<br/>- Location mapping<br/>- Focus characters<br/>- Personality checks"]
         UI5("User UI: Scene Cards") --> S5
         S5 --> UI5
     end

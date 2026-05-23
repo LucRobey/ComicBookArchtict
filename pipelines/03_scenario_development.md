@@ -22,7 +22,7 @@ You will receive specific QA flags instructing you to execute one of these 5 ste
 
 ### Step 3: The Story Treatment (Synopsis)
 - **Trigger Flag:** `GENERATE_SYNOPSIS` or `REWRITE_SYNOPSIS`
-- **Input Required:** `data/scenario_inputs.json` + `data/personality_signature.json` + `data/lore.json`.
+- **Input Required:** `data/scenario_inputs.json` + `data/personality_signature.json` + `data/final_lore.json`.
 - **Process:** Write a rich-text synopsis covering the entire scenario arc.
 - **Output File:** `data/scenario_synopsis.json` (format: `{"synopsis": "..."}`)
 

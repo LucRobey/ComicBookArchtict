@@ -1,0 +1,149 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Script writing style guide. Extracted from Herge's 'The Adventures of Tintin'. Governs all narrative decisions: dialogue density, caption usage, pacing, humor style, beat structure, and lettering conventions. Consumed by the Scene Script Agent (Phase 3A) and the Panel Script Agent (Phase 3B).",
+  "_usage": "The Style Research agent fills this template by analyzing a reference comic's storytelling conventions. Once approved by the user, this file constrains all script generation for the project.",
+
+  "reference": {
+    "comic_title": "The Adventures of Tintin",
+    "author_writer": "Hergé (Georges Remi)",
+    "publisher": "Casterman",
+    "era": "1940s–1976 (Ligne Claire peak period, starting from the colorization of early black-and-white albums to Tintin and the Picaros)",
+    "style_family": "european_bd",
+    "reference_notes": "Narrative pacing in Tintin was refined through years of newspaper serialization, demanding frequent gags and cliffhangers at page boundaries. Dialogue is highly character-specific and written in tandem with the visual layout to maintain reading rhythm."
+  },
+
+  "dialogue_conventions": {
+    "density": "moderate",
+    "average_words_per_balloon": { "min": 3, "max": 25, "typical": 12 },
+    "average_balloons_per_panel": { "min": 0, "max": 3, "typical": 1 },
+    "average_balloons_per_page": { "min": 5, "max": 22, "typical": 12 },
+    "line_length_tendency": "medium",
+    "interruptions_and_trails": "occasional",
+    "overlapping_dialogue": false,
+    "dialogue_notes": "Dialogue is highly legible and functional. Characters rarely speak over each other in a single panel unless it is a crowd scene. Speech bubbles are organized sequentially in a strict left-to-right reading order."
+  },
+
+  "caption_conventions": {
+    "usage_frequency": "occasional",
+    "primary_voice": "omniscient",
+    "caption_length": "short",
+    "caption_placement": "top_of_panel",
+    "narration_boxes_per_page": { "min": 0, "max": 3, "typical": 1 },
+    "caption_notes": "Narration captions are short, factual time/location markers ('The next day...', 'At Marlinspike...', 'Meanwhile, at the police station...'). Hergé never uses caption boxes for internal character monologues or emotional commentary."
+  },
+
+  "silence_and_pacing": {
+    "silent_panel_frequency": "occasional",
+    "silent_panels_per_page": { "min": 0, "max": 3, "typical": 0 },
+    "wordless_page_frequency": "never",
+    "beat_density_per_scene": "moderate",
+    "scene_length_tendency": "medium",
+    "pacing_notes": "Pacing is rapid but even. Silent panels are typically used for reaction shots (shock, realization), silent action beats (creeping, jumping), or physical comedy beats (falling after a gag)."
+  },
+
+  "sfx_conventions": {
+    "usage_frequency": "occasional",
+    "style": "integrated",
+    "visual_size": "moderate",
+    "onomatopoeia_language": "original_language",
+    "custom_lettering": true,
+    "sfx_notes": "Sound effects (SFX) are hand-drawn in a lettering style matching the outline weight of the art. They are kept simple and are often translated depending on the language edition (e.g. 'Pan!' vs 'Bang!', 'Ting!' vs 'Ring!')."
+  },
+
+  "internal_monologue_conventions": {
+    "usage_frequency": "rare",
+    "presentation": "thought_balloon",
+    "tone": "analytical",
+    "monologue_notes": "Human characters do not have internal monologues. Snowy is the sole character who regularly uses thought balloons, providing cynical or worried commentary to contrast Tintin's optimistic, brave posture."
+  },
+
+  "humor_style": {
+    "primary_type": "slapstick",
+    "secondary_type": "wordplay",
+    "joke_frequency": "frequent",
+    "punchline_delivery": "combo",
+    "humor_notes": "Humor is a cornerstone of the Tintin formula. It balances physical slapstick (Haddock tripping, Thompsons falling off vehicles) with verbal character comedy: Haddock's creative insults, Calculus's hearing-related misunderstandings, and the Thompsons' redundant corrections ('To be precise...')."
+  },
+
+  "emotional_register": {
+    "subtext_level": "minimal",
+    "sentimentality": "earned",
+    "exposition_style": "balanced",
+    "conflict_expression": "direct_confrontation",
+    "emotional_notes": "Tintin stories are plots of adventure, mystery, and travel. Emotional conflicts are direct and outward. Deep, lingering psychological drama is absent. True emotional sentimentality (e.g., search for Chang in Tibet) is rare but extremely powerful because it is earned."
+  },
+
+  "character_voice_rules": {
+    "voice_differentiation": "strong",
+    "verbal_tics_frequency": "occasional",
+    "formality_range": "wide_range",
+    "accent_dialect_usage": true,
+    "voice_notes": "Voices are immediately recognizable: Tintin is highly polite, formal, and clear-headed. Haddock is colorful, nautical, informal, and loud. Calculus is overly polite, pedantic, and misinterprets speech. The Thompsons are identical, clumsy, and use redundant pseudo-legal phrasing. Villains speak with formal, menacing tone or distinct regional dialects."
+  },
+
+  "lettering_style": {
+    "balloon_types_used": ["normal", "rounded", "rectangular", "organic", "cloud_balloon"],
+    "dominant_balloon_type": "rounded",
+    "tail_style": "pointed",
+    "emphasis_method": "bold",
+    "emphasis_frequency": "occasional",
+    "whisper_convention": "dashed_balloon",
+    "shout_convention": "jagged_balloon",
+    "thought_convention": "cloud_balloon",
+    "lettering_notes": "Classic Belgian rounded speech balloons. The tail points directly to the speaker's mouth. Whipering uses dashed borders, yelling uses jagged borders, and thoughts (primarily Snowy) use puffy cloud bubbles with small circular tail beats."
+  },
+
+  "page_narrative_structure": {
+    "typical_scenes_per_page": { "min": 1, "max": 3, "typical": 1 },
+    "scene_transition_style": "hard_cut",
+    "cliffhanger_frequency": "occasional",
+    "page_turn_hooks": "sometimes",
+    "structure_notes": "Most pages represent a single scene or a continuous sequence of action. Major scene cuts happen either at the top of the next page or are separated by a location/time caption in the top-left of a panel."
+  },
+
+  "beat_weight_distribution": {
+    "anchor_beats_per_scene": { "min": 1, "max": 2, "typical": 1 },
+    "supporting_to_anchor_ratio": "3:1",
+    "ambient_usage": "moderate",
+    "action_vs_dialogue_ratio": "1:1",
+    "weight_notes": "Each scene has a single primary 'anchor beat' (discovery, attack, arrival) that occurs in an oversized panel, with supporting beats filling standard grid panels."
+  },
+
+  "anti_patterns": [
+    {
+      "rule": "Never use narration boxes to describe what the artwork already depicts",
+      "reason": "Hergé's Ligne Claire philosophy demands that the art carries all visual details. Text must only provide speech, sounds, or invisible parameters like time.",
+      "severity": "hard_rule"
+    },
+    {
+      "rule": "Never use thought balloons for human characters",
+      "reason": "Human characters must externalize thoughts through dialogue, facial expressions, or physical actions. Thought balloons are strictly reserved for Snowy (the dog).",
+      "severity": "hard_rule"
+    },
+    {
+      "rule": "Never use dynamic, diagonal, or overlapping panel borders",
+      "reason": "All panel borders must be strictly rectangular and parallel to the page edges, separated by clear, clean gutters. Slanted borders violate the classic European grid architecture.",
+      "severity": "hard_rule"
+    },
+    {
+      "rule": "Never use heavy hatching, cross-hatching, or chiaroscuro shadow modeling",
+      "reason": "Shadows must be flat shapes or omitted entirely. Linework must remain uniform in thickness, which is the foundational rule of the Ligne Claire aesthetic.",
+      "severity": "hard_rule"
+    },
+    {
+      "rule": "Never use modern internet slang, contemporary buzzwords, or extreme profanity",
+      "reason": "Dialogue must remain timeless, classic, and family-friendly. Haddock's anger must rely on colorful, creative insults (e.g. 'billions of bilious blue cataracts', 'sea gherkin') rather than crude swearing.",
+      "severity": "strong_preference"
+    },
+    {
+      "rule": "Never show extreme graphic violence, gore, or physical mutilation",
+      "reason": "The tone is that of a family-friendly comic adventure. Fights, shootings, and explosions are stylized to avoid graphic details or blood.",
+      "severity": "hard_rule"
+    },
+    {
+      "rule": "Never place speech balloons in an order that violates left-to-right reading flow",
+      "reason": "Hergé's layouts are carefully constructed to ensure dialogue bubbles are read in chronological order without winding or backtracking.",
+      "severity": "hard_rule"
+    }
+  ]
+}

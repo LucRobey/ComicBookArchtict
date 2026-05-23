@@ -20,10 +20,10 @@ The cover image (`data/images/locations/[loc_id].png`) for a location card is th
 ```
 data/geography.json                               ← location list (schema v1.4)
 data/locations/[loc_id]/location_sheet.md         ← shot library (written by Pipeline 09)
-data/lore.json                                    ← visual_style (universal style suffix)
+data/final_lore.json                              ← visual_style (universal style suffix)
 ```
 
-If `geography.json` or `lore.json` is missing → stop. Run Pipelines 01 + 03 first.
+If `geography.json` or `final_lore.json` is missing → stop. Run Pipelines 01 + 03 first.
 If a location has no `location_sheet` path → run Pipeline 09 for that location first.
 
 ---

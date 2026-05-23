@@ -1,0 +1,269 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Panel layout style guide. Extracted from Herge's 'The Adventures of Tintin'. Governs all layout decisions: grid structure, gutters, panel shapes, proportions, and signature patterns. Consumed by the Layout Agent (Phase 2B) and the Panel Script Agent (Phase 3B).",
+  "_usage": "The Style Research agent fills this template by analyzing a reference comic's visual conventions. Once approved by the user, this file constrains all panel layout generation for the project.",
+
+  "reference": {
+    "comic_title": "The Adventures of Tintin",
+    "author_artist": "Hergé (Georges Remi)",
+    "publisher": "Casterman",
+    "era": "1940s–1976 (Ligne Claire peak period, starting from the colorization of early black-and-white albums to Tintin and the Picaros)",
+    "style_family": "european_bd",
+    "reference_notes": "Joost Swarte coined the term 'Ligne Claire' in 1977 to describe the style of Hergé and his contemporaries. Characterized by uniform line thickness, flat colors, realistic backgrounds combined with iconic/cartoonish characters, and highly readable, geometric panel layouts."
+  },
+
+  "grid_rules": {
+    "rows_per_page": {
+      "min": 3,
+      "max": 4,
+      "default": 4
+    },
+    "columns_per_page": {
+      "min": 2,
+      "max": 4,
+      "default": 3
+    },
+    "panels_per_page": {
+      "min": 4,
+      "max": 12,
+      "typical": 10
+    },
+    "row_height_variance": "low",
+    "column_width_variance": "medium",
+    "variance_notes": "Rows are almost always uniform in height to maintain a stable horizontal grid rhythm. Columns vary inside each row: individual panels are frequently merged to span 2 columns, creating wider panoramic views for movement or establishing shots."
+  },
+
+  "gutter": {
+    "size": "8px",
+    "style": "white_space",
+    "color": "#000000",
+    "border_width": "1.5px",
+    "outer_margin": "16px",
+    "gutter_notes": "Each panel has a solid black border (border_width: 1.5px). The gutters are empty space showing the white or cream paper background (style: white_space, size: 8px)."
+  },
+
+  "panel_shapes": {
+    "always_rectangular": true,
+    "border_radius": "0px",
+    "allow_borderless": false,
+    "allow_bleed_to_edge": false,
+    "border_style": "solid",
+    "border_color": "#000000",
+    "border_weight": "1.5px",
+    "shape_notes": "Panels are strictly rectangular with sharp 90-degree corners. Round, diagonal, or borderless panels do not appear. Borders are uniform clean ink lines."
+  },
+
+  "proportions": {
+    "standard_panel_ratio": "4:3",
+    "wide_panel_ratio": "8:3",
+    "tall_panel_ratio": "1:1",
+    "splash_ratio": "none",
+    "proportion_notes": "Standard panels resemble classic 4:3 cinema. Wide panels span two columns (8:3) for action or landscapes. Square panels (1:1) focus on single-character reactions. True full-page splashes are virtually non-existent, except for extremely rare and iconic narrative milestones."
+  },
+
+  "reading_flow": {
+    "primary_direction": "left_to_right",
+    "row_reading": "strict_z_pattern",
+    "eye_lead_techniques": ["left-to-right character motion", "balloon placement pacing", "gutter alignment guides"],
+    "flow_notes": "Hergé laid out dialogue and action to guide the eye seamlessly. Main characters generally move from left to right to signify forward momentum, while antagonists or obstacles block them from the right."
+  },
+
+  "splash_and_emphasis": {
+    "splash_frequency": "rare",
+    "double_page_spreads": false,
+    "oversized_panel_frequency": "occasional",
+    "emphasis_notes": "Oversized panels are typically double-width horizontal panels (1 row, 2 columns wide) or occasional half-page splash panels (often at the bottom of the page) for major reveals or dynamic action scenes."
+  },
+
+  "signature_patterns": [
+    {
+      "pattern_id": "tintin_standard_4x3",
+      "name": "Standard 4-Row Grid",
+      "description": "Four rows of 3 equal panels. The fundamental layout for dense dialogue and detailed sequential action.",
+      "grid_template": {
+        "columns": "1fr 1fr 1fr",
+        "rows": "1fr 1fr 1fr 1fr"
+      },
+      "panel_areas": [
+        { "slot": 1, "gridArea": "1 / 1 / 2 / 2" },
+        { "slot": 2, "gridArea": "1 / 2 / 2 / 3" },
+        { "slot": 3, "gridArea": "1 / 3 / 2 / 4" },
+        { "slot": 4, "gridArea": "2 / 1 / 3 / 2" },
+        { "slot": 5, "gridArea": "2 / 2 / 3 / 3" },
+        { "slot": 6, "gridArea": "2 / 3 / 3 / 4" },
+        { "slot": 7, "gridArea": "3 / 1 / 4 / 2" },
+        { "slot": 8, "gridArea": "3 / 2 / 4 / 3" },
+        { "slot": 9, "gridArea": "3 / 3 / 4 / 4" },
+        { "slot": 10, "gridArea": "4 / 1 / 5 / 2" },
+        { "slot": 11, "gridArea": "4 / 2 / 5 / 3" },
+        { "slot": 12, "gridArea": "4 / 3 / 5 / 4" }
+      ],
+      "frequency": "dominant",
+      "use_when": ["dialogue_exchange", "sequential_action", "procedural_investigation"],
+      "example_note": "Hergé's default canvas, used on roughly 50-60% of pages."
+    },
+    {
+      "pattern_id": "tintin_classic_4row_10panel",
+      "name": "Classic 4-Row Asymmetric Grid",
+      "description": "Four rows with alternating widths. Rows 1 & 3 have 3 panels, Rows 2 & 4 have 2 panels (one wide and one standard).",
+      "grid_template": {
+        "columns": "1fr 1fr 1fr",
+        "rows": "1fr 1fr 1fr 1fr"
+      },
+      "panel_areas": [
+        { "slot": 1, "gridArea": "1 / 1 / 2 / 2" },
+        { "slot": 2, "gridArea": "1 / 2 / 2 / 3" },
+        { "slot": 3, "gridArea": "1 / 3 / 2 / 4" },
+        { "slot": 4, "gridArea": "2 / 1 / 3 / 3" },
+        { "slot": 5, "gridArea": "2 / 3 / 3 / 4" },
+        { "slot": 6, "gridArea": "3 / 1 / 4 / 2" },
+        { "slot": 7, "gridArea": "3 / 2 / 4 / 3" },
+        { "slot": 8, "gridArea": "3 / 3 / 4 / 4" },
+        { "slot": 9, "gridArea": "4 / 1 / 5 / 2" },
+        { "slot": 10, "gridArea": "4 / 2 / 5 / 4" }
+      ],
+      "frequency": "common",
+      "use_when": ["balanced_pacing", "dialogue_with_establishing_beat", "reaction_moments"],
+      "example_note": "Breaks visual monotony while maintaining a strict 4-row system."
+    },
+    {
+      "pattern_id": "tintin_3row_9panel",
+      "name": "Standard 3-Row Grid",
+      "description": "Three rows of 3 equal panels. Creates slightly taller panels than the standard 4-row grid.",
+      "grid_template": {
+        "columns": "1fr 1fr 1fr",
+        "rows": "1fr 1fr 1fr"
+      },
+      "panel_areas": [
+        { "slot": 1, "gridArea": "1 / 1 / 2 / 2" },
+        { "slot": 2, "gridArea": "1 / 2 / 2 / 3" },
+        { "slot": 3, "gridArea": "1 / 3 / 2 / 4" },
+        { "slot": 4, "gridArea": "2 / 1 / 3 / 2" },
+        { "slot": 5, "gridArea": "2 / 2 / 3 / 3" },
+        { "slot": 6, "gridArea": "2 / 3 / 3 / 4" },
+        { "slot": 7, "gridArea": "3 / 1 / 4 / 2" },
+        { "slot": 8, "gridArea": "3 / 2 / 4 / 3" },
+        { "slot": 9, "gridArea": "3 / 3 / 4 / 4" }
+      ],
+      "frequency": "occasional",
+      "use_when": ["detailed_backgrounds", "slower_conversations", "character_movement_focus"],
+      "example_note": "Common in earlier albums and scenes with intricate environment layouts."
+    },
+    {
+      "pattern_id": "tintin_widescreen_8panel",
+      "name": "Widescreen 4-Row Grid",
+      "description": "Four rows of 2 equal panels. Highly cinematic, providing wide panels for every beat.",
+      "grid_template": {
+        "columns": "1fr 1fr",
+        "rows": "1fr 1fr 1fr 1fr"
+      },
+      "panel_areas": [
+        { "slot": 1, "gridArea": "1 / 1 / 2 / 2" },
+        { "slot": 2, "gridArea": "1 / 2 / 2 / 3" },
+        { "slot": 3, "gridArea": "2 / 1 / 3 / 2" },
+        { "slot": 4, "gridArea": "2 / 2 / 3 / 3" },
+        { "slot": 5, "gridArea": "3 / 1 / 4 / 2" },
+        { "slot": 6, "gridArea": "3 / 2 / 4 / 3" },
+        { "slot": 7, "gridArea": "4 / 1 / 5 / 2" },
+        { "slot": 8, "gridArea": "4 / 2 / 5 / 3" }
+      ],
+      "frequency": "occasional",
+      "use_when": ["action_sequences", "travel_montages", "cinematic_dialogue"],
+      "example_note": "Excellent for panning shots and side-to-side chases."
+    },
+    {
+      "pattern_id": "tintin_half_splash_7panel",
+      "name": "Bottom Half-Splash Layout",
+      "description": "Two rows of 3 standard panels followed by a double-height, full-width bottom row serving as a dramatic half-splash.",
+      "grid_template": {
+        "columns": "1fr 1fr 1fr",
+        "rows": "1fr 1fr 2fr"
+      },
+      "panel_areas": [
+        { "slot": 1, "gridArea": "1 / 1 / 2 / 2" },
+        { "slot": 2, "gridArea": "1 / 2 / 2 / 3" },
+        { "slot": 3, "gridArea": "1 / 3 / 2 / 4" },
+        { "slot": 4, "gridArea": "2 / 1 / 3 / 2" },
+        { "slot": 5, "gridArea": "2 / 2 / 3 / 3" },
+        { "slot": 6, "gridArea": "2 / 3 / 3 / 4" },
+        { "slot": 7, "gridArea": "3 / 1 / 4 / 4" }
+      ],
+      "frequency": "rare",
+      "use_when": ["major_climax", "spectacular_landscape", "grand_arrival"],
+      "example_note": "Used for massive visual pay-offs (e.g., seeing the Syldavian rocket or the Yeti's cave)."
+    },
+    {
+      "pattern_id": "tintin_cinematic_6panel",
+      "name": "Classic 3-Row Widescreen",
+      "description": "Three rows of 2 equal panels. Very clean layout optimized for detailed dialogue exchanges and clear visual pacing.",
+      "grid_template": {
+        "columns": "1fr 1fr",
+        "rows": "1fr 1fr 1fr"
+      },
+      "panel_areas": [
+        { "slot": 1, "gridArea": "1 / 1 / 2 / 2" },
+        { "slot": 2, "gridArea": "1 / 2 / 2 / 3" },
+        { "slot": 3, "gridArea": "2 / 1 / 3 / 2" },
+        { "slot": 4, "gridArea": "2 / 2 / 3 / 3" },
+        { "slot": 5, "gridArea": "3 / 1 / 4 / 2" },
+        { "slot": 6, "gridArea": "3 / 2 / 4 / 3" }
+      ],
+      "frequency": "common",
+      "use_when": ["character_dialogue", "indoor_conversations", "slow_travel"],
+      "example_note": "A highly readable layout frequently used during indoor exposition."
+    },
+    {
+      "pattern_id": "tintin_establishing_8panel",
+      "name": "Establishing Top Wide Layout",
+      "description": "A 4-row layout with a full-width establishing panel in the top row, followed by 3 rows of varying panel configurations.",
+      "grid_template": {
+        "columns": "1fr 1fr 1fr",
+        "rows": "1.2fr 1fr 1fr 1fr"
+      },
+      "panel_areas": [
+        { "slot": 1, "gridArea": "1 / 1 / 2 / 4" },
+        { "slot": 2, "gridArea": "2 / 1 / 3 / 2" },
+        { "slot": 3, "gridArea": "2 / 2 / 3 / 3" },
+        { "slot": 4, "gridArea": "2 / 3 / 3 / 4" },
+        { "slot": 5, "gridArea": "3 / 1 / 4 / 3" },
+        { "slot": 6, "gridArea": "3 / 3 / 4 / 4" },
+        { "slot": 7, "gridArea": "4 / 1 / 5 / 2" },
+        { "slot": 8, "gridArea": "4 / 2 / 5 / 4" }
+      ],
+      "frequency": "occasional",
+      "use_when": ["scene_opening", "new_location_introduction", "exterior_transition"],
+      "example_note": "Perfect for opening a page at a new location (e.g. Marlinspike Hall exterior, Marlinspike docks)."
+    },
+    {
+      "pattern_id": "custom_full_page_splash",
+      "name": "Full-Page Splash Layout",
+      "description": "A single full-page panel layout used for iconic visual highlights or chapter covers.",
+      "grid_template": {
+        "columns": "1fr",
+        "rows": "1fr"
+      },
+      "panel_areas": [
+        { "slot": 1, "gridArea": "1 / 1 / 2 / 2" }
+      ],
+      "frequency": "rare",
+      "use_when": ["chapter_cover", "iconic_reveal"],
+      "example_note": "Used for the cover page or final visual acceptance page."
+    }
+  ],
+
+  "page_rhythm": {
+    "opening_page_tendency": "Typically opens with an establishing top panel (e.g. `tintin_establishing_8panel`) to introduce the geographical setting.",
+    "closing_page_tendency": "Ends on a small visual gag or a significant plot cliffhanger in the final slot (bottom-right panel).",
+    "action_page_tendency": "Utilizes double-column panels and alternating widths (`tintin_classic_4row_10panel` or `tintin_widescreen_8panel`) to convey horizontal movement.",
+    "dialogue_page_tendency": "Relies heavily on `tintin_standard_4x3` or `tintin_cinematic_6panel` to hold dialogue balloons safely without cramming characters.",
+    "emotional_page_tendency": "Maintains the rigid grid, letting character expressions and body language in square (1:1) panels carry the emotional weight.",
+    "rhythm_notes": "Page rhythm is highly consistent. The action moves sequentially and logically; Hergé almost never jumps time mid-page unless marked by an explicit narrative caption."
+  },
+
+  "color_and_atmosphere": {
+    "background_fill": "white",
+    "panel_background_default": "cream",
+    "negative_space_usage": "minimal",
+    "atmosphere_notes": "Ligne Claire utilizes flat colors with no gradients. Shadows are thin and clean. The gutters and page margins are pure white, and the artwork panels themselves feel brightly illuminated."
+  }
+}

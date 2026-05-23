@@ -1,0 +1,963 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Scene-level script. Contains all dialogue, narration, sound, and pacing for each scene as an ordered sequence of beats. This is the narrative writing layer — no panel layout decisions are made here.",
+  "_agent_inputs": [
+    "scenario_synopsis.json",
+    "scenario_scenes.json",
+    "scenario_chapters.json",
+    "pages.json",
+    "character_moods.json",
+    "personality_signature.json",
+    "lore.json"
+  ],
+  "scenes": [
+    {
+      "scene_id": 1,
+      "chapter_id": 1,
+      "title": "The Defiant Toaster",
+
+      "page_budget": {
+        "pages": [3],
+        "estimated_total_panels": 3,
+        "density_note": "sparse"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Quiet concentration, controlled isolation",
+        "turning_point": "The screw resists — the toaster wins this round",
+        "closing_state": "Stubborn refusal to admit defeat",
+        "arc_note": "Adèle's fixation on the toaster is a proxy for control over her post-breakup life. The harder the screw resists, the more she needs it to turn."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc1_b01",
+          "type": "action",
+          "description": "Close-up of Adèle's hands pressing a butter knife flat against a Phillips-head screw on the side panel of a chrome toaster. The metal slips. She adjusts her grip.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "Focused, determined",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc1_b02",
+          "type": "narration",
+          "text": "Tuesday. 9:47 PM. The toaster had been broken since March.",
+          "voice": "omniscient",
+          "character_id": null,
+          "tone": "Dry, factual",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc1_b03",
+          "type": "internal_monologue",
+          "character_id": "CHARACTER_A",
+          "text": "Probably a Phillips head. Most likely a number two. The butter knife was... statistically adequate.",
+          "tone": "Analytical, self-reassuring",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc1_b04",
+          "type": "sfx",
+          "text": "SKREEE",
+          "description": "Metal butter knife scraping against chrome screw head, slipping",
+          "intensity": "subtle",
+          "weight": "ambient"
+        },
+        {
+          "beat_id": "sc1_b05",
+          "type": "action",
+          "description": "Adèle pushes her glasses up with the back of her wrist. A thin scratch now runs across the toaster's side panel. She stares at it like it personally insulted her.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "Quietly annoyed, refusing to quit",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc1_b06",
+          "type": "silence",
+          "description": "The apartment hums. The drafty window rattles faintly. Adèle and the toaster regard each other.",
+          "duration": "held",
+          "purpose": "Establishing the quiet, lonely rhythm of her evenings",
+          "weight": "anchor"
+        }
+      ],
+
+      "pacing_notes": "Slow and deliberate. Each beat should feel like a small eternity — this is a woman who has nothing but time and a broken appliance.",
+      "scene_thesis": "Control is Adèle's love language, and the toaster is her current relationship.",
+      "transition_out": "The silence is about to be shattered."
+    },
+
+    {
+      "scene_id": 2,
+      "chapter_id": 1,
+      "title": "A Neon Knock",
+
+      "page_budget": {
+        "pages": [4],
+        "estimated_total_panels": 4,
+        "density_note": "moderate"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Violent disruption of the quiet",
+        "turning_point": "Adèle opens the door and sees the flamingo",
+        "closing_state": "Stunned incomprehension",
+        "arc_note": "The knock is Thomas's signature move — loud, unannounced, impossible to ignore. The flamingo is the exclamation mark."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc2_b01",
+          "type": "sfx",
+          "text": "BAM BAM BAM",
+          "description": "Three aggressive knocks on the apartment door, rattling the hinges",
+          "intensity": "dramatic",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc2_b02",
+          "type": "action",
+          "description": "Adèle flinches. The butter knife clatters onto the table. She stares at the door like it just detonated.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "Startled, immediately defensive",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc2_b03",
+          "type": "action",
+          "description": "Adèle opens the door. Thomas is leaning against the doorframe with one arm. Under the other arm, tucked casually like a baguette, is a four-foot neon-green flamingo.",
+          "character_focus": "CHARACTER_B",
+          "emotional_state": "Completely casual, radiating confidence",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc2_b04",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "Hey. So — quick thing. Completely unrelated to anything. Can I use your bathtub?",
+          "delivery": "Rapid, casual, as if asking to borrow sugar",
+          "subtext": "He needs shelter and is using absurdity to disarm her",
+          "volume": "normal",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc2_b05",
+          "type": "silence",
+          "description": "Adèle stares at the flamingo. The flamingo stares at Adèle. Thomas smiles.",
+          "duration": "held",
+          "purpose": "Comic beat — the sheer absurdity needs a moment to land",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc2_b06",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "Thomas... what is that.",
+          "delivery": "Flat. Not a question. A diagnosis.",
+          "subtext": "She already knows this is going to ruin her evening and she doesn't have the energy to stop it",
+          "volume": "quiet",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc2_b07",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "It's a flamingo. Obviously. The colour is — look, that's a whole separate conversation.",
+          "delivery": "Interrupting himself, deflecting the obvious follow-up",
+          "subtext": "He doesn't want to explain the green part yet",
+          "volume": "normal",
+          "weight": "supporting"
+        }
+      ],
+
+      "pacing_notes": "Sharp contrast with Scene 1. The knock should feel like a grenade. Then the reveal of the flamingo slows everything down for the comedy.",
+      "scene_thesis": "Thomas arrives the way he always does: loudly, absurdly, and with something that cannot be ignored.",
+      "transition_out": "Before Adèle can object, Thomas is already moving toward the bathroom."
+    },
+
+    {
+      "scene_id": 3,
+      "chapter_id": 1,
+      "title": "The Tub Negotiation",
+
+      "page_budget": {
+        "pages": [5],
+        "estimated_total_panels": 4,
+        "density_note": "moderate"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Adèle resisting, Thomas persuading",
+        "turning_point": "Adèle realizes arguing is more exhausting than agreeing",
+        "closing_state": "Reluctant surrender",
+        "arc_note": "This is a negotiation Adèle was always going to lose — not because Thomas is more persuasive, but because she's too tired to fight."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc3_b01",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "My plumbing is — you don't want details. Trust me. The point is, she needs water. Shallow water. Your tub is perfect.",
+          "delivery": "Fast, steamrolling, gesturing at the bathtub like a real estate agent",
+          "subtext": "The plumbing excuse is probably a lie, but the need is real",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc3_b02",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "She.",
+          "delivery": "One word. Flat. Processing.",
+          "subtext": "She just caught the pronoun and is horrified",
+          "volume": "quiet",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc3_b03",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "Her name is Giselle. Which — I didn't pick. She came pre-named.",
+          "delivery": "Defensive but proud, like introducing a girlfriend",
+          "subtext": "He absolutely did pick the name",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc3_b04",
+          "type": "internal_monologue",
+          "character_id": "CHARACTER_A",
+          "text": "It's 10 PM on a Tuesday. There is a green bird in my hallway. This is my life now.",
+          "tone": "Flat resignation, bordering on dark comedy",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc3_b05",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "...bathroom's on the left.",
+          "delivery": "Trailing off, already turning away to the kitchen",
+          "subtext": "She surrenders not because she agrees but because resistance costs more energy than she has",
+          "volume": "quiet",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc3_b06",
+          "type": "action",
+          "description": "Thomas grins and marches past her carrying the flamingo under his arm. Adèle closes her eyes for a full second, then walks back to her toaster.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "Defeated but too tired to care",
+          "weight": "supporting"
+        }
+      ],
+
+      "pacing_notes": "Quick dialogue volleys, then a hard stop on Adèle's internal monologue. The scene should feel like a tennis match that ends when one player just walks off the court.",
+      "scene_thesis": "Adèle's exhaustion is Thomas's greatest weapon.",
+      "transition_out": "Ten minutes of quiet. Then: clicking."
+    },
+
+    {
+      "scene_id": 4,
+      "chapter_id": 2,
+      "title": "Corn and Clicking",
+
+      "page_budget": {
+        "pages": [6],
+        "estimated_total_panels": 4,
+        "density_note": "moderate"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Suspicion triggered by strange sounds",
+        "turning_point": "Adèle sees the corn — the situation is more elaborate than she assumed",
+        "closing_state": "Dawning curiosity",
+        "arc_note": "The clicking sound is Adèle's curiosity winning over her desire to be left alone."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc4_b01",
+          "type": "sfx",
+          "text": "tik tik tik tik",
+          "description": "Dry corn kernels tapping against porcelain bathtub, quiet and rhythmic",
+          "intensity": "subtle",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc4_b02",
+          "type": "internal_monologue",
+          "character_id": "CHARACTER_A",
+          "text": "That's not a plumbing sound.",
+          "tone": "Suspicious, analytical",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc4_b03",
+          "type": "action",
+          "description": "Adèle stands in the bathroom doorway. Thomas is sitting on the edge of the tub, dropping dried corn kernels one by one into a pale green palm. The flamingo pecks delicately from his hand.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "Bewildered",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc4_b04",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "You brought... food for it.",
+          "delivery": "Slow, each word chosen carefully, as if describing evidence at a crime scene",
+          "subtext": "The corn means this wasn't spontaneous — he planned this",
+          "volume": "quiet",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc4_b05",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "Her. And yeah, she likes the dry kind better. The wet stuff makes her — anyway. It's a texture thing.",
+          "delivery": "Casual expertise, interrupted mid-sentence by self-awareness",
+          "subtext": "He knows way too much about this bird for someone who just 'found' it",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc4_b06",
+          "type": "action",
+          "description": "The flamingo tilts its head and looks directly at Adèle. Its eye is a small black marble, bright and oddly intelligent.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "A crack in her defenses — genuine curiosity",
+          "weight": "supporting"
+        }
+      ],
+
+      "pacing_notes": "Start with just sound, then reveal. The corn changes everything — it proves intent.",
+      "scene_thesis": "Thomas didn't stumble into this situation. He chose it. That's what unsettles Adèle.",
+      "transition_out": "The bird blinks. And Adèle's world tilts."
+    },
+
+    {
+      "scene_id": 5,
+      "chapter_id": 2,
+      "title": "Real, Live, and Neon-Green",
+
+      "page_budget": {
+        "pages": [7],
+        "estimated_total_panels": 3,
+        "density_note": "sparse"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Disbelief — this can't be real",
+        "turning_point": "The bird makes a sound. It IS real.",
+        "closing_state": "Shock dissolving into absurd acceptance",
+        "arc_note": "Until this moment, Adèle could have told herself it was a lawn ornament. The sound kills that fiction."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc5_b01",
+          "type": "sfx",
+          "text": "krrr",
+          "description": "A soft, throaty sound from the flamingo — a quiet gurgling chirr",
+          "intensity": "subtle",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc5_b02",
+          "type": "action",
+          "description": "Adèle's eyes widen. The flamingo turns its head ninety degrees and blinks at her. A slow, deliberate, very-much-alive blink.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "Genuine shock",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc5_b03",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "Thomas. That's... that is a real bird.",
+          "delivery": "Whispered. As if saying it louder would make it more true.",
+          "subtext": "Her analytical brain is crashing — this does not compute",
+          "volume": "whisper",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc5_b04",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "Bankrupt roadside zoo. Outside Valence. She was the last one left. They were just... going to leave her.",
+          "delivery": "Quieter than usual, genuine for once, not performing",
+          "subtext": "He sees himself in the abandoned bird",
+          "volume": "quiet",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc5_b05",
+          "type": "silence",
+          "description": "Neither of them says anything. The flamingo shifts its weight from one leg to the other. The bathroom faucet drips once.",
+          "duration": "held",
+          "purpose": "The absurdity lands. Something real has entered the conversation.",
+          "weight": "supporting"
+        }
+      ],
+
+      "pacing_notes": "This scene needs air. Let the revelation breathe. Thomas's one genuine moment shouldn't be rushed.",
+      "scene_thesis": "When Thomas stops performing, the truth hits harder.",
+      "transition_out": "But the serious moment can't last. Thomas has a landlord problem."
+    },
+
+    {
+      "scene_id": 6,
+      "chapter_id": 2,
+      "title": "The Landlord's 'Parrot'",
+
+      "page_budget": {
+        "pages": [8],
+        "estimated_total_panels": 3,
+        "density_note": "sparse"
+      },
+
+      "emotional_arc": {
+        "opening_state": "The gravity of the situation — landlord consequences",
+        "turning_point": "The 'parrot' excuse is so absurd it breaks Adèle",
+        "closing_state": "Full surrender to laughter",
+        "arc_note": "This is the emotional release. Adèle stops fighting the absurdity and just... sits down."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc6_b01",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "Okay, one thing. Mrs. Gable absolutely cannot find out about this.",
+          "delivery": "Leaning forward, conspiratorial, index finger raised",
+          "subtext": "He's already been caught and is managing damage",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc6_b02",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "Thomas. It's four feet tall.",
+          "delivery": "Deadpan. Stating objective reality.",
+          "subtext": "There is no possible cover story",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc6_b03",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "I told her it was a large parrot.",
+          "delivery": "Completely straight-faced. No irony. He means it.",
+          "subtext": "He genuinely believes this will work",
+          "volume": "normal",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc6_b04",
+          "type": "silence",
+          "description": "A beat. Adèle's mouth opens. Nothing comes out.",
+          "duration": "brief",
+          "purpose": "The joke needs a fraction of a second to land",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc6_b05",
+          "type": "action",
+          "description": "Adèle slides down the wall until she's sitting on the bathmat. Her shoulders start shaking. She's laughing — really laughing — for the first time in weeks. She tilts her head back against the tiles.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "Uncontrolled laughter, releasing weeks of tension",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc6_b06",
+          "type": "narration",
+          "text": "She hadn't laughed like that since before Marc.",
+          "voice": "omniscient",
+          "character_id": null,
+          "tone": "Quiet, understated. Not sentimental — just a fact.",
+          "weight": "supporting"
+        }
+      ],
+
+      "pacing_notes": "The 'parrot' line is the punchline of the chapter. Give it room. Adèle's laughter is the emotional climax of Act 1.",
+      "scene_thesis": "Sometimes the best medicine is something too stupid to argue with.",
+      "transition_out": "They settle in. The night is no longer about the toaster."
+    },
+
+    {
+      "scene_id": 7,
+      "chapter_id": 3,
+      "title": "Pizza on the Bathmat",
+
+      "page_budget": {
+        "pages": [9],
+        "estimated_total_panels": 4,
+        "density_note": "moderate"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Warm, shared intimacy — siblings on the floor",
+        "turning_point": "The cold pizza triggers a childhood memory",
+        "closing_state": "Deep nostalgia, defenses fully down",
+        "arc_note": "The bathroom floor becomes their childhood bedroom. Same positions, same food, different decade."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc7_b01",
+          "type": "action",
+          "description": "Wide overhead shot: Adèle and Thomas sit on opposite sides of a grease-stained pizza box on the bathroom floor. The flamingo stands in the bathtub behind them, one leg folded.",
+          "character_focus": null,
+          "emotional_state": "Comfortable silence",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc7_b02",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "This is exactly like Lyon. Floor pizza. Terrible lighting. Except the bird is new.",
+          "delivery": "Mouth half-full, waving a pizza slice for emphasis",
+          "subtext": "He's deliberately invoking their shared history to deepen the connection",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc7_b03",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "The lighting in Lyon was worse. You had that... that lamp shaped like a football.",
+          "delivery": "Trailing off into a half-smile, remembering",
+          "subtext": "She's letting the memory in without resistance",
+          "volume": "quiet",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc7_b04",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "That lamp was a design classic.",
+          "delivery": "Mock-offended, pointing with the pizza crust",
+          "subtext": "They both know it was hideous",
+          "volume": "normal",
+          "weight": "ambient"
+        },
+        {
+          "beat_id": "sc7_b05",
+          "type": "internal_monologue",
+          "character_id": "CHARACTER_A",
+          "text": "Same positions. Same cold pizza. He still eats the crust first.",
+          "tone": "Tender, noticing small details",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc7_b06",
+          "type": "silence",
+          "description": "They chew. The flamingo shifts. The radiator hisses. Nothing needs to be said.",
+          "duration": "extended",
+          "purpose": "The warmth of the scene is in the silence, not the words",
+          "weight": "anchor"
+        }
+      ],
+
+      "pacing_notes": "Let this scene be slow and warm. It's the emotional center of the story. The dialogue should feel like two people who know each other's rhythms by heart.",
+      "scene_thesis": "Some bonds are measured in cold pizza on floors.",
+      "transition_out": "The memories start flowing — and Thomas goes first."
+    },
+
+    {
+      "scene_id": 8,
+      "chapter_id": 3,
+      "title": "The Haircut Incident",
+
+      "page_budget": {
+        "pages": [10],
+        "estimated_total_panels": 3,
+        "density_note": "moderate"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Playful accusation",
+        "turning_point": "Adèle's dry rebuttal — it was his fault",
+        "closing_state": "Comfortable rivalry, both grinning",
+        "arc_note": "The haircut story is their greatest hit — a well-worn anecdote both of them have told a hundred times. Each has their own version."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc8_b01",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "Remember the kitchen shears? I wore a beanie for a MONTH because of you.",
+          "delivery": "Dramatic, pointing at her face, grinning",
+          "subtext": "He loves this story — it makes him the victim and that's his favourite role",
+          "volume": "loud",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc8_b02",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "You moved. I told you not to move. Statistically, one hundred percent your fault.",
+          "delivery": "Dry, matter-of-fact, no remorse whatsoever",
+          "subtext": "She has rehearsed this defense many times",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc8_b03",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "The beanie was bright red. I looked like a — like a postbox with legs.",
+          "delivery": "Laughing at his own description, changing the subject mid-thought",
+          "subtext": "He actually liked the beanie",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc8_b04",
+          "type": "action",
+          "description": "Thomas tugs at his green beanie. Adèle raises an eyebrow. The implication lands: he's still wearing a beanie.",
+          "character_focus": "CHARACTER_B",
+          "emotional_state": "Self-aware amusement",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc8_b05",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "...you lost the red one in two weeks.",
+          "delivery": "Trailing off, quiet smile, looking at the green one",
+          "subtext": "She notices the pattern — he's always covering something",
+          "volume": "quiet",
+          "weight": "ambient"
+        }
+      ],
+
+      "pacing_notes": "Fast and playful. The dialogue should bounce like a ping-pong match. The beanie callback is a gentle visual punchline.",
+      "scene_thesis": "Their best arguments are the ones neither of them wants to win.",
+      "transition_out": "The memories keep coming — deeper now."
+    },
+
+    {
+      "scene_id": 9,
+      "chapter_id": 3,
+      "title": "The Stairwell Sofa and Haunted Radiator",
+
+      "page_budget": {
+        "pages": [10],
+        "estimated_total_panels": 3,
+        "density_note": "moderate"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Warm mischief — shared childhood crimes",
+        "turning_point": "Thomas reveals the pennies — still in his pocket",
+        "closing_state": "Bittersweet recognition of who they are",
+        "arc_note": "The pennies are a physical artifact of their childhood. Thomas keeping them says more than any dialogue could."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc9_b01",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "And the sofa. On the stairs. Nobody could get past for three days.",
+          "delivery": "Building momentum, gesturing with both hands",
+          "subtext": "He's proud of the chaos they caused",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc9_b02",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "Madame Fournier had to use the service elevator. She called us ghost children.",
+          "delivery": "Half-laughing, remembering the old woman's fury",
+          "subtext": "She loved being invisible and powerful at the same time",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc9_b03",
+          "type": "action",
+          "description": "Thomas reaches into his jacket pocket and pulls out three copper pennies. He holds them in his open palm under the warm glow of the bathroom light.",
+          "character_focus": "CHARACTER_B",
+          "emotional_state": "Quiet pride, nostalgia",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc9_b04",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "The radiator offerings. Still got 'em.",
+          "delivery": "Quiet. No joke. Just a fact.",
+          "subtext": "He carries their childhood with him literally",
+          "volume": "quiet",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc9_b05",
+          "type": "internal_monologue",
+          "character_id": "CHARACTER_A",
+          "text": "He bought candy with those pennies. Split it exactly in half. Even the broken pieces.",
+          "tone": "Fond, specific detail that reveals deep memory",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc9_b06",
+          "type": "silence",
+          "description": "They look at the pennies. The radiator in the bathroom clanks once, as if on cue.",
+          "duration": "held",
+          "purpose": "The coincidence of the radiator sound connects past and present",
+          "weight": "supporting"
+        }
+      ],
+
+      "pacing_notes": "Start fast with the sofa story, then slow way down for the pennies reveal. The radiator sound at the end should feel like the apartment is listening.",
+      "scene_thesis": "Thomas hoards memories in his pockets. Adèle hoards them in her head. Same instinct, different filing systems.",
+      "transition_out": "The night shifts — from nostalgia to play."
+    },
+
+    {
+      "scene_id": 10,
+      "chapter_id": 4,
+      "title": "The Microwave Mimic",
+
+      "page_budget": {
+        "pages": [11],
+        "estimated_total_panels": 4,
+        "density_note": "moderate"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Shared playfulness, creative chaos",
+        "turning_point": "The flamingo actually mimics the beep",
+        "closing_state": "Triumphant laughter, interrupted by a furious dog",
+        "arc_note": "This is the high point of pure fun — two adults teaching a bird a sound. The consequences are immediate and hilarious."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc10_b01",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "Okay okay okay. Watch this. Ready?",
+          "delivery": "Buzzing with energy, crouching next to the microwave",
+          "subtext": "He lives for these moments of pointless invention",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc10_b02",
+          "type": "sfx",
+          "text": "BEEP BEEP BEEP",
+          "description": "Thomas mimicking the microwave timer sound with his mouth, surprisingly accurate",
+          "intensity": "moderate",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc10_b03",
+          "type": "sfx",
+          "text": "BRREEP",
+          "description": "The flamingo's attempt at the microwave beep — a throaty, warbling approximation",
+          "intensity": "moderate",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc10_b04",
+          "type": "action",
+          "description": "Thomas and Adèle freeze. They look at each other. The flamingo did it. It actually did it.",
+          "character_focus": null,
+          "emotional_state": "Shared astonishment, then delight",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc10_b05",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "That's... that is statistically improbable.",
+          "delivery": "Barely containing laughter, adjusting her glasses",
+          "subtext": "She's genuinely delighted and it shows — a rare breach in her composure",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc10_b06",
+          "type": "sfx",
+          "text": "BRRREEP BRRREEP BRRREEP",
+          "description": "The flamingo going off, repeating the sound on a loop",
+          "intensity": "dramatic",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc10_b07",
+          "type": "sfx",
+          "text": "WOOF WOOF WOOF WOOF",
+          "description": "Napoleon, the neighbor's dog, erupting into frenzied barking through the wall",
+          "intensity": "dramatic",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc10_b08",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "Napoleon.",
+          "delivery": "One word. Instant regret.",
+          "subtext": "He forgot about the dog",
+          "volume": "quiet",
+          "weight": "anchor"
+        }
+      ],
+
+      "pacing_notes": "Build the anticipation, then rapid-fire escalation. The flamingo's first beep is the peak — everything after is controlled chaos.",
+      "scene_thesis": "Joy is contagious, destructive, and makes terrible neighbors.",
+      "transition_out": "The night catches up with them. Time to go."
+    },
+
+    {
+      "scene_id": 11,
+      "chapter_id": 4,
+      "title": "2:00 AM Departure",
+
+      "page_budget": {
+        "pages": [12],
+        "estimated_total_panels": 3,
+        "density_note": "sparse"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Warm fatigue, the night winding down",
+        "turning_point": "Thomas actually leaves — the door opens to cold air",
+        "closing_state": "Sudden vacuum of energy and silence",
+        "arc_note": "Thomas leaves the way he came — quickly, without ceremony. The silence he leaves behind is the real goodbye."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc11_b01",
+          "type": "action",
+          "description": "Thomas scoops up the flamingo with practiced ease, tucking it under one arm. He grabs the empty pizza box with the other hand.",
+          "character_focus": "CHARACTER_B",
+          "emotional_state": "Content but restless — ready to move again",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc11_b02",
+          "type": "dialogue",
+          "speaker": "CHARACTER_B",
+          "text": "Right. Early start tomorrow. Big plans. Very legitimate plans.",
+          "delivery": "Rapid, already halfway to the door, not looking back",
+          "subtext": "He has no plans. He doesn't know where he's sleeping.",
+          "volume": "normal",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc11_b03",
+          "type": "dialogue",
+          "speaker": "CHARACTER_A",
+          "text": "Thomas...",
+          "delivery": "Trailing off. She doesn't know what she wants to say.",
+          "subtext": "Stay. Be careful. Come back. All of it.",
+          "volume": "quiet",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc11_b04",
+          "type": "action",
+          "description": "Thomas pauses in the open doorway. The hallway light behind him turns his silhouette — and the flamingo's — into a single, absurd, backlit shape. He offers a small, sincere smile. No joke.",
+          "character_focus": "CHARACTER_B",
+          "emotional_state": "Genuine warmth, briefly unmasked",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc11_b05",
+          "type": "sfx",
+          "text": "click",
+          "description": "The front door closing gently",
+          "intensity": "subtle",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc11_b06",
+          "type": "silence",
+          "description": "The apartment is suddenly, completely, oppressively quiet. The hallway light that was leaking under the door fades as Thomas walks away.",
+          "duration": "extended",
+          "purpose": "The absence is physical. Thomas takes the sound with him.",
+          "weight": "anchor"
+        }
+      ],
+
+      "pacing_notes": "Quick exit, then a long, held silence. The door closing should feel final. The silence after should linger across multiple panels.",
+      "scene_thesis": "Thomas always leaves the way he arrives: without warning. The difference is what he leaves behind.",
+      "transition_out": "Adèle is alone. But something is different."
+    },
+
+    {
+      "scene_id": 12,
+      "chapter_id": 4,
+      "title": "Corn in the Cabinet",
+
+      "page_budget": {
+        "pages": [12, 13],
+        "estimated_total_panels": 4,
+        "density_note": "sparse"
+      },
+
+      "emotional_arc": {
+        "opening_state": "Alone in the quiet, the broken toaster still waiting",
+        "turning_point": "Instead of fixing the toaster, she opens the cabinet",
+        "closing_state": "Quiet acceptance — a choice made without words",
+        "arc_note": "The corn is the opposite of the toaster. The toaster is about control. The corn is about invitation. Adèle chooses the corn."
+      },
+
+      "beats": [
+        {
+          "beat_id": "sc12_b01",
+          "type": "action",
+          "description": "Adèle stands in her kitchen. The broken toaster is still on the table, the butter knife beside it. She looks at it.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "Tired, reflective",
+          "weight": "supporting"
+        },
+        {
+          "beat_id": "sc12_b02",
+          "type": "action",
+          "description": "She doesn't pick up the butter knife. Instead, she reaches into a grocery bag on the counter and pulls out a small plastic bag of dried yellow corn kernels.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "Deliberate, quiet resolve",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc12_b03",
+          "type": "internal_monologue",
+          "character_id": "CHARACTER_A",
+          "text": "Just in case.",
+          "tone": "Simple. No analysis. No qualifiers. For once.",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc12_b04",
+          "type": "action",
+          "description": "She opens the wooden kitchen cabinet and places the bag of corn on the middle shelf, next to her colour-coded spice jars. She adjusts it so it sits straight. Then she closes the cabinet door.",
+          "character_focus": "CHARACTER_A",
+          "emotional_state": "Peaceful. A smile she doesn't know she's making.",
+          "weight": "anchor"
+        },
+        {
+          "beat_id": "sc12_b05",
+          "type": "narration",
+          "text": "The toaster could wait.",
+          "voice": "omniscient",
+          "character_id": null,
+          "tone": "Final. Warm. Not sentimental — just true.",
+          "weight": "supporting"
+        }
+      ],
+
+      "pacing_notes": "Maximum slowness. Every gesture matters. The bag of corn should feel like the most important object in the world. End on the cabinet closing — no dialogue, no noise.",
+      "scene_thesis": "Acceptance isn't dramatic. It's putting corn next to the cinnamon.",
+      "transition_out": null
+    }
+  ]
+}

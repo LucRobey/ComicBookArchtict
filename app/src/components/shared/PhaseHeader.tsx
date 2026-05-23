@@ -36,7 +36,7 @@ export const PhaseHeader: React.FC<PhaseHeaderProps> = ({
   outputs,
   accentColor = '#3b82f6',
   nextStep,
-  defaultCollapsed = false,
+  defaultCollapsed = true,
 }) => {
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
 

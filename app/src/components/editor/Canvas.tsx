@@ -3,6 +3,7 @@ import { Rnd } from 'react-rnd';
 import { useEditorStore } from '@/store/useEditorStore';
 import type { CanvasBubble, CanvasPanel } from '@/store/useEditorStore';
 import type { PageData } from '@/types/assembly';
+import { useJsonFile } from '@/hooks/useJsonFile';
 
 interface CanvasProps {
   activePage: PageData | null;
@@ -11,7 +12,7 @@ interface CanvasProps {
 const Canvas: React.FC<CanvasProps> = ({ activePage }) => {
   const { 
     elements, 
-    initializePanelsIfEmpty, 
+    initializeLayout, 
     addElement, 
     updateElementPosition, 
     updateElementSize,
@@ -20,6 +21,8 @@ const Canvas: React.FC<CanvasProps> = ({ activePage }) => {
     showGrid,
     snapToGrid
   } = useEditorStore();
+
+  const { data: panelStyle } = useJsonFile<any>('data/panel_style.json');
 
   const canvasRef = useRef<HTMLDivElement>(null);
 
@@ -33,16 +36,28 @@ const Canvas: React.FC<CanvasProps> = ({ activePage }) => {
         .then(data => {
           if (data.elements) {
             replaceElementsForPage(activePage.id, data.elements);
-          } else {
-            initializePanelsIfEmpty(activePage.id, activePage.panels || []);
+          } else if (panelStyle) {
+            initializeLayout(
+              activePage.id,
+              activePage.panels || [],
+              activePage.layout_template || 'tintin_standard_4x3',
+              panelStyle
+            );
           }
         })
         .catch(err => {
           console.error("Failed to load layout:", err);
-          initializePanelsIfEmpty(activePage.id, activePage.panels || []);
+          if (panelStyle) {
+            initializeLayout(
+              activePage.id,
+              activePage.panels || [],
+              activePage.layout_template || 'tintin_standard_4x3',
+              panelStyle
+            );
+          }
         });
     }
-  }, [activePage, initializePanelsIfEmpty, replaceElementsForPage]);
+  }, [activePage, panelStyle, initializeLayout, replaceElementsForPage]);
 
   if (!activePage) return <div className="canvas-container">Select a page to start</div>;
 

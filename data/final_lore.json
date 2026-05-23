@@ -1,0 +1,98 @@
+{
+  "_schema_version": "1.1",
+  "_description": "Active inspired lore of the project. Result of merging user_lore.json and lore_style.json.",
+  "inspiration_reference": {
+    "comic_title": "The Adventures of Tintin",
+    "style_family": "Belgian Ligne Claire",
+    "era": "Mid-20th Century (approx. 1930s-1970s)",
+    "key_inspirations_applied": [
+      "Pacing and comedy rules",
+      "Accidental involvement as plot engine",
+      "MacGuffin-driven narrative",
+      "Externalized conflict focus"
+    ]
+  },
+  "narrative_blend": {
+    "world_type": "Contemporary drama with dark comedy undertones",
+    "genre_blend": "Slice-of-life dramedy with a pervasive undercurrent of low-stakes mystery and absurd detection.",
+    "tone_blend": "Dry, deadpan, and emotionally honest, where humor arises from the stark contrast between characters' internal contradictions and the absurd, often understated, external events. Silence is as potent as dialogue, underscoring unspoken truths.",
+    "era_setting": "Present day",
+    "core_conflict_translation": {
+      "original_user_conflict": "A rigid need for order and predictability is challenged when a chaotic element (a real, green-dyed flamingo) is introduced into a mundane apartment, forcing a confrontation with family history and the unpredictable absurdity of life.",
+      "adapted_conflict_concept": "The meticulously ordered life of the protagonist is derailed by the accidental, inexplicable appearance of a green-dyed flamingo in their apartment. This seemingly mundane, chaotic element becomes an absurd MacGuffin, drawing the protagonist into a localized 'investigation' that unravels hidden threads of their family's past, revealing petty rivalries and long-held secrets. The 'hunt' isn't for global treasure, but for the local, personal 'why' behind the flamingo's presence, forcing the protagonist to confront the inherent unpredictability of life and the unsaid truths of their lineage, all while navigating a series of low-stakes, deadpan 'conspiracies' within their immediate environment.",
+      "primary_style_plot_drivers": [
+        "Accidental Involvement & Mistaken Identity",
+        "The Mysterious Clue or MacGuffin Hunt",
+        "Shadowy Syndicate / Conspiracy"
+      ]
+    }
+  },
+  "blended_world_rules": [
+    {
+      "rule": "No superpowers. No genre conventions. Only human behavior.",
+      "derived_from": "User Lore",
+      "application_in_story": "All dramatic tension and conflict arise solely from realistic human interactions, flaws, and motivations, without resorting to fantastic elements or traditional genre tropes. Even the 'adventure' elements are grounded in mundane human absurdity."
+    },
+    {
+      "rule": "Characters never say exactly what they mean.",
+      "derived_from": "User Lore",
+      "application_in_story": "Dialogue is often indirect, sarcastic, or laden with subtext, requiring readers to interpret true intentions through actions, expressions, and the ensuing comedic misunderstandings."
+    },
+    {
+      "rule": "Silence is a valid panel. Use it.",
+      "derived_from": "User Lore",
+      "application_in_story": "Moments of quiet reflection, unspoken tension, or deadpan reaction are conveyed through panels devoid of dialogue, allowing visual storytelling and character expressions to carry emotional weight and comedic timing."
+    },
+    {
+      "rule": "Altruistic and Moral Focus",
+      "derived_from": "The Adventures of Tintin",
+      "application_in_story": "The protagonist, while perhaps initially reluctant or annoyed by the chaos, ultimately acts out of a sense of responsibility and a desire to understand and resolve the bizarre situation, seeking truth rather than selfish gain."
+    },
+    {
+      "rule": "Externalized Conflict and Plot-Driven Focus",
+      "derived_from": "The Adventures of Tintin",
+      "application_in_story": "Story progression is driven by observable actions, reactions, and the unfolding mystery of the flamingo and the family history. Inner turmoil is primarily expressed through external, often understated, character behaviors and interactions."
+    },
+    {
+      "rule": "Animal Companion Commentary",
+      "derived_from": "The Adventures of Tintin",
+      "application_in_story": "The green-dyed flamingo itself (or another mundane household pet) serves as a silent, yet expressive, foil. Its reactions and presence offer visual commentary, subtly reflecting the reader's own perspective or underscoring the absurdity of the human drama."
+    }
+  ],
+  "integrated_tropes": [
+    {
+      "trope_name": "Accidental Involvement & Mistaken Identity",
+      "source_trope_description": "The protagonist is drawn into a massive, dangerous plot not by choice or destiny, but by a random accident: buying a model ship, picking up a dropped wallet, or being mistaken for a foreign agent.",
+      "manifestation_in_scenario": "The protagonist's meticulously ordered life is upended not by a grand design, but by the sheer, random absurdity of a green-dyed flamingo inexplicably appearing in their apartment. This 'accidental involvement' forces them to confront the unexpected without any prior intention or preparation, setting off a chain of events."
+    },
+    {
+      "trope_name": "The Mysterious Clue or MacGuffin Hunt",
+      "source_trope_description": "The story revolves around a physical object or puzzle (a scroll, a scepter, a falling meteorite, a stolen statue) that the protagonist must find, decipher, or protect from rival factions.",
+      "manifestation_in_scenario": "The green-dyed flamingo itself functions as the primary MacGuffin. Its inexplicable presence and unique coloring (the 'clue') drives the narrative, prompting a 'hunt' not for treasure, but for the mundane, local story behind its arrival, and the family secrets or absurd truths it implicitly represents."
+    },
+    {
+      "trope_name": "Global Travel & Multi-Locale Adventure",
+      "source_trope_description": "The narrative scale shifts rapidly from a quiet domestic setting (Marlinstike Hall) to multiple international, often exotic, locales (e.g. desert, mountains, foreign cities, space) to track down the mystery.",
+      "manifestation_in_scenario": "While the story remains strictly within a mundane, localized setting (the apartment, immediate neighborhood, local archives), the narrative uses exaggerated emotional intensity and detailed perspective to make these 'locales' feel like grand, perilous territories for the order-obsessed protagonist. The 'global travel' is internalized, representing a journey through deeply personal and familial history, which feels as vast and unknown as any foreign land."
+    },
+    {
+      "trope_name": "Shadowy Syndicate / Conspiracy",
+      "source_trope_description": "The villains are not lone wolves but belong to a highly organized, international conspiracy: smugglers, counterfeiters, secret societies, or military juntas operating behind respectable facades.",
+      "manifestation_in_scenario": "The 'syndicate' is scaled down to a highly localized, almost comically petty 'conspiracy.' This could involve a nosy HOA president, a rival family member with a hidden agenda regarding the flamingo, or a small, peculiar community group that operates with cult-like intensity, all acting under the veneer of suburban normalcy. Their machinations are about small-scale gains, maintaining their own peculiar order, or preserving trivial secrets, making them antagonists to the protagonist's quest for understanding."
+    }
+  ],
+  "humor_and_pacing_rules": {
+    "humor_mechanisms_applied": [
+      "Humor derived from character contradictions and the deadpan reaction to absurdity.",
+      "Understated slapstick collisions, falls, and minor mishaps, played for dry comedic effect.",
+      "Running gags, such as recurring trivial annoyances or character misinterpretations that highlight rigid mindsets.",
+      "Secondary characters misinterpreting normal questions as veiled insults or deeper conspiracies.",
+      "Creative, understated 'insults' or exasperated exclamations delivered with a straight face."
+    ],
+    "pacing_tempo_rules": [
+      "Tense or dramatic plot developments are immediately followed by or interwoven with moments of physical comedy or character-driven humor, maintaining a light, accessible tone without sacrificing emotional honesty.",
+      "Strategic use of 'silence panels' to punctuate comedic timing or emphasize moments of emotional weight and unspoken thoughts.",
+      "A deliberate, measured pace that allows character reactions and subtle details to resonate, reflecting the 'slice-of-life' genre while building a sense of low-stakes mystery."
+    ]
+  }
+}

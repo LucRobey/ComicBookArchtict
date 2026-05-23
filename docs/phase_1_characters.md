@@ -1,7 +1,7 @@
 # 🤖 Phase 1: Character Introductions
 
 **App Tab:** 🎭 Characters
-**Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
+**Master Guide:** [← MASTER_GUIDE.md](../MASTER_GUIDE.md)
 **Upstream:** [Phase 0 →](phase_0_lore.md) | [Phase 1.5 →](phase_1.5_pacing.md)
 **Downstream:** [Phase 2 →](phase_2_structure.md)
 
@@ -17,7 +17,8 @@ Creates dedicated introductory pages for each main character. Each character get
 
 | File | Path |
 |------|------|
-| Lore & character notes | `data/lore.json` |
+| Lore & character notes | `data/final_lore.json` |
+| Character Personality Signatures | `data/characters/[Name]/personality_signature.json` |
 | Instructions | `pipelines/intro_instructions.md` |
 
 ---

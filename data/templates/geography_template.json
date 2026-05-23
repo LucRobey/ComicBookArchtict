@@ -1,0 +1,68 @@
+{
+  "_schema_version": "1.4",
+  "_description": "Location registry. Each location is a distinct physical space. Time-of-day conditions are modelled as 'variants' within a location, not as separate entries.",
+  "locations": [
+    {
+      "id": "loc_example_flat",
+      "name": "String (e.g., The Cozy Café)",
+      "type": "interior | exterior | transitional",
+      "description": "String (physical description and narrative atmosphere)",
+      "appears_in_scenes": [
+        0
+      ],
+      "location_sheet": "data/locations/loc_example_flat/location_sheet.md",
+      "image": "data/images/locations/loc_example_flat.png",
+      "palette": [
+        "#HEX1",
+        "#HEX2"
+      ],
+      "lighting_summary": "String (lighting description, e.g., warm pendant overhead)",
+      "shots": [
+        {
+          "id": "String (e.g., wide_entrance)",
+          "label": "String (e.g., Wide — from entrance)",
+          "description": "String (visual layout of this specific camera setup)",
+          "use_for": "String (narrative purpose, e.g., Establishing scene)",
+          "image": "data/images/locations/loc_example_flat/wide_entrance.png",
+          "prompt_suffix": "String (diffusion prompt suffix detailing the shot layout)"
+        }
+      ]
+    },
+    {
+      "id": "loc_example_with_variants",
+      "name": "String (e.g., The Office)",
+      "type": "interior | exterior | transitional",
+      "description": "String (overall physical description of the location)",
+      "appears_in_scenes": [
+        0
+      ],
+      "location_sheet": "data/locations/loc_example_with_variants/location_sheet.md",
+      "variants": [
+        {
+          "id": "String (e.g., morning)",
+          "label": "String (e.g., Morning)",
+          "description": "String (visual and mood differences for this variant/time)",
+          "appears_in_scenes": [
+            0
+          ],
+          "image": "data/images/locations/loc_example_with_variants_day.png",
+          "lighting_summary": "String (variant lighting characteristics)",
+          "palette": [
+            "#HEX1",
+            "#HEX2"
+          ],
+          "shots": [
+            {
+              "id": "String (e.g., wide_entrance)",
+              "label": "String (e.g., Wide — from entrance)",
+              "description": "String (visual layout of this shot under these variant conditions)",
+              "use_for": "String (narrative purpose, e.g., Establishing scene)",
+              "image": "data/images/locations/loc_example_with_variants_day/wide_entrance.png",
+              "prompt_suffix": "String (diffusion prompt suffix for this variant shot)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

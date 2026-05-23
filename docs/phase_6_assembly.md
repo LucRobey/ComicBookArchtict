@@ -1,8 +1,8 @@
 # 🤖 Phase 6: Assembly
 
 **App Tab:** 🧩 Assembly
-**Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
-**Upstream:** [Phase 4/5 →](phase_4_images.md) | [Phase 3 →](phase_3_script.md)
+**Master Guide:** [← MASTER_GUIDE.md](../MASTER_GUIDE.md)
+**Upstream:** [Phase 4/5 →](phase_4_images.md) | [Phase 3B →](phase_3_script.md) (Panel Script)
 **Downstream:** Final output (no further phases)
 
 ---

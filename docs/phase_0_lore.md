@@ -1,7 +1,7 @@
 # 🤖 Phase 0: Pre-Production
 
 **App Tab:** 🌍 Lore & Story
-**Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
+**Master Guide:** [← MASTER_GUIDE.md](../MASTER_GUIDE.md)
 **Downstream:** [Phase 1.5 →](phase_1.5_pacing.md) | [Phase 1 →](phase_1_characters.md)
 
 ---
@@ -17,7 +17,7 @@ Phase 0 establishes the creative bedrock of the project. It is the only **manual
 | Source | Where |
 |--------|-------|
 | User conversation | (chat context) |
-| Pipeline instructions | `pipelines/01_style_building.md`, `pipelines/03_scenario_development.md` |
+| Pipeline instructions | `pipelines/01_style_building.md` |
 
 ---
 
@@ -25,57 +25,38 @@ Phase 0 establishes the creative bedrock of the project. It is the only **manual
 
 | File | Path |
 |------|------|
-| World rules | `data/lore.json` |
-| Scene list | `data/scenario.json` |
+| Raw World rules | `data/user_lore.json` |
 
 ---
 
-## `data/lore.json` Schema
+## `data/user_lore.json` Schema
 
 ```json
 {
   "world_type": "string — universe descriptor",
   "tone": "string — how the story feels",
   "genre": "string — formal genre",
-  "rules": ["hard constraint 1", "hard constraint 2"],
-  "visual_rules": ["visual constraint 1", "visual constraint 2"],
   "era": "string — when the story is set",
-  "visual_style": "string — art direction bible for image generation",
-  "palette": [{"label": "Name", "hex": "#HEX", "role": "Usage description"}]
+  "rules": ["hard constraint 1", "hard constraint 2"],
+  "core_conflict": "string — core conflict of the story"
 }
 ```
 
 `rules` are imperative behavioral/narrative constraints that **every downstream agent must respect**. Write them as commands. Example: `"Characters never say exactly what they mean."`
 
-`visual_rules` are imperative image generation constraints covering linework, rendering, and composition. Example: `"Minimal hatching — shadow is flat fill, not crosshatch."`
-
 ---
 
-## `data/scenario.json` Schema
+## Scenario Development (Phase 0.2)
 
-```json
-{
-  "scenes": [
-    {
-      "scene_id": 1,
-      "title": "string",
-      "location": "string",
-      "characters_present": ["CHARACTER_A"],
-      "emotional_beat": "string",
-      "summary": "string",
-      "anecdotes": ["anecdote_key"]
-    }
-  ]
-}
-```
+Scenario development has been refactored into a structured **5-step controllable pipeline** in **Phase 0.2**, producing decoupled outputs (`data/scenario_inputs.json`, `data/characters/[Name]/personality_signature.json`, `data/scenario_synopsis.json`, `data/scenario_chapters.json`, and `data/scenario_scenes.json`). 
 
-`anecdotes` are **snake_case reference keys** (not descriptions). They are tracked through pacing (`data/pages.json`) to ensure they appear on the correct page.
+Please refer to `scenario_pipeline_handoff.md` and `docs/pipeline_steps.md` for details on scenario generation, schemas, and agent interactions.
 
 ---
 
 ## App: 🌍 Lore & Story Tab
 
-**Lore sub-tab:** Every `lore.json` key rendered as a card. Arrays as bulleted lists. Each card has 🚩.
+**Lore sub-tab:** Every `user_lore.json` and `final_lore.json` key rendered as a card. Arrays as bulleted lists. Each card has 🚩.
 
 **Scenario sub-tab:** Each scene as a card with scene ID, title, location, characters, emotional beat (italic), summary (left-border), anecdotes (pin badges). Two buttons per scene: 🚩 Rewrite + Add After.
 
@@ -89,7 +70,7 @@ Phase 0 establishes the creative bedrock of the project. It is the only **manual
 * **Current:** Dry, deadpan.
 * **Request:** Warmer. Still dry, but with genuine affection.
 ```
-**Action:** Update only `lore.json`. For visual rules flagged as `visual_rule:[text]`, update `visual_rules` array.
+**Action:** Update `user_lore.json`.
 
 ### `[REWRITE_SCENE]` — Rewrite a scene
 ```markdown
@@ -116,8 +97,6 @@ Phase 0 establishes the creative bedrock of the project. It is the only **manual
 
 ## Agent Rules
 
-1. Write `data/lore.json` first — tone rules influence how you write the scenario.
-2. Scene IDs must be sequential integers starting at 1.
-3. `anecdotes` are snake_case keys, not descriptions.
-4. Target 15–25 scenes.
-5. After writing, update `PRODUCTION_STATUS.md`: Phase 0 → `[REVIEW]`
+1. Write `data/user_lore.json` establishing universe parameters, hard rules, and core conflict.
+2. Ensure world rules are written as imperative commands (e.g. "Characters never say exactly what they mean").
+3. After writing, update `PRODUCTION_STATUS.md`: Phase 0 → `[REVIEW]`

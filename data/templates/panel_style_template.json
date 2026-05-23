@@ -1,0 +1,109 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Panel layout style guide. Extracted from a reference comic by the Style Research agent. Governs all layout decisions: grid structure, gutters, panel shapes, proportions, and signature patterns. Consumed by the Layout Agent (Phase 2B) and the Panel Script Agent (Phase 3B).",
+  "_usage": "The Style Research agent fills this template by analyzing a reference comic's visual conventions. Once approved by the user, this file constrains all panel layout generation for the project.",
+
+  "reference": {
+    "comic_title": "",
+    "author_artist": "",
+    "publisher": "",
+    "era": "",
+    "style_family": "european_bd | american_classic | american_modern | manga | indie_art | webcomic",
+    "reference_notes": ""
+  },
+
+  "grid_rules": {
+    "rows_per_page": {
+      "min": 0,
+      "max": 0,
+      "default": 0
+    },
+    "columns_per_page": {
+      "min": 0,
+      "max": 0,
+      "default": 0
+    },
+    "panels_per_page": {
+      "min": 0,
+      "max": 0,
+      "typical": 0
+    },
+    "row_height_variance": "none | low | medium | high",
+    "column_width_variance": "none | low | medium | high",
+    "variance_notes": ""
+  },
+
+  "gutter": {
+    "size": "0px",
+    "style": "solid_line | double_line | none | shadow | white_space",
+    "color": "#000000",
+    "border_width": "0px",
+    "outer_margin": "0px",
+    "gutter_notes": ""
+  },
+
+  "panel_shapes": {
+    "always_rectangular": true,
+    "border_radius": "0px",
+    "allow_borderless": false,
+    "allow_bleed_to_edge": false,
+    "border_style": "solid | drawn | rough | none",
+    "border_color": "#000000",
+    "border_weight": "1px",
+    "shape_notes": ""
+  },
+
+  "proportions": {
+    "standard_panel_ratio": "",
+    "wide_panel_ratio": "",
+    "tall_panel_ratio": "",
+    "splash_ratio": "",
+    "proportion_notes": ""
+  },
+
+  "reading_flow": {
+    "primary_direction": "left_to_right | right_to_left | vertical",
+    "row_reading": "strict_z_pattern | guided | freeform",
+    "eye_lead_techniques": [],
+    "flow_notes": ""
+  },
+
+  "splash_and_emphasis": {
+    "splash_frequency": "never | rare | occasional | frequent",
+    "double_page_spreads": false,
+    "oversized_panel_frequency": "never | rare | occasional | frequent",
+    "emphasis_notes": ""
+  },
+
+  "signature_patterns": [
+    {
+      "pattern_id": "",
+      "name": "",
+      "description": "",
+      "grid_template": {
+        "columns": "",
+        "rows": ""
+      },
+      "panel_areas": [],
+      "frequency": "dominant | common | occasional | rare | signature_only",
+      "use_when": [],
+      "example_note": ""
+    }
+  ],
+
+  "page_rhythm": {
+    "opening_page_tendency": "",
+    "closing_page_tendency": "",
+    "action_page_tendency": "",
+    "dialogue_page_tendency": "",
+    "emotional_page_tendency": "",
+    "rhythm_notes": ""
+  },
+
+  "color_and_atmosphere": {
+    "background_fill": "white | cream | colored | scene_dependent",
+    "panel_background_default": "",
+    "negative_space_usage": "minimal | moderate | generous",
+    "atmosphere_notes": ""
+  }
+}

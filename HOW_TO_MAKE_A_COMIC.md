@@ -10,17 +10,23 @@
 ```
 [Pre-Phase]  Project Initialization   → pipelines/ customized for your project
       ↓
-[Phase 0]    World Building           → data/lore.json
+[Phase 0]    Raw World Building       → data/user_lore.json
       ↓
-[Phase 0.2]  Scenario                 → data/scenario_*.json, data/personality_signature.json
+[Phase 0.5]  Style Research           → data/*_style.json (researched layout/writing rules)
       ↓
-[Phase 1]  Character Intros         → data/intro_pages.json
+[Phase 0.6]  Lore Merging             → data/final_lore.json
       ↓
-[Phase 1.5]    Pacing                   → data/pages.json
+[Phase 0.2]  Scenario                 → data/scenario_*.json (synopsis, chapters, scenes)
       ↓
-[Phase 2]    Panel Structuring        → data/panels.json
+[Phase 0.7]  Characters Hub           → data/character_moods.json, personality, visual signatures
       ↓
-[Phase 3]    Scripting                → data/script.json
+[Phase 3A]   Script (Scene)           → data/scene_script.json
+      ↓
+[Phase 1]    Character Intros         → data/intro_pages.json
+      ↓
+[Phase 1.5]  Pacing                   → data/pages.json
+      ↓
+[Phase 2 & 3B] Panels & Panel Script  → data/panels.json & data/script.json (in parallel)
       ↓
 [Phase 4/5]  Image Generation         → data/images/page_N/panel_N.png
       ↓
@@ -92,37 +98,64 @@ Every `[ACTION REQUIRED]` placeholder in every `pipelines/` file has been replac
 
 ---
 
-## 📖 Phase 0: Pre-Production
+## 📖 Phase 0: Raw World Building
 
-**App Tab:** 🌍 Lore & Story  
+**App Tab:** 🌍 Lore & Story (Sub-tab: `🌍 Raw World`)  
 **Pipeline files:** `pipelines/01_style_building.md`, `02_character_distillation.md`  
-**Outputs:** `data/lore.json`
+**Outputs:** `data/user_lore.json`
 
-> ⚠️ **THIS PHASE IS A CONVERSATION.** No single command — you talk freely with the agent until the world and story feel right.
+> ⚠️ **THIS PHASE IS A CONVERSATION.** You talk freely with the agent in chat until your core story world concept is shaped.
 
 ### What you say
+Talk to the agent about your custom story idea, factions, setting, and rules:
+> *"The story is about a space-port detective who runs a bakery. The tone is cozy but mystery-driven. Key rules: No magic, baking solves problems..."*
 
-Talk to the agent like a creative collaborator. There is no fixed command:
+When finished, instruct the agent:
+> *"Save this as `data/user_lore.json`."*
 
-> *"The world is a near-future Tokyo. Tone is melancholic but dry. The protagonist is a forensic accountant who can't stop noticing patterns in everything..."*
+---
 
-Go back and forth until you're happy. When ready:
+## 🔍 Phase 0.5: Style Research
 
-> *"Save this as `data/lore.json` and `data/scenario.json`."*
+**App Tab:** 🌍 Lore & Story (Sub-tab: `🔍 Style Research`)  
+**Pipeline files:** `pipelines/09b_style_research.md`  
+**Outputs:** `data/panel_style.json`, `data/script_style.json`, `data/lore_style.json`, `data/visual_style.json`
+
+### What you say
+Provide the name of the reference comic you want to adapt the layout and narrative style from:
+> *"We want to adopt the style of Hergé's Tintin (1950s era). Execute Phase 0.5 Style Research."*
 
 ### What the agent does
-
-Builds `data/lore.json` — world type, tone, genre, hard rules, visual style, character sheets.
+The agent performs **targeted web searches** to analyze the visual layouts, scripting pacing, and narrative devices of the reference comic. It extracts:
+1.  **Panel layouts** (`panel_style.json`): Grid template structures, gutters, reading flow, and CSS grid patterns.
+2.  **Script conventions** (`script_style.json`): Dialogue density, caption voice, silent panel rates, sound effects rules, lettering, and style anti-patterns.
+3.  **Thematic tropes** (`lore_style.json`): Archetypes, story mechanisms, and world rules.
+4.  **Visual DNA** (`visual_style.json`): Outlines, shading, color palette tokens, and image generation prompts (positive and negative style constraints).
 
 ### In the app
+You can review the researched style guidelines in the **Style Research** sub-tab. When `Edit Style Guide` is toggled, you can edit tropes, rules, color palettes (via color picker), prompts, and layout templates inline.
 
-Open the **Lore & Story** tab to review both files. Use 🚩 to flag anything that feels wrong. QA reports go to `qa/lore/`.
+---
 
-Then say: **"Apply my modifications."**
+## 🌪️ Phase 0.6: Lore Merging
+
+**App Tab:** 🌍 Lore & Story (Sub-tab: `✨ Blended World`)  
+**Pipeline files:** `pipelines/09c_lore_merge.md`, `09c_lore_merge.py`  
+**Inputs:** `data/user_lore.json`, `data/lore_style.json`  
+**Outputs:** `data/final_lore.json`
+
+### What you do
+Open the **Blended World** sub-tab and click the **Mix World & Style** button.
+
+### What the agent does
+Runs the Python script `09c_lore_merge.py` to trigger Gemini, blending the user's raw story ideas with the style tropes to create a single active project bible:
+*   Combines the user's genre/setting and the style's pacing to create a **Narrative Blend**.
+*   Adapts the user's core conflict through the style's signature plot drivers.
+*   Merges and resolves contradictions in the world rules.
+*   Populates the active project bible `data/final_lore.json`.
 
 ### Done when
-
-`data/lore.json` exists, is approved, and all world rules feel right.
+`data/final_lore.json` exists and is approved. We are now ready to build the characters and scene scenarios.
 
 ---
 
@@ -130,17 +163,17 @@ Then say: **"Apply my modifications."**
 
 **App Tab:** 📝 Scenario  
 **Pipeline files:** `pipelines/03_scenario_development.md`  
-**Outputs:** `data/scenario_inputs.json`, `data/personality_signature.json`, `data/scenario_synopsis.json`, `data/scenario_chapters.json`, `data/scenario_scenes.json`
+**Outputs:** `data/scenario_inputs.json`, `data/scenario_synopsis.json`, `data/scenario_chapters.json`, `data/scenario_scenes.json`
 
-> ⚠️ **THIS PHASE IS A STEP-BY-STEP PROCESS.** You proceed through the tabs in the app (Inputs → Signatures → Synopsis → Chapters → Scenes), triggering the agent generation at each step.
+> ⚠️ **THIS PHASE IS A STEP-BY-STEP PROCESS.** You proceed through the tabs in the app (Inputs → Synopsis → Chapters → Scenes), triggering the agent generation at each step.
 
 ### What you say
 
 Start with the Inputs tab in the app, write your logline, themes, and anecdotes. Then ask the agent:
 
-> *"Generate the personality signatures based on my inputs."*
+> *"Generate the scenario synopsis and chapters based on my inputs."*
 
-Continue this process for each tab, guiding the agent until the final scene-by-scene script breakdown is generated.
+Continue this process for each tab, guiding the agent until the final scene-by-scene breakdown is generated.
 
 ### What the agent does
 
@@ -154,7 +187,37 @@ Then say: **"Apply my modifications."**
 
 ### Done when
 
-All five scenario files exist, are approved, and all scenes feel right.
+All four scenario files exist, are approved, and all scenes feel right.
+
+---
+
+## 👤 Phase 0.7: Character Foundation & Hub
+
+**App Tab:** 👤 Characters Hub  
+**Pipeline files:** `pipelines/05_visual_signature.md`, `06_personality_signature.md`, `07_mood_simulation.md`  
+**Inputs:** `data/final_lore.json` (active blended bible), `data/scenario_scenes.json`  
+**Outputs:** `data/character_moods.json`, `data/characters/[Name]/personality_signature.json`, character turnaround images, emotion portraits
+
+### What you say
+
+> *"Execute Phase 0.7 Character Foundation. Read data/final_lore.json and pipelines/05_visual_signature.md / 06_personality_signature.md / 07_mood_simulation.md to generate the personality signatures, turnaround sheets, and character moods."*
+
+### What the agent does
+
+*   **Visual translation** (`05_visual_signature.md`): Translates character reference photos into the target visual style, generating a canonical visual description and turnaround images.
+*   **Personality profiling** (`06_personality_signature.md`): Creates project-specific personality signatures and generates 12 dominant emotion portraits (face only) for image-to-image styling.
+*   **Mood simulation** (`07_mood_simulation.md`): Simulates emotional trajectories (dominant emotion, feels, shows, tension) for each character in each scene.
+
+### In the app
+
+Open the **Characters Hub** tab. You can:
+*   View character bios, visual turnarounds, and personality networks.
+*   Review the scene-by-scene mood matrix and edit fields inline (changes save instantly).
+*   Flag issues on personality or visuals. QA reports go to `qa/character-hub/`.
+
+### Done when
+
+Turnarounds, personality signatures, and `data/character_moods.json` are created and approved.
 
 > ⚠️ **After approval:** Check that `pipelines/pacing_instructions.md` scene-type weights match your actual scenes.
 
@@ -164,12 +227,12 @@ All five scenario files exist, are approved, and all scenes feel right.
 
 **App Tab:** 🎭 Characters  
 **Pipeline file:** `pipelines/intro_instructions.md`  
-**Input:** `data/lore.json`  
+**Input:** `data/final_lore.json`  
 **Output:** `data/intro_pages.json`
 
 ### What you say
 
-> *"Execute Phase 1. Read `data/lore.json` and `pipelines/intro_instructions.md`. Generate `data/intro_pages.json`."*
+> *"Execute Phase 1. Read `data/final_lore.json` and `pipelines/intro_instructions.md`. Generate `data/intro_pages.json`."*
 
 ### What the agent does
 
@@ -292,20 +355,35 @@ QA reports go to: `qa/structure/`. Then say: **"Apply my modifications."**
 
 ---
 
-## ✍️ Phase 3: Scripting
+## ✍️ Phase 3A: Script (Scene)
 
-**App Tab:** ✍️ Script  
-**Pipeline file:** `pipelines/scripting_instructions.md`  
-**Input:** `data/panels.json`, `data/lore.json`  
+**App Tab:** ✍️ Script (Sub-tab: `🎬 Scene Script`)  
+**Pipeline file:** `pipelines/10_scene_script.md`  
+**Input:** `data/scenario_scenes.json`, `data/final_lore.json`, `data/script_style.json`  
+**Output:** `data/scene_script.json`
+
+### What you say
+
+> *"Execute Phase 3A Scene Script. Read data/scenario_scenes.json, data/final_lore.json, data/script_style.json, and pipelines/10_scene_script.md to generate data/scene_script.json."*
+
+### What the agent does
+Writes the sequential scene-by-scene script beats (dialogue, narration, SFX, and silences) based on the world lore.
+
+---
+
+## ✍️ Phase 3B: Script (Panel)
+
+**App Tab:** ✍️ Script (Sub-tab: `📐 Panel Script`)  
+**Pipeline file:** `pipelines/11_panel_script.md`  
+**Input:** `data/scene_script.json`, `data/panels.json`, `data/script_style.json`, `data/final_lore.json`  
 **Output:** `data/script.json`
 
 ### What you say
 
-> *"Execute Phase 3. Read `data/panels.json`, `data/lore.json`, and `pipelines/scripting_instructions.md`. Generate `data/script.json`."*
+> *"Execute Phase 3B Panel Script. Read data/scene_script.json, data/panels.json, data/script_style.json, data/final_lore.json, and pipelines/11_panel_script.md to generate data/script.json."*
 
 ### What the agent does
-
-Reads every panel action and writes all dialogue, thoughts, and captions. Every line gets a permanent ID.
+Distributes scene beats to panels, configures dialogue bubbles, sets reading orders, and defines character acting instructions.
 
 ```json
 {
@@ -407,8 +485,11 @@ If a speech bubble text needs a real rewrite, go back to the **Script** tab → 
 
 | You want to… | Do it in… |
 |---|---|
-| Define world rules & tone | Phase 0 chat → `data/lore.json` |
-| Define the story arc | Phase 0.2 chat → `data/scenario_*.json` |
+| Define world rules & tone | Phase 0 chat → `data/user_lore.json` |
+| Extract reference comic style rules | Phase 0.5 agent run → `data/lore_style.json`, `data/visual_style.json`, etc. |
+| Blend world story & style rules | Phase 0.6 dashboard mix → `data/final_lore.json` |
+| Define the story arc | Phase 0.2 chat/tabs → `data/scenario_*.json` |
+| Build character signatures & moods | Phase 0.7 chat/hub → `data/character_moods.json` & personality profiles |
 | Add/remove a scene | Phase 0.2 chat → `data/scenario_scenes.json` |
 | Add or merge a page | 📋 Pacing tab → 🚩 Flag |
 | Fix a character's intro | 🎭 Characters tab → 🚩 Flag |
@@ -443,22 +524,31 @@ architecture 3.0/
 │   └── (run: cd app && npm run dev → localhost:5173)
 │
 ├── data/                      ← ALL generated JSON files
-│   ├── lore.json
+│   ├── user_lore.json         ← User's raw story ideas
+│   ├── lore_style.json        ← Researched narrative tropes of reference style
+│   ├── visual_style.json      ← Researched Visual DNA details & prompts
+│   ├── panel_style.json       ← Researched panel layout templates (CSS Grids)
+│   ├── script_style.json      ← Researched script conventions & anti-patterns
+│   ├── final_lore.json        ← Blended lore (user + style)
 │   ├── scenario_inputs.json
-│   ├── personality_signature.json
 │   ├── scenario_synopsis.json
 │   ├── scenario_chapters.json
 │   ├── scenario_scenes.json
+│   ├── scene_script.json      ← Scene-level beats script
 │   ├── pages.json
 │   ├── intro_pages.json
 │   ├── panels.json
 │   ├── script.json
+│   ├── characters/            ← Character personality & visual state folders
+│   │   └── [Name]/
+│   │       └── personality_signature.json
 │   └── images/
 │       └── page_N/
 │           └── panel_N.png
 │
 ├── qa/                        ← All QA reports by phase
 │   ├── lore/
+│   ├── character-hub/
 │   ├── characters/
 │   ├── pacing/
 │   ├── structure/
@@ -468,11 +558,13 @@ architecture 3.0/
 ├── pipelines/                 ← Agent instruction files (customized at init)
 ├── docs/                      ← Per-phase technical reference
 │
-├── AGENT_GUIDE.md             ← Technical reference for AI agents
-├── AGENT_HANDOFF.md           ← Current session state
 ├── FILE_GUIDE.md              ← What every file and folder does
-├── HOW_TO_MAKE_A_COMIC.md    ← This document
+├── HOW_TO_MAKE_A_COMIC.md     ← This document
 ├── MASTER_GUIDE.md            ← 60-second overview
 ├── PRODUCTION_STATUS.md       ← Kanban board
-└── init_project_protocol.md   ← One-time project setup instructions
+├── init_project_protocol.md   ← One-time project setup instructions
+├── new_research_handoff.md    ← Style research & lore handoff
+├── scenario_pipeline_handoff.md ← Scenario pipeline architecture & handoff
+├── scenario_layout_handoff.md  ← Relationship tree layout handoff
+└── script_pipeline_handoff.md  ← Scripting pipeline architecture & handoff
 ```

@@ -1,8 +1,8 @@
 # 🤖 Phase 4/5: Image Generation & Surgical Review
 
 **App Tab:** *(None — AI chat only)*
-**Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
-**Upstream:** [Phase 3 →](phase_3_script.md)
+**Master Guide:** [← MASTER_GUIDE.md](../MASTER_GUIDE.md)
+**Upstream:** [Phase 2 →](phase_2_structure.md) | [Phase 3B →](phase_3_script.md) (Panel Script)
 **Downstream:** [Phase 6 →](phase_6_assembly.md)
 
 ---
@@ -23,7 +23,7 @@ No Comic Studio tab. All review happens in the AI chat session.
 |------|------|
 | Panel breakdown | `data/panels.json` |
 | Script | `data/script.json` |
-| Lore | `data/lore.json` |
+| Lore | `data/final_lore.json` |
 | Instructions | `pipelines/generation_instructions.md` |
 
 ---

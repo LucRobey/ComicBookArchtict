@@ -1,15 +1,15 @@
 # 🤖 Phase 2: Page Structuring
 
 **App Tab:** 📐 Panel Structure
-**Master Guide:** [← AGENT_GUIDE.md](../AGENT_GUIDE.md)
+**Master Guide:** [← MASTER_GUIDE.md](../MASTER_GUIDE.md)
 **Upstream:** [Phase 1.5 →](phase_1.5_pacing.md) | [Phase 1 →](phase_1_characters.md)
-**Downstream:** [Phase 3 →](phase_3_script.md)
+**Downstream:** [Phase 3B →](phase_3_script.md) (Panel Script - runs in parallel) | [Phase 6 →](phase_6_assembly.md)
 
 ---
 
 ## What This Phase Does
 
-Breaks every approved page into individual panels. For each panel: a camera angle (framing), an action description, the characters visible, and any structural tags. Output is the blueprint Phase 3 uses for dialogue.
+Breaks every approved page into individual panels. For each panel: a camera angle (framing), an action description, the characters visible, and any structural tags. Output is the blueprint Phase 3B uses for panel scripting, and Phase 4/5 uses for image generation.
 
 ---
 
@@ -19,8 +19,9 @@ Breaks every approved page into individual panels. For each panel: a camera angl
 |------|------|
 | Page list | `data/pages.json` |
 | Character intro pages | `data/intro_pages.json` |
+| Scene script | `data/scene_script.json` |
 | Instructions | `pipelines/structuring_instructions.md` |
-| Lore rules | `data/lore.json` |
+| Lore rules | `data/final_lore.json` |
 
 ---
 
@@ -28,24 +29,37 @@ Breaks every approved page into individual panels. For each panel: a camera angl
 
 | File | Path |
 |------|------|
+| Visual schema template | `data/templates/panels_template.json` |
 | Panel breakdown | `data/panels.json` |
 
 ---
 
-## `data/panels.json` Schema
+## `data/panels.json` Schema (Page & Grid Architecture)
 
 ```json
 {
   "pages": [
     {
       "page_number": 1,
+      "layout_template": "tintin_standard_4x3",
       "panels": [
         {
           "panel_number": 1,
           "framing": "Wide Establishing Shot",
-          "action": "string — what is visually happening",
+          "action": "string — what is visually happening (no dialogue)",
           "characters_present": ["CHARACTER_A"],
-          "tags": ["[ESTABLISHING]"]
+          "tags": ["[ESTABLISHING]"],
+          "focal_element": "string — specific focal point of the camera",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "string — facial expression",
+              "pose_and_gesture": "string — body pose and posture details",
+              "internal_state": "string — internal thoughts or emotions"
+            }
+          ],
+          "environment_details": "string — atmospheric or background elements",
+          "composition_notes": "string — camera lens, depth of field, or composition notes"
         }
       ]
     }
@@ -63,7 +77,7 @@ The app uses these exact strings for color-coded badge display. Respect case.
 
 ### `action` — writing rules:
 - Present tense, visual description only. **No dialogue.**
-- Written for two agents: Phase 3 (dialogue context) AND Phase 4 (image prompt).
+- Written for two agents: Phase 3B (panel script dialogue context) AND Phase 4 (image prompt).
 - Be specific about body language, spatial relationships, expressions.
 
 ### `tags` — defined in `pipelines/structuring_instructions.md`:

@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../../../styles/script.css';
 
-export type DialogueType = 'speech' | 'thought' | 'caption';
+export type DialogueType = 'speech' | 'thought' | 'caption' | 'sfx';
 
 export interface Dialogue {
   id: string;
   speaker: string;
   text: string;
   type: DialogueType;
+  delivery?: string;
+  subtext?: string;
+  volume?: string;
 }
 
 interface DialogueLineProps {
@@ -20,6 +23,7 @@ const TYPE_LABELS: Record<DialogueType, { label: string; icon: string; color: st
   speech:  { label: 'Speech',  icon: '💬', color: '#3b82f6' },
   thought: { label: 'Thought', icon: '💭', color: '#8b5cf6' },
   caption: { label: 'Caption', icon: '📝', color: '#94a3b8' },
+  sfx:     { label: 'SFX',     icon: '💥', color: '#f97316' },
 };
 
 const DialogueLine: React.FC<DialogueLineProps> = ({ dialogue, onSave, onFlag }) => {

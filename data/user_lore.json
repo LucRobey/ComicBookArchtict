@@ -1,0 +1,14 @@
+{
+  "_schema_version": "1.0",
+  "_description": "User raw story and world inputs. Filled by the user in the app before starting the style integration or scenario development.",
+  "world_type": "Contemporary drama with dark comedy undertones",
+  "tone": "Dry, deadpan, emotionally honest. Humor comes from character contradictions, not situations.",
+  "genre": "Slice-of-life dramedy",
+  "era": "Present day",
+  "rules": [
+    "No superpowers. No genre conventions. Only human behavior.",
+    "Characters never say exactly what they mean.",
+    "Silence is a valid panel. Use it."
+  ],
+  "core_conflict": "A rigid need for order and predictability is challenged when a chaotic element (a real, green-dyed flamingo) is introduced into a mundane apartment, forcing a confrontation with family history and the unpredictable absurdity of life."
+}

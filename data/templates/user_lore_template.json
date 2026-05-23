@@ -1,0 +1,10 @@
+{
+  "_schema_version": "1.0",
+  "_description": "User raw story and world inputs. Filled by the user in the app before starting the style integration or scenario development.",
+  "world_type": "",
+  "tone": "",
+  "genre": "",
+  "era": "",
+  "rules": [],
+"core_conflict": ""
+}

@@ -51,6 +51,12 @@ interface EditorState {
   clearElementsForPage: (pageId: string) => void;
   replaceElementsForPage: (pageId: string, elements: (CanvasBubble | CanvasPanel)[]) => void;
   initializePanelsIfEmpty: (pageId: string, panels: string[]) => void;
+  initializeLayout: (
+    pageId: string,
+    panels: { panel_number: number }[],
+    layoutTemplate: string,
+    panelStyle: any
+  ) => void;
 }
 
 export const useEditorStore = create<EditorState>((set, get) => ({
@@ -120,6 +126,106 @@ export const useEditorStore = create<EditorState>((set, get) => ({
         imageOffsetX: 0,
         imageOffsetY: 0
       }));
+      set({ elements: [...state.elements, ...newPanels] });
+    }
+  },
+
+  initializeLayout: (pageId, panels, layoutTemplate, panelStyle) => {
+    const state = get();
+    const hasPanels = state.elements.some(el => el.pageId === pageId && el.type === 'panel');
+    if (!hasPanels && panels.length > 0) {
+      const pattern = panelStyle.signature_patterns?.find((p: any) => p.pattern_id === layoutTemplate) 
+                   || panelStyle.signature_patterns?.[0];
+
+      if (!pattern) {
+        // Fallback to basic layout if style is missing or invalid
+        const newPanels: CanvasPanel[] = panels.map((panel, index) => ({
+          id: `panel_${pageId}_${panel.panel_number}`,
+          type: 'panel',
+          imageUrl: `/api/load-image?path=data/images/${pageId}/panel_${panel.panel_number}.png`,
+          x: 20 + (index * 40),
+          y: 20 + (index * 40),
+          width: 300,
+          height: 200,
+          zIndex: index,
+          pageId,
+          imageScale: 1,
+          imageOffsetX: 0,
+          imageOffsetY: 0
+        }));
+        set({ elements: [...state.elements, ...newPanels] });
+        return;
+      }
+
+      // Parse grid definitions from style guidelines
+      const colWeights = pattern.grid_template.columns.split(/\s+/).map((s: string) => parseFloat(s));
+      const rowWeights = pattern.grid_template.rows.split(/\s+/).map((s: string) => parseFloat(s));
+
+      const outerMargin = parseInt(panelStyle.gutter?.outer_margin) || 16;
+      const gutterSize = parseInt(panelStyle.gutter?.size) || 8;
+
+      const PAGE_WIDTH = 800;
+      const PAGE_HEIGHT = 1131;
+
+      // Calculate column widths and row heights
+      const activeWidth = PAGE_WIDTH - 2 * outerMargin;
+      const totalColWeight = colWeights.reduce((a, b) => a + b, 0);
+      const colWidths = colWeights.map(w => 
+        (activeWidth - (colWeights.length - 1) * gutterSize) * (w / totalColWeight)
+      );
+
+      const activeHeight = PAGE_HEIGHT - 2 * outerMargin;
+      const totalRowWeight = rowWeights.reduce((a, b) => a + b, 0);
+      const rowHeights = rowWeights.map(w => 
+        (activeHeight - (rowWeights.length - 1) * gutterSize) * (w / totalRowWeight)
+      );
+
+      const getColX = (colIdx: number) => {
+        let x = outerMargin;
+        for (let i = 0; i < colIdx; i++) x += colWidths[i] + gutterSize;
+        return x;
+      };
+
+      const getRowY = (rowIdx: number) => {
+        let y = outerMargin;
+        for (let i = 0; i < rowIdx; i++) y += rowHeights[i] + gutterSize;
+        return y;
+      };
+
+      // Map each panel slot to screen coordinates
+      const newPanels: CanvasPanel[] = panels.map((panel, idx) => {
+        const slot = pattern.panel_areas.find((sa: any) => sa.slot === panel.panel_number) 
+                  || pattern.panel_areas[idx] 
+                  || pattern.panel_areas[0];
+
+        const [rStart, cStart, rEnd, cEnd] = slot.gridArea.split('/').map((s: string) => parseInt(s.trim()));
+
+        let width = 0;
+        for (let i = cStart - 1; i < cEnd - 1; i++) {
+          width += colWidths[i] + (i > (cStart - 1) ? gutterSize : 0);
+        }
+
+        let height = 0;
+        for (let i = rStart - 1; i < rEnd - 1; i++) {
+          height += rowHeights[i] + (i > (rStart - 1) ? gutterSize : 0);
+        }
+
+        return {
+          id: `panel_${pageId}_${panel.panel_number}`,
+          type: 'panel',
+          imageUrl: `/api/load-image?path=data/images/${pageId}/panel_${panel.panel_number}.png`,
+          x: getColX(cStart - 1),
+          y: getRowY(rStart - 1),
+          width,
+          height,
+          zIndex: idx,
+          pageId,
+          imageScale: 1,
+          imageOffsetX: 0,
+          imageOffsetY: 0
+        };
+      });
+
       set({ elements: [...state.elements, ...newPanels] });
     }
   }

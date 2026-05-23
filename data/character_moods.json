@@ -8,7 +8,250 @@
     "CHARACTER_A": "# CHARACTER_A — General Mood\n\n> **Current emotional headspace — for the story period covered by this project.**\n\nAdèle is three months out of a five-year relationship. She's not heartbroken in the dramatic sense — she's in the quieter, harder phase after that: the phase where you have to build a new daily life from scratch and prove to yourself that the leaving was worth it.\n\nShe's oscillating between relief and doubt. Some days she feels lighter than she has in years. Other days — usually Sunday evenings — she sits in her new apartment and wonders if she made a mistake. Not because she misses Marc specifically, but because she misses the structure of being known by someone.\n\nHer work is the anchor. The abandoned buildings project gives her purpose and direction. When she's shooting, she doesn't think about any of it. The problem is the hours between.\n\nShe's more open than usual — the breakup cracked something in her composure. She's saying things she normally wouldn't. She's surprised by how much she wants to connect with people, after years of telling herself she didn't need to. This openness is fragile and new.\n\n*Last updated: 2026-05-19*\n",
     "CHARACTER_B": "# CHARACTER_B — General Mood\n\n> **Current emotional headspace — for the story period covered by this project.**\n\nThomas is at a turning point, though he hides it behind a barrage of jokes and reckless stunts. He has recently returned from a high-stress field operation that went sideways, leaving him with a lingering sense of vulnerability he refuses to acknowledge.\n\nHe is oscillating between his natural impulse to run to the next thrill and a growing, unfamiliar desire to slow down and find some stability. Seeing his sister Adèle rebuild her life from scratch has stirred something in him — a mixture of protective worry and envy of her quiet courage.\n\nHe uses adrenaline and humor as his armor. When things get too quiet or too serious, his instinct is to disrupt the room or start a new project. The silence is his enemy.\n\nHe is trying to be a supportive brother while dealing with his own unraveling. This makes his humor sharper and his actions more erratic than usual.\n\n*Last updated: 2026-05-20*\n"
   },
-  "chapter_moods": [],
+  "chapter_moods": [
+    {
+      "chapter_id": 1,
+      "title": "The Butter Knife and the Flamingo",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "defensive",
+          "feels": "Desperately trying to maintain a predictable environment to keep her post-breakup loneliness and anxiety at bay.",
+          "shows": "Fixated on a mechanical task (fixing the toaster), rigid posture, speaking in flat, short sentences.",
+          "tension_with": "CHARACTER_B",
+          "agenda": "Maintain her domestic order and get her brother to leave before he completely disrupts her night.",
+          "subtext": "She is exhausted by life and has no emotional bandwidth for Thomas's antics, but she lacks the energy to fight him.",
+          "secret": "She feels a fleeting sense of relief that someone knocked on her door.",
+          "status_dynamic": "Adèle holds the high ground as the 'sane' homeowner, while Thomas is the intrusive petitioner.",
+          "tactics": "Ignoring the absurdity of the flamingo, focusing intensely on the broken toaster as a physical shield.",
+          "scene_stakes": "Her fragile illusion of control and safety in her new apartment."
+        },
+        "CHARACTER_B": {
+          "dominant_emotion": "deflecting",
+          "feels": "Vulnerable and anxious about his own recent failures, yet deeply concerned that Adèle is shutting herself away.",
+          "shows": "Unreasonably cheerful, high energy, deadpan delivery of preposterous excuses.",
+          "tension_with": "CHARACTER_A",
+          "agenda": "Gain entry, distract Adèle from her sad routine, and establish a beachhead for the night.",
+          "subtext": "Using the neon flamingo as an emotional icebreaker to force Adèle to engage with him.",
+          "secret": "He didn't just rescue the flamingo; he's running away from his own high-stress mess.",
+          "status_dynamic": "Thomas plays the low-status fool to disarm Adèle's defenses.",
+          "tactics": "Using high-concept absurdity and mock-innocent begging to wear down her resistance.",
+          "scene_stakes": "Breaking through Adèle's isolation without triggering a defensive retreat."
+        }
+      }
+    },
+    {
+      "chapter_id": 2,
+      "title": "The Porcelain Stage",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "disbelieving",
+          "feels": "Pure disbelief mixed with a sudden, overwhelming urge to laugh at the sheer absurdity of her life.",
+          "shows": "Wide eyes, dropping her tools, eventually sliding down to sit on the bathmat in absolute surrender.",
+          "tension_with": "CHARACTER_B",
+          "agenda": "Verify if she is losing her mind, and understand the scope of the landlord trouble Thomas is bringing.",
+          "subtext": "Her rigid walls are cracking; she realizes she cannot control this situation and maybe doesn't want to.",
+          "secret": "She is secretly thrilled by the sheer visual madness of a green bird in her bathtub.",
+          "status_dynamic": "The dynamic shifts from rigid authority to mutual participation in an absurd secret.",
+          "tactics": "Surrendering her logical arguments, asking deadpan questions to meet Thomas on his own level.",
+          "scene_stakes": "Relinquishing her grip on order and letting the chaos in."
+        },
+        "CHARACTER_B": {
+          "dominant_emotion": "amused",
+          "feels": "Relief that the truth is out and that Adèle isn't kicking him (or the bird) out immediately.",
+          "shows": "Completely nonchalant, sitting on the edge of the tub, scattering corn as if it's perfectly normal.",
+          "tension_with": null,
+          "agenda": "Normalize the situation and get Adèle to agree to keep the bird's secret from the landlord.",
+          "subtext": "Testing how far he can push Adèle's boundaries before she snaps.",
+          "secret": "He is deeply relieved to see the tension leave Adèle's face, even if it's because she thinks he's crazy.",
+          "status_dynamic": "Thomas takes the lead as the 'producer' of the show, guiding Adèle into the performance.",
+          "tactics": "Underplaying the situation ('Mrs. Gable thinks it's a large parrot') to make the bizarre seem mundane.",
+          "scene_stakes": "Gaining Adèle's complicity in his chaotic scheme."
+        }
+      }
+    },
+    {
+      "chapter_id": 3,
+      "title": "Ghost Children and Kitchen Shears",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "reminiscent",
+          "feels": "A deep, comforting warmth and nostalgia; feeling safe and understood in the shared history with her brother.",
+          "shows": "Softened facial expression, laughing genuinely, leaning against the bathroom wall while eating pizza.",
+          "tension_with": null,
+          "agenda": "Connect with Thomas and escape her current adult worries by retreating into childhood memories.",
+          "subtext": "She realizes that no matter how much she tries to isolate herself, her brother is her constant anchor.",
+          "secret": "She still feels guilty about the 'Haircut Incident' even though she laughs about it.",
+          "status_dynamic": "Perfect equality — they are peers sharing the battle scars of their childhood.",
+          "tactics": "Trading jokes, matching Thomas's storytelling beat for beat.",
+          "scene_stakes": "Re-establishing the sibling bond as a buffer against their current real-world stresses."
+        },
+        "CHARACTER_B": {
+          "dominant_emotion": "nostalgic",
+          "feels": "A bittersweet longing for the simpler times of childhood, seeking comfort in his sister's shared memories.",
+          "shows": "Gesturing with pizza, laughing loudly, but with brief quiet moments where he looks closely at Adèle.",
+          "tension_with": null,
+          "agenda": "Keep Adèle talking and laughing, solidifying their connection to distract them both from their current worries.",
+          "subtext": "He is using their history to remind Adèle (and himself) of who they are when they aren't failing.",
+          "secret": "He pocketed those pennies because he wanted to buy a toy for her, not just out of greed.",
+          "status_dynamic": "Perfect equality — sharing the stage as co-conspirators.",
+          "tactics": "Exaggerating the details of past disasters to maximize the comedic effect.",
+          "scene_stakes": "Creating a safe emotional harbor where they can both drop their armor."
+        }
+      }
+    },
+    {
+      "chapter_id": 4,
+      "title": "The Beep of Acceptance",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "accepting",
+          "feels": "A quiet, peaceful acceptance of her brother's chaotic nature and her own imperfect, changing life.",
+          "shows": "Tired but smiling, cleaning up, placing the corn bag neatly in the cupboard with deliberate care.",
+          "tension_with": null,
+          "agenda": "Safely close the chapter of the night, while acknowledging that she doesn't want to completely shut Thomas out.",
+          "subtext": "She is lonely again once the door closes, but it's a softer, more hopeful kind of quiet now.",
+          "secret": "She bought the corn because she hopes they will come back soon.",
+          "status_dynamic": "Sole occupant of her space, but now her boundaries have been expanded by choice.",
+          "tactics": "Methodical, gentle movements; choosing a place for the new bag of corn as a symbolic gesture.",
+          "scene_stakes": "Her emotional trajectory — choosing connection and resilience over rigid isolation."
+        },
+        "CHARACTER_B": {
+          "dominant_emotion": "sated",
+          "feels": "Content that he has successfully broken through Adèle's shell and left her in a better place.",
+          "shows": "Yawning, packing up the bird carefully, offering a quiet, sincere smile before leaving.",
+          "tension_with": null,
+          "agenda": "Exit gracefully, leaving behind a lighter mood, and take care of the next step of his own messy situation.",
+          "subtext": "He is tired and the reality of his own problems is waiting outside, but he feels stronger for having helped his sister.",
+          "secret": "He has no idea where he's sleeping tonight, but he's glad Adèle doesn't have to worry about that.",
+          "status_dynamic": "Gentle departure, yielding the space entirely back to Adèle.",
+          "tactics": "Leaving on a high note, avoiding a heavy emotional goodbye that might rebuild her walls.",
+          "scene_stakes": "Leaving Adèle with a sense of connection rather than a feeling of being abandoned again."
+        }
+      }
+    }
+  ],
+  "chapters": [
+    {
+      "chapter_id": 1,
+      "title": "The Butter Knife and the Flamingo",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "defensive",
+          "feels": "Desperately trying to maintain a predictable environment to keep her post-breakup loneliness and anxiety at bay.",
+          "shows": "Fixated on a mechanical task (fixing the toaster), rigid posture, speaking in flat, short sentences.",
+          "tension_with": "CHARACTER_B",
+          "agenda": "Maintain her domestic order and get her brother to leave before he completely disrupts her night.",
+          "subtext": "She is exhausted by life and has no emotional bandwidth for Thomas's antics, but she lacks the energy to fight him.",
+          "secret": "She feels a fleeting sense of relief that someone knocked on her door.",
+          "status_dynamic": "Adèle holds the high ground as the 'sane' homeowner, while Thomas is the intrusive petitioner.",
+          "tactics": "Ignoring the absurdity of the flamingo, focusing intensely on the broken toaster as a physical shield.",
+          "scene_stakes": "Her fragile illusion of control and safety in her new apartment."
+        },
+        "CHARACTER_B": {
+          "dominant_emotion": "deflecting",
+          "feels": "Vulnerable and anxious about his own recent failures, yet deeply concerned that Adèle is shutting herself away.",
+          "shows": "Unreasonably cheerful, high energy, deadpan delivery of preposterous excuses.",
+          "tension_with": "CHARACTER_A",
+          "agenda": "Gain entry, distract Adèle from her sad routine, and establish a beachhead for the night.",
+          "subtext": "Using the neon flamingo as an emotional icebreaker to force Adèle to engage with him.",
+          "secret": "He didn't just rescue the flamingo; he's running away from his own high-stress mess.",
+          "status_dynamic": "Thomas plays the low-status fool to disarm Adèle's defenses.",
+          "tactics": "Using high-concept absurdity and mock-innocent begging to wear down her resistance.",
+          "scene_stakes": "Breaking through Adèle's isolation without triggering a defensive retreat."
+        }
+      }
+    },
+    {
+      "chapter_id": 2,
+      "title": "The Porcelain Stage",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "disbelieving",
+          "feels": "Pure disbelief mixed with a sudden, overwhelming urge to laugh at the sheer absurdity of her life.",
+          "shows": "Wide eyes, dropping her tools, eventually sliding down to sit on the bathmat in absolute surrender.",
+          "tension_with": "CHARACTER_B",
+          "agenda": "Verify if she is losing her mind, and understand the scope of the landlord trouble Thomas is bringing.",
+          "subtext": "Her rigid walls are cracking; she realizes she cannot control this situation and maybe doesn't want to.",
+          "secret": "She is secretly thrilled by the sheer visual madness of a green bird in her bathtub.",
+          "status_dynamic": "The dynamic shifts from rigid authority to mutual participation in an absurd secret.",
+          "tactics": "Surrendering her logical arguments, asking deadpan questions to meet Thomas on his own level.",
+          "scene_stakes": "Relinquishing her grip on order and letting the chaos in."
+        },
+        "CHARACTER_B": {
+          "dominant_emotion": "amused",
+          "feels": "Relief that the truth is out and that Adèle isn't kicking him (or the bird) out immediately.",
+          "shows": "Completely nonchalant, sitting on the edge of the tub, scattering corn as if it's perfectly normal.",
+          "tension_with": null,
+          "agenda": "Normalize the situation and get Adèle to agree to keep the bird's secret from the landlord.",
+          "subtext": "Testing how far he can push Adèle's boundaries before she snaps.",
+          "secret": "He is deeply relieved to see the tension leave Adèle's face, even if it's because she thinks he's crazy.",
+          "status_dynamic": "Thomas takes the lead as the 'producer' of the show, guiding Adèle into the performance.",
+          "tactics": "Underplaying the situation ('Mrs. Gable thinks it's a large parrot') to make the bizarre seem mundane.",
+          "scene_stakes": "Gaining Adèle's complicity in his chaotic scheme."
+        }
+      }
+    },
+    {
+      "chapter_id": 3,
+      "title": "Ghost Children and Kitchen Shears",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "reminiscent",
+          "feels": "A deep, comforting warmth and nostalgia; feeling safe and understood in the shared history with her brother.",
+          "shows": "Softened facial expression, laughing genuinely, leaning against the bathroom wall while eating pizza.",
+          "tension_with": null,
+          "agenda": "Connect with Thomas and escape her current adult worries by retreating into childhood memories.",
+          "subtext": "She realizes that no matter how much she tries to isolate herself, her brother is her constant anchor.",
+          "secret": "She still feels guilty about the 'Haircut Incident' even though she laughs about it.",
+          "status_dynamic": "Perfect equality — they are peers sharing the battle scars of their childhood.",
+          "tactics": "Trading jokes, matching Thomas's storytelling beat for beat.",
+          "scene_stakes": "Re-establishing the sibling bond as a buffer against their current real-world stresses."
+        },
+        "CHARACTER_B": {
+          "dominant_emotion": "nostalgic",
+          "feels": "A bittersweet longing for the simpler times of childhood, seeking comfort in his sister's shared memories.",
+          "shows": "Gesturing with pizza, laughing loudly, but with brief quiet moments where he looks closely at Adèle.",
+          "tension_with": null,
+          "agenda": "Keep Adèle talking and laughing, solidifying their connection to distract them both from their current worries.",
+          "subtext": "He is using their history to remind Adèle (and himself) of who they are when they aren't failing.",
+          "secret": "He pocketed those pennies because he wanted to buy a toy for her, not just out of greed.",
+          "status_dynamic": "Perfect equality — sharing the stage as co-conspirators.",
+          "tactics": "Exaggerating the details of past disasters to maximize the comedic effect.",
+          "scene_stakes": "Creating a safe emotional harbor where they can both drop their armor."
+        }
+      }
+    },
+    {
+      "chapter_id": 4,
+      "title": "The Beep of Acceptance",
+      "moods": {
+        "CHARACTER_A": {
+          "dominant_emotion": "accepting",
+          "feels": "A quiet, peaceful acceptance of her brother's chaotic nature and her own imperfect, changing life.",
+          "shows": "Tired but smiling, cleaning up, placing the corn bag neatly in the cupboard with deliberate care.",
+          "tension_with": null,
+          "agenda": "Safely close the chapter of the night, while acknowledging that she doesn't want to completely shut Thomas out.",
+          "subtext": "She is lonely again once the door closes, but it's a softer, more hopeful kind of quiet now.",
+          "secret": "She bought the corn because she hopes they will come back soon.",
+          "status_dynamic": "Sole occupant of her space, but now her boundaries have been expanded by choice.",
+          "tactics": "Methodical, gentle movements; choosing a place for the new bag of corn as a symbolic gesture.",
+          "scene_stakes": "Her emotional trajectory — choosing connection and resilience over rigid isolation."
+        },
+        "CHARACTER_B": {
+          "dominant_emotion": "sated",
+          "feels": "Content that he has successfully broken through Adèle's shell and left her in a better place.",
+          "shows": "Yawning, packing up the bird carefully, offering a quiet, sincere smile before leaving.",
+          "tension_with": null,
+          "agenda": "Exit gracefully, leaving behind a lighter mood, and take care of the next step of his own messy situation.",
+          "subtext": "He is tired and the reality of his own problems is waiting outside, but he feels stronger for having helped his sister.",
+          "secret": "He has no idea where he's sleeping tonight, but he's glad Adèle doesn't have to worry about that.",
+          "status_dynamic": "Gentle departure, yielding the space entirely back to Adèle.",
+          "tactics": "Leaving on a high note, avoiding a heavy emotional goodbye that might rebuild her walls.",
+          "scene_stakes": "Leaving Adèle with a sense of connection rather than a feeling of being abandoned again."
+        }
+      }
+    }
+  ],
   "scenes": [
     {
       "scene_id": 1,
@@ -18,13 +261,25 @@
           "dominant_emotion": "determined",
           "feels": "Terrified she'll be blamed",
           "shows": "Talking too fast, laughing at wrong moments",
-          "tension_with": "CHARACTER_B"
+          "tension_with": "CHARACTER_B",
+          "agenda": "",
+          "subtext": "",
+          "secret": "",
+          "status_dynamic": "",
+          "tactics": "",
+          "scene_stakes": ""
         },
         "CHARACTER_B": {
           "dominant_emotion": "performing",
           "feels": "Hollow. He doesn't care.",
           "shows": "Relaxed, already has a plan",
-          "tension_with": null
+          "tension_with": null,
+          "agenda": "",
+          "subtext": "",
+          "secret": "",
+          "status_dynamic": "",
+          "tactics": "",
+          "scene_stakes": ""
         }
       }
     },
@@ -36,7 +291,13 @@
           "dominant_emotion": "overwhelmed",
           "feels": "Alone. The letter shattered something.",
           "shows": "Very still. Not crying. Reading again.",
-          "tension_with": null
+          "tension_with": null,
+          "agenda": "",
+          "subtext": "",
+          "secret": "",
+          "status_dynamic": "",
+          "tactics": "",
+          "scene_stakes": ""
         }
       }
     },
@@ -48,13 +309,25 @@
           "dominant_emotion": "resigned",
           "feels": "She knows this won't fix anything.",
           "shows": "Polite. Too polite.",
-          "tension_with": "CHARACTER_B"
+          "tension_with": "CHARACTER_B",
+          "agenda": "",
+          "subtext": "",
+          "secret": "",
+          "status_dynamic": "",
+          "tactics": "",
+          "scene_stakes": ""
         },
         "CHARACTER_B": {
           "dominant_emotion": "determined",
           "feels": "He needs to say something real today.",
           "shows": "Unusually quiet, listening more.",
-          "tension_with": null
+          "tension_with": null,
+          "agenda": "",
+          "subtext": "",
+          "secret": "",
+          "status_dynamic": "",
+          "tactics": "",
+          "scene_stakes": ""
         }
       }
     }

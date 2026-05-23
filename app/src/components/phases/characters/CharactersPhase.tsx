@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { PhaseHeader } from '../../shared/PhaseHeader';
 import { useJsonFile } from '@/hooks/useJsonFile';
 import { saveQaFlag } from '@/utils/saveFile';
 import { Plus, Trash2, Save, Image, Flag, X, Check, Sparkles } from 'lucide-react';
@@ -190,8 +191,19 @@ const CharactersPhase: React.FC = () => {
   };
 
   return (
-    <div className="chars-phase bg-background-panel relative">
-      
+    <div className="chars-phase-wrapper">
+      <PhaseHeader
+        title="Characters' Intro"
+        emoji="🎭"
+        badge="Phase 1"
+        description="Orchestrates dynamic introduction splash layouts for primary scenario characters based on their personality signatures and lore. Each character gets a humorous multi-panel introduction page."
+        inputs={['data/lore.json', 'data/characters/[Name]/personality_signature.json']}
+        outputs={['data/intro_pages.json']}
+        accentColor="#f59e0b"
+        nextStep={{ label: 'Pacing & Pagination' }}
+        defaultCollapsed={true}
+      />
+      <div className="chars-phase bg-background-panel relative">
       {/* Sidebar - Characters List */}
       <div className="chars-sidebar bg-secondary border-r border-border shadow-sm">
         <div className="chars-sidebar-header">
@@ -846,6 +858,7 @@ const CharactersPhase: React.FC = () => {
           </div>
         </>
       )}
+      </div>
     </div>
   );
 };

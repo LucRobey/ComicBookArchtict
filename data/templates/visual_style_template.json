@@ -1,0 +1,32 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Aesthetic design tokens and rules extracted from reference comic research. Dictates color palettes, outline weights, and positive/negative baseline prompts for image diffusion generation.",
+  "style_metadata": {
+    "name": "",
+    "description": ""
+  },
+  "dna": {
+    "description": ""
+  },
+  "palette": [
+    {
+      "hex": "",
+      "label": "",
+      "role": ""
+    }
+  ],
+  "rules": [],
+  "mood_board": [
+    {
+      "id": "",
+      "prompt": "",
+      "image": ""
+    }
+  ],
+  "image_generation": {
+    "positive_baseline": "",
+    "negative_prompt": "",
+    "interior_page_framing": "",
+    "cover_page_framing": ""
+  }
+}

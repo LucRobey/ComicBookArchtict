@@ -1,0 +1,1267 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Compiled panel structures mapping framing, visual action, characters present, layout templates, environmental details, and composition notes across all 14 pages.",
+  "pages": [
+    {
+      "page_number": 0,
+      "layout_proposal_raw": "splash_page",
+      "layout_template": "custom_full_page_splash",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Wide Establishing Shot",
+          "action": "A warm, dim kitchen scene at twilight. A metallic butter knife rests on a clean wooden cutting board. Next to it, catching the ambient amber light, lies a single neon-green feather. The comic title 'The Butter Knife and the Flamingo' is prominently displayed.",
+          "characters_present": [],
+          "tags": [
+            "[COVER]",
+            "[ESTABLISHING]"
+          ],
+          "focal_element": "The metallic butter knife reflecting light next to the neon-green feather.",
+          "characters_acting": [],
+          "environment_details": "Dim kitchen, amber light from an unseen window, warm glow, quiet and still atmosphere.",
+          "composition_notes": "Eye-level shot, shallow depth of field focusing on the knife and feather, soft-focus background of kitchen appliances."
+        }
+      ]
+    },
+    {
+      "page_number": 1,
+      "layout_proposal_raw": "standard_grid",
+      "layout_template": "tintin_standard_4x3",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Close-up",
+          "action": "Emily is peering through magnifying glasses at a clean glass thermometer submerged in a tea cup, next to a blinking digital timer displaying 03:59.95.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "[ESTABLISHING]",
+            "office",
+            "tea_cup",
+            "timer",
+            "thermometer",
+            "interior"
+          ],
+          "focal_element": "Emily's intense gaze through magnifying glasses, focused on the digital tea timer and thermometer.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Intense squinting concentration",
+              "pose_and_gesture": "Leaning in, holding magnifying glasses steady",
+              "internal_state": "Obsessively analytical about the tea timer's deviation"
+            }
+          ],
+          "environment_details": "Pristine office desk, bright office lights.",
+          "composition_notes": "Close-up at Eye-Level, shallow depth of field focus."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Wide Establishing Shot",
+          "action": "Emily sits at her pristine, color-coded desk. On her laptop screen is an intricate spreadsheet with red highlighted cells. In the background, office flashing warning lights pulse, and colleagues walk past her toward the exit.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "office",
+            "desk",
+            "laptop",
+            "spreadsheet",
+            "evacuation_background"
+          ],
+          "focal_element": "Emily's laptop screen displaying a complex, red-highlighted spreadsheet.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Mild analytical irritation, eyes fixed on laptop screen",
+              "pose_and_gesture": "Sitting upright, hands poised over keyboard",
+              "internal_state": "Oblivious to the evacuation, engrossed in her analysis of the tea timer's flaw"
+            }
+          ],
+          "environment_details": "Bright office lights, flashing red evacuation alarm, colleagues evacuating in the background.",
+          "composition_notes": "Wide Establishing Shot at Low Angle looking up, wide-angle lens feel."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Medium shot",
+          "action": "Emily's teacup sits cold and untouched on her desk. She starts sketching clock crystal diagrams on a chalkboard mounted behind her desk. The entire office space behind her is empty and dark.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "empty_office",
+            "chalkboard",
+            "cold_tea",
+            "interior"
+          ],
+          "focal_element": "Emily sketching intricate clock crystal diagrams on a chalkboard.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Determined investigation state",
+              "pose_and_gesture": "Standing at chalkboard, chalk in hand, focused on sketching",
+              "internal_state": "Driven to solve the 'betrayal' of the timer, ignoring all external events"
+            }
+          ],
+          "environment_details": "Empty, dark office, cold tea cup, bright chalkboard.",
+          "composition_notes": "Medium shot at High Angle looking down, natural focal depth."
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "layout_proposal_raw": "asymmetric_focus",
+      "layout_template": "tintin_classic_4row_10panel",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Wide Establishing Shot",
+          "action": "Marcus is leaned deep under the hood of a classic red sports convertible in a driveway, face smudged with grease. He holds a partially peeled banana, gesturing with it. A phone is on speakerphone resting on the air filter cover.",
+          "characters_present": [
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "[ESTABLISHING]",
+            "driveway",
+            "classic_car",
+            "banana",
+            "exterior"
+          ],
+          "focal_element": "Marcus under the car hood, holding a banana and talking on the speakerphone.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Charming, fast-talking grin",
+              "pose_and_gesture": "Leaning into car engine, gesturing with a banana, phone on speaker",
+              "internal_state": "Confidently explaining his improvised engineering to parking enforcement"
+            }
+          ],
+          "environment_details": "Bright daytime, suburban driveway, red vintage car.",
+          "composition_notes": "Wide shot at Eye-Level, crisp focal contrast."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Close-up",
+          "action": "A close-up of a greasy hand tightening a bolt over a yellow banana peel wedged into a metal pipe fitting. Steam is escaping from a tiny gap, but the yellow organic seal is holding.",
+          "characters_present": [
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "close-up",
+            "banana_peel",
+            "car_parts",
+            "steam"
+          ],
+          "focal_element": "The banana peel gasket holding against the escaping steam.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Straining hands out of frame",
+              "pose_and_gesture": "Hands tightening a wrench, focused exertion",
+              "internal_state": "Confident in his unconventional repair method"
+            }
+          ],
+          "environment_details": "Engine compartment, steam, grease.",
+          "composition_notes": "Close-up at Dutch Angle, tight macro perspective."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Medium shot",
+          "action": "Marcus wipes his hands on a rag, looking up with a grin as the car rumbles to life. Behind him, a tow truck has backed up to the front of his driveway, its yellow beacon lights flashing.",
+          "characters_present": [
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "driveway",
+            "tow_truck",
+            "flashing_lights",
+            "exterior"
+          ],
+          "focal_element": "Marcus's incredulous smirk as he sees the tow truck.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Incredulous smirk",
+              "pose_and_gesture": "Wiping hands on rag, looking up and back at the tow truck",
+              "internal_state": "Amused defiance at the timing of the tow truck's arrival"
+            }
+          ],
+          "environment_details": "Daytime driveway, car engine running, flashing yellow tow truck beacons.",
+          "composition_notes": "Medium shot at High Angle looking down, natural perspective."
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "layout_proposal_raw": "three_panel_horizontal",
+      "layout_template": "tintin_cinematic_6panel",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Close-up",
+          "action": "Adèle's hands, in a cozy knit sweater, press a metallic butter knife flat against a Phillips-head screw on the side panel of a chrome toaster. She adjusts her grip after the metal slips.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "[ESTABLISHING]",
+            "toaster",
+            "butter_knife",
+            "kitchen"
+          ],
+          "focal_element": "Adèle's hands and the struggle between the butter knife and the screw.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Focused, determined",
+              "pose_and_gesture": "Hands carefully manipulating the knife, slight tension in fingers",
+              "internal_state": "Determined to fix the toaster, convinced of the butter knife's statistical adequacy"
+            }
+          ],
+          "environment_details": "Dim amber tones, soft overhead lamp, kitchen table, the toaster.",
+          "composition_notes": "Medium-close overhead shot, shallow depth of field focusing on the hands."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Medium shot",
+          "action": "Adèle pushes her round glasses up with the back of her wrist, revealing a thin scratch now running across the toaster's side panel. She stares at the scratch with quiet annoyance.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "toaster",
+            "scratch",
+            "reaction"
+          ],
+          "focal_element": "The scratch on the toaster and Adèle's subtly annoyed expression.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Quietly annoyed, refusing to quit",
+              "pose_and_gesture": "Pushing glasses up, shoulders slightly tensed, fixed gaze",
+              "internal_state": "Frustrated by the setback, but stubborn in her resolve to continue"
+            }
+          ],
+          "environment_details": "Kitchen table, soft overhead lamp casting high-contrast shadows.",
+          "composition_notes": "Eye-level medium shot, focusing on Adèle's face and the toaster."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Wide Establishing Shot",
+          "action": "A wide shot of Adèle's cozy kitchen. The broken toaster sits defiant on the table. Adèle stands silently, regarding the toaster. A cold draft rattles the dark window pane in the background.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "kitchen",
+            "silence",
+            "draft",
+            "tension"
+          ],
+          "focal_element": "The overall quiet, lonely atmosphere of Adèle's kitchen and her standoff with the toaster.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Resigned determination",
+              "pose_and_gesture": "Standing still, arms at her side, head slightly tilted",
+              "internal_state": "Accepting the current stalemate, but not giving up"
+            }
+          ],
+          "environment_details": "Dim amber tones, drafty dark window pane, quiet apartment hum, soft table glow.",
+          "composition_notes": "Wide shot from a slight distance, capturing the full kitchen environment, emphasizing the quiet stillness."
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "layout_proposal_raw": "standard_grid",
+      "layout_template": "tintin_standard_4x3",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Medium shot",
+          "action": "Adèle, startled, flinches dramatically as three aggressive knocks rattle her apartment door. The butter knife clatters onto the kitchen table. She stares at the door, eyes wide with alarm.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "[ESTABLISHING]",
+            "knock",
+            "startled",
+            "kitchen"
+          ],
+          "focal_element": "Adèle's startled reaction to the loud knocks.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Startled, immediately defensive",
+              "pose_and_gesture": "Shoulders hunched, flinching away from the sound, eyes fixed on the door",
+              "internal_state": "Her quiet evening is violently interrupted, causing immediate tension"
+            }
+          ],
+          "environment_details": "Dim kitchen, toaster on table, echoing knock sound.",
+          "composition_notes": "Medium shot from a slightly low angle, capturing Adèle's full body reaction to the loud sound."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Wide Establishing Shot",
+          "action": "Adèle opens the door, revealing Thomas leaning casually against the doorframe, one arm tucked. Under his other arm, held like a baguette, is a four-foot neon-green flamingo. The hallway is lit by a harsh yellow light.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "introduction",
+            "flamingo",
+            "surprise",
+            "hallway"
+          ],
+          "focal_element": "Thomas's casual posture contrasted with the absurd neon-green flamingo.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Stunned incomprehension",
+              "pose_and_gesture": "Standing rigidly in the doorway, mouth slightly agape",
+              "internal_state": "Attempting to process the utterly bizarre sight before her"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Completely casual, radiating confidence",
+              "pose_and_gesture": "Leaning against doorframe, holding flamingo under arm, slight smirk",
+              "internal_state": "Amused by Adèle's reaction, ready to disarm her with rapid banter"
+            }
+          ],
+          "environment_details": "Narrow apartment hallway corridor, harsh yellow overhead corridor light, long vertical shadows.",
+          "composition_notes": "Wide shot from inside the hallway looking toward the open front door, capturing the scale of the flamingo and Thomas."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Medium two-shot",
+          "action": "Thomas points a casual finger at Adèle, still holding the flamingo. Adèle continues to stare at the flamingo with a flat, incredulous expression.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "dialogue",
+            "flamingo",
+            "deflection"
+          ],
+          "focal_element": "The interaction between Thomas and Adèle, with the flamingo as a bizarre backdrop.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Stunned, flat diagnosis",
+              "pose_and_gesture": "Slightly leaning forward, arms still at her side, eyes glued to the bird",
+              "internal_state": "She knows her evening is ruined but lacks the energy for immediate confrontation"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Casual, disarming, rapid delivery",
+              "pose_and_gesture": "Hand casually raised, shoulders relaxed",
+              "internal_state": "Trying to bypass Adèle's logical objections with speed and absurdity"
+            }
+          ],
+          "environment_details": "Apartment doorway, cool hallway air draft.",
+          "composition_notes": "Medium two-shot, eye-level, focusing on the character's expressions and the flamingo's presence."
+        },
+        {
+          "panel_number": 4,
+          "framing": "Close-up",
+          "action": "A close-up on the neon-green flamingo's head, slightly blurry, as Thomas gestures vaguely near it. Adèle's perplexed face is visible in the background, out of focus.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "flamingo",
+            "dialogue",
+            "detail"
+          ],
+          "focal_element": "The bizarre neon-green color of the flamingo.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Exasperated bewilderment",
+              "pose_and_gesture": "Slight head tilt, arms crossed",
+              "internal_state": "Struggling to comprehend the situation and Thomas's cavalier attitude"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Deflecting, slightly hurried",
+              "pose_and_gesture": "Vague hand gesture near the flamingo, not making eye contact with Adèle",
+              "internal_state": "Avoiding explaining the green color, moving quickly to his real request"
+            }
+          ],
+          "environment_details": "Corridor lighting, flamingo's vibrant color.",
+          "composition_notes": "Close-up on the flamingo, shallow depth of field, with Adèle out of focus in the midground."
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "layout_proposal_raw": "asymmetric_focus",
+      "layout_template": "tintin_classic_4row_10panel",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Over-the-shoulder",
+          "action": "Thomas gestures enthusiastically at Adèle's white porcelain bathtub, holding the flamingo. He explains his (likely fake) plumbing problem and the bird's need for water.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "[ESTABLISHING]",
+            "bathroom",
+            "flamingo",
+            "pleading"
+          ],
+          "focal_element": "Thomas's persuasive gestures towards the bathtub, with the flamingo nearby.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Weary skepticism",
+              "pose_and_gesture": "Arms crossed, head slightly cocked",
+              "internal_state": "Too tired to actively fight, but mentally resisting Thomas's pitch"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Fast, steamrolling, confident",
+              "pose_and_gesture": "Waving arm towards the tub like a showman, eyes twinkling",
+              "internal_state": "Desperate to secure a temporary home for Giselle, using charm and misdirection"
+            }
+          ],
+          "environment_details": "Small vintage bathroom, white porcelain bathtub, single warm bulb overhead.",
+          "composition_notes": "Medium over-the-shoulder shot from Adèle's perspective, looking at Thomas as he points to the tub."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Close-up",
+          "action": "A close-up of Adèle's face, her expression shifting from skepticism to dawning horror as she processes Thomas's use of 'she'.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "reaction",
+            "shock"
+          ],
+          "focal_element": "Adèle's horrified realization.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Processing, horrified realization",
+              "pose_and_gesture": "Still, eyes slightly wider",
+              "internal_state": "She just caught the pronoun and is horrified; this is an actual, sentient being, not a prop"
+            }
+          ],
+          "environment_details": "Soft yellow illumination reflecting on tiles.",
+          "composition_notes": "Tight close-up, slightly high angle, emphasizing Adèle's subtle change in expression."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Medium two-shot",
+          "action": "Adèle, with a look of flat resignation, points vaguely towards the bathroom. Thomas grins triumphantly behind her, still holding the flamingo.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "resignation",
+            "surrender",
+            "bathroom"
+          ],
+          "focal_element": "Adèle's defeated gesture and Thomas's satisfied grin.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Flat resignation, bordering on dark comedy",
+              "pose_and_gesture": "Vague pointing gesture, already turning her body away",
+              "internal_state": "She surrenders not because she agrees but because resistance costs more energy than she has"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Defensive but proud",
+              "pose_and_gesture": "Smiling, shoulders relax slightly",
+              "internal_state": "Relieved Adèle isn't putting up a stronger fight, subtly proud of 'Giselle'"
+            }
+          ],
+          "environment_details": "Adèle's bathroom entrance, warm bulb overhead.",
+          "composition_notes": "Medium shot, eye-level, capturing the interaction of the two characters as Adèle gives in."
+        },
+        {
+          "panel_number": 4,
+          "framing": "Wide Establishing Shot",
+          "action": "Thomas marches past Adèle, carrying the green flamingo under his arm, heading deeper into the bathroom. Adèle closes her eyes for a full second, then slowly walks back towards her kitchen, leaving him to it.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "retreat",
+            "flamingo",
+            "exhaustion",
+            "kitchen"
+          ],
+          "focal_element": "Adèle's moment of defeated closure and return to her lonely task.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Defeated but too tired to care",
+              "pose_and_gesture": "Closing eyes, then slowly turning and walking back to the kitchen",
+              "internal_state": "The sheer exhaustion of Thomas's chaos outweighs any desire to argue further"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Triumphant, relieved",
+              "pose_and_gesture": "Marching purposefully with the bird, disappearing into the bathroom",
+              "internal_state": "Successfully secured shelter, moving quickly before Adèle can change her mind"
+            }
+          ],
+          "environment_details": "Corridor leading to the bathroom, light from the kitchen.",
+          "composition_notes": "Wide shot from Adèle's perspective, emphasizing her return to her solitary and meticulous work."
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "layout_proposal_raw": "standard_grid",
+      "layout_template": "tintin_standard_4x3",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Close-up",
+          "action": "A close-up of dry corn kernels tapping quietly against the white porcelain of a bathtub. The rhythmic 'tik tik tik' sound emanates from the bathroom, catching Adèle's attention.",
+          "characters_present": [],
+          "tags": [
+            "[ESTABLISHING]",
+            "sfx",
+            "sound_origin",
+            "corn"
+          ],
+          "focal_element": "The dry corn kernels tapping against the porcelain, creating an unusual sound.",
+          "characters_acting": [],
+          "environment_details": "Porcelain bathtub, subtle light reflecting on tiles, quiet apartment.",
+          "composition_notes": "Extreme close-up, low angle, focusing on the sound source and visual texture of the corn."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Medium shot",
+          "action": "Adèle stands in the bathroom doorway, her expression a mix of suspicion and bewilderment. Thomas is sitting casually on the edge of the tub, dropping dried corn kernels into a pale green palm for the flamingo to peck.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "discovery",
+            "feeding",
+            "flamingo",
+            "suspicion"
+          ],
+          "focal_element": "Thomas feeding the flamingo, observed by a bewildered Adèle.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Bewildered, suspicious",
+              "pose_and_gesture": "Standing in doorway, head tilted, arms slightly folded",
+              "internal_state": "Her analytical mind immediately recognizes the 'clicking' is not plumbing, but a calculated action"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Casual expertise, slightly caught",
+              "pose_and_gesture": "Sitting on tub edge, hand extended with corn",
+              "internal_state": "Caught in the act, but attempting to appear nonchalant and knowledgeable about the bird"
+            }
+          ],
+          "environment_details": "Bathroom doorway, soft yellow illumination, retro checkered tile floor.",
+          "composition_notes": "Medium shot, eye-level, showing Adèle's full figure in the doorway and Thomas with the flamingo."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Close-up",
+          "action": "A close-up on Thomas's pale green palm, holding dry corn kernels. The blurry green beak of the flamingo delicately pecks a kernel from his hand. Adèle's voice balloon trails in.",
+          "characters_present": [
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "feeding_detail",
+            "corn",
+            "flamingo"
+          ],
+          "focal_element": "The specific act of feeding, emphasizing the corn and the bird's beak.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Casual expertise",
+              "pose_and_gesture": "Hand held steady for the bird, fingers slightly cupped",
+              "internal_state": "Revealing his deeper, planned involvement with the bird"
+            }
+          ],
+          "environment_details": "Soft yellow illumination on the hand and corn.",
+          "composition_notes": "Low angle close-up shot of dry corn kernels in a palm, with a blurry green bird beak in the foreground."
+        },
+        {
+          "panel_number": 4,
+          "framing": "Medium two-shot",
+          "action": "The neon-green flamingo tilts its head, its small black marble eye looking directly towards Adèle. Adèle stares back, a crack forming in her usual defenses, a hint of genuine curiosity in her eyes.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "flamingo_gaze",
+            "curiosity"
+          ],
+          "focal_element": "The flamingo's intelligent eye and Adèle's reaction to it.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Dawning curiosity",
+              "pose_and_gesture": "Standing still, slight head tilt mirroring the bird's, arms loosely at sides",
+              "internal_state": "Her analytical mind is piqued by the bird's unexpected intelligence"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Amused, observant",
+              "pose_and_gesture": "Watching Adèle's reaction, a slight smile",
+              "internal_state": "Enjoying Adèle's slow realization and the breaking of her composure"
+            }
+          ],
+          "environment_details": "Bathroom setting, soft light, foregrounding the flamingo.",
+          "composition_notes": "Medium shot, eye-level, focusing on the bird and Adèle's reciprocal gaze."
+        }
+      ]
+    },
+    {
+      "page_number": 7,
+      "layout_proposal_raw": "three_panel_horizontal",
+      "layout_template": "tintin_cinematic_6panel",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Close-up",
+          "action": "The neon-green flamingo makes a soft, throaty 'krrr' sound. Its head turns ninety degrees, and it blinks slowly and deliberately, confirming its very-much-alive state. Adèle's wide eyes are visible in the background.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "[ESTABLISHING]",
+            "flamingo_alive",
+            "blink",
+            "shock"
+          ],
+          "focal_element": "The flamingo's slow, deliberate blink and its small, intelligent eye.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Genuine shock, eyes widening",
+              "pose_and_gesture": "Slight recoil, arms still",
+              "internal_state": "The undeniable proof of life shatters her rational explanations"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Quietly observant",
+              "pose_and_gesture": "Sitting still, watching Adèle's reaction",
+              "internal_state": "Awaiting Adèle's full realization, not performing for once"
+            }
+          ],
+          "environment_details": "Soft yellow illumination, quiet bathroom, flamingo in the tub.",
+          "composition_notes": "Medium-wide profile shot capturing Adèle's widening eyes as the flamingo turns its head and blinks."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Medium shot",
+          "action": "Adèle stands, staring at the flamingo in the tub, her face a mask of disbelief. She whispers, stating the obvious, that it's a real bird.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "realization",
+            "disbelief",
+            "dialogue"
+          ],
+          "focal_element": "Adèle's expression of utter disbelief at the flamingo's reality.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Whispered disbelief, analytical brain crashing",
+              "pose_and_gesture": "Standing rigidly, body language conveying shock",
+              "internal_state": "Her ordered world is completely upended by this living, neon-green anomaly"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Solemn, awaiting reaction",
+              "pose_and_gesture": "Sitting still on tub edge, watching Adèle",
+              "internal_state": "Allowing Adèle to process the truth, forgoing his usual banter"
+            }
+          ],
+          "environment_details": "Adèle's bathroom, still atmosphere.",
+          "composition_notes": "Medium-wide profile shot, capturing Adèle's widening eyes and the flamingo's presence."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Medium two-shot",
+          "action": "Thomas, unusually quiet and genuine, explains to Adèle that he rescued the flamingo from a bankrupt roadside zoo. Both stand in silence, the flamingo shifting its weight in the background. A faucet drips.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "rescue",
+            "vulnerability",
+            "silence"
+          ],
+          "focal_element": "Thomas's genuine expression and the quiet understanding between the siblings.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Stunned, contemplative",
+              "pose_and_gesture": "Standing still, listening intently",
+              "internal_state": "Beginning to grasp the depth of Thomas's impulsiveness and compassion"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Quieter than usual, genuine for once",
+              "pose_and_gesture": "Slightly slumped, not gesturing",
+              "internal_state": "A rare moment of vulnerability, revealing his connection to the abandoned bird"
+            }
+          ],
+          "environment_details": "Slight damp/cool air, quiet porcelain stillness, dripping faucet.",
+          "composition_notes": "Medium shot, focusing on the shared silence and the emotional weight of Thomas's confession, slight low angle to emphasize the bird."
+        }
+      ]
+    },
+    {
+      "page_number": 8,
+      "layout_proposal_raw": "splash_page",
+      "layout_template": "custom_full_page_splash",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Bird's eye view",
+          "action": "Adèle, utterly broken by Thomas's deadpan revelation that he told the landlord the neon-green flamingo was a 'large parrot', slides down the bathroom wall onto the bathmat. Her shoulders begin shaking with uncontrolled laughter, head tilted back against the tiles, releasing weeks of tension. Thomas stands over her, arms crossed, with a look of mischievous pride, while the flamingo watches from the tub.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "[CLIMAX]",
+            "laughter",
+            "absurdity",
+            "surrender",
+            "flamingo"
+          ],
+          "focal_element": "Adèle's cathartic laughter on the bathmat, surrounded by the bizarre reality of the situation.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Uncontrolled laughter, releasing weeks of tension",
+              "pose_and_gesture": "Sliding down wall to sit on bathmat, head tilted back, shoulders shaking",
+              "internal_state": "A complete surrender to the absurdity, finding genuine joy amidst the chaos after a long period of emotional suppression"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Conspiratorial, mischievous pride, straight-faced",
+              "pose_and_gesture": "Leaning forward conspiratorially, then standing with arms crossed, observing Adèle",
+              "internal_state": "Confident in his absurd solution, genuinely pleased to see Adèle laugh"
+            }
+          ],
+          "environment_details": "Small vintage bathroom, retro checkered tile floor, single warm bulb overhead, soft yellow illumination, quiet porcelain stillness.",
+          "composition_notes": "High angle shot looking down at Adèle sitting on the patterned bathmat, laughing with her head tilted back. Wide-angle lens to capture both characters and the flamingo in the tub, emphasizing the dramatic scale of the moment."
+        }
+      ]
+    },
+    {
+      "page_number": 9,
+      "layout_proposal_raw": "standard_grid",
+      "layout_template": "tintin_standard_4x3",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Bird's eye view",
+          "action": "Adèle and Thomas sit comfortably on opposite sides of a grease-stained pizza box on the bathroom floor. The green flamingo stands in the bathtub behind them, one leg folded, in a moment of shared, comfortable intimacy.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "[ESTABLISHING]",
+            "pizza",
+            "bathroom_floor",
+            "flamingo",
+            "siblings"
+          ],
+          "focal_element": "The shared pizza box and the comfortable, nostalgic setting.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Comfortable silence, content",
+              "pose_and_gesture": "Sitting cross-legged, reaching for pizza",
+              "internal_state": "Enjoying the unexpected moment of connection, defenses down"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Content, nostalgic, mouth half-full",
+              "pose_and_gesture": "Sitting casually, waving a pizza slice for emphasis",
+              "internal_state": "Deliberately invoking shared childhood memories, deepening the bond"
+            }
+          ],
+          "environment_details": "Bathroom floor, retro checkered tiles, single warm bulb overhead casting soft golden glows.",
+          "composition_notes": "Wide overhead shot, capturing the full scene of siblings and flamingo, emphasizing the shared space."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Medium two-shot",
+          "action": "Adèle smiles softly, looking at Thomas with a distant, remembered expression as he waves a pizza crust. She recalls the terrible football lamp from their childhood in Lyon.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "dialogue",
+            "reminiscing",
+            "nostalgia"
+          ],
+          "focal_element": "Adèle's soft smile and Thomas's playful, mock-offended expression.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Trailing off into a half-smile, remembering",
+              "pose_and_gesture": "Leaning slightly back, eyes distant in thought",
+              "internal_state": "Letting a warm childhood memory wash over her without resistance"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Mock-offended, playful",
+              "pose_and_gesture": "Pointing with pizza crust, exaggerated offense",
+              "internal_state": "Engaging in a familiar, comforting sibling banter"
+            }
+          ],
+          "environment_details": "Soft golden ambient glows over the floor.",
+          "composition_notes": "Medium two-shot, eye-level, focusing on the expressive faces and shared humor."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Close-up",
+          "action": "A close-up of Adèle's hands, resting on her lap, slightly smudged with pizza grease. Her gaze is fixed on Thomas, noticing small details, like him still eating the crust first.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "internal_monologue",
+            "observation",
+            "tenderness"
+          ],
+          "focal_element": "Adèle's thoughtful gaze and her hands, reflecting quiet observation.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Tender, observant",
+              "pose_and_gesture": "Quietly still, eyes focused on Thomas (out of frame)",
+              "internal_state": "Deeply familiar with Thomas's habits, finding comfort and tenderness in their consistency"
+            }
+          ],
+          "environment_details": "Warm, dim light, quiet hum of the apartment.",
+          "composition_notes": "Close-up, slightly high angle, emphasizing Adèle's internal state through subtle physical cues."
+        },
+        {
+          "panel_number": 4,
+          "framing": "Wide Establishing Shot",
+          "action": "Adèle and Thomas sit in comfortable silence on the bathroom floor, chewing on pizza. The flamingo shifts its weight in the tub, and the old radiator hisses faintly in the background. Nothing needs to be said.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "silence",
+            "comfort",
+            "shared_moment"
+          ],
+          "focal_element": "The overall atmosphere of shared, unspoken understanding.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Content, relaxed",
+              "pose_and_gesture": "Comfortably seated, eating pizza",
+              "internal_state": "Feeling a profound sense of peace and belonging with her brother"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Relaxed, thoughtful",
+              "pose_and_gesture": "Comfortably seated, eating pizza",
+              "internal_state": "Enjoying the familiar ritual and shared space with Adèle"
+            }
+          ],
+          "environment_details": "Cozy shared room feel, quiet apartment hum, radiator hissing.",
+          "composition_notes": "Wide overhead shot, re-establishing the scene, focusing on the calm and stillness, allowing the atmosphere to speak."
+        }
+      ]
+    },
+    {
+      "page_number": 10,
+      "layout_proposal_raw": "asymmetric_focus",
+      "layout_template": "tintin_classic_4row_10panel",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Medium shot",
+          "action": "Thomas points dramatically at Adèle's face, grinning widely, as he recalls the 'Haircut Incident' with the kitchen shears. Adèle, unimpressed, gives a dry, matter-of-fact rebuttal.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "[ESTABLISHING]",
+            "flashback_joke",
+            "kitchen_shears",
+            "playful_rivalry"
+          ],
+          "focal_element": "Thomas's dramatic pointing gesture and Adèle's deadpan response.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Dry, matter-of-fact, no remorse",
+              "pose_and_gesture": "Arms crossed, slight smirk, listening to Thomas",
+              "internal_state": "Rehearsed defense, finding comfort in the familiar banter"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Dramatic, grinning, playful accusation",
+              "pose_and_gesture": "Pointing at Adèle's face with exaggerated motion",
+              "internal_state": "Relishing his role as the 'victim' of their childhood antics"
+            }
+          ],
+          "environment_details": "Adèle's bathroom, soft yellow illumination, kitchen shears lying on the sink counter behind Thomas.",
+          "composition_notes": "Medium shot focused on Thomas playfully pointing at Adèle's face, with a pair of kitchen shears lying on the sink counter behind him, eye-level."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Medium two-shot",
+          "action": "Thomas tugs at his green beanie, laughing at his own comparison of his previous red beanie to a 'postbox with legs'. Adèle raises an eyebrow, a quiet smile playing on her lips, noticing his continued beanie-wearing habit. Thomas then excitedly recalls blocking the stairs with a sofa.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "beanie",
+            "childhood_memory",
+            "mischief"
+          ],
+          "focal_element": "Thomas's green beanie and Adèle's knowing look, leading into the shared memory.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Self-aware amusement, quiet smile",
+              "pose_and_gesture": "Raising an eyebrow, looking at Thomas's beanie",
+              "internal_state": "Noticing the pattern of his covering something up, enjoying the shared memory"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Laughing, building momentum",
+              "pose_and_gesture": "Tugging at his beanie, then gesturing with both hands",
+              "internal_state": "Proud of their shared childhood chaos, transitioning to another fond memory"
+            }
+          ],
+          "environment_details": "Adèle's bathroom, cozy shared room feel.",
+          "composition_notes": "Medium two-shot, capturing both siblings' reactions and Thomas's energetic storytelling, eye-level."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Extreme close-up",
+          "action": "Thomas reaches into his jacket pocket and pulls out three copper pennies, holding them in his open palm under the warm, dim orange glow of the bathroom light. The radiator clanks once in the background, as if on cue. Adèle observes with fond memory.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "pennies",
+            "haunted_radiator",
+            "sentimental",
+            "object_focus"
+          ],
+          "focal_element": "The copper pennies in Thomas's palm, glowing under the light.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Fond, specific memory",
+              "pose_and_gesture": "Slightly leaning in, watching Thomas's hand",
+              "internal_state": "Recalling Thomas's generosity and their shared childhood resourcefulness"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Quiet pride, nostalgia",
+              "pose_and_gesture": "Holding pennies in open palm, no joke, just a fact",
+              "internal_state": "Carrying their shared childhood literally, a rare moment of genuine sentimentality"
+            }
+          ],
+          "environment_details": "Warm, dim orange glow of the radiator reflecting off bathroom tiles, radiator hiss and clank.",
+          "composition_notes": "Extreme close-up of a few copper pennies in a hand, lit by the warm, dim orange glow of a radiator, emphasizing the sentimental object."
+        }
+      ]
+    },
+    {
+      "page_number": 11,
+      "layout_proposal_raw": "asymmetric_focus",
+      "layout_template": "tintin_classic_4row_10panel",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Medium two-shot",
+          "action": "Thomas crouches next to Adèle's microwave, buzzing with energy, hands cupped around his mouth as he accurately mimics its 'BEEP BEEP BEEP' sound. Adèle watches him with an amused but skeptical expression.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "[ESTABLISHING]",
+            "microwave",
+            "mimicry",
+            "playfulness"
+          ],
+          "focal_element": "Thomas's energetic mimicry and Adèle's watchful amusement.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Amused skepticism",
+              "pose_and_gesture": "Arms crossed, observing Thomas with a slight smile",
+              "internal_state": "Intrigued but not yet convinced of the flamingo's ability to mimic"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Buzzing with energy, performing",
+              "pose_and_gesture": "Crouching, hands cupped to mouth, eyes on the flamingo (out of frame)",
+              "internal_state": "Living for moments of pointless invention, eager to teach the bird"
+            }
+          ],
+          "environment_details": "Dim kitchen lights, green digital glow of the microwave timer, dark window.",
+          "composition_notes": "Medium shot, eye-level, capturing both characters in the kitchen, with the microwave prominent."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Close-up",
+          "action": "The green flamingo's open beak is next to the digital glow of the microwave timer, its throat throbbing as it produces a warbling 'BRREEP' — a surprisingly accurate attempt at the microwave sound. Thomas and Adèle freeze in shared astonishment.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "flamingo_mimicry",
+            "astonishment",
+            "sfx"
+          ],
+          "focal_element": "The flamingo's beak and its successful mimicry, contrasting with the microwave timer.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Shared astonishment, then delight",
+              "pose_and_gesture": "Frozen, eyes wide, hands slightly parted",
+              "internal_state": "Genuinely delighted by the statistically improbable feat, a rare breach of composure"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Shared astonishment, then delight",
+              "pose_and_gesture": "Frozen, mouth slightly open in surprise",
+              "internal_state": "Exultant that his playful experiment actually worked"
+            }
+          ],
+          "environment_details": "Green digital glow of the microwave timer, dark kitchen.",
+          "composition_notes": "Medium-close shot of the flamingo's open beak next to the digital glow of the microwave timer, highlighting the sound source."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Medium shot",
+          "action": "The flamingo, now going off on a loop, repeats its 'BRRREEP BRRREEP BRRREEP' from the bathtub. Adèle, barely containing laughter, adjusts her glasses while Thomas covers his mouth, trying not to laugh.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "repetitive_sfx",
+            "laughter",
+            "chaos"
+          ],
+          "focal_element": "The chaotic repetition of the flamingo's mimicry and the siblings' attempts to suppress laughter.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Barely containing laughter, adjusting glasses",
+              "pose_and_gesture": "Hands covering mouth slightly, shoulders shaking with suppressed laughter",
+              "internal_state": "Finding immense joy in the uncontrolled, absurd success of their lesson"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Triumphant laughter, quickly turning to concern",
+              "pose_and_gesture": "Covering mouth, eyes wide with mirth and a hint of dread",
+              "internal_state": "Delighted by the flamingo's talent, but sensing impending consequences"
+            }
+          ],
+          "environment_details": "Dim kitchen, microwave and flamingo in the background.",
+          "composition_notes": "Medium shot, eye-level, capturing the joyful chaos and the siblings' reactions, with the flamingo slightly out of focus in the tub."
+        },
+        {
+          "panel_number": 4,
+          "framing": "Wide Establishing Shot",
+          "action": "A wide view of Adèle's kitchen, showing the siblings reacting to the frenzied 'WOOF WOOF WOOF' of Napoleon, the neighbor's dog, erupting through the wall in response to the flamingo's constant 'BRRREEP'. Thomas's face shows instant regret.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "sfx_impact",
+            "dog_barking",
+            "consequence",
+            "regret"
+          ],
+          "focal_element": "The sudden eruption of dog barking and the siblings' immediate reactions of realization and regret.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Surprised, slightly worried smile",
+              "pose_and_gesture": "Hands now dropped from face, listening to the dog",
+              "internal_state": "Amused by the chaos, but aware of the neighborhood disruption"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Instant regret",
+              "pose_and_gesture": "Facepalming or looking down, shoulders slumping",
+              "internal_state": "The immediate, predictable consequence of their prank hits him, remembering Napoleon"
+            }
+          ],
+          "environment_details": "Late night stillness, dark apartment building, muffled barking through the wall.",
+          "composition_notes": "Wide shot from within the kitchen, showing the siblings reacting to the dog's barking from beyond the fourth wall, emphasizing the immediate consequence of their noise."
+        }
+      ]
+    },
+    {
+      "page_number": 12,
+      "layout_proposal_raw": "three_panel_horizontal",
+      "layout_template": "tintin_cinematic_6panel",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Medium two-shot",
+          "action": "Thomas scoops up the flamingo with practiced ease, tucking it under one arm. He grabs the empty pizza box with his other hand, already halfway to the door, giving a rushed goodbye about 'big, legitimate plans'.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "[ESTABLISHING]",
+            "departure",
+            "flamingo",
+            "pizza_box"
+          ],
+          "focal_element": "Thomas's hurried departure, laden with the flamingo and pizza box.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Trailing off, melancholic",
+              "pose_and_gesture": "Standing slightly slumped, watching him leave",
+              "internal_state": "Feeling the familiar pang of his sudden departures, not wanting him to go but unable to articulate it"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Content but restless, rapid delivery",
+              "pose_and_gesture": "Scooping bird, grabbing box, already halfway to door",
+              "internal_state": "Ready to move again, creating a false urgency to avoid an emotional goodbye"
+            }
+          ],
+          "environment_details": "Adèle's living room, single floor lamp casting low ambient warm light.",
+          "composition_notes": "Medium shot, eye-level, showing Thomas's collected belongings and his hurried movement towards the exit."
+        },
+        {
+          "panel_number": 2,
+          "framing": "Wide Establishing Shot",
+          "action": "Thomas pauses in the open doorway, his silhouette and the flamingo's absurd shape stark against the cool white hallway light. He offers Adèle a small, sincere smile before stepping out.",
+          "characters_present": [
+            "CHARACTER_A",
+            "CHARACTER_B"
+          ],
+          "tags": [
+            "silhouette",
+            "farewell",
+            "sincere_smile",
+            "contrast_lighting"
+          ],
+          "focal_element": "The combined silhouette of Thomas and the flamingo against the bright hallway, and his brief, genuine smile.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Quiet, longing",
+              "pose_and_gesture": "Standing still, watching his silhouette",
+              "internal_state": "A moment of shared warmth and understanding, a silent wish for him to stay"
+            },
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Genuine warmth, briefly unmasked",
+              "pose_and_gesture": "Pausing, offering a small, sincere smile, no joke",
+              "internal_state": "A rare moment of vulnerability and affection before he retreats into his usual chaos"
+            }
+          ],
+          "environment_details": "Dark living room, cool white light coming from the hallway door, sudden cold night air.",
+          "composition_notes": "Wide shot from the dark living room looking towards the open front door, with Thomas and the green silhouette of the bird silhouetted against the hallway light, emphasizing the finality of the departure."
+        },
+        {
+          "panel_number": 3,
+          "framing": "Medium shot",
+          "action": "The front door closes gently with a click, leaving Adèle's apartment suddenly, completely quiet and oppressive. Adèle stands alone in her kitchen, looking at the broken toaster and the butter knife still on the table, feeling the vacuum of Thomas's energy.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "silence",
+            "loneliness",
+            "broken_toaster",
+            "transition"
+          ],
+          "focal_element": "Adèle's solitary figure in the quiet kitchen and the untouched broken toaster.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Tired, reflective",
+              "pose_and_gesture": "Standing still, gazing at the toaster on the table",
+              "internal_state": "Experiencing the profound silence and emptiness left by Thomas's departure, contemplating her own routines"
+            }
+          ],
+          "environment_details": "Warm glowing table lamp, deep shadows in the rest of the kitchen, dark window, quiet silence of the early morning.",
+          "composition_notes": "Medium shot, slightly high angle, emphasizing Adèle's isolation and the stark quiet of the room after Thomas's departure."
+        }
+      ]
+    },
+    {
+      "page_number": 13,
+      "layout_proposal_raw": "splash_page",
+      "layout_template": "custom_full_page_splash",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Close-up",
+          "action": "Adèle, with a quiet, knowing smile she doesn't know she's making, opens her wooden kitchen cabinet. She carefully places a small plastic bag of dried yellow corn kernels on the middle shelf, next to her meticulously colour-coded spice jars. She adjusts the bag so it sits straight, a symbol of her quiet acceptance of her brother's chaotic presence. The toaster could wait.",
+          "characters_present": [
+            "CHARACTER_A"
+          ],
+          "tags": [
+            "[FINAL_PAGE]",
+            "acceptance",
+            "corn",
+            "cabinet",
+            "quiet_smile"
+          ],
+          "focal_element": "The bag of dried corn placed meticulously among Adèle's organized spice jars in the cabinet.",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Peaceful, quiet acceptance, a smile she doesn't know she's making",
+              "pose_and_gesture": "Reaching into cabinet, carefully placing the bag, adjusting it precisely",
+              "internal_state": "Choosing acceptance and warmth over rigid order, acknowledging the possibility of Thomas's return with the bird"
+            }
+          ],
+          "environment_details": "Interior of wooden kitchen cabinet, warm glowing table lamp casting deep shadows, quiet silence of the early morning.",
+          "composition_notes": "Close-up shot of the interior of Adèle's wooden kitchen cabinet, highlighting a plastic bag filled with yellow dried corn kernels, showing both the corn and the meticulous organization of her spices, with Adèle's hands in the frame."
+        }
+      ]
+    }
+  ]
+}

@@ -19,7 +19,7 @@ Think of this as the agent "playing" every character simultaneously through ever
 Before running, confirm:
 
 - `data/scenario_scenes.json` — full scene list (required)
-- `data/lore.json` — cast list and world context (required)
+- `data/final_lore.json` — cast list and world context (required)
 - `data/personality_signature.json` — for **every character in the cast** (required)
 - `global_characters/[Name]/general_mood.md` — for each character (recommended)
 
@@ -29,7 +29,7 @@ If `data/personality_signature.json` is missing, run Pipeline 06 first.
 
 ## Step 1 — Build the Character Map
 
-Extract from `lore.json`:
+Extract from `final_lore.json`:
 - Full cast list (names only)
 - Relationships between characters
 
@@ -56,6 +56,18 @@ Answer these questions:
 
 4. **Tension with:** If there is a specific tension or unresolved charge between this character and one other character in the scene, name that character. Otherwise `null`.
 
+5. **Agenda (what they want):** What does this character actually want to achieve in this scene/interaction, and what do they expect out of it? (1-2 sentences)
+
+6. **Subtext (implied truth):** What is unspoken or implied under their actions and lines? What are the underlying currents? (1-2 sentences)
+
+7. **Secret (what they hide):** What specific piece of information, feeling, or truth are they actively keeping from the other person in this specific scene? (1-2 sentences)
+
+8. **Status Dynamic (power dynamic):** What is their status/power posture compared to others in this scene? Does it shift? (e.g. low status seeking control, high status collapsing, etc.)
+
+9. **Tactics (verbal/behavioral tactics):** What specific conversational tactics do they use to get what they want? (e.g. deflection, fast-talking, silence, guilt-tripping, flattery)
+
+10. **Stakes (cost of failure):** What is at risk for them? What happens if they fail to achieve their agenda in this scene? (1-2 sentences)
+
 ---
 
 ## Step 3 — Write `character_moods.json`
@@ -70,19 +82,31 @@ Use this exact schema:
   "scenes": [
     {
       "scene_id": 1,
-      "title": "Scene title from scenario.json",
+      "title": "Scene title from scenario_scenes.json",
       "moods": {
         "Name1": {
           "dominant_emotion": "anxious",
           "feels": "Internal experience — private truth",
           "shows": "External behaviour — the mask",
-          "tension_with": "Name2 or null"
+          "tension_with": "Name2 or null",
+          "agenda": "What the character wants in this scene",
+          "subtext": "What they actually mean/imply under the lines",
+          "secret": "What they are actively hiding",
+          "status_dynamic": "Perceived power stance or shift",
+          "tactics": "Verbal/conversational methods used",
+          "scene_stakes": "What is at risk if they fail"
         },
         "Name2": {
           "dominant_emotion": "performing",
           "feels": "...",
           "shows": "...",
-          "tension_with": null
+          "tension_with": null,
+          "agenda": "...",
+          "subtext": "...",
+          "secret": "...",
+          "status_dynamic": "...",
+          "tactics": "...",
+          "scene_stakes": "..."
         }
       }
     }

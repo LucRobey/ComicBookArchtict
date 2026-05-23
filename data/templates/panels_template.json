@@ -1,0 +1,207 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Template schema for Phase 2 (Panel Structuring). Maps the page-by-page panel breakdown, framing, actions, characters, tags, focal elements, character acting states, ambient details, and camera compositions.",
+  "pages": [
+    {
+      "page_number": 0,
+      "layout_proposal_raw": "splash_page",
+      "layout_template": "custom_full_page_splash",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Wide Establishing Shot",
+          "action": "A warm, dim kitchen scene with a metallic butter knife catching the amber light, lying next to a vibrant neon-green feather. The title 'The Butter Knife and the Flamingo' is prominently displayed.",
+          "characters_present": [],
+          "tags": ["COVER"],
+          "focal_element": "The glowing contrast between the metallic knife and the neon-green feather next to the book title",
+          "characters_acting": [],
+          "environment_details": "Dimly lit kitchen table, soft warm ambient light reflecting off wooden textures",
+          "composition_notes": "Symmetric center-weighted cover art layout with bold typography overlays"
+        }
+      ]
+    },
+    {
+      "page_number": 1,
+      "layout_proposal_raw": "standard_grid",
+      "layout_template": "tintin_standard_4x3",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Close-up",
+          "action": "Emily is peering through magnifying glasses at a clean glass thermometer submerged in a teacup, next to a blinking digital timer.",
+          "characters_present": ["CHARACTER_A"],
+          "tags": ["[ESTABLISHING]"],
+          "focal_element": "The teacup containing the thermometer and the digital timer reading 03:59.95",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Squinting in intense concentration, nose slightly wrinkled",
+              "pose_and_gesture": "Leaning in close, eyes level with the cup's brim",
+              "internal_state": "Meticulous focus, analytical obsession with the 0.05-second timer deviation"
+            }
+          ],
+          "environment_details": "Bright office cubicle, neatly stacked folders in the background",
+          "composition_notes": "Shallow depth of field focus on the thermometer tip, framing Emily's glasses in the background"
+        },
+        {
+          "panel_number": 2,
+          "framing": "Wide Establishing Shot",
+          "action": "Emily sits at her pristine, color-coded desk. On her laptop screen is an intricate spreadsheet. In the background, office warning lights pulse.",
+          "characters_present": ["CHARACTER_A"],
+          "tags": ["[PROJECT_DETAIL: Emily discovers minor deviation in timer]"],
+          "focal_element": "The glowing spreadsheet with red highlighted cells on the laptop screen",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Mild irritation, analytical glare",
+              "pose_and_gesture": "Sitting upright, hands poised over the keyboard",
+              "internal_state": "Slightly perturbed by the timer deviation, ignoring the building alarm"
+            }
+          ],
+          "environment_details": "Office hallway with emergency strobe lights flashing, blurred silhouettes of evacuating colleagues in the background",
+          "composition_notes": "Wide angle lens capturing the scale of the office space and the flashing beacons"
+        },
+        {
+          "panel_number": 3,
+          "framing": "Medium shot",
+          "action": "Emily sketches clock crystal diagrams on a chalkboard. The entire office space behind her is empty and dark.",
+          "characters_present": ["CHARACTER_A"],
+          "tags": [],
+          "focal_element": "The chalk sketches of crystal oscillators on the board",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Determined and highly focused",
+              "pose_and_gesture": "Holding a piece of chalk, hand raised to the board",
+              "internal_state": "Complete intellectual immersion, oblivious to her cold tea and the empty building"
+            }
+          ],
+          "environment_details": "Shadowy, silent office space with overhead lights off",
+          "composition_notes": "Side profile shot capturing the blackboard and the dark workspace behind her"
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "layout_proposal_raw": "asymmetric_focus",
+      "layout_template": "tintin_classic_4row_10panel",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Wide Establishing Shot",
+          "action": "Marcus is leaned deep under the hood of a classic red sports convertible in a driveway, holding a partially peeled banana.",
+          "characters_present": ["CHARACTER_B"],
+          "tags": ["[ESTABLISHING]"],
+          "focal_element": "The open hood of the red sports car and the yellow banana in hand",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Fast-talking, confident smirk",
+              "pose_and_gesture": "Leaning over the engine bay, gesturing with the banana peel",
+              "internal_state": "Completely sure of his improvised mechanical fix, ignoring standard procedures"
+            }
+          ],
+          "environment_details": "Sunny driveway, tools scattered on the pavement, phone resting on the air filter",
+          "composition_notes": "Medium-wide shot showing the front half of the convertible and Marcus's grease-smudged face"
+        },
+        {
+          "panel_number": 2,
+          "framing": "Close-up",
+          "action": "A close-up of Marcus's grease-smudged hands tightening a bolt over a yellow banana peel wedged into a metal pipe fitting.",
+          "characters_present": ["CHARACTER_B"],
+          "tags": [],
+          "focal_element": "The yellow banana peel being compressed under the metal flange",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Out of frame focus on hands",
+              "pose_and_gesture": "Hands wrenching a socket driver",
+              "internal_state": "Kinetic, improvised effort"
+            }
+          ],
+          "environment_details": "Hot engine block textures, tiny wisps of steam escaping",
+          "composition_notes": "Tight macro perspective focusing on the metal bolt and yellow organic seal"
+        },
+        {
+          "panel_number": 3,
+          "framing": "Medium shot",
+          "action": "Marcus wipes his hands on a rag, looking up with a grin. Behind him, a tow truck has backed up to the front of his driveway.",
+          "characters_present": ["CHARACTER_B"],
+          "tags": ["[PROJECT_DETAIL: Marcus fixes coolant leak using banana peel]"],
+          "focal_element": "The yellow flashing beacon lights of the tow truck in the background",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_B",
+              "expression": "Amused, defiant smirk",
+              "pose_and_gesture": "Wiping grease off his forearms with a dirty rag",
+              "internal_state": "Delighted by the timing, preparing for a phone argument with parking enforcement"
+            }
+          ],
+          "environment_details": "Driveway entrance blocked by a heavy-duty tow truck with warning lights",
+          "composition_notes": "Over-the-shoulder framing from the tow truck operator's general direction looking back at Marcus"
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "layout_proposal_raw": "three_panel_horizontal",
+      "layout_template": "tintin_cinematic_6panel",
+      "panels": [
+        {
+          "panel_number": 1,
+          "framing": "Close-up",
+          "action": "Adèle's hands press a metallic butter knife flat against a Phillips-head screw on the side panel of a chrome toaster. The knife slips.",
+          "characters_present": ["CHARACTER_A"],
+          "tags": ["[ESTABLISHING]"],
+          "focal_element": "The butter knife blade slipping off the toaster's side screw",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Focused, determined",
+              "pose_and_gesture": "Gripping the toaster base, pushing the knife flat",
+              "internal_state": "Quiet focus, using a manual task to seek order"
+            }
+          ],
+          "environment_details": "Dimly lit kitchen table, drafty window frame rattling slightly",
+          "composition_notes": "Close-up profile of the hands and chrome metal textures reflecting ambient light"
+        },
+        {
+          "panel_number": 2,
+          "framing": "Medium shot",
+          "action": "Adèle pushes her glasses up with the back of her wrist. A thin scratch now runs across the toaster's side panel.",
+          "characters_present": ["CHARACTER_A"],
+          "tags": ["[PROJECT_DETAIL: History of fixing things with cutlery]"],
+          "focal_element": "The fresh metallic scratch on the toaster side",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Subtly annoyed, staring intently",
+              "pose_and_gesture": "Wrist raised to push round glasses up on her nose",
+              "internal_state": "Quiet annoyance at the scratch, stubborn refusal to admit defeat"
+            }
+          ],
+          "environment_details": "Kitchen counter area, toaster sitting on wooden table surface",
+          "composition_notes": "Eye-level medium shot framing her upper body and the toaster prominent in the foreground"
+        },
+        {
+          "panel_number": 3,
+          "framing": "Medium two-shot",
+          "action": "Adèle and the toaster sit in quiet defiance on the kitchen table in the dim amber kitchen lighting.",
+          "characters_present": ["CHARACTER_A"],
+          "tags": [],
+          "focal_element": "The toaster sitting alone in the middle of the kitchen table",
+          "characters_acting": [
+            {
+              "character_id": "CHARACTER_A",
+              "expression": "Pensive, chin resting on her hand",
+              "pose_and_gesture": "Leaned back slightly on her wooden chair",
+              "internal_state": "Resigned but staring, the silence hums"
+            }
+          ],
+          "environment_details": "Amber glowing table lamp casting long shadows down the kitchen walls",
+          "composition_notes": "Wide composition showing Adèle on the chair and the toaster as equal visual weight"
+        }
+      ]
+    }
+  ]
+}

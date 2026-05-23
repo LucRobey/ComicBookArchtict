@@ -8,12 +8,12 @@ This document serves as the master specification of the compilation pipeline for
 
 Comic book generation is divided into two segments:
 1. **The Iterative Loop (Steps 1–4)**: A back-and-forth orchestration between `Scenario Planner` and `Characters Hub` to gradually align characters' emotional beats with narrative pacing.
-2. **The Linear Compilation (Phases 1.5–6)**: A downstream pipeline that translates the scene list into physical comic layouts, panel compositions, lettering, and exports.
+2. **The Linear Compilation (Phases 3A–6)**: A downstream pipeline that translates the scenes outline into detailed scene-level scripting, pagination pacing, panel structuring, panel scripting (in parallel), and layout lettering.
 
 ```mermaid
 flowchart TD
     %% Base
-    LORE["data/lore.json"]
+    LORE["data/final_lore.json"]
     STYLE["data/visual_style.json"]
     
     %% Loop Steps
@@ -31,21 +31,25 @@ flowchart TD
 
     %% Downstream
     subgraph "Linear Downstream"
+        P3A["Phase 3A: Script (Scene)\n(Script Phase)"]
         P15["Phase 1.5: Pacing & Pagination\n(Pacing Phase)"]
         P2["Phase 2: Panel Structuring\n(Panels Phase)"]
-        P3["Phase 3: Script & Dialogue\n(Script Phase)"]
+        P3B["Phase 3B: Panel Scripting\n(Script Phase)"]
         P6["Phase 6: Assembly Studio\n(Assembly Tab)"]
         
-        C4 -- "scenario_scenes.json" --> P15
+        C4 -- "scenario_scenes.json" --> P3A
+        P3A -- "scene_script.json" --> P15
         P15 -- "pages.json" --> P2
-        P2 -- "panels.json" --> P3
-        P3 -- "script.json" --> P6
+        P15 -- "pages.json" --> P3B
+        P2 -- "panels.json" --> P3B
+        P2 -- "panels.json" --> P6
+        P3B -- "script.json" --> P6
     end
     
     STYLE -.-> C2
     STYLE -.-> C4
     LORE -.-> P2
-    LORE -.-> P3
+    LORE -.-> P3B
 ```
 
 ---
@@ -57,7 +61,7 @@ flowchart TD
 * **Workspace**: [ScenarioPhase](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/app/src/components/phases/scenario/ScenarioPhase.tsx)
 * **Associated Agent**: `Scenario Architect Agent`
 * **Input Files**: 
-  * `data/lore.json` (defines factions, parameters)
+  * `data/user_lore.json` (defines factions, parameters)
   * `data/scenario_inputs.json` (theme prompts)
 * **Output Files**:
   * `data/personality_signature.json` (base character archetypes)
@@ -69,7 +73,7 @@ flowchart TD
 * **Workspace**: [CharacterHubPhase](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/app/src/components/phases/character-hub/CharacterHubPhase.tsx)
 * **Associated Agent**: `Mood Simulation Agent`
 * **Input Files**:
-  * `data/lore.json`, `data/visual_style.json`
+  * `data/final_lore.json`, `data/visual_style.json`
   * `data/personality_signature.json`
   * `data/scenario_chapters.json` (defines the timeline axis)
 * **Output Files**:
@@ -102,30 +106,44 @@ flowchart TD
 
 ## 3. Downstream Linear Compilation
 
+### Phase 3A: Script (Scene) (Script Phase)
+* **Description**: Writes narrative scene-level script beats: dialogues, narrations, SFX, and silences.
+* **Workspace**: [ScriptPhase](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/app/src/components/phases/script/ScriptPhase.tsx)
+* **Associated Agent**: `Scene Writer Agent`
+* **Input Files**:
+  * `data/scenario_scenes.json`
+  * `data/final_lore.json`
+  * `data/script_style.json`
+* **Output Files**: `data/scene_script.json`
+
 ### Phase 1.5: Pacing & Pagination (Pacing Phase)
-* **Description**: Takes the flat list of scenes and divides them into physical comic pages. Sets page layout constraints, focus points, and pacing variables.
+* **Description**: Takes the written scene script beats and divides them into physical comic pages. Sets page layout constraints, focus points, and pacing variables.
 * **Workspace**: [PacingPhase](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/app/src/components/phases/pacing/PacingPhase.tsx)
 * **Associated Agent**: `Layout Pagination Agent`
-* **Input Files**: `data/scenario_scenes.json`
+* **Input Files**: `data/scene_script.json`
 * **Output Files**: `data/pages.json`
 
 ### Phase 2: Panel Structuring (Panels Phase)
-* **Description**: Divides page budgets into configurations of panels. Outlines camera positioning (Wide, Close-up, Low-angle), focus characters, and framing bounds.
+* **Description**: Divides page budgets into configurations of panels. Outlines camera positioning (Wide, Close-up, Low-angle), focus characters, and framing bounds, guided by the scene script.
 * **Workspace**: [PanelsPhase](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/app/src/components/phases/panels/PanelsPhase.tsx)
 * **Associated Agent**: `Panel Composition Agent`
 * **Input Files**:
   * `data/pages.json`
-  * `data/lore.json`
+  * `data/intro_pages.json`
+  * `data/final_lore.json`
+  * `data/panel_style.json`
+  * `data/scene_script.json`
 * **Output Files**: `data/panels.json`
 
-### Phase 3: Script & Dialogue (Script Phase)
-* **Description**: Crafts narrative descriptions, dialogue strings, sound effects, and maps them to speech bubbles inside the panels.
+### Phase 3B: Panel Scripting (Script Phase - Parallel with Phase 2)
+* **Description**: Maps scene beats to panels, determines reading flow, acting directions, and bubble placement details.
 * **Workspace**: [ScriptPhase](file:///c:/Users/Users/Desktop/Emy%20christmass/architecture%203.0/app/src/components/phases/script/ScriptPhase.tsx)
-* **Associated Agent**: `Scripting & Dialog Agent`
+* **Associated Agent**: `Panel Script Agent`
 * **Input Files**:
+  * `data/scene_script.json`
   * `data/panels.json`
-  * `data/scenario_scenes.json`
-  * `data/lore.json`
+  * `data/script_style.json`
+  * `data/final_lore.json`
 * **Output Files**: `data/script.json`
 
 ### Phase 6: Page Assembly (Assembly Studio)

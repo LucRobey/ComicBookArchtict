@@ -20,7 +20,7 @@ the sequencing, the guardrails, and the patterns to follow.
 Read these files first. They define the project's current state:
 
 ```
-AGENT_GUIDE.md          — phase map, data flow, QA tag system
+MASTER_GUIDE.md         — phase map, data flow, QA tag system
 FILE_GUIDE.md           — what every file does and where it lives
 pipelines/scripting_instructions.md — active mandates for all scripting agents
 app/src/App.tsx         — phase routing (switch statement)
@@ -212,7 +212,7 @@ After the phase is implemented and tested, update:
 
 | File | What to add |
 |------|-------------|
-| `AGENT_GUIDE.md` | New phase in phase map, data flow chain, QA tag reference |
+| `MASTER_GUIDE.md` | New phase in phase map, data flow chain, QA tag reference |
 | `FILE_GUIDE.md` | New data files, new pipeline files, new app tab |
 | `pipelines/scripting_instructions.md` | Any new mandate for scripting agents |
 

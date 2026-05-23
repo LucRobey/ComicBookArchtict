@@ -1,0 +1,39 @@
+{
+  "_schema_version": "1.1",
+  "_description": "Active inspired lore of the project. Result of merging user_lore.json (raw story concept) and lore_style.json (reference comic style research). This file acts as the series bible, governing downstream scenario, pacing, scripting, character, and visual generations.",
+  "inspiration_reference": {
+    "comic_title": "",
+    "style_family": "",
+    "era": "",
+    "key_inspirations_applied": []
+  },
+  "narrative_blend": {
+    "world_type": "",
+    "genre_blend": "",
+    "tone_blend": "",
+    "era_setting": "",
+    "core_conflict_translation": {
+      "original_user_conflict": "",
+      "adapted_conflict_concept": "",
+      "primary_style_plot_drivers": []
+    }
+  },
+  "blended_world_rules": [
+    {
+      "rule": "",
+      "derived_from": "",
+      "application_in_story": ""
+    }
+  ],
+"integrated_tropes": [
+    {
+      "trope_name": "",
+      "source_trope_description": "",
+      "manifestation_in_scenario": ""
+    }
+  ],
+  "humor_and_pacing_rules": {
+    "humor_mechanisms_applied": [],
+    "pacing_tempo_rules": []
+  }
+}

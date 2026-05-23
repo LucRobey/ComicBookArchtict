@@ -1,0 +1,11 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Active lore of the project. Result of merging user_lore.json (user story) and lore_style.json (inspiration research). Governs all downstream chapter, scene, and scripting generations.",
+  "world_type": "",
+  "tone": "",
+  "genre": "",
+  "era": "",
+  "rules": [],
+"core_conflict": "",
+  "integrated_tropes": []
+}

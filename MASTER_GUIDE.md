@@ -11,15 +11,18 @@ Production is strictly sequential. Approve one phase before starting the next; c
 | Phase | Tab Name in App | Inputs | Key Outputs | Reference Docs |
 |---|---|---|---|---|
 | **Pre** | — | Story Brief | Customized `pipelines/` files | `init_project_protocol.md` |
-| **0** | 🌍 Lore & Story | Free-form dialogue | `data/lore.json` | `docs/phase_0_lore.md` |
-| **0.2**| 📝 Scenario | `data/lore.json` | `data/scenario_*.json` | `pipelines/03_scenario_development.md` |
-| **0.5**| 👤 Characters Hub | `data/lore.json`, scenes | `data/character_moods.json`, visual sheets | `pipelines/05_visual_signature.md` |
-| **1** | 🎭 Characters | character_moods.json | `data/intro_pages.json` | `docs/phase_1_characters.md` |
-| **1.5**| 📋 Pacing | scenes | `data/pages.json` | `docs/phase_1.5_pacing.md` |
-| **2** | 📐 Panel Structure | `data/pages.json` | `data/panels.json` | `docs/phase_2_structure.md` |
-| **3** | ✍️ Script | `data/panels.json`, moods | `data/script.json` | `docs/phase_3_script.md` |
+| **0** | 🌍 Lore & Story (Raw) | Story concept, genre ideas | `data/user_lore.json` | `docs/phase_0_lore.md` |
+| **0.5**| 🌍 Lore & Story (Style)| Reference Comic Name | `data/*_style.json` (panel, script, lore, visual) | `pipelines/09b_style_research.md` |
+| **0.6**| 🌍 Lore & Story (Blend)| `user_lore.json`, `lore_style.json` | `data/final_lore.json` | `pipelines/09c_lore_merge.md` |
+| **0.2**| 🌍 Lore & Story (Scenario)| `data/final_lore.json`, scenario inputs | `data/scenario_synopsis.json`, `data/scenario_chapters.json`, `data/scenario_scenes.json` | `pipelines/03_scenario_development.md` |
+| **0.7**| 👤 Characters Hub | `data/final_lore.json`, scenes | `data/character_moods.json`, personality/visual signatures | `pipelines/05_visual_signature.md` |
+| **3A** | ✍️ Script (Scene) | synopsis, scenes, chapters, moods, personality, final_lore.json, script_style.json | `data/scene_script.json` | `pipelines/10_scene_script.md` |
+| **1** | 🎭 Characters | final_lore.json, character personality | `data/intro_pages.json` | `docs/phase_1_characters.md` |
+| **1.5**| 📋 Pacing | `data/scene_script.json` | `data/pages.json` | `docs/phase_1.5_pacing.md` |
+| **2** | 📐 Panel Structure | `data/pages.json`, `data/scene_script.json`, `data/final_lore.json`, `data/panel_style.json` | `data/panels.json` | `docs/phase_2_structure.md` |
+| **3B** | ✍️ Script (Panel) | `data/scene_script.json`, `data/panels.json`, `data/script_style.json`, `data/final_lore.json` | `data/script.json` | `pipelines/11_panel_script.md` |
 | **4/5**| *(AI Chat only)* | `data/script.json` | `data/images/page_N/panel_N.png` | `docs/phase_4_images.md` |
-| **6** | 🧩 Assembly | images, script.json | Final Composited Page Layouts | `docs/phase_6_assembly.md` |
+| **6** | 🧩 Assembly | images, script.json, panels.json | Final Composited Page Layouts | `docs/phase_6_assembly.md` |
 
 ---
 
@@ -31,10 +34,21 @@ architecture 3.0/
 │   ├── src/                  ← Vite + React components, stores, styles
 │   └── vite.config.ts        ← Vite dev server configuration & API middleware
 ├── data/                     ← Flat JSON files + subfolders for character sheets/assets
-│   ├── lore.json             ← World and story bible keys
-│   ├── scenario_inputs.json  ← Scenario parameters
+│   ├── user_lore.json        ← User's raw world, tone, genre, and rules input
+│   ├── lore_style.json       ← Extracted narrative tropes/rules of reference style
+│   ├── visual_style.json       ← Visual DNA, color tokens, and diffusion prompts
+│   ├── panel_style.json      ← Panel layout constraints, CSS grids, and spacing
+│   ├── script_style.json     ← Narrative conventions, word counts, and anti-patterns
+│   ├── final_lore.json       ← Blended world lore (user_lore + lore_style)
+│   ├── scenario_inputs.json  ← Scenario inputs
+│   ├── scenario_synopsis.json← Scenario synopsis
+│   ├── scenario_chapters.json← Scenario chapters breakdown
+│   ├── scenario_scenes.json  ← Scenario scene list
 │   ├── geography.json        ← Location library registry (v1.4)
 │   ├── character_moods.json  ← Character mood matrix
+│   ├── characters/           ← Character data folders (personality_signature.json)
+│   ├── templates/            ← Reusable visual and layout schema templates
+│   │   └── panels_template.json ← Phase 2 visual schema template (enriched with focal & acting detail)
 │   ├── intro_pages.json      ← Phase 1 outputs
 │   ├── pages.json            ← Phase 1.5 outputs
 │   ├── panels.json           ← Phase 2 outputs
@@ -63,24 +77,26 @@ architecture 3.0/
 Each stage reads from the upstream inputs and saves to a downstream output.
 
 ```
-data/lore.json ─────────────────────────────────────────────────────────────────────────────┐
-data/scenario_*.json ────────────┬──────────────────────────────────────────────────────────┤
-                                 ↓                                                           │
-                   data/character_moods.json (Phase 0.5-D)                                  │
-                   global_characters/[Name]/canonical_visual.md (Phase 0.5-A)               │
-                   data/characters/[Name]/personality_signature.md (Phase 0.5-B)            │
-                                 ↓                                                           │
-                       data/intro_pages.json (parallel)                                     │
-                                 │                                                           │
-               data/pages.json ──────────────────────────────────────────────────────────────┤
-                                 ↓                                                           │
-                       data/panels.json ─────────────────────────────────────────────────────┤
-                                 ↓                                                           │
-                       data/script.json ─────────────────────────────────────────────────────┤
-                                 ↓                                                           │
-                      data/images/page_N/ ────────────────────────────────────────────────────┘
-                                 ↓
-                      data/assembly/pages/
+data/user_lore.json ────┐
+                        ├──► data/final_lore.json (Phase 0.6 Merge) ────┐
+data/lore_style.json ───┘                                               │
+                                                                        │
+data/scenario_*.json ─────────────────────────┐                         │
+                                              ├──► data/scenario_scenes.json ◄──┤
+                                              │                                 │
+                   data/character_moods.json ◄┘                                 │
+                                                                                │
+data/scenario_scenes.json ────┬─────────────────────────────────────────────────┤
+                              ↓                                                 │
+                  data/scene_script.json (Phase 3A Scene Script) ───────────────┤
+                              ↓                                                 │
+                  data/pages.json (Phase 1.5 Pacing) ───────────────────────────┤
+                              ↓                                                 │
+                  data/panels.json (Phase 2 Grid) ◄───[in parallel]───► data/script.json (Phase 3B Panel Script)
+                              │                                           │
+                              └─────────────────────┬─────────────────────┘
+                                                    ▼
+                                           data/assembly/pages/
 ```
 
 ### Upstream Rules
@@ -108,7 +124,7 @@ When a human reviewer identifies issues in the application:
 
 ### QA Operation Tag Reference
 * `[REWRITE_VISUAL]` (Phase 0.5): Rewrite character's `canonical_visual.md`.
-* `[REWRITE_PERSONALITY]` (Phase 0.5): Rewrite character's `personality_signature.md`.
+* `[REWRITE_PERSONALITY]` (Phase 0.5): Rewrite character's `personality_signature.json`.
 * `[REGENERATE_SHOT:{loc}:{variant}:{shot}]` (Phase 0): Re-generate a background shot image.
 * `[MODIFY_SHOT:{loc}:{variant}:{shot}]` (Phase 0): Modify existing shot (image-to-image).
 * `[REGENERATE_PALETTE:{loc}:{variant}]` (Phase 0): Update variant colors.
@@ -172,3 +188,4 @@ The workspace follows a custom **Modern Drafting Board** aesthetic, defined in `
 3. **Verify Types:** Run `npx tsc --noEmit` from `app/` after making major typescript file edits to ensure type safety.
 4. **Sandboxing:** Do not load or save files outside the workspace root directory. Always sanitize path variables using safety helpers.
 5. **No Placeholders:** Ensure all files generated are fully functional, with no mock content or placeholders.
+6. **Single Local Server Rule:** Before running `npm run dev` or starting any local dev server, verify if a server is already running on port 5173 or in the background. If one is active, DO NOT start another. If launching a server is required, confirm with the user or check if there is an active process first to prevent launching redundant server instances that consume system resources.
